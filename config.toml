@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 title = "Nuevas Fronteras con r"
 theme = "hugo-lithium"
-googleAnalytics = ""
+googleAnalytics = "UA-142402614-1"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 
