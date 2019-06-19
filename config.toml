@@ -1,0 +1,45 @@
+baseurl = "/"
+languageCode = "en-us"
+title = "Nuevas Fronteras con r"
+theme = "hugo-lithium"
+googleAnalytics = ""
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+
+[permalinks]
+    post = "/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Acerca de mi"
+    url = "/about/"
+[[menu.main]]
+    name = "Facebook"
+    url = "https://github.com/rstudio/blogdown"
+[[menu.main]]
+    name = "LinkedIn"
+    url = "https://twitter.com/rstudio"
+[[menu.main]]
+    name = "Unete"
+    url = "https://github.com/arturocdb"
+
+[params]
+    description = "Nos dedicamos a formar nuevos Analistas de datos con R "
+
+    # options for highlight.js (version, additional languages, and theme)
+    highlightjsVersion = "9.12.0"
+    highlightjsCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    highlightjsLang = ["r", "yaml"]
+    highlightjsTheme = "github"
+
+    MathJaxCDN = "//cdnjs.cloudflare.com/ajax/libs"
+    MathJaxVersion = "2.7.5"
+
+    # path to the favicon, under "static"
+    favicon = "favicon.ico"
+
+    [params.logo]
+    url = "logo.png"
+    width = 50
+    height = 50
+    alt = "10x Faster con R"
+
