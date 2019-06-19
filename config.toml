@@ -23,7 +23,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "https://github.com/arturocdb"
 
 [params]
-    description = "Nos dedicamos a formar nuevos Analistas de datos con R "
+    description = "Nos dedicamos a formar Analistas de datos con R "
 
     # options for highlight.js (version, additional languages, and theme)
     highlightjsVersion = "9.12.0"
