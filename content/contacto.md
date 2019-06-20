@@ -5,7 +5,9 @@ title: Contacto
 
 ### Como encontrarnos...
 
-Poco a poco crece nuestra presencia en Redes Sociales, comenzamos desde 0, literalmente!, no estamos interesados en tener ~~cantidad~~, sino **calidad** ante todo, nuestro perfil en Facebook refleja nuestro trabajo ante el público en general.
+Poco a poco crece nuestra presencia en Redes Sociales, comenzamos desde 0, literalmente!, no estamos interesados en tener ~~cantidad~~, sino **calidad** ante todo.
+
+Nuestro perfil en Facebook refleja nuestro trabajo ante el público en general.
 
 Nuestra comunidad en Facebook desarrolla:
 
@@ -13,19 +15,19 @@ Nuestra comunidad en Facebook desarrolla:
 - [x] Compartimos conocimiento y formas de afrontar los retos.
 - [x] Creamos equipos, compartimos, aportamos y creamos valor. 
 
-#### Perfil en Facebook
+### Perfil en Facebook
 
 
 
-#### Comunidad en Facebook
+### Comunidad en Facebook
 
 
 
-#### LinkedIn
+### LinkedIn
 
-[Conoce a nuestro Fundador](https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/)
+[Conoce a nuestro CEO-Founder](https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/)
 
-#### Contacto
+### Contacto
 
 _Contacto:_ Charlie Arturo Do Amaral Becerra
 
