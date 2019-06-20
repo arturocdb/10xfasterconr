@@ -1,7 +1,18 @@
 ---
 date: "2016-05-05T21:48:51-07:00"
-title: Unete
+title: Se parte de nuestro equipo
 ---
 
-## Unete
-RRSS [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+### ¿Te gustaría dar cursos? 
+
+Pues si la la respuesta es si!, estas en el lugar adecuado. **10x Faster con R** cuenta con un programa listo para implementar, contenido completo que se entrega a nuestros alumnos los cuales incluyen no solo toda lo visto en la clase sino tambien ejercicios y retos para practicar.
+
+Esta todo listo para que comiences, por supuesto para cuidar nuestros estandares vamos a precisar una _entrevista técnica_ que te habilite como uno de nuestros instructores.
+
+Aprovecha esta oportunidad compartiendo tus conocimientos con tu comunidad!, crea valor!, y recuerda:
+
+> "Todas tus limitaciones, solo estan en tu mente..."
+[_Mathias Arturo_](www.google.com)
+
+
+
