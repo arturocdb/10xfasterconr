@@ -12,15 +12,19 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 [[menu.main]]
     name = "El proyecto"
     url = "/proyecto/"
+    weight = 1
 [[menu.main]]
     name = "RRSS"
     url = "/rrss/"
+    weight = 4
 [[menu.main]]
     name = "Curso"
     url = "/curso/"
+    weight = 2
 [[menu.main]]
     name = "Unete"
     url = "/unete/"
+    weight = 3
 
 [params]
     description = "Nos dedicamos a formar Analistas de datos con R "
