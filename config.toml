@@ -1,6 +1,6 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "Nuevas Fronteras con r"
+title = "Nuevas Fronteras con R"
 theme = "hugo-lithium"
 googleAnalytics = "UA-142402614-1"
 disqusShortname = ""
@@ -45,5 +45,5 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "logo.png"
     width = 50
     height = 50
-    alt = "10x Faster con R"
+    alt = "Nos dedicamos a formar Analistas de datos con R"
 
