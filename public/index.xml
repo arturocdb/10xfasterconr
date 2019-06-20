@@ -32,12 +32,21 @@
     </item>
     
     <item>
-      <title>About</title>
-      <link>/about/</link>
+      <title>Proyecto</title>
+      <link>/proyecto/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
-      <guid>/about/</guid>
-      <description>This is a &amp;ldquo;hello world 2&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+      <guid>/proyecto/</guid>
+      <description>Proyecto This is a &amp;ldquo;hello world 2&amp;rdquo; example website for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+    </item>
+    
+    <item>
+      <title>Unete</title>
+      <link>/unete/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/unete/</guid>
+      <description>Unete RRSS blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
     </item>
     
     <item>
@@ -46,7 +55,7 @@
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/curso/</guid>
-      <description>Contenido del curso for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+      <description>Curso Contenido del curso for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
     </item>
     
     <item>

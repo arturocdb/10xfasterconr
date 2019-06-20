@@ -10,8 +10,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
-    name = "Acerca de mi"
-    url = "/about/"
+    name = "El proyecto"
+    url = "/proyecto/"
 [[menu.main]]
     name = "RRSS"
     url = "/rrss/"
@@ -20,7 +20,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "/curso/"
 [[menu.main]]
     name = "Unete"
-    url = "https://github.com/arturocdb"
+    url = "/unete/"
 
 [params]
     description = "Nos dedicamos a formar Analistas de datos con R "
