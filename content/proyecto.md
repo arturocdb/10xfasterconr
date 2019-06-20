@@ -4,4 +4,20 @@ title: Proyecto
 ---
 
 ## Proyecto
-This is a "hello world 2" example website for the [**blogdown**](https://github.com/rstudio/blogdown) package. The theme was forked from [@jrutheiser/hugo-lithium-theme](https://github.com/jrutheiser/hugo-lithium-theme) and modified by [Yihui Xie](https://github.com/yihui/hugo-lithium).
+En palabaras simples, que es 10x Faster con R?,  
+
+### Motivacion
+
+This is a simple example of a Markdown document.
+
+
+
+
+
+
+
+
+
+
+
+
