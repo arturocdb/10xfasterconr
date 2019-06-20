@@ -32,6 +32,15 @@
     </item>
     
     <item>
+      <title>Contacto</title>
+      <link>/contacto/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/contacto/</guid>
+      <description> RRSS Perfil Facebook Comunidad Facebook LinkedIn contacto </description>
+    </item>
+    
+    <item>
       <title>Unete</title>
       <link>/unete/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
@@ -50,22 +59,13 @@
     </item>
     
     <item>
-      <title>rss</title>
-      <link>/rrss/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/rrss/</guid>
-      <description>RRSS RRSS blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
-    </item>
-    
-    <item>
       <title>¿qué es 10x Faster con R?</title>
       <link>/proyecto/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/proyecto/</guid>
       <description>Motivación Hola, Bienvenido(a), mi nombre es Charlie Do Amaral, soy un entusiasta de R, seguramente al igual que tú, en palabras simples, ¿qué es 10x Faster con R?, por supuesto que para mí no solo representa un blog con sus publicaciones, es resultado de un recorrido por muchas tecnologías actuales, muchas horas invertidas en conferencias, varios libros y muchos fines de semana…
-Tecnologías que deberían ser capaz de cumplir los requerimientos, no técnicos, eso es secundario, sino requerimientos soñados (cuando dices: “quiero que sea así”, “quiero que funciones así”, etc.</description>
+ Tecnologías que deberían ser capaz de cumplir los requerimientos, no técnicos, eso es secundario, sino requerimientos soñados (cuando dices: “quiero que sea así”, “quiero que funciones así”, etc.</description>
     </item>
     
     <item>
