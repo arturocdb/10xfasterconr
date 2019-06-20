@@ -16,8 +16,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     name = "Facebook"
     url = "https://github.com/rstudio/blogdown"
 [[menu.main]]
-    name = "LinkedIn"
-    url = "https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/"
+    name = "Curso"
+    url = "/curso/"
 [[menu.main]]
     name = "Unete"
     url = "https://github.com/arturocdb"

@@ -41,6 +41,15 @@
     </item>
     
     <item>
+      <title>curso</title>
+      <link>/curso/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/curso/</guid>
+      <description>Contenido del curso for the blogdown package. The theme was forked from @jrutheiser/hugo-lithium-theme and modified by Yihui Xie.</description>
+    </item>
+    
+    <item>
       <title>Hello R Markdown Charlie</title>
       <link>/2015/07/23/hello-r-markdown-charlie/</link>
       <pubDate>Thu, 23 Jul 2015 21:13:14 -0500</pubDate>
