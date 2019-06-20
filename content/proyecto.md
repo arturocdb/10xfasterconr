@@ -16,19 +16,9 @@ Orientado 100% al Análisis con uno de los lenguajes mas importantes hoy en el m
 - [x] Llegar a ser un espacio que permita realizar publicaciones y análisis de datos profesionales.
 - [x] Ser un punto de encuentro para entusiastas en R, y para formar nuevos Analistas que les permita estar listos para lo que se viene y que prácticamente ya tocó a la puerta (Big Data, Data Science, Machine Learning, entre otros)  
 
-De mi parte, ¡te doy la más cálida Bienvenida!, estas completamente invitado a realizar tu aporte (publicaciones y análisis) que con mucho gusto las canalizaré, a continuación, encontraras otros canales para seguir nuestro proyecto y ponerte en contacto con mi persona. 
+De mi parte, ¡te doy la más cálida Bienvenida!, estas completamente invitado a realizar tu aporte (publicaciones y análisis) que con mucho gusto las canalizaré.
 
 ¡Un gran abrazo!  
-
-
-
-
-
-
-
-
-
-
 
 
 
