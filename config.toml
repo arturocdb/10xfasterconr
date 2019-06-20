@@ -10,7 +10,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
-    name = "El proyecto"
+    name = "Proyecto"
     url = "/proyecto/"
     weight = 1
 [[menu.main]]
@@ -22,7 +22,7 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "/curso/"
     weight = 2
 [[menu.main]]
-    name = "Unete"
+    name = "Únete"
     url = "/unete/"
     weight = 3
 
