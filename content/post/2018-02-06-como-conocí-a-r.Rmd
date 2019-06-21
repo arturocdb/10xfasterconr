@@ -1,0 +1,18 @@
+---
+title: Como conocí a R
+author: Charlie Do Amaral
+date: '2018-02-06'
+slug: como-conocí-a-r
+categories:
+  - R
+tags:
+  - inicio
+  - R
+---
+
+### Amor a primera vista
+Los cursos de fundamentos o de introducción de programación impartidos en colegios o universidades se han sustentado sobre sobre un seudocódigo (_Joyanes Aguilar 2002_), este último permite utilizar una serie de instrucciones que representan sencillos procesos a ser ejecutados en forma secuencial, luego este seudocódigo ser llevado al lenguaje de programación de elegido por el estudiante, luego nos hacen conocer cómo trabajan las funciones, los while, los if, etc. etc...(personalmente ya tenía en mente lo que me esperaba) y aquí es donde marco personalmente un punto de inflexión respecto a **R**.
+
+
+
+
