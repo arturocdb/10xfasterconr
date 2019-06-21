@@ -5,6 +5,7 @@ date: '2018-02-06'
 slug: como-conocí-a-r
 categories:
   - R
+  - Comentarios
 tags:
   - inicio
   - R
@@ -13,6 +14,11 @@ tags:
 ### Amor a primera vista
 Los cursos de fundamentos o de introducción de programación impartidos en colegios o universidades se han sustentado sobre sobre un seudocódigo (_Joyanes Aguilar 2002_), este último permite utilizar una serie de instrucciones que representan sencillos procesos a ser ejecutados en forma secuencial, luego este seudocódigo ser llevado al lenguaje de programación de elegido por el estudiante, luego nos hacen conocer cómo trabajan las funciones, los while, los if, etc. etc...(personalmente ya tenía en mente lo que me esperaba) y aquí es donde marco personalmente un punto de inflexión respecto a **R**.
 
+Cuando comencé a estudiar **R** mi percepción empezó a cambiar desde la primera instrucción que conocí, como dicen: "fue amor a primera vista", ya que mientras avanzaba descubría que R es un mundo totalmente diferente...pues me había decidido por estudiar **data science**, y las mejores y prácticamente únicas opciones eran y son **Python** y **R**, empecé con **Python**, conocí lo básico, y por supuesto antes de tomar mi decisión con cual me iba a quedar, pues también tenía que tener R su oportunidad, y el final es obvio.
+
+**R** posee características de 2 mundos, el mundo de la programación y el mundo de la estadística y el análisis, esto hace la gran diferencia con **Python**, **Python** fue desarrollado por programadores, en cambio **R** no, **R** fue desarrollado por estadistas, y eso lo cambia todo, **Python** es absolutamente poderoso y puedes hacer prácticamente cualquier cosa, sin embargo, **R** está orientado 100% al análisis, la sencillez, entre otras ventajas.
+
+Aunque no todo es color de rosa, **R** también tiene sus cositas, que posteriormente profundizaré, sin embargo **R** me permitió entender lo equivocados que están al catalogar a **R** como un lenguaje de programación, (desde mi punto de personal) **R** es y no es al mismo tiempo, una vez empieces a usarlo me entenderás!, y eso es lo hermoso de **R**, ese otro lado que no necesitas ser un programador para comprenderlo y utilizarlo, simplemente déjate llevar y cuando menos te des cuenta, estarás realizando análisis avanzados en inferencia estadística sin ser programador, bienvenido a este maravilloso mundo de **R.**
 
 
 

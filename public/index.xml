@@ -6,19 +6,10 @@
     <description>Recent content on Nuevas Fronteras con R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 08 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 06 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>prueba para ronald</title>
-      <link>/2018/02/08/prueba-ronald/</link>
-      <pubDate>Thu, 08 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/02/08/prueba-ronald/</guid>
-      <description>PruebaLos cursos de fundamentos o de introducción de programación impartidos en colegios o universidades se han sustentado sobre sobre un seudocódigo (Joyanes Aguilar 2002), este último permite utilizar una serie de instrucciones que representan sencillos procesos a ser ejecutados en forma secuencial, luego este seudocódigo ser llevado al lenguaje de programación de elegido por el estudiante, luego nos hacen conocer cómo trabajan las funciones, los while, los if, etc.</description>
-    </item>
     
     <item>
       <title>Como conocí a R</title>
