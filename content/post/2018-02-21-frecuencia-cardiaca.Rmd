@@ -1,0 +1,43 @@
+---
+title: Frecuencia Cardiaca
+author: Charlie Do Amaral
+date: '2018-02-21'
+slug: frecuencia-cardiaca
+categories:
+  - R
+  - estadistica
+  - fundamentos
+tags:
+  - R
+  - fundamentos
+---
+Se toma una muestra de N=7 varones adultos sanos y en cada uno se mide la frecuencia cardiaca x, obteniendose
+
+```{r}
+mediciones <- c(80,83,85,78,76,86,72)
+mediciones
+```
+
+### Medidas de centralizacion y dispersion
+
+Calcularemos la media aritmetica, Cuasivarianza, desviacion estandar muestral.
+
+Las medidas de posicion indican en torno a que valores estan los datos, su significado es obvio y su calculo no ofrece dificulatdes conceptuales.
+
+Calculando la media, el promedio de los datos, que es la suma de todos los valores dividida por el numero de ellos
+
+```{r}
+mean(mediciones)
+```
+
+ 
+
+
+
+
+
+
+
+
+
+

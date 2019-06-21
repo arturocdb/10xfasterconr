@@ -67,4 +67,12 @@ Tiene un Costo de Bs 690.- (si prefieres cancelados en 2 cuotas, al inicio y al 
 
 Un curso esencial para introducirse al mundo de R y RStudio. Esperamos colmar tus expectativas!.
 
+> "La única forma de cambiar nuestra sociedad, es mediante la educación...
+[_Lic. Luis Fernando Parada G._](https://www.linkedin.com/in/luis-fernando-parada-guachalla-bba7a5138/)
+
+
+
+
+
+
 

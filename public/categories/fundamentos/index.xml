@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R on Nuevas Fronteras con R</title>
-    <link>/tags/r/</link>
-    <description>Recent content in R on Nuevas Fronteras con R</description>
+    <title>fundamentos on Nuevas Fronteras con R</title>
+    <link>/categories/fundamentos/</link>
+    <description>Recent content in fundamentos on Nuevas Fronteras con R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 21 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/fundamentos/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -20,15 +20,6 @@
       <description>Se toma una muestra de N=7 varones adultos sanos y en cada uno se mide la frecuencia cardiaca x, obteniendose
 mediciones &amp;lt;- c(80,83,85,78,76,86,72)mediciones## [1] 80 83 85 78 76 86 72Medidas de centralizacion y dispersionCalcularemos la media aritmetica, Cuasivarianza, desviacion estandar muestral.
 Las medidas de posicion indican en torno a que valores estan los datos, su significado es obvio y su calculo no ofrece dificulatdes conceptuales.</description>
-    </item>
-    
-    <item>
-      <title>Como conocí a R</title>
-      <link>/2018/02/06/como-conoc%C3%AD-a-r/</link>
-      <pubDate>Tue, 06 Feb 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/2018/02/06/como-conoc%C3%AD-a-r/</guid>
-      <description>Amor a primera vistaLos cursos de fundamentos o de introducción de programación impartidos en colegios o universidades se han sustentado sobre sobre un seudocódigo (Joyanes Aguilar 2002), este último permite utilizar una serie de instrucciones que representan sencillos procesos a ser ejecutados en forma secuencial, luego este seudocódigo ser llevado al lenguaje de programación de elegido por el estudiante, luego nos hacen conocer cómo trabajan las funciones, los while, los if, etc.</description>
     </item>
     
   </channel>
