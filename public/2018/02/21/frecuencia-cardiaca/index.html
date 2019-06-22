@@ -64,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">1 min read</span>
+    <span class="article-duration">2 min read</span>
     
 
     <h1 class="article-title">Frecuencia Cardiaca</h1>
@@ -82,12 +82,69 @@
 mediciones</code></pre>
 <pre><code>## [1] 80 83 85 78 76 86 72</code></pre>
 <div id="medidas-de-centralizacion-y-dispersion" class="section level3">
-<h3>Medidas de centralizacion y dispersion</h3>
+<h3><em>Medidas de centralizacion y dispersion</em></h3>
 <p>Calcularemos la media aritmetica, Cuasivarianza, desviacion estandar muestral.</p>
 <p>Las medidas de posicion indican en torno a que valores estan los datos, su significado es obvio y su calculo no ofrece dificulatdes conceptuales.</p>
-<p>Calculando la media, el promedio de los datos, que es la suma de todos los valores dividida por el numero de ellos</p>
+<p>Calculando la media, el promedio de los datos, que es la suma de todos los valores dividida por el numero de ellos.</p>
+<p><span class="math display">\[ M = (\sum X)/N\]</span>
+En R usamos la funcion <code>mean</code></p>
 <pre class="r"><code>mean(mediciones)</code></pre>
 <pre><code>## [1] 80</code></pre>
+<p>Realizaremos una tabla para identificar la suma de Cuadrados, es decir <span class="math display">\[d^{2}\]</span>, de los cuadrados de las distancias de cada valor a la media del grupo (no debe confundirse con la suma de los valores originales al cuadrado) donde d = valor individual menos la media del grupo</p>
+<pre class="r"><code># creamos un data frame
+datos &lt;- data.frame(mediciones)
+datos</code></pre>
+<pre><code>##   mediciones
+## 1         80
+## 2         83
+## 3         85
+## 4         78
+## 5         76
+## 6         86
+## 7         72</code></pre>
+<p>Agregamos la columna diferenica, d</p>
+<pre class="r"><code>datos$diferencia &lt;- datos$mediciones - (mean(datos$mediciones))
+datos</code></pre>
+<pre><code>##   mediciones diferencia
+## 1         80          0
+## 2         83          3
+## 3         85          5
+## 4         78         -2
+## 5         76         -4
+## 6         86          6
+## 7         72         -8</code></pre>
+<p>Agregamos la columna <em>suma de cuadrados</em></p>
+<pre class="r"><code>datos$sum.cuad &lt;- (datos$diferencia)^2
+datos</code></pre>
+<pre><code>##   mediciones diferencia sum.cuad
+## 1         80          0        0
+## 2         83          3        9
+## 3         85          5       25
+## 4         78         -2        4
+## 5         76         -4       16
+## 6         86          6       36
+## 7         72         -8       64</code></pre>
+<p>Obteniendo resultados</p>
+<pre class="r"><code>sum.cuad &lt;- sum(datos$sum.cuad)
+sum.cuad</code></pre>
+<pre><code>## [1] 154</code></pre>
+</div>
+<div id="cuasivarianza-o-varianza-muestral" class="section level3">
+<h3><em>Cuasivarianza o varianza muestral</em></h3>
+<p><span class="math display">\[ S^{2}=\frac{SC}{N-1} \]</span></p>
+<p>La cuasivarianza es similar a la varianza excepto por la divisio de n-1 (tamaño de la muestra) y no por N(tamaño del grupo de datos). Este estadistico es apropiado para obtener estimaciones de la varianza de la poblacion en el analisis inferencial de datos.</p>
+<pre class="r"><code># Cuasivarianza
+cuasi &lt;- round(sum(sum(sum.cuad)/nrow(datos)-1), digits = 2)
+cuasi</code></pre>
+<pre><code>## [1] 21</code></pre>
+</div>
+<div id="desviacion-estandar-o-tipica" class="section level3">
+<h3><em>Desviacion Estandar o tipica</em></h3>
+<p>Es la Raiz cuadrada de la varianza, es decir, la raiz cuadrada de la media de los cuadrados de las desviaciones, para hacerlo sencillo, es mostrar en un solo numero el alejamiento de los valores respecto de la media.</p>
+<pre class="r"><code># Desviacion Estandar muestral
+round(cuasi^(1/2), digits = 2)</code></pre>
+<pre><code>## [1] 4.58</code></pre>
+<p><em>gracias!</em></p>
 </div>
 
     </div>
@@ -125,6 +182,9 @@ mediciones</code></pre>
 
 
     
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
 <script type="application/javascript">
