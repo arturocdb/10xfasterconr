@@ -81,7 +81,7 @@ ls.str()
 
 Lo cual representa informacion mas completa.
 
-La eliminacion de variables es algo muy sencillo, usmaos la funcion `rm()` proviene de remove
+La eliminacion de variables es algo muy sencillo, usamos la funcion `rm()` proviene de remove
 
 ```{r}
 rm(x)

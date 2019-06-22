@@ -27,6 +27,8 @@ Nuestra comunidad en Facebook desarrolla:
 
 [Conoce a nuestro CEO-Founder](https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/)
 
+[10x Faster con R](https://www.linkedin.com/company/10x-faster-con-r/about/?viewAsMember=true)
+
 ### Contacto
 
 _Contacto:_ Charlie Arturo Do Amaral Becerra
