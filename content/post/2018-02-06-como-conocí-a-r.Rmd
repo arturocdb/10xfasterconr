@@ -12,7 +12,7 @@ tags:
 ---
 
 ### Amor a primera vista
-Los cursos de fundamentos o de introducción de programación impartidos en colegios o universidades se han sustentado sobre sobre un seudocódigo (_Joyanes Aguilar 2002_), este último permite utilizar una serie de instrucciones que representan sencillos procesos a ser ejecutados en forma secuencial, luego este seudocódigo ser llevado al lenguaje de programación de elegido por el estudiante, luego nos hacen conocer cómo trabajan las funciones, los while, los if, etc. etc...(personalmente ya tenía en mente lo que me esperaba) y aquí es donde marco personalmente un punto de inflexión respecto a **R**.
+Los cursos de fundamentos o de introducción de programación impartidos en colegios o universidades se han sustentado sobre un seudocódigo (_Joyanes Aguilar 2002_), este último permite utilizar una serie de instrucciones que representan sencillos procesos a ser ejecutados en forma secuencial, luego este seudocódigo ser llevado al lenguaje de programación de elegido por el estudiante, luego nos hacen conocer cómo trabajan las funciones, los while, los if, etc. etc...(personalmente ya tenía en mente lo que me esperaba) y aquí es donde marco personalmente un punto de inflexión respecto a **R**.
 
 Cuando comencé a estudiar **R** mi percepción empezó a cambiar desde la primera instrucción que conocí, como dicen: "fue amor a primera vista", ya que mientras avanzaba descubría que R es un mundo totalmente diferente...pues me había decidido por estudiar **data science**, y las mejores y prácticamente únicas opciones eran y son **Python** y **R**, empecé con **Python**, conocí lo básico, y por supuesto antes de tomar mi decisión con cual me iba a quedar, pues también tenía que tener R su oportunidad, y el final es obvio.
 
