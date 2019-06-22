@@ -17,9 +17,10 @@
       <pubDate>Wed, 21 Feb 2018 00:00:00 +0000</pubDate>
       
       <guid>/2018/02/21/frecuencia-cardiaca/</guid>
-      <description>Se toma una muestra de N=7 varones adultos sanos y en cada uno se mide la frecuencia cardiaca x, obteniendose
-mediciones &amp;lt;- c(80,83,85,78,76,86,72)mediciones## [1] 80 83 85 78 76 86 72Medidas de centralizacion y dispersionCalcularemos la media aritmetica, Cuasivarianza, desviacion estandar muestral.
-Las medidas de posicion indican en torno a que valores estan los datos, su significado es obvio y su calculo no ofrece dificulatdes conceptuales.</description>
+      <description>ObjetivoConocer como utilizar R para obtener medidas de centralizacion y dispersion con variables cuantitativas.
+Las medidas de posicion indican en torno a que valores estan los datos.
+Se toma una muestra de N=7 varones adultos sanos y en cada uno se mide la frecuencia cardiaca x, obteniendose
+mediciones &amp;lt;- c(80,83,85,78,76,86,72)mediciones## [1] 80 83 85 78 76 86 72Medidas de centralizacion y dispersionCalcularemos la media aritmetica, Cuasivarianza, desviacion estandar muestral.</description>
     </item>
     
   </channel>

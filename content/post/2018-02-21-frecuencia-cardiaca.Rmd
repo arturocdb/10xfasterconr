@@ -11,6 +11,11 @@ tags:
   - R
   - fundamentos
 ---
+### _Objetivo_
+Conocer como utilizar R para obtener medidas de centralizacion y dispersion con variables cuantitativas.
+
+Las medidas de posicion indican en torno a que valores estan los datos.
+
 Se toma una muestra de N=7 varones adultos sanos y en cada uno se mide la frecuencia cardiaca x, obteniendose
 
 ```{r}
@@ -21,7 +26,7 @@ mediciones
 ### _Medidas de centralizacion y dispersion_
 Calcularemos la media aritmetica, Cuasivarianza, desviacion estandar muestral.
 
-Las medidas de posicion indican en torno a que valores estan los datos, su significado es obvio y su calculo no ofrece dificulatdes conceptuales.
+Las medidas de posición indican en torno a que valores estan los datos, su significado es obvio y su calculo no ofrece dificulatdes conceptuales.
 
 Calculando la media, el promedio de los datos, que es la suma de todos los valores dividida por el numero de ellos.
 
