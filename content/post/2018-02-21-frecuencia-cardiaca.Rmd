@@ -11,6 +11,7 @@ tags:
   - R
   - fundamentos
 ---
+
 ### _Objetivo_
 Conocer como utilizar R para obtener medidas de centralizacion y dispersion con variables cuantitativas.
 
@@ -19,8 +20,10 @@ Las medidas de posicion indican en torno a que valores estan los datos.
 Se toma una muestra de N=7 varones adultos sanos y en cada uno se mide la frecuencia cardiaca x, obteniendose
 
 ```{r}
+library(ggplot2)
 mediciones <- c(80,83,85,78,76,86,72)
 mediciones
+plot(mediciones, xlab = "Individuos", ylab = "Mediciones")
 ```
 
 ### _Medidas de centralizacion y dispersion_
@@ -85,8 +88,10 @@ Es la Raiz cuadrada de la varianza, es decir, la raiz cuadrada de la media de lo
 round(cuasi^(1/2), digits = 2)
 ```
 
-_gracias!_
+### _Interpretación_
+Si una variable corporal de muchas que se miden en medicina presenta sistemáticamente valores muy próximos a la media, cuando en un paciente se encuentra un valor moderadamente alejado de ella se considerará inicio de enfermedad, señal de alarma. Pero en una variable que presenta espontáneamente valores muy dispersos respecto a la media, un valor moderadamente alejado de ella no se considerará un inicio de enfermedad, sino expresión de la variabilidad de esa medida.   
 
+_gracias!_
 
 
 

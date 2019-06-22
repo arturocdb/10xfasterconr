@@ -19,9 +19,12 @@ tags:
 <p>Conocer como utilizar R para obtener medidas de centralizacion y dispersion con variables cuantitativas.</p>
 <p>Las medidas de posicion indican en torno a que valores estan los datos.</p>
 <p>Se toma una muestra de N=7 varones adultos sanos y en cada uno se mide la frecuencia cardiaca x, obteniendose</p>
-<pre class="r"><code>mediciones &lt;- c(80,83,85,78,76,86,72)
+<pre class="r"><code>library(ggplot2)
+mediciones &lt;- c(80,83,85,78,76,86,72)
 mediciones</code></pre>
 <pre><code>## [1] 80 83 85 78 76 86 72</code></pre>
+<pre class="r"><code>plot(mediciones, xlab = &quot;Individuos&quot;, ylab = &quot;Mediciones&quot;)</code></pre>
+<p><img src="/post/2018-02-21-frecuencia-cardiaca_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
 </div>
 <div id="medidas-de-centralizacion-y-dispersion" class="section level3">
 <h3><em>Medidas de centralizacion y dispersion</em></h3>
@@ -86,5 +89,9 @@ cuasi</code></pre>
 <pre class="r"><code># Desviacion Estandar muestral
 round(cuasi^(1/2), digits = 2)</code></pre>
 <pre><code>## [1] 4.58</code></pre>
+</div>
+<div id="interpretacion" class="section level3">
+<h3><em>Interpretación</em></h3>
+<p>Si una variable corporal de muchas que se miden en medicina presenta sistemáticamente valores muy próximos a la media, cuando en un paciente se encuentra un valor moderadamente alejado de ella se considerará inicio de enfermedad, señal de alarma. Pero en una variable que presenta espontáneamente valores muy dispersos respecto a la media, un valor moderadamente alejado de ella no se considerará un inicio de enfermedad, sino expresión de la variabilidad de esa medida.</p>
 <p><em>gracias!</em></p>
 </div>
