@@ -1,0 +1,91 @@
+---
+title: Funciones Basicas en R
+author: Charlie Do Amaral
+date: '2018-02-22'
+slug: funciones-basicas-en-r
+categories:
+  - fundamentos
+  - R
+tags:
+  - inicio
+  - fundamentos
+---
+### _Objetivo_
+Conocer algunas funciones y operaciones básicas en R.
+
+Para obtener ayuda sobre una función específica en R ejecutamos help(nombre de la funcion) `help(mean)`, esto no carga despliega la ayuda en la pestaña help en Rstudio. 
+
+```{r}
+#Si necesitamos un recordatorio de los argumentos de cualquier funcion usamos la funcion args
+args(mean)
+```
+
+Tambien tenemos disponible la funcion example(nombre de la funcion), nos devuelve un ejemplo del uso de la funcion que le indiquemos
+
+```{r}
+example(mean)
+```
+
+R es un lenguaje extremadamente flexible y sencillo, el manejo de las variables es una verdadera maravilla, no tenemos que declararlas previamente, las podemos asignar en cualquier momento usando el operador (<-), veamos
+
+```{r}
+x <- 3
+y <- 4
+z <- sqrt(x^2 + y^2)
+print(z)
+```
+
+incluso podemos prescindir de la funcion print, solo colocamos elnombre de la variable y listo
+
+```{r}
+z
+```
+
+Existen situaciones especificas donde necesitamos hacer uso de la funcion print, por ejemplo cuando necesitemos imprimir en pantalla multiples items de una sola vez, veamos
+
+```{r}
+print("Los ceros ocurren en "); print(2*pi); print("Radianes")
+```
+
+Las variables  se mantienen y actualizan automaticamente en el enviroment o workspace, el workspace o espacio de trabajo puede ser guardado como un archivo en el disco, es decir; salimos de Rstudio, luego posteriormente cuando regresamos cargamos todo tal cual lo dejamos la ultima vez, guarda toda la sesion.
+
+R es un lenguaje dinamico de taipedao, significa que nnos permite cambiar los datos y tipos de variables a necesidad, si asignamos x como numerica, R no se hace problema en que la cambiemos en cualquier momento a caracter.
+
+```{r}
+x <-3
+print(x)
+```
+
+```{r}
+x <- c("fee", "fie", "foo", "fum")
+print(x)
+```
+
+### _Listando nuestras variables_
+Para listar todas las variables que tenemos disponibles usamos la funcion `ls()`  
+
+```{r}
+x <- 10
+y <- 50
+z <- c("ventas", "producto", "categoria")
+f <- function(n,p)
+  sqrt(p*(1-p)/n)
+ls()
+```
+
+Vemos que `ls()` devuelve un vector de cadena de caracteres, en la que cada cadena es el nombre de la variable o funcion,cuando el espacio de trabajo esta vacio, `ls()` devuelve un vector vacio. Si queremos obtener algo mas que una lista de nombres usamos `ls.str()`, veamos:
+
+```{r}
+ls.str()
+```
+
+Lo cual representa informacion mas completa.
+
+La eliminacion de variables es algo muy sencillo, usmaos la funcion `rm()` proviene de remove
+
+```{r}
+rm(x)
+ls()
+```
+
+

@@ -1,0 +1,78 @@
+---
+title: Funciones Basicas en R
+author: Charlie Do Amaral
+date: '2018-02-22'
+slug: funciones-basicas-en-r
+categories:
+  - fundamentos
+  - R
+tags:
+  - inicio
+  - fundamentos
+---
+
+
+
+<div id="objetivo" class="section level3">
+<h3><em>Objetivo</em></h3>
+<p>Conocer algunas funciones y operaciones básicas en R.</p>
+<p>Para obtener ayuda sobre una función específica en R ejecutamos help(nombre de la funcion) <code>help(mean)</code>, esto no carga despliega la ayuda en la pestaña help en Rstudio.</p>
+<pre class="r"><code>#Si necesitamos un recordatorio de los argumentos de cualquier funcion usamos la funcion args
+args(mean)</code></pre>
+<pre><code>## function (x, ...) 
+## NULL</code></pre>
+<p>Tambien tenemos disponible la funcion example(nombre de la funcion), nos devuelve un ejemplo del uso de la funcion que le indiquemos</p>
+<pre class="r"><code>example(mean)</code></pre>
+<pre><code>## 
+## mean&gt; x &lt;- c(0:10, 50)
+## 
+## mean&gt; xm &lt;- mean(x)
+## 
+## mean&gt; c(xm, mean(x, trim = 0.10))
+## [1] 8.75 5.50</code></pre>
+<p>R es un lenguaje extremadamente flexible y sencillo, el manejo de las variables es una verdadera maravilla, no tenemos que declararlas previamente, las podemos asignar en cualquier momento usando el operador (&lt;-), veamos</p>
+<pre class="r"><code>x &lt;- 3
+y &lt;- 4
+z &lt;- sqrt(x^2 + y^2)
+print(z)</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>incluso podemos prescindir de la funcion print, solo colocamos elnombre de la variable y listo</p>
+<pre class="r"><code>z</code></pre>
+<pre><code>## [1] 5</code></pre>
+<p>Existen situaciones especificas donde necesitamos hacer uso de la funcion print, por ejemplo cuando necesitemos imprimir en pantalla multiples items de una sola vez, veamos</p>
+<pre class="r"><code>print(&quot;Los ceros ocurren en &quot;); print(2*pi); print(&quot;Radianes&quot;)</code></pre>
+<pre><code>## [1] &quot;Los ceros ocurren en &quot;</code></pre>
+<pre><code>## [1] 6.283185</code></pre>
+<pre><code>## [1] &quot;Radianes&quot;</code></pre>
+<p>Las variables se mantienen y actualizan automaticamente en el enviroment o workspace, el workspace o espacio de trabajo puede ser guardado como un archivo en el disco, es decir; salimos de Rstudio, luego posteriormente cuando regresamos cargamos todo tal cual lo dejamos la ultima vez, guarda toda la sesion.</p>
+<p>R es un lenguaje dinamico de taipedao, significa que nnos permite cambiar los datos y tipos de variables a necesidad, si asignamos x como numerica, R no se hace problema en que la cambiemos en cualquier momento a caracter.</p>
+<pre class="r"><code>x &lt;-3
+print(x)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code>x &lt;- c(&quot;fee&quot;, &quot;fie&quot;, &quot;foo&quot;, &quot;fum&quot;)
+print(x)</code></pre>
+<pre><code>## [1] &quot;fee&quot; &quot;fie&quot; &quot;foo&quot; &quot;fum&quot;</code></pre>
+</div>
+<div id="listando-nuestras-variables" class="section level3">
+<h3><em>Listando nuestras variables</em></h3>
+<p>Para listar todas las variables que tenemos disponibles usamos la funcion <code>ls()</code></p>
+<pre class="r"><code>x &lt;- 10
+y &lt;- 50
+z &lt;- c(&quot;ventas&quot;, &quot;producto&quot;, &quot;categoria&quot;)
+f &lt;- function(n,p)
+  sqrt(p*(1-p)/n)
+ls()</code></pre>
+<pre><code>## [1] &quot;f&quot;  &quot;x&quot;  &quot;xm&quot; &quot;y&quot;  &quot;z&quot;</code></pre>
+<p>Vemos que <code>ls()</code> devuelve un vector de cadena de caracteres, en la que cada cadena es el nombre de la variable o funcion,cuando el espacio de trabajo esta vacio, <code>ls()</code> devuelve un vector vacio. Si queremos obtener algo mas que una lista de nombres usamos <code>ls.str()</code>, veamos:</p>
+<pre class="r"><code>ls.str()</code></pre>
+<pre><code>## f : function (n, p)  
+## x :  num 10
+## xm :  num 8.75
+## y :  num 50
+## z :  chr [1:3] &quot;ventas&quot; &quot;producto&quot; &quot;categoria&quot;</code></pre>
+<p>Lo cual representa informacion mas completa.</p>
+<p>La eliminacion de variables es algo muy sencillo, usmaos la funcion <code>rm()</code> proviene de remove</p>
+<pre class="r"><code>rm(x)
+ls()</code></pre>
+<pre><code>## [1] &quot;f&quot;  &quot;xm&quot; &quot;y&quot;  &quot;z&quot;</code></pre>
+</div>

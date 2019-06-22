@@ -6,10 +6,21 @@
     <description>Recent content in Posts on Nuevas Fronteras con R</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 21 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 22 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Funciones Basicas en R</title>
+      <link>/2018/02/22/funciones-basicas-en-r/</link>
+      <pubDate>Thu, 22 Feb 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/02/22/funciones-basicas-en-r/</guid>
+      <description>ObjetivoConocer algunas funciones y operaciones básicas en R.
+Para obtener ayuda sobre una función específica en R ejecutamos help(nombre de la funcion) help(mean), esto no carga despliega la ayuda en la pestaña help en Rstudio.
+#Si necesitamos un recordatorio de los argumentos de cualquier funcion usamos la funcion argsargs(mean)## function (x, ...) ## NULLTambien tenemos disponible la funcion example(nombre de la funcion), nos devuelve un ejemplo del uso de la funcion que le indiquemos</description>
+    </item>
     
     <item>
       <title>Frecuencia Cardiaca</title>
