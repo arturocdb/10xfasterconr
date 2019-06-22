@@ -1,6 +1,6 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "Nuevas Fronteras con R"
+title = "Think big, start small, grow fast"
 theme = "hugo-lithium"
 googleAnalytics = "UA-142402614-1"
 disqusShortname = ""
