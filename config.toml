@@ -45,5 +45,5 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     url = "logo.png"
     width = 50
     height = 50
-    alt = "Nos dedicamos a formar Analistas de datos con R"
+    alt = "Nos dedicamos a formar Analistas de datos con R."
 
