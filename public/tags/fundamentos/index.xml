@@ -6,10 +6,19 @@
     <description>Recent content in fundamentos on Think big, start small, grow fast</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/fundamentos/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Subsetting</title>
+      <link>/2019/01/02/subsetting/</link>
+      <pubDate>Wed, 02 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/01/02/subsetting/</guid>
+      <description>Subsetting en RConocer como realizar subsetting es de vital importancia en R, la palabra subsetting hace referencia a subconjunto, sin embargo nos referiremos de aqui en adelante como subsetting, en R realizamos el subsetting para extraer un subconjunto especifico de los datos, de acuerdo a nuestras necesidades de analissis, el dominio de subsetting nos permite expresar operaciones complejas que pocos lenguajes pueden igualar, el subsetting en R no es una tarea simple de dominar ya que previamente se necesita aprender una serie de conceptos interrelacionados, como:</description>
+    </item>
     
     <item>
       <title>Funciones Basicas en R</title>

@@ -1,0 +1,164 @@
+---
+title: Subsetting
+author: Charlie Do Amaral
+date: '2019-01-02'
+slug: subsetting
+categories:
+  - fundamentos
+  - R
+tags:
+  - fundamentos
+---
+
+### _Subsetting en R_
+Conocer como realizar subsetting es de vital importancia en R, la palabra subsetting hace referencia a subconjunto, sin embargo nos referiremos de aqui en adelante como _subsetting_, en R realizamos el subsetting para extraer un subconjunto especifico de los datos, de acuerdo a nuestras necesidades de analissis, el dominio de subsetting nos permite expresar operaciones complejas que pocos lenguajes pueden igualar, el subsetting en R no es una tarea simple de dominar ya que previamente se necesita aprender una serie de conceptos interrelacionados, como:
+
+- Los tres operadores de subsetting
+
+- Los seis tipos de subsetting
+
+- Las importantes diferencias de comportammientos de diferentes objetos (vectores, listas, factores, matrices y data frames)
+
+- El uso de subsetting conjuntamente con operadores
+
+Un complemento natural para realizar subsetting es la funcion `str()`. `str()` nos muestra laestructura de cualquier objeto y el subsetting nos permite extraer la pieza de nuestro interes.
+
+### Nociones Generales
+Conceptos previos que haciamos referencia al inicio del articulo, tener un entendimiento basico de estos temas es importante para realizar subsetting. 
+
+_**Tipos de Datos**_: conocer la importancia del corchete `[ ]` nos permitira aprender los seis tipos de datos que se pueden usar para realizar subsetting, los vectores, matrices, data frames tienen diferentes comportamientos cuando realizamos el subsetting.
+
+
+_**Operadores de Subsetting**_: extenderas tu conocimiento de los operadores de subsetting al incluir `[[` y `$` maneniendo el foco en los principios importantes de _simplificacion_ vs _preservancia_
+
+### Tipos de Datos (Data types)
+Es mas facil aprender como funciona el subsetting o subconjunto para vectores atomicos y luego generalizar a las demas dimensiones de objetos mas complejos, empezaremos con el uso mas comun del operador `[[` y `$` los dos operadores principales en subsetting 
+
+### Vectores Atomicos
+Veamos los diferentes tipos de subsetting con un simple vector `x`
+
+```{r}
+x <- c(2.1, 4.2, 3.3, 5.4)
+```
+
+Existen cinco tipos de cosas que puedes usar para subsetear un vector
+
+1. **Enteros Postivos**, retorna los elementos de una posicion especificada
+
+```{r}
+x[c(3, 1)]
+```
+
+```{r}
+# Ordena los elementos
+x[order(x)]
+```
+
+```{r}
+# inices duplicados producen valores duplicados
+x[c(1, 1)]
+```
+
+```{r}
+# los numeros reales se truncan silencionamente a numeros enteros
+x[c(2.1, 2.9)]
+```
+
+2. **Enteros Negativos**, omiten elementos de posiciones especificadas
+
+```{r}
+x[-c(3, 1)]
+```
+
+No se puede mezclar enteros positivos con negativos en un solo subset
+
+```{r, eval=FALSE, echo=TRUE}
+x[c(-1, 2)]
+# Error in x[c(-1, 2)] : only 0's may be mixed with negative subscripts
+```
+
+2. **Vectores Logicos**, selecciona elementos donde el valore de la correspondencia logica es `TRUE` este es probablemente el tipo de subsetting mas util porque permite escribir la expresion que crea el vector logico
+
+```{r}
+x[c(TRUE, TRUE, FALSE, FALSE)]
+```
+
+```{r}
+x[x > 3]
+```
+
+Si el operador logico es mas corto que el vecto que se esta subseteando, se reciclara para que tenga la misma longitud
+
+```{r}
+x[c(TRUE, FALSE)]
+```
+
+```{r}
+# Equivalente a:
+x[c(TRUE, FALSE, TRUE, FALSE)]
+```
+
+Un valor faltante en el inidice siempre produce un valor faltante en la salida
+
+```{r}
+x[c(TRUE, TRUE, NA, FALSE)]
+```
+
+3. **Nada**, devuelve el vector original, esto no es util en vectores, pero es muy util en matrices, data frames y colecciones, tambien puede ser util usarlo conjuntamente con asignaciones
+
+```{r}
+x[]
+```
+
+4. **Cero**, devuelve un vector de longitud cero, esto no es algo que usualmente se use con algun proposito, pero puede ser util para generar datos de prueba
+
+```{r}
+x[0]
+```
+
+si el vector tiene nombres, puedes usar:
+
+5. **Vectores de Carcateres**, para retornar elementos en el que el nombre coincida
+
+```{r}
+(y <- setNames(x, letters[1:4]))
+```
+
+```{r}
+y[c("d", "c", "a")]
+```
+
+como en los inices enteros, tsmbien se pueden repetir los indices
+
+```{r}
+y[c("a", "a", "a")]
+```
+
+```{r, eval=FALSE}
+# cuando subseteamos con [ los nombres siempre deben coincidir exactamente
+z <- c(abc = 1, def = 2)
+z[c("a", "d")]
+
+```
+
+En proximos articulos exploraremos las listas. _Gracias!_
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

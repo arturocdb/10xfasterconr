@@ -6,10 +6,19 @@
     <description>Recent content on Think big, start small, grow fast</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 22 Feb 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 02 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Subsetting</title>
+      <link>/2019/01/02/subsetting/</link>
+      <pubDate>Wed, 02 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/01/02/subsetting/</guid>
+      <description>Subsetting en RConocer como realizar subsetting es de vital importancia en R, la palabra subsetting hace referencia a subconjunto, sin embargo nos referiremos de aqui en adelante como subsetting, en R realizamos el subsetting para extraer un subconjunto especifico de los datos, de acuerdo a nuestras necesidades de analissis, el dominio de subsetting nos permite expresar operaciones complejas que pocos lenguajes pueden igualar, el subsetting en R no es una tarea simple de dominar ya que previamente se necesita aprender una serie de conceptos interrelacionados, como:</description>
+    </item>
     
     <item>
       <title>Funciones Basicas en R</title>
@@ -61,7 +70,7 @@ library(ggplot2)mediciones &amp;lt;- c(80,83,85,78,76,86,72)mediciones## [1] 
       <description>Como encontrarnos&amp;hellip; Poco a poco crece nuestra presencia en Redes Sociales, comenzamos desde 0, literalmente!, no estamos interesados en tener cantidad, sino calidad ante todo.
 Nuestro perfil en Facebook refleja nuestro trabajo ante el público en general.
 Nuestra comunidad en Facebook desarrolla:
-&amp;ldquo;Casos de Estudio&amp;rdquo;, sean estos simples o complejos. Compartimos conocimiento y formas de afrontar los retos. Creamos equipos, compartimos, aportamos y creamos valor.  Perfil en Facebook Comunidad en Facebook LinkedIn Conoce a nuestro CEO-Founder</description>
+&amp;ldquo;Casos de Estudio&amp;rdquo;, sean estos simples o complejos. Compartimos conocimiento y formas de afrontar los retos. Creamos equipos, compartimos, aportamos y creamos valor.  Perfil en Facebook muy pronto&amp;hellip;</description>
     </item>
     
     <item>

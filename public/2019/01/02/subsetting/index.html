@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<title>Subsetting - Think big, start small, grow fast</title>
+<meta property="og:title" content="Subsetting - Think big, start small, grow fast">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/proyecto/">Proyecto</a></li>
+    
+    <li><a href="/curso/">Curso</a></li>
+    
+    <li><a href="/unete/">Únete</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">4 min read</span>
+    
+
+    <h1 class="article-title">Subsetting</h1>
+
+    
+    <span class="article-date">2019-01-02</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="subsetting-en-r" class="section level3">
+<h3><em>Subsetting en R</em></h3>
+<p>Conocer como realizar subsetting es de vital importancia en R, la palabra subsetting hace referencia a subconjunto, sin embargo nos referiremos de aqui en adelante como <em>subsetting</em>, en R realizamos el subsetting para extraer un subconjunto especifico de los datos, de acuerdo a nuestras necesidades de analissis, el dominio de subsetting nos permite expresar operaciones complejas que pocos lenguajes pueden igualar, el subsetting en R no es una tarea simple de dominar ya que previamente se necesita aprender una serie de conceptos interrelacionados, como:</p>
+<ul>
+<li><p>Los tres operadores de subsetting</p></li>
+<li><p>Los seis tipos de subsetting</p></li>
+<li><p>Las importantes diferencias de comportammientos de diferentes objetos (vectores, listas, factores, matrices y data frames)</p></li>
+<li><p>El uso de subsetting conjuntamente con operadores</p></li>
+</ul>
+<p>Un complemento natural para realizar subsetting es la funcion <code>str()</code>. <code>str()</code> nos muestra laestructura de cualquier objeto y el subsetting nos permite extraer la pieza de nuestro interes.</p>
+</div>
+<div id="nociones-generales" class="section level3">
+<h3>Nociones Generales</h3>
+<p>Conceptos previos que haciamos referencia al inicio del articulo, tener un entendimiento basico de estos temas es importante para realizar subsetting.</p>
+<p><em><strong>Tipos de Datos</strong></em>: conocer la importancia del corchete <code>[ ]</code> nos permitira aprender los seis tipos de datos que se pueden usar para realizar subsetting, los vectores, matrices, data frames tienen diferentes comportamientos cuando realizamos el subsetting.</p>
+<p><em><strong>Operadores de Subsetting</strong></em>: extenderas tu conocimiento de los operadores de subsetting al incluir <code>[[</code> y <code>$</code> maneniendo el foco en los principios importantes de <em>simplificacion</em> vs <em>preservancia</em></p>
+</div>
+<div id="tipos-de-datos-data-types" class="section level3">
+<h3>Tipos de Datos (Data types)</h3>
+<p>Es mas facil aprender como funciona el subsetting o subconjunto para vectores atomicos y luego generalizar a las demas dimensiones de objetos mas complejos, empezaremos con el uso mas comun del operador <code>[[</code> y <code>$</code> los dos operadores principales en subsetting</p>
+</div>
+<div id="vectores-atomicos" class="section level3">
+<h3>Vectores Atomicos</h3>
+<p>Veamos los diferentes tipos de subsetting con un simple vector <code>x</code></p>
+<pre class="r"><code>x &lt;- c(2.1, 4.2, 3.3, 5.4)</code></pre>
+<p>Existen cinco tipos de cosas que puedes usar para subsetear un vector</p>
+<ol style="list-style-type: decimal">
+<li><strong>Enteros Postivos</strong>, retorna los elementos de una posicion especificada</li>
+</ol>
+<pre class="r"><code>x[c(3, 1)]</code></pre>
+<pre><code>## [1] 3.3 2.1</code></pre>
+<pre class="r"><code># Ordena los elementos
+x[order(x)]</code></pre>
+<pre><code>## [1] 2.1 3.3 4.2 5.4</code></pre>
+<pre class="r"><code># inices duplicados producen valores duplicados
+x[c(1, 1)]</code></pre>
+<pre><code>## [1] 2.1 2.1</code></pre>
+<pre class="r"><code># los numeros reales se truncan silencionamente a numeros enteros
+x[c(2.1, 2.9)]</code></pre>
+<pre><code>## [1] 4.2 4.2</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Enteros Negativos</strong>, omiten elementos de posiciones especificadas</li>
+</ol>
+<pre class="r"><code>x[-c(3, 1)]</code></pre>
+<pre><code>## [1] 4.2 5.4</code></pre>
+<p>No se puede mezclar enteros positivos con negativos en un solo subset</p>
+<pre class="r"><code>x[c(-1, 2)]
+# Error in x[c(-1, 2)] : only 0&#39;s may be mixed with negative subscripts</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li><strong>Vectores Logicos</strong>, selecciona elementos donde el valore de la correspondencia logica es <code>TRUE</code> este es probablemente el tipo de subsetting mas util porque permite escribir la expresion que crea el vector logico</li>
+</ol>
+<pre class="r"><code>x[c(TRUE, TRUE, FALSE, FALSE)]</code></pre>
+<pre><code>## [1] 2.1 4.2</code></pre>
+<pre class="r"><code>x[x &gt; 3]</code></pre>
+<pre><code>## [1] 4.2 3.3 5.4</code></pre>
+<p>Si el operador logico es mas corto que el vecto que se esta subseteando, se reciclara para que tenga la misma longitud</p>
+<pre class="r"><code>x[c(TRUE, FALSE)]</code></pre>
+<pre><code>## [1] 2.1 3.3</code></pre>
+<pre class="r"><code># Equivalente a:
+x[c(TRUE, FALSE, TRUE, FALSE)]</code></pre>
+<pre><code>## [1] 2.1 3.3</code></pre>
+<p>Un valor faltante en el inidice siempre produce un valor faltante en la salida</p>
+<pre class="r"><code>x[c(TRUE, TRUE, NA, FALSE)]</code></pre>
+<pre><code>## [1] 2.1 4.2  NA</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Nada</strong>, devuelve el vector original, esto no es util en vectores, pero es muy util en matrices, data frames y colecciones, tambien puede ser util usarlo conjuntamente con asignaciones</li>
+</ol>
+<pre class="r"><code>x[]</code></pre>
+<pre><code>## [1] 2.1 4.2 3.3 5.4</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li><strong>Cero</strong>, devuelve un vector de longitud cero, esto no es algo que usualmente se use con algun proposito, pero puede ser util para generar datos de prueba</li>
+</ol>
+<pre class="r"><code>x[0]</code></pre>
+<pre><code>## numeric(0)</code></pre>
+<p>si el vector tiene nombres, puedes usar:</p>
+<ol start="5" style="list-style-type: decimal">
+<li><strong>Vectores de Carcateres</strong>, para retornar elementos en el que el nombre coincida</li>
+</ol>
+<pre class="r"><code>(y &lt;- setNames(x, letters[1:4]))</code></pre>
+<pre><code>##   a   b   c   d 
+## 2.1 4.2 3.3 5.4</code></pre>
+<pre class="r"><code>y[c(&quot;d&quot;, &quot;c&quot;, &quot;a&quot;)]</code></pre>
+<pre><code>##   d   c   a 
+## 5.4 3.3 2.1</code></pre>
+<p>como en los inices enteros, tsmbien se pueden repetir los indices</p>
+<pre class="r"><code>y[c(&quot;a&quot;, &quot;a&quot;, &quot;a&quot;)]</code></pre>
+<pre><code>##   a   a   a 
+## 2.1 2.1 2.1</code></pre>
+<pre class="r"><code># cuando subseteamos con [ los nombres siempre deben coincidir exactamente
+z &lt;- c(abc = 1, def = 2)
+z[c(&quot;a&quot;, &quot;d&quot;)]</code></pre>
+<p>En proximos articulos exploraremos las listas. <em>Gracias!</em></p>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+
