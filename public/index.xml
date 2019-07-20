@@ -6,10 +6,20 @@
     <description>Recent content on Think big, start small, grow fast</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Porque estudiar la dispersion?</title>
+      <link>/2019/07/20/porque-estudiar-la-dispersion/</link>
+      <pubDate>Sat, 20 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/07/20/porque-estudiar-la-dispersion/</guid>
+      <description>Porque estudiar la dispersion?Los estadigrafos de dispersion, como su nombre lo indica, miden la dispersion de los datos de la muestra, dos conjuntos de datos pueden tener la misma localizacion central, y no obstante ser muy diferentes, si uno esta mas disperso que el otro.
+Es decir, una dispersion pequeña nos indica que los datos se encuentran acumulados cercanamente alrededor de la media aritmetica, si esto es asi, la media es un valor muy representativo de todos los datos, se consideraria un promedio confiable.</description>
+    </item>
     
     <item>
       <title>Subsetting</title>
@@ -70,7 +80,7 @@ library(ggplot2)mediciones &amp;lt;- c(80,83,85,78,76,86,72)mediciones## [1] 
       <description>Como encontrarnos&amp;hellip; Poco a poco crece nuestra presencia en Redes Sociales, comenzamos desde 0, literalmente!, no estamos interesados en tener cantidad, sino calidad ante todo.
 Nuestro perfil en Facebook refleja nuestro trabajo ante el público en general.
 Nuestra comunidad en Facebook desarrolla:
-&amp;ldquo;Casos de Estudio&amp;rdquo;, sean estos simples o complejos. Compartimos conocimiento y formas de afrontar los retos. Creamos equipos, compartimos, aportamos y creamos valor.  Perfil en Facebook muy pronto&amp;hellip;</description>
+&amp;ldquo;Casos de Estudio&amp;rdquo;, sean estos simples o complejos. Compartimos conocimiento y formas de afrontar los retos. Creamos equipos, compartimos, aportamos y creamos valor.  Perfil en Facebook Fan Page Facebook</description>
     </item>
     
     <item>

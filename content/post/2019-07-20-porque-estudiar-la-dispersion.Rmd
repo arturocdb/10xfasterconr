@@ -1,0 +1,194 @@
+---
+title: Porque estudiar la dispersion?
+author: Charlie Do Amaral
+date: '2019-07-20'
+slug: porque-estudiar-la-dispersion
+categories:
+  - estadistica
+  - fundamentos
+tags:
+  - fundamentos
+  - inicio
+---
+
+### Porque estudiar la dispersion?
+Los estadigrafos de dispersion, como su nombre lo indica, miden la dispersion de los datos de la muestra, dos conjuntos de datos pueden tener la misma localizacion central, y no obstante ser muy diferentes, si uno esta mas disperso que el otro.
+
+Es decir, una dispersion pequeña nos indica que los datos se encuentran acumulados cercanamente alrededor de la media aritmetica, si esto es asi, la _media_ es un valor muy representativo de todos los datos, se consideraria un **promedio confiable**.
+
+Veamos un ejemplo
+```{r}
+a <- c(9,10,11,12,13,14,15)
+b <- c(6,8,10,12,14,16,18)
+mean(a)
+mean(b)
+```
+
+En ambos casos la media aritmetica es 12, y para la mediana tambien es 12
+```{r}
+median(a)
+median(b)
+```
+
+Es decir; tienen la misma media y la misma mediana, y sin embargo; no se necesita mucho esfuerzo para darse cuenta que son muestras significativamente diferentes, conocer la dispersion nos permite evaluar la confiabilidad de dos o mas **promedios**
+
+supongamos que hay dos plantas de produccion, una en Santa Cruz y otra en La Paz, ambas tienen la misma media aritmetica de 50, correspondiente a la produccion diaria de cada planta.
+
+Al utilizar la medida de dispersion nos ayuda a identificar si ese promedio de 50 es confiable o no, para esto tenemos los registros de las dos plantas
+```{r}
+santacruz <- c(48,49,49,50,50,50,51,51,52)
+mean(santacruz) # promedio planta Santa Cruz
+```
+
+```{r}
+# Rango
+range(santacruz)
+```
+
+Histograma planta Santa Cruz
+```{r}
+hist(santacruz, col = "lightyellow")
+```
+
+```{r}
+# Planta La Paz
+lapaz <- c(40,47,47,50,50,50,53,53,60)
+mean(lapaz) # Promedio planta La Paz
+```
+
+```{r}
+# Rango
+range(lapaz)
+```
+
+Histograma planta La Paz
+```{r}
+hist(lapaz, col = "lightyellow")
+```
+
+Podemos concluuir que apesar de tener la misma media la planta de La Paz presenta una mayor dispersion ya que el rango de su produccion va de 40 a 60
+
+### _Amplitud Total o Recorrido de la Variable_
+la medida de dispersion mas simple es la amplitud total, es simplemente la diferencia entre el valor maximo y el valor minimo de un conjunto de datos 
+
+$$R = X_{max} - X_{min}$$
+
+_Si el recorrido de la variable es mayor en un conjunto de observaciones que en otro_ debe esperarse, en principio que la dispersion de los datos sea superior tambien en uno que en el otro, como puede verse en el ejemplo anterior, el rango es mucho mayor en la Planta de La Paz.
+
+En **R** para obtener esta medida de amplitud utilizamos la funcion `diff()`
+```{r}
+diff(range(santacruz))
+```
+
+```{r}
+diff(range(lapaz))
+```
+
+Sin embargo; en ciertas ocasiones el recorrido ofrece una medida errónea de la dispersion, debido a que para calcularlo solo se emplean los valores extremos, por tanto; ignora la naturaleza de la variacion entre todas las demas observaciones y esta altamente influenciado por los valores extremos.
+
+### _Varianza_
+Conocida tambien como variancia, se define como la media del cuadrado de las observaciones con respecto de la medi aritmetica de esos datos. La varianza sirve para poder comparar la dispersion en dos o mas conjuntos de observaciones, nos da una idea del nivel de dispersion de los datos y el nivel de acercamiento con respecto a la media.
+
+Mientras menor la varianza, los datos se acumulan mas a la media, asi confirmamos que la media obtenida de los datos es representativa, en R usamos la funcion `var()`
+
+Continuando con nuestros datos, planta Santa Cruz
+
+```{r}
+var(santacruz)
+```
+
+planta La paz
+```{r}
+var(lapaz)
+```
+
+### _Desviacion Tipica o Desviacion Estandar_
+Si bien ya sabemos como expresar cuantitativamente la dispersion de un conjunto de observaciones, ocurre un inconveniente en cuanto a la interpretacion de esta cantidad, ya que ella esta dada en el cuadrado de la dimension en que se expresa la caracteritica, y en ocasiones trae confusion. Es conveniente entonces contar con otro estadigrafo que basado en el valor de la varianza, sirva para dar una medida de la dispersion en la misma dimension en que estan los datos, esta medida es la _Desviacion Tipica_ o _Desviacion Estandar_, se define como **_la raiz cuadrada positiva de la varianza_**
+
+$$ D(x) = S = \sqrt{V(x))} = \sqrt{S^{2}} $$
+
+**La Desviacion Tipica muestral** se denota como `s` y se define mediante la siguiente formula:
+
+$$s= \sqrt{(\frac{\sum_{i=1}^{n}(y_{i} - \bar{y})}{n-1})}$$
+
+Por tanto, para obtener la desviacion tipica de una muestra, primero se obtienen las desviaciones, seguidamente:
+
+1. se elevan al cuadrado
+2. se suman
+3. se dividen por `n-1`
+4. se toma la raiz cuadrada
+
+Para ilustrar el uso de la formula, hemos escogido un conjunto de datos que es especialmente simple de manejar
+
+_**Crecimiento de crisantemos**_, un botánico midió el alargamiento del tallo (mm en 7 dias) de cinco plantas que crecian en el mismo banco del invernadero, los resultados fueron los siguientes
+
+```{r}
+medidas.tallo <- c(76,72,65,70,82)
+medidas.tallo
+```
+
+La media muestral es
+
+$$\bar{y}=\frac{365}{5}=73mm$$
+
+En R usamos la funcion `mean()`
+
+```{r}
+mean(medidas.tallo)
+```
+
+A continuacion construiremos un data frame para identificar las desviaciones y obtener la desviacion tipica.
+```{r}
+obser <- medidas.tallo
+desv <- medidas.tallo - mean(medidas.tallo)
+desv.al.cuad <- desv^2
+```
+
+Comprobamos que tengamos los datos correctos antes de armar el data frame, simplemente llamando a cada variable
+
+Observacion
+```{r}
+obser
+```
+
+Desviacion
+```{r}
+desv
+```
+
+Desviacion al cuadrado
+```{r}
+desv.al.cuad
+```
+
+Todo correcto!, ahora armamos el data frame
+```{r}
+df <- data.frame(obser, desv, desv.al.cuad)
+df
+```
+
+Con la funcion `nrow` determinamos el numero de obervaciones
+```{r}
+nrow(df)
+```
+
+como `n=5` la desviacion tipica es
+
+$$s=\sqrt{\frac{64}{4}}=\sqrt{41}=6,4mm$$
+
+En R es muy sencillo con la funcion `sd()` (Standar Desviation)
+```{r}
+sd(desv)
+```
+
+Gracias!
+
+
+
+
+
+
+
+
+
+
