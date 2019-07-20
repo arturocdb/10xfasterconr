@@ -17,11 +17,7 @@ Nuestra comunidad en Facebook desarrolla:
 
 ### Perfil en Facebook
 
-muy pronto...
-
-### Comunidad en Facebook
-
-
+[Fan Page Facebook](https://www.facebook.com/10x-Faster-con-R)
 
 ### LinkedIn
 
@@ -29,9 +25,6 @@ muy pronto...
 
 [10x Faster con R](https://www.linkedin.com/company/10x-faster-con-r/about/?viewAsMember=true)
 
-### Gitter Chat
-
-[![Gitter](https://badges.gitter.im/10x-Faster-con-R/community.svg)](https://gitter.im/10x-Faster-con-R/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 ### Contacto
 
