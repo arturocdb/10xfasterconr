@@ -17,7 +17,7 @@ Nuestra comunidad en Facebook desarrolla:
 
 ### Perfil en Facebook
 
-[Fan Page Facebook](https://www.facebook.com/10xasterconr)
+[Fan Page Facebook](https://www.facebook.com/10xfasterconr)
 
 ### LinkedIn
 

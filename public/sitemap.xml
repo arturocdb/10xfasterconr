@@ -9,6 +9,12 @@
   </url>
   
   <url>
+    <loc>/</loc>
+    <lastmod>2019-07-20T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/2019/07/20/porque-estudiar-la-dispersion/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
   </url>
@@ -21,12 +27,6 @@
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2019-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
