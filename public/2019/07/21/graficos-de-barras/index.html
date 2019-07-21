@@ -64,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">9 min read</span>
+    <span class="article-duration">8 min read</span>
     
 
     <h1 class="article-title">Graficos de Barras</h1>
@@ -217,45 +217,6 @@ ce</code></pre>
 ##  $ z      : num  2.43 2.31 2.31 2.63 2.75 2.48 2.47 2.53 2.49 2.39 ...</code></pre>
 <p>Con <code>geom_bar()</code> el comportamiento por defecto es usar <code>stat = "bin"</code>, que cuenta el numero de casos de cada grupo (cada posicion x en este ejemplo) en el grafico podemos ver que hay 23.000 casos con tipo de corte <code>ideal</code></p>
 <p>En este ejemplo, la variable en el eje x es <em>discreta</em>, si usamos una variable <em>continua</em> en el eje x obtendremos una barra en cada valor unico de x en los datos.</p>
-</div>
-</div>
-<div id="usando-colores-en-los-graficos-de-barras" class="section level3">
-<h3>Usando colores en los Graficos de Barras</h3>
-<div id="problema-3" class="section level4">
-<h4>Problema</h4>
-<p>Como usar diferentes colores para las barras en tus graficos</p>
-</div>
-<div id="solucion-3" class="section level4">
-<h4>Solucion</h4>
-<p>Mapear la variable apropiada a la estetica de relleno.</p>
-<p>Usaremos el conjunto de datos <code>uspopchange</code> para este ejemplo, contiene el cambio porcentual de la poblacion de EEUU, de 2000 a 2010, tomaremos los 10 estados con mayor crecimiento y graficaresmos su cambio porcentual. Tambien colorearemos las barras por region (noreste, sur, norte central u oeste). Tambien utilizaremos el formato del paquete <code>dplyr</code></p>
-<p>Primero filtramos los 10 mejores estados</p>
-<pre class="r"><code>library(gcookbook)
-library(dplyr)</code></pre>
-<pre><code>## Warning: package &#39;dplyr&#39; was built under R version 3.6.1</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>upc &lt;- uspopchange %&gt;%
-  arrange(desc(Change)) %&gt;%
-  slice(1:10)
-upc</code></pre>
-<pre><code>##             State Abb Region Change
-## 1          Nevada  NV   West   35.1
-## 2         Arizona  AZ   West   24.6
-## 3            Utah  UT   West   23.8
-## 4           Idaho  ID   West   21.1
-## 5           Texas  TX  South   20.6
-## 6  North Carolina  NC  South   18.5
-## 7         Georgia  GA  South   18.3
-## 8         Florida  FL  South   17.6
-## 9        Colorado  CO   West   16.9
-## 10 South Carolina  SC  South   15.3</code></pre>
 </div>
 </div>
 
