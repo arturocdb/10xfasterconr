@@ -6,10 +6,19 @@
     <description>Recent content on Diseñando una experiencia ... enseñando.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 20 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 21 Jul 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Graficos de Barras</title>
+      <link>/2019/07/21/graficos-de-barras/</link>
+      <pubDate>Sun, 21 Jul 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/07/21/graficos-de-barras/</guid>
+      <description>Graficos de BarrasLos graficos de barras son quizas el tipo de visualizacion de datos mas utilizado. Normalmente se utilizan para mostrar valores numericos (en el eje y), por ejemplo, los graficos de barras serian buenos para mostrar los precios de cuatro tipos diferentes de articulos, y por otro lado, un grafico de barras no seria tan bueno para mostrar precios a lo largo del tiempo, donde el tiempo es una variable continua, aunque se puede hacer.</description>
+    </item>
     
     <item>
       <title>Porque estudiar la dispersion?</title>

@@ -1,0 +1,67 @@
+---
+title: Graficos de Barras
+author: Charlie Do Amaral
+date: '2019-07-21'
+slug: graficos-de-barras
+categories:
+  - estadistica
+  - R
+tags:
+  - fundamentos
+---
+
+### Graficos de Barras
+Los graficos de barras son quizas el tipo de visualizacion de datos mas utilizado. Normalmente se utilizan para mostrar valores numericos (en el eje y), por ejemplo, los graficos de barras serian buenos para mostrar los precios de cuatro tipos diferentes de articulos, y por otro lado, un grafico de barras no seria tan bueno para mostrar precios a lo largo del tiempo, donde el tiempo es una variable continua, aunque se puede hacer.
+
+Hay una distincion importante que debes tener en cuenta al hacer graficos de barras, a veces las alturas de las barras representan recuentos de casos en el conjunto de datos, se debe tener en cuenta esta dintincion ya que puede ser una fuente de confusion, ya que tienen relaciones muy diferentes con los datos, pero se utiliza el mismo termino para ambos. en este post mostraremos sugerencias para ambos tipos de graficos de barras.
+
+En esta publicacion nos enfocaremos en el uso de **_ggplot2_** en lugar del sistema base de graficos de **R**, usando **_gplot2_** mantendremos las cosas simples y haremos graficos mas sofisticados
+
+### Haciendo un grafico de barras
+#### Problema
+Tenemos un data frame donde una columna representa la posicion x de cada barra y otra columna representa la altura vertical (y) de cada barra.
+
+#### Solucion
+Usando `ggplot()` con `geom_col()` y especificando las variables que queremos en los ejes x e y.
+
+Para nuestros ejemplos usaremos el paquete `gcookbook` que contiene data sets de ejemplo, a continuacion con el data set `pg_mean` (este conjunto de datos simplemente tiene las _medias_ grupales del conjunto de datos _PlantGrowth_), el proposito de este conjunto resumen es para simplicar su uso en los graficos.
+
+```{r}
+library(ggplot2) # cargamos la libreria ggplot2
+library(gcookbook) # cargamos el paquete
+ggplot(pg_mean, aes(x=group, y=weight)) + geom_col()
+```
+
+Grafico de barras con valores discretos en el eje x
+
+Cuando x es una variable _continua_ (o numerica), las barras se comportan de manera diferente, en lugar de tener una barra en cada valor x real, hay una barra en cada valor x posible entre el minimo y el maximo. podemos convertir las variables _continuas_ a variables _discretas_ usando la funcion `factor()`
+
+Para el siguiente ejemplo usaremos el conjunto de datos `BOD` (contiene 6 filas y 2 columnas, nos muestra la demanda bioquimica de oxigeno frente al tiempo en una evaluacion de la calidad del agua)
+
+```{r}
+BOD
+```
+
+_Time_ nos da la media en dias y _demand_ la demanda bioquimica de oxigeno en (mg/l)
+
+Veamos su estructura
+```{r}
+str(BOD)
+```
+
+Graficando
+```{r, echo=FALSE, out.width='.49\\linewidth', fig.width=2, fig.height=2,fig.show='hold',fig.align='center'}
+ggplot(BOD, aes(x = Time, y = demand)) + geom_col()
+
+# convetimos el tiempo a discreto (variable categorica) con la funcion factor()
+ggplot(BOD, aes(x = factor(Time), y = demand)) + geom_col()
+```
+
+
+
+
+
+
+
+
+

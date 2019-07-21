@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<title>Graficos de Barras - Diseñando una experiencia ... enseñando.</title>
+<meta property="og:title" content="Graficos de Barras - Diseñando una experiencia ... enseñando.">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/proyecto/">Proyecto</a></li>
+    
+    <li><a href="/curso/">Curso</a></li>
+    
+    <li><a href="/unete/">Únete</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Graficos de Barras</h1>
+
+    
+    <span class="article-date">2019-07-21</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="graficos-de-barras" class="section level3">
+<h3>Graficos de Barras</h3>
+<p>Los graficos de barras son quizas el tipo de visualizacion de datos mas utilizado. Normalmente se utilizan para mostrar valores numericos (en el eje y), por ejemplo, los graficos de barras serian buenos para mostrar los precios de cuatro tipos diferentes de articulos, y por otro lado, un grafico de barras no seria tan bueno para mostrar precios a lo largo del tiempo, donde el tiempo es una variable continua, aunque se puede hacer.</p>
+<p>Hay una distincion importante que debes tener en cuenta al hacer graficos de barras, a veces las alturas de las barras representan recuentos de casos en el conjunto de datos, se debe tener en cuenta esta dintincion ya que puede ser una fuente de confusion, ya que tienen relaciones muy diferentes con los datos, pero se utiliza el mismo termino para ambos. en este post mostraremos sugerencias para ambos tipos de graficos de barras.</p>
+<p>En esta publicacion nos enfocaremos en el uso de <strong><em>ggplot2</em></strong> en lugar del sistema base de graficos de <strong>R</strong>, usando <strong><em>gplot2</em></strong> mantendremos las cosas simples y haremos graficos mas sofisticados</p>
+</div>
+<div id="haciendo-un-grafico-de-barras" class="section level3">
+<h3>Haciendo un grafico de barras</h3>
+<div id="problema" class="section level4">
+<h4>Problema</h4>
+<p>Tenemos un data frame donde una columna representa la posicion x de cada barra y otra columna representa la altura vertical (y) de cada barra.</p>
+</div>
+<div id="solucion" class="section level4">
+<h4>Solucion</h4>
+<p>Usando <code>ggplot()</code> con <code>geom_col()</code> y especificando las variables que queremos en los ejes x e y.</p>
+<p>Para nuestros ejemplos usaremos el paquete <code>gcookbook</code> que contiene data sets de ejemplo, a continuacion con el data set <code>pg_mean</code> (este conjunto de datos simplemente tiene las <em>medias</em> grupales del conjunto de datos <em>PlantGrowth</em>), el proposito de este conjunto resumen es para simplicar su uso en los graficos.</p>
+<pre class="r"><code>library(ggplot2) # cargamos la libreria ggplot2
+library(gcookbook) # cargamos el paquete
+ggplot(pg_mean, aes(x=group, y=weight)) + geom_col()</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Grafico de barras con valores discretos en el eje x</p>
+<p>Cuando x es una variable <em>continua</em> (o numerica), las barras se comportan de manera diferente, en lugar de tener una barra en cada valor x real, hay una barra en cada valor x posible entre el minimo y el maximo. podemos convertir las variables <em>continuas</em> a variables <em>discretas</em> usando la funcion <code>factor()</code></p>
+<p>Para el siguiente ejemplo usaremos el conjunto de datos <code>BOD</code> (contiene 6 filas y 2 columnas, nos muestra la demanda bioquimica de oxigeno frente al tiempo en una evaluacion de la calidad del agua)</p>
+<pre class="r"><code>BOD</code></pre>
+<pre><code>##   Time demand
+## 1    1    8.3
+## 2    2   10.3
+## 3    3   19.0
+## 4    4   16.0
+## 5    5   15.6
+## 6    7   19.8</code></pre>
+<p><em>Time</em> nos da la media en dias y <em>demand</em> la demanda bioquimica de oxigeno en (mg/l)</p>
+<p>Veamos su estructura</p>
+<pre class="r"><code>str(BOD)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    6 obs. of  2 variables:
+##  $ Time  : num  1 2 3 4 5 7
+##  $ demand: num  8.3 10.3 19 16 15.6 19.8
+##  - attr(*, &quot;reference&quot;)= chr &quot;A1.4, p. 270&quot;</code></pre>
+<p>Graficando
+<img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-4-1.png" width=".49\linewidth" style="display: block; margin: auto;" /><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-4-2.png" width=".49\linewidth" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+
