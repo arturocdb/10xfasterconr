@@ -139,7 +139,7 @@ x[1:10]
 
 Es el vector formado por los diez primeros elementos de `x`, (supuesto que `length(x)` no es menor que 10). Por otra parte, 
 
-```{r}
+```{r, eval=FALSE}
 c("x","y")[rep(c(1,2,2,1), times=4)]
 ```
 
@@ -147,7 +147,7 @@ crea un vector de caracteres de longitud 16 formado por `"x", "y", "y", "x"` rep
 
 **3. Un vector de numeros naturales negativos.** En este caso, los índices indican los elementos del vector referido que deben _excluirse_. Asi pues:
 
-```{r}
+```{r, eval=FALSE}
 y <- x[-(1:5)]
 ```
 
@@ -167,17 +167,17 @@ La variable de almacenamiento tambien puede ser indexada, en cuyo caso la asigna
 
 El vector asignado debe ser de la misma longitud que el vector de índices, y en el caso de un vector de índices logico, debe ser de la misma longitud del vector que indexa. Por ejemplo:
 
-```{r}
+```{r, eval=FALSE}
 x[is.na(x)] <- 0
 ```
 
 sustituye cada valor faltante de `x` por un cero, por otra parte,
-```{r}
+```{r, eval=FALSE}
 y[y < 0] <- -y[y < 0]
 ```
 
 equivale a:
-```{r}
+```{r, eval=FALSE}
 y <- abs(y)
 ```
 
