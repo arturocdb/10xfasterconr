@@ -26,7 +26,7 @@ Usando `ggplot()` con `geom_col()` y especificando las variables que queremos en
 
 Para nuestros ejemplos usaremos el paquete `gcookbook` que contiene data sets de ejemplo, a continuacion con el data set `pg_mean` (este conjunto de datos simplemente tiene las _medias_ grupales del conjunto de datos _PlantGrowth_), el proposito de este conjunto resumen es para simplicar su uso en los graficos.
 
-```{r}
+```{r fig.height=4, fig.width=4}
 library(ggplot2) # cargamos la libreria ggplot2
 library(gcookbook) # cargamos el paquete
 ggplot(pg_mean, aes(x=group, y=weight)) + geom_col()
@@ -50,15 +50,19 @@ str(BOD)
 ```
 
 Graficando
-```{r, echo=FALSE, out.width='.49\\linewidth', fig.width=2, fig.height=2,fig.show='hold',fig.align='center'}
+```{r fig.height=4, fig.width=4}
 ggplot(BOD, aes(x = Time, y = demand)) + geom_col()
 
+```
+
+Grafico de barras con valores _continuos_ en el eje x
+
+```{r fig.height=4, fig.width=4}
 # convetimos el tiempo a discreto (variable categorica) con la funcion factor()
 ggplot(BOD, aes(x = factor(Time), y = demand)) + geom_col()
 ```
 
-
-
+Grafico de barras con la variable x convertida a factor, note que el espacio del valor 6 no existe. En nuestros datos no existe el valor 6 en la columna `Time`. Cuando la variable x es _continua_ ggplot2 usara un eje numerico que tendra espacio para todos los valores numericos dentro del rango, por eso se da el espacio vacio 6 en la grafica, cuando la variable tiempo se convierte a factor _ggplot2_ la usa como una variable _discreta_, donde los valores de tratan como etiquetas arbitrarias en lugar de valores numericos, por lo que no asignara espacio en el eje x para todos los valores numericos posibles entre el minimo y el maximo.
 
 
 

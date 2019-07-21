@@ -96,7 +96,7 @@
 <pre class="r"><code>library(ggplot2) # cargamos la libreria ggplot2
 library(gcookbook) # cargamos el paquete
 ggplot(pg_mean, aes(x=group, y=weight)) + geom_col()</code></pre>
-<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-1-1.png" width="384" /></p>
 <p>Grafico de barras con valores discretos en el eje x</p>
 <p>Cuando x es una variable <em>continua</em> (o numerica), las barras se comportan de manera diferente, en lugar de tener una barra en cada valor x real, hay una barra en cada valor x posible entre el minimo y el maximo. podemos convertir las variables <em>continuas</em> a variables <em>discretas</em> usando la funcion <code>factor()</code></p>
 <p>Para el siguiente ejemplo usaremos el conjunto de datos <code>BOD</code> (contiene 6 filas y 2 columnas, nos muestra la demanda bioquimica de oxigeno frente al tiempo en una evaluacion de la calidad del agua)</p>
@@ -115,8 +115,14 @@ ggplot(pg_mean, aes(x=group, y=weight)) + geom_col()</code></pre>
 ##  $ Time  : num  1 2 3 4 5 7
 ##  $ demand: num  8.3 10.3 19 16 15.6 19.8
 ##  - attr(*, &quot;reference&quot;)= chr &quot;A1.4, p. 270&quot;</code></pre>
-<p>Graficando
-<img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-4-1.png" width=".49\linewidth" style="display: block; margin: auto;" /><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-4-2.png" width=".49\linewidth" style="display: block; margin: auto;" /></p>
+<p>Graficando</p>
+<pre class="r"><code>ggplot(BOD, aes(x = Time, y = demand)) + geom_col()</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-4-1.png" width="384" /></p>
+<p>Grafico de barras con valores <em>continuos</em> en el eje x</p>
+<pre class="r"><code># convetimos el tiempo a discreto (variable categorica) con la funcion factor()
+ggplot(BOD, aes(x = factor(Time), y = demand)) + geom_col()</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-5-1.png" width="384" /></p>
+<p>Grafico de barras con la variable x convertida a factor, note que el espacio del valor 6 no existe. En nuestros datos no existe el valor 6 en la columna <code>Time</code>. Cuando la variable x es <em>continua</em> ggplot2 usara un eje numerico que tendra espacio para todos los valores numericos dentro del rango, por eso se da el espacio vacio 6 en la grafica, cuando la variable tiempo se convierte a factor <em>ggplot2</em> la usa como una variable <em>discreta</em>, donde los valores de tratan como etiquetas arbitrarias en lugar de valores numericos, por lo que no asignara espacio en el eje x para todos los valores numericos posibles entre el minimo y el maximo.</p>
 </div>
 </div>
 
