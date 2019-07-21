@@ -1,0 +1,49 @@
+---
+title: Generacion de Sucesiones y Vectores
+author: Charlie Do Amaral
+date: '2018-02-28'
+slug: generacion-de-sucesiones-y-vectores
+categories:
+  - fundamentos
+  - R
+tags:
+  - inicio
+  - R
+---
+
+
+
+<div id="generacion-de-sucesiones" class="section level3">
+<h3>Generacion de Sucesiones</h3>
+<p>En R existen varias funciones para generar sucesiones numericas, por ejemplo: <code>1:30</code> es el vector <code>c(1,2, ...,29,30).</code> el operador “dos puntos” tiene maxima prioridad en una expresion, asi por ejemplo: <code>2*1:15</code> es el vector <code>c(2,4,6, ...,28,30).</code> Escribimos <code>n &lt;- 10</code> y comparamos las sucesiones <code>1:n-1</code> y <code>1:(n-1)</code></p>
+<pre class="r"><code>n &lt;- 10
+1:n-1</code></pre>
+<pre><code>##  [1] 0 1 2 3 4 5 6 7 8 9</code></pre>
+<pre class="r"><code>1:(n-1)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<p>La forma <code>30:1</code> permite construir una sucesion descendente</p>
+<p>La funcion <code>seq()</code> permite generar sucesiones mas complejas, dispone de cinco argumentos, aunque no se utilizan todos simultaneamente. Si se dan los dos primeros indica el comienzo y el final de la sucesion, y si son los unicos argumentos, el resultado coincide con el operador “dos puntos”, esto es <code>seq(2,10)</code> coincide con <code>2:10</code>.</p>
+<p>Los argumentos de <code>seq()</code> y de muchas funciones de R, pueden darse ademas de por posicion, por nombre, en cuyo caso, el orden en que aparecen es <strong>irrelevante.</strong> En esta funcion los dos primeros argumentos se pueden dar por nombre mediante <code>from=valor-inicial</code> y <code>to=valor-final</code>, por tanto; <code>seq(1,30), seq(from=1, to=30)</code> y <code>seq(to=30, from=1)</code> son formas equivalentes a <code>1:30</code></p>
+<p>Los dos siguientes argumentos de <code>seq()</code> son <code>by=valor</code> y <code>length=valor</code> y especifican el ‘paso’ y ‘longitud’ de la sucesion respectivamente. Si no se suministra ninguno, el valor predeterminado es <code>by=1</code> y <code>length</code> se calcula.</p>
+<p>Por ejemplo</p>
+<pre class="r"><code>seq(-5, 5, by=.2) -&gt; s3
+s3</code></pre>
+<pre><code>##  [1] -5.0 -4.8 -4.6 -4.4 -4.2 -4.0 -3.8 -3.6 -3.4 -3.2 -3.0 -2.8 -2.6 -2.4
+## [15] -2.2 -2.0 -1.8 -1.6 -1.4 -1.2 -1.0 -0.8 -0.6 -0.4 -0.2  0.0  0.2  0.4
+## [29]  0.6  0.8  1.0  1.2  1.4  1.6  1.8  2.0  2.2  2.4  2.6  2.8  3.0  3.2
+## [43]  3.4  3.6  3.8  4.0  4.2  4.4  4.6  4.8  5.0</code></pre>
+<p>Genera el vector <code>c(-5.0, -4.8, -4.6, ..., 4.6, 4.8, 5.0)</code> y lo almacena en <code>s3</code>. Similarmente</p>
+<pre class="r"><code>s4 &lt;- seq(length=51, from=-5, by=.2)</code></pre>
+<p>Genera los mismos valores y lo almacena en <code>s4</code>.</p>
+<p>el quinto argumento de esta funcion es <code>along=vector</code> y si se usa debe ser el unico argumento, ya que crea una sucesion <code>1, 2, ..., length(vector)</code> o la sucesion vacia si el vector es vacio (lo que puede ocurrir).</p>
+<p>Una funcion relacionada con <code>seq()</code> es <code>rep()</code> que permite duplicar un objeto de formas diversas, su forma mas sencilla es:</p>
+<pre class="r"><code>s5 &lt;- rep(&#39;x&#39;, times=5)
+s5</code></pre>
+<pre><code>## [1] &quot;x&quot; &quot;x&quot; &quot;x&quot; &quot;x&quot; &quot;x&quot;</code></pre>
+<p>que coloca cinco copias de x, una tras la otra y las almacena en <code>s5</code></p>
+</div>
+<div id="vectores-logicos" class="section level3">
+<h3>Vectores Logicos</h3>
+<p>R no solo maneja vectores numericos, sino tambien logicos. Los elementos de un vector logico solo pueden tomar dos valores: <code>FALSE</code> (falso) y <code>TRUE</code> (verdadero), estos valores se representan tambien por <code>F</code> y <code>T</code>.</p>
+<p>Los vectores logicos aparecen al utilizar <em>condiciones</em>, por ejemplo</p>
+</div>

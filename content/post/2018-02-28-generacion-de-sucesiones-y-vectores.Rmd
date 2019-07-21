@@ -1,0 +1,103 @@
+---
+title: Generacion de Sucesiones y Vectores
+author: Charlie Do Amaral
+date: '2018-02-28'
+slug: generacion-de-sucesiones-y-vectores
+categories:
+  - fundamentos
+  - R
+tags:
+  - inicio
+  - R
+---
+
+### Generacion de Sucesiones
+En R existen varias funciones para generar sucesiones numericas, por ejemplo: `1:30` es el vector `c(1,2, ...,29,30).` el operador "dos puntos" tiene maxima prioridad en una expresion, asi por ejemplo: `2*1:15` es el vector `c(2,4,6, ...,28,30).` Escribimos `n <- 10` y comparamos las sucesiones `1:n-1` y `1:(n-1)`
+
+```{r}
+n <- 10
+1:n-1
+1:(n-1)
+```
+
+La forma `30:1` permite construir una sucesion descendente
+
+La funcion `seq()` permite generar sucesiones mas complejas, dispone de cinco argumentos, aunque no se utilizan todos simultaneamente. Si se dan los dos primeros indica el comienzo y el final de la sucesion, y si son los unicos argumentos, el resultado coincide con el operador "dos puntos", esto es `seq(2,10)` coincide con `2:10`.
+
+Los argumentos de `seq()` y de muchas funciones de R, pueden darse ademas de por posicion, por nombre, en cuyo caso, el orden en que aparecen es **irrelevante.** En esta funcion los dos primeros argumentos se pueden dar por nombre mediante `from=valor-inicial` y `to=valor-final`, por tanto; `seq(1,30), seq(from=1, to=30)` y `seq(to=30, from=1)` son formas equivalentes a `1:30`
+
+Los dos siguientes argumentos de `seq()` son `by=valor` y `length=valor` y especifican el 'paso' y 'longitud' de la sucesion respectivamente. Si no se suministra ninguno, el valor predeterminado es `by=1` y `length` se calcula.
+
+Por ejemplo
+```{r}
+seq(-5, 5, by=.2) -> s3
+s3
+```
+
+Genera el vector `c(-5.0, -4.8, -4.6, ..., 4.6, 4.8, 5.0)` y lo almacena en `s3`. Similarmente
+```{r}
+s4 <- seq(length=51, from=-5, by=.2)
+```
+
+Genera los mismos valores y lo almacena en `s4`.
+
+el quinto argumento de esta funcion es `along=vector` y si se usa debe ser el unico argumento, ya que crea una sucesion `1, 2, ..., length(vector)` o la sucesion vacia si el vector es vacio (lo que puede ocurrir).
+
+Una funcion relacionada con `seq()` es `rep()` que permite duplicar un objeto de formas diversas, su forma mas sencilla es:
+```{r}
+s5 <- rep('x', times=5)
+s5
+```
+
+que coloca cinco copias de x, una tras la otra y las almacena en `s5`
+
+### Vectores Logicos
+R no solo maneja vectores numericos, sino tambien logicos. Los elementos de un vector logico solo pueden tomar dos valores: `FALSE` (falso) y `TRUE` (verdadero), estos valores se representan tambien por `F` y `T`.
+
+Los vectores logicos aparecen al utilizar _condiciones_, por ejemplo
+```{r}
+temp <- x > 13
+```
+
+Almacena en `temp` un vector de la misma longitud de x y cuyos valores seran, respectivamente `T` o `F` de acuerdo a que los elementos de `x` cumplan o no la condicion indicada; ser mayores que 13.
+
+Los operadores logicos son `<` (menor), `<=` (menor o igual), `>` (mayor), `>=` (mayor o igual), `==` (igual) y `!=` (distinto).
+
+Ademas, si `c1` y `c2` son expresiones logicas, entonces `c1$c2` es su interseccion ("conjuncion"), `c1|c2` es su union ("disyuncion") y `!c1` es la negacion de `c1`.
+
+Los vectores logicos pueden utilizarse en expresiones aritmeticas, en cuyo caso se transforman primero en vectores numericos, de tal modo que `F` se transforma en `0` y `T` en `1`. Sin embargo hay casos en que un vector logico y su correspondiente numerico no son equivalentes, como puede ver a continuacion:
+
+### Valores Faltantes
+En ocasiones puede que no todas las componentes de un vector sean conocidas. Cuando falta un elemento, lo que se denomina 'valor faltante', se le asigna un valor especial, NA, en general, casi cualquier operacion donde intervenga un valor `NA`, da por resultado `NA`, la justificacion es sencilla. Si no se puede especificar completamente la operacion, el resultado no podra ser conocido, y por tanto no estara disponible.
+
+La funcion `is.na(x)` crea un vector logico del tamaño de x cuyos elementos solo valdran `T` si el elemento correspondiente de x es `NA`, y `F` en caso contrario. 
+
+```{r}
+z <- c(1:3,NA);
+z
+```
+
+```{r}
+ind <- is.na(z)
+ind
+```
+
+Note que la expresion `x == NA` es distinta de `is.na(x)` puesto que `NA` no es realmente un valor, sino un indicador de una cantidad que no esta disponible, por tanto, `x == NA` es un vector de la misma longitud de x con todos sus elementos `NA` puesto que la expresion logica es incompleta.
+
+Ademas, hay una segunda clase de valores 'faltantes' producidos por el calculo. Son los llamados valores `NaN` este tipo de dato no existe en `S` se confunden con `NA` en S-Plus, ejemplos de `NaN` son
+```{r}
+0/0
+```
+
+```{r}
+Inf - Inf
+```
+
+En resumen, `is.na(xx)` es `TRUE` _tanto_ para los valores `NA` como para los `NaN`, para diferenciar estos ultimos existe la funcion `is.nan(xx)` que solo toma el valor `TRUE` para los valores `NaN`.
+
+
+
+
+
+
+

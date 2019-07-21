@@ -67,6 +67,17 @@
   </url>
   
   <url>
+    <loc>/2018/02/28/generacion-de-sucesiones-y-vectores/</loc>
+    <lastmod>2018-02-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2018-02-28T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/2018/02/22/funciones-basicas-en-r/</loc>
     <lastmod>2018-02-22T00:00:00+00:00</lastmod>
   </url>
@@ -74,12 +85,6 @@
   <url>
     <loc>/2018/02/21/frecuencia-cardiaca/</loc>
     <lastmod>2018-02-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2018-02-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

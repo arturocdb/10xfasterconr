@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<title>Generacion de Sucesiones y Vectores - Diseñando una experiencia ... enseñando.</title>
+<meta property="og:title" content="Generacion de Sucesiones y Vectores - Diseñando una experiencia ... enseñando.">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/proyecto/">Proyecto</a></li>
+    
+    <li><a href="/curso/">Curso</a></li>
+    
+    <li><a href="/unete/">Únete</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Generacion de Sucesiones y Vectores</h1>
+
+    
+    <span class="article-date">2018-02-28</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="generacion-de-sucesiones" class="section level3">
+<h3>Generacion de Sucesiones</h3>
+<p>En R existen varias funciones para generar sucesiones numericas, por ejemplo: <code>1:30</code> es el vector <code>c(1,2, ...,29,30).</code> el operador “dos puntos” tiene maxima prioridad en una expresion, asi por ejemplo: <code>2*1:15</code> es el vector <code>c(2,4,6, ...,28,30).</code> Escribimos <code>n &lt;- 10</code> y comparamos las sucesiones <code>1:n-1</code> y <code>1:(n-1)</code></p>
+<pre class="r"><code>n &lt;- 10
+1:n-1</code></pre>
+<pre><code>##  [1] 0 1 2 3 4 5 6 7 8 9</code></pre>
+<pre class="r"><code>1:(n-1)</code></pre>
+<pre><code>## [1] 1 2 3 4 5 6 7 8 9</code></pre>
+<p>La forma <code>30:1</code> permite construir una sucesion descendente</p>
+<p>La funcion <code>seq()</code> permite generar sucesiones mas complejas, dispone de cinco argumentos, aunque no se utilizan todos simultaneamente. Si se dan los dos primeros indica el comienzo y el final de la sucesion, y si son los unicos argumentos, el resultado coincide con el operador “dos puntos”, esto es <code>seq(2,10)</code> coincide con <code>2:10</code>.</p>
+<p>Los argumentos de <code>seq()</code> y de muchas funciones de R, pueden darse ademas de por posicion, por nombre, en cuyo caso, el orden en que aparecen es <strong>irrelevante.</strong> En esta funcion los dos primeros argumentos se pueden dar por nombre mediante <code>from=valor-inicial</code> y <code>to=valor-final</code>, por tanto; <code>seq(1,30), seq(from=1, to=30)</code> y <code>seq(to=30, from=1)</code> son formas equivalentes a <code>1:30</code></p>
+<p>Los dos siguientes argumentos de <code>seq()</code> son <code>by=valor</code> y <code>length=valor</code> y especifican el ‘paso’ y ‘longitud’ de la sucesion respectivamente. Si no se suministra ninguno, el valor predeterminado es <code>by=1</code> y <code>length</code> se calcula.</p>
+<p>Por ejemplo</p>
+<pre class="r"><code>seq(-5, 5, by=.2) -&gt; s3
+s3</code></pre>
+<pre><code>##  [1] -5.0 -4.8 -4.6 -4.4 -4.2 -4.0 -3.8 -3.6 -3.4 -3.2 -3.0 -2.8 -2.6 -2.4
+## [15] -2.2 -2.0 -1.8 -1.6 -1.4 -1.2 -1.0 -0.8 -0.6 -0.4 -0.2  0.0  0.2  0.4
+## [29]  0.6  0.8  1.0  1.2  1.4  1.6  1.8  2.0  2.2  2.4  2.6  2.8  3.0  3.2
+## [43]  3.4  3.6  3.8  4.0  4.2  4.4  4.6  4.8  5.0</code></pre>
+<p>Genera el vector <code>c(-5.0, -4.8, -4.6, ..., 4.6, 4.8, 5.0)</code> y lo almacena en <code>s3</code>. Similarmente</p>
+<pre class="r"><code>s4 &lt;- seq(length=51, from=-5, by=.2)</code></pre>
+<p>Genera los mismos valores y lo almacena en <code>s4</code>.</p>
+<p>el quinto argumento de esta funcion es <code>along=vector</code> y si se usa debe ser el unico argumento, ya que crea una sucesion <code>1, 2, ..., length(vector)</code> o la sucesion vacia si el vector es vacio (lo que puede ocurrir).</p>
+<p>Una funcion relacionada con <code>seq()</code> es <code>rep()</code> que permite duplicar un objeto de formas diversas, su forma mas sencilla es:</p>
+<pre class="r"><code>s5 &lt;- rep(&#39;x&#39;, times=5)
+s5</code></pre>
+<pre><code>## [1] &quot;x&quot; &quot;x&quot; &quot;x&quot; &quot;x&quot; &quot;x&quot;</code></pre>
+<p>que coloca cinco copias de x, una tras la otra y las almacena en <code>s5</code></p>
+</div>
+<div id="vectores-logicos" class="section level3">
+<h3>Vectores Logicos</h3>
+<p>R no solo maneja vectores numericos, sino tambien logicos. Los elementos de un vector logico solo pueden tomar dos valores: <code>FALSE</code> (falso) y <code>TRUE</code> (verdadero), estos valores se representan tambien por <code>F</code> y <code>T</code>.</p>
+<p>Los vectores logicos aparecen al utilizar <em>condiciones</em>, por ejemplo</p>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+
