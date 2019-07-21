@@ -64,6 +64,97 @@ ggplot(BOD, aes(x = factor(Time), y = demand)) + geom_col()
 
 Grafico de barras con la variable x convertida a factor, note que el espacio del valor 6 no existe. En nuestros datos no existe el valor 6 en la columna `Time`. Cuando la variable x es _continua_ ggplot2 usara un eje numerico que tendra espacio para todos los valores numericos dentro del rango, por eso se da el espacio vacio 6 en la grafica, cuando la variable tiempo se convierte a factor _ggplot2_ la usa como una variable _discreta_, donde los valores de tratan como etiquetas arbitrarias en lugar de valores numericos, por lo que no asignara espacio en el eje x para todos los valores numericos posibles entre el minimo y el maximo.
 
+Los graficos de barras por defecto usan un gris oscuro para las barras, para utilizar otro color en el relleno utilizamos el parametro `fill`, para agregar una linea al contorno usamos `colour`, veamos
+
+```{r fig.height=4, fig.width=4}
+ggplot(pg_mean, aes(x = group, y = weight)) +   geom_col(fill = "lightblue", colour = "black")
+```
+
+>Nota
+
+>En ggplot2 se usa la ortografia britanica, por eso el termino `colour`, sin embargo si usa la opcion americana `color` tambien funcionara.
+
+### Agrupando Barras
+#### Problema
+Agrupar barras por una segunda variable
+
+#### Solucion
+Lo realizaremos mapeando una variable como relleno, y usando `geom_col(position = "dodge")`
+
+En este ejemplom usaremos el data set `cabbage_exp` (este conjunto de datos tiene _medias_ grupales, _desviaciones estandar_, _conteos_ y _Error Estandar_ de la _media_ para el conjunto de datos del paquete `MASS`), contiene dos variables categoricas `Cultivar` y `Date` y una variable continua `Weight`
+
+```{r}
+library(gcookbook) # cargamos el paquete
+cabbage_exp
+```
+
+Mapearemos `Date` en la posicion x y la variable `Cultivar` como relleno
+```{r fig.height=4, fig.width=4}
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) + geom_col(position = "dodge")
+```
+
+Los graficos de barras mas basicos tienen una variable _categorica_ en el eje `x` y una variable _continua_ en el eje `y`, a veces necesitaras usar variables _categoricas_ para dividir los datos, ademas de la variable en el eje `x`, puede producir un grafico de barras agrupadas asignando esa variable como relleno, que representa el color de relleno de las barras. Debemos usar el argumento `position = "dodge"` que le indican a las barras "dodge" (esquiven) unas a otras horizontalmente, si no lo haces, terminaras con un grafico de barras apiladas.
+
+Al igual que con las variables asignadas al eje x de un grafico de barras, las variables que se asignan al color de relleno deben ser variables _categoricas_ en lugar de _continuas_.
+
+Para agregar una linea de borde usamos `colour = "black"` dentro de `geom_col()`, para el color podemos usar `scale_fill_brewer()` o `scale_fill_manual()`.
+
+```{r fig.height=4, fig.width=4}
+ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "dodge", colour = "black") +
+  scale_fill_brewer(palette = "Pastel1")
+```
+
+Grafico de barras agrupadas con linea de borde negra y diferentes colores.
+
+Ten en cuenta que si faltan combinaciones de las variables categoricas, esa barra faltara, y las barras vecinas se expandiran para llenar ese espacio, por ejemplo si eliminamos la ultima fila de nuestro data frame:
+
+```{r fig.height=4, fig.width=4}
+ce <- cabbage_exp[1:5, ]
+ce
+```
+
+```{r fig.height=4, fig.width=4}
+ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = "dodge", colour = "black") +
+  scale_fill_brewer(palette = "Pastel1")
+```
+
+Si tus datos tienen este problema, puedes hacer manualmente una entrada para la combinacion de nivel de factor faltante con un `NA` para la variable `y`.
+
+### Haciendo un Grafico de Barras de cantidades
+#### Problema
+Tus datos tienen una fila que representan cada caso y deseas graficar las cantidades de los casos
+
+#### Solucion
+Usar `geom_bar()` sin mapear o asignar nada a `y`, para el ejemplo usaremos el data set `diamonds`
+
+```{r}
+head(diamonds)
+```
+
+```{r fig.height=4, fig.width=4}
+ggplot(diamonds, aes(x = cut)) +
+  geom_bar()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -58,5 +58,84 @@ ggplot(pg_mean, aes(x=group, y=weight)) + geom_col()</code></pre>
 ggplot(BOD, aes(x = factor(Time), y = demand)) + geom_col()</code></pre>
 <p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-5-1.png" width="384" /></p>
 <p>Grafico de barras con la variable x convertida a factor, note que el espacio del valor 6 no existe. En nuestros datos no existe el valor 6 en la columna <code>Time</code>. Cuando la variable x es <em>continua</em> ggplot2 usara un eje numerico que tendra espacio para todos los valores numericos dentro del rango, por eso se da el espacio vacio 6 en la grafica, cuando la variable tiempo se convierte a factor <em>ggplot2</em> la usa como una variable <em>discreta</em>, donde los valores de tratan como etiquetas arbitrarias en lugar de valores numericos, por lo que no asignara espacio en el eje x para todos los valores numericos posibles entre el minimo y el maximo.</p>
+<p>Los graficos de barras por defecto usan un gris oscuro para las barras, para utilizar otro color en el relleno utilizamos el parametro <code>fill</code>, para agregar una linea al contorno usamos <code>colour</code>, veamos</p>
+<pre class="r"><code>ggplot(pg_mean, aes(x = group, y = weight)) +   geom_col(fill = &quot;lightblue&quot;, colour = &quot;black&quot;)</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-6-1.png" width="384" /></p>
+<blockquote>
+<p>Nota</p>
+</blockquote>
+<blockquote>
+<p>En ggplot2 se usa la ortografia britanica, por eso el termino <code>colour</code>, sin embargo si usa la opcion americana <code>color</code> tambien funcionara.</p>
+</blockquote>
+</div>
+</div>
+<div id="agrupando-barras" class="section level3">
+<h3>Agrupando Barras</h3>
+<div id="problema-1" class="section level4">
+<h4>Problema</h4>
+<p>Agrupar barras por una segunda variable</p>
+</div>
+<div id="solucion-1" class="section level4">
+<h4>Solucion</h4>
+<p>Lo realizaremos mapeando una variable como relleno, y usando <code>geom_col(position = "dodge")</code></p>
+<p>En este ejemplom usaremos el data set <code>cabbage_exp</code> (este conjunto de datos tiene <em>medias</em> grupales, <em>desviaciones estandar</em>, <em>conteos</em> y <em>Error Estandar</em> de la <em>media</em> para el conjunto de datos del paquete <code>MASS</code>), contiene dos variables categoricas <code>Cultivar</code> y <code>Date</code> y una variable continua <code>Weight</code></p>
+<pre class="r"><code>library(gcookbook) # cargamos el paquete
+cabbage_exp</code></pre>
+<pre><code>##   Cultivar Date Weight        sd  n         se
+## 1      c39  d16   3.18 0.9566144 10 0.30250803
+## 2      c39  d20   2.80 0.2788867 10 0.08819171
+## 3      c39  d21   2.74 0.9834181 10 0.31098410
+## 4      c52  d16   2.26 0.4452215 10 0.14079141
+## 5      c52  d20   3.11 0.7908505 10 0.25008887
+## 6      c52  d21   1.47 0.2110819 10 0.06674995</code></pre>
+<p>Mapearemos <code>Date</code> en la posicion x y la variable <code>Cultivar</code> como relleno</p>
+<pre class="r"><code>ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) + geom_col(position = &quot;dodge&quot;)</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-8-1.png" width="384" /></p>
+<p>Los graficos de barras mas basicos tienen una variable <em>categorica</em> en el eje <code>x</code> y una variable <em>continua</em> en el eje <code>y</code>, a veces necesitaras usar variables <em>categoricas</em> para dividir los datos, ademas de la variable en el eje <code>x</code>, puede producir un grafico de barras agrupadas asignando esa variable como relleno, que representa el color de relleno de las barras. Debemos usar el argumento <code>position = "dodge"</code> que le indican a las barras “dodge” (esquiven) unas a otras horizontalmente, si no lo haces, terminaras con un grafico de barras apiladas.</p>
+<p>Al igual que con las variables asignadas al eje x de un grafico de barras, las variables que se asignan al color de relleno deben ser variables <em>categoricas</em> en lugar de <em>continuas</em>.</p>
+<p>Para agregar una linea de borde usamos <code>colour = "black"</code> dentro de <code>geom_col()</code>, para el color podemos usar <code>scale_fill_brewer()</code> o <code>scale_fill_manual()</code>.</p>
+<pre class="r"><code>ggplot(cabbage_exp, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = &quot;dodge&quot;, colour = &quot;black&quot;) +
+  scale_fill_brewer(palette = &quot;Pastel1&quot;)</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-9-1.png" width="384" /></p>
+<p>Grafico de barras agrupadas con linea de borde negra y diferentes colores.</p>
+<p>Ten en cuenta que si faltan combinaciones de las variables categoricas, esa barra faltara, y las barras vecinas se expandiran para llenar ese espacio, por ejemplo si eliminamos la ultima fila de nuestro data frame:</p>
+<pre class="r"><code>ce &lt;- cabbage_exp[1:5, ]
+ce</code></pre>
+<pre><code>##   Cultivar Date Weight        sd  n         se
+## 1      c39  d16   3.18 0.9566144 10 0.30250803
+## 2      c39  d20   2.80 0.2788867 10 0.08819171
+## 3      c39  d21   2.74 0.9834181 10 0.31098410
+## 4      c52  d16   2.26 0.4452215 10 0.14079141
+## 5      c52  d20   3.11 0.7908505 10 0.25008887</code></pre>
+<pre class="r"><code>ggplot(ce, aes(x = Date, y = Weight, fill = Cultivar)) +
+  geom_col(position = &quot;dodge&quot;, colour = &quot;black&quot;) +
+  scale_fill_brewer(palette = &quot;Pastel1&quot;)</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-11-1.png" width="384" /></p>
+<p>Si tus datos tienen este problema, puedes hacer manualmente una entrada para la combinacion de nivel de factor faltante con un <code>NA</code> para la variable <code>y</code>.</p>
+</div>
+</div>
+<div id="haciendo-un-grafico-de-barras-de-cantidades" class="section level3">
+<h3>Haciendo un Grafico de Barras de cantidades</h3>
+<div id="problema-2" class="section level4">
+<h4>Problema</h4>
+<p>Tus datos tienen una fila que representan cada caso y deseas graficar las cantidades de los casos</p>
+</div>
+<div id="solucion-2" class="section level4">
+<h4>Solucion</h4>
+<p>Usar <code>geom_bar()</code> sin mapear o asignar nada a <code>y</code>, para el ejemplo usaremos el data set <code>diamonds</code></p>
+<pre class="r"><code>head(diamonds)</code></pre>
+<pre><code>## # A tibble: 6 x 10
+##   carat cut       color clarity depth table price     x     y     z
+##   &lt;dbl&gt; &lt;ord&gt;     &lt;ord&gt; &lt;ord&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 0.23  Ideal     E     SI2      61.5    55   326  3.95  3.98  2.43
+## 2 0.21  Premium   E     SI1      59.8    61   326  3.89  3.84  2.31
+## 3 0.23  Good      E     VS1      56.9    65   327  4.05  4.07  2.31
+## 4 0.290 Premium   I     VS2      62.4    58   334  4.2   4.23  2.63
+## 5 0.31  Good      J     SI2      63.3    58   335  4.34  4.35  2.75
+## 6 0.24  Very Good J     VVS2     62.8    57   336  3.94  3.96  2.48</code></pre>
+<pre class="r"><code>ggplot(diamonds, aes(x = cut)) +
+  geom_bar()</code></pre>
+<p><img src="/post/2019-07-21-graficos-de-barras_files/figure-html/unnamed-chunk-13-1.png" width="384" /></p>
 </div>
 </div>
