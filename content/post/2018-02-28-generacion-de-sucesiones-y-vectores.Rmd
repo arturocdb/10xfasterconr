@@ -95,6 +95,95 @@ Inf - Inf
 
 En resumen, `is.na(xx)` es `TRUE` _tanto_ para los valores `NA` como para los `NaN`, para diferenciar estos ultimos existe la funcion `is.nan(xx)` que solo toma el valor `TRUE` para los valores `NaN`.
 
+### Vectores de Caracteres
+Las cadenas de caracteres o frases, tambien son utilizadas en **R**, por ejemplo, para etiquetar graficos. Una cadena de carcateres se construye escribiendo entre comillas la sucesion de carcateres que la define, por ejemplo `"Altura"` o `"Resultados de la tercera iteracion"`.
+
+Los vectores de caracteres pueden concatenarse en un vector mediante la funcion `c()`. Por otra parte, la funcion `paste()` une todos los vectores de caracteres que se le suministran y construye una sola cadena de caracteres. Tambien admite argumentos numericos, que convierte inmediatamente en cadena de caracteres. En su forma predterminada, en la cadena final, cada argumento original se separa del siguiente por un espacio en blanco, aunque ello puede cambiarse utilizando el argumento `sep="cadena"` que sustituye el espacio en blanco por _cadena_, la cual podria ser incluso vacia. por ejemplo:
+
+```{r}
+labs <- paste(c("X","Y"), 1:10, sep="")
+```
+
+Almacena el `labs` el vector de caracteres
+
+```{r}
+labs
+```
+
+Recuerda que al tener `c("X", "Y")` solo dos elementos debera repetirse cinco veces para obtener la longitud del vector `1:10`
+
+### Vectores de Índices, selección y modificación de subvectores
+Puede seleccionar un subvector de un vector añadiendo al nombre del mismo un _vector de índices_ entre corchetes, `[ y ]. En general podra obtener un subvector de cualquier expresion cuyo resultado sea un vector, sin mas que añadirle un vector de índices entre corchetes.
+
+Los vectores de índices pueden ser de cuatro tipos distintos:
+
+**1. Un vector Logico**. En este caso el vector de índices debe tener la misma longitud que el vector al que refiere. Solo se seleccionaran los elementos correspondientes a valores `T` del vector de índices y se omitira el resto, por ejemplo:
+
+```{r, eval=FALSE}
+y <- x[!is.na(x)]
+```
+
+Almacena en `y` los valores no-faltantes de `x`, en el mismo orden. Si `x` tiene valores faltantes, el vector `y` sera mas corto que `x`. Analogamente,
+
+```{r, eval=FALSE}
+(x+1)[(!is.na(x)) & x>0] -> z
+```
+
+Almacena en `z` los elementos del vector `x+1` para los que el correspondiente elemento de `x` es no-faltante y positivo.
+
+**2. Un vector de numeros naturales positivos** En este caso los elementos del vector de índices deben pertenecer al conjunto `{1, 2, . . . , length(x)}`. El resultado es un vector formado por los elementos  del vector referido que corresponden a estos índices y en el orden en que aparecen en el vector de índices. El vector de índices puede tener cualquier longitud y el resultado sera de esa misma longitud, por ejemplo `x[6]` es el sexto elemento de `x,y`
+
+```{r, eval=FALSE}
+x[1:10]
+```
+
+Es el vector formado por los diez primeros elementos de `x`, (supuesto que `length(x)` no es menor que 10). Por otra parte, 
+
+```{r}
+c("x","y")[rep(c(1,2,2,1), times=4)]
+```
+
+crea un vector de caracteres de longitud 16 formado por `"x", "y", "y", "x"` repetido cuatro veces.
+
+**3. Un vector de numeros naturales negativos.** En este caso, los índices indican los elementos del vector referido que deben _excluirse_. Asi pues:
+
+```{r}
+y <- x[-(1:5)]
+```
+
+Almacena en el vector `y` todos los elementos de `x` excepto los cinco primeros (suponiendo que `x` tiene al menos cinco elementos).
+
+**4. Un vector de caracteres.** Esta opcion solo puede realizarse si el vector posee el atributo `names` (nombres) para identificar sus componentes, en cuyo caso solo se comportara de forma similar al punto 2.
+
+```{r}
+fruta <- c(5, 10, 1, 20)
+names(fruta) <- c("naranja", "plaatano", "manzana", "pera")
+postre <- fruta[c("manzana","naranja")]
+```
+
+La ventaja en este caso es que los _nombres_ son a menudo mas faciles de recordar que los _índices numéricos_. Esta opcion es especialmente util al tratar de la estructura de "hoja de datos" (data frame) que veremos posteriormente en un siguiente post.
+
+La variable de almacenamiento tambien puede ser indexada, en cuyo caso la asignacion se realiza _solamente sobre los elementos referidos_, la expresion debe ser de la forma `vector[vector de indices]` ya que la utilizacion de una expresion arbitraria en vez del nombre de un vector no tiene mucho sentido.
+
+El vector asignado debe ser de la misma longitud que el vector de índices, y en el caso de un vector de índices logico, debe ser de la misma longitud del vector que indexa. Por ejemplo:
+
+```{r}
+x[is.na(x)] <- 0
+```
+
+sustituye cada valor faltante de `x` por un cero, por otra parte,
+```{r}
+y[y < 0] <- -y[y < 0]
+```
+
+equivale a:
+```{r}
+y <- abs(y)
+```
+
+Esta una parte del contenido de nuestro curso **Comienza con R curso para principiantes**
+
+gracias!
 
 
 
