@@ -55,7 +55,7 @@ que coloca cinco copias de x, una tras la otra y las almacena en `s5`
 R no solo maneja vectores numericos, sino tambien logicos. Los elementos de un vector logico solo pueden tomar dos valores: `FALSE` (falso) y `TRUE` (verdadero), estos valores se representan tambien por `F` y `T`.
 
 Los vectores logicos aparecen al utilizar _condiciones_, por ejemplo
-```{r}
+```{r, eval=FALSE}
 temp <- x > 13
 ```
 

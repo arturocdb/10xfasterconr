@@ -46,4 +46,27 @@ s5</code></pre>
 <h3>Vectores Logicos</h3>
 <p>R no solo maneja vectores numericos, sino tambien logicos. Los elementos de un vector logico solo pueden tomar dos valores: <code>FALSE</code> (falso) y <code>TRUE</code> (verdadero), estos valores se representan tambien por <code>F</code> y <code>T</code>.</p>
 <p>Los vectores logicos aparecen al utilizar <em>condiciones</em>, por ejemplo</p>
+<pre class="r"><code>temp &lt;- x &gt; 13</code></pre>
+<p>Almacena en <code>temp</code> un vector de la misma longitud de x y cuyos valores seran, respectivamente <code>T</code> o <code>F</code> de acuerdo a que los elementos de <code>x</code> cumplan o no la condicion indicada; ser mayores que 13.</p>
+<p>Los operadores logicos son <code>&lt;</code> (menor), <code>&lt;=</code> (menor o igual), <code>&gt;</code> (mayor), <code>&gt;=</code> (mayor o igual), <code>==</code> (igual) y <code>!=</code> (distinto).</p>
+<p>Ademas, si <code>c1</code> y <code>c2</code> son expresiones logicas, entonces <code>c1$c2</code> es su interseccion (“conjuncion”), <code>c1|c2</code> es su union (“disyuncion”) y <code>!c1</code> es la negacion de <code>c1</code>.</p>
+<p>Los vectores logicos pueden utilizarse en expresiones aritmeticas, en cuyo caso se transforman primero en vectores numericos, de tal modo que <code>F</code> se transforma en <code>0</code> y <code>T</code> en <code>1</code>. Sin embargo hay casos en que un vector logico y su correspondiente numerico no son equivalentes, como puede ver a continuacion:</p>
+</div>
+<div id="valores-faltantes" class="section level3">
+<h3>Valores Faltantes</h3>
+<p>En ocasiones puede que no todas las componentes de un vector sean conocidas. Cuando falta un elemento, lo que se denomina ‘valor faltante’, se le asigna un valor especial, NA, en general, casi cualquier operacion donde intervenga un valor <code>NA</code>, da por resultado <code>NA</code>, la justificacion es sencilla. Si no se puede especificar completamente la operacion, el resultado no podra ser conocido, y por tanto no estara disponible.</p>
+<p>La funcion <code>is.na(x)</code> crea un vector logico del tamaño de x cuyos elementos solo valdran <code>T</code> si el elemento correspondiente de x es <code>NA</code>, y <code>F</code> en caso contrario.</p>
+<pre class="r"><code>z &lt;- c(1:3,NA);
+z</code></pre>
+<pre><code>## [1]  1  2  3 NA</code></pre>
+<pre class="r"><code>ind &lt;- is.na(z)
+ind</code></pre>
+<pre><code>## [1] FALSE FALSE FALSE  TRUE</code></pre>
+<p>Note que la expresion <code>x == NA</code> es distinta de <code>is.na(x)</code> puesto que <code>NA</code> no es realmente un valor, sino un indicador de una cantidad que no esta disponible, por tanto, <code>x == NA</code> es un vector de la misma longitud de x con todos sus elementos <code>NA</code> puesto que la expresion logica es incompleta.</p>
+<p>Ademas, hay una segunda clase de valores ‘faltantes’ producidos por el calculo. Son los llamados valores <code>NaN</code> este tipo de dato no existe en <code>S</code> se confunden con <code>NA</code> en S-Plus, ejemplos de <code>NaN</code> son</p>
+<pre class="r"><code>0/0</code></pre>
+<pre><code>## [1] NaN</code></pre>
+<pre class="r"><code>Inf - Inf</code></pre>
+<pre><code>## [1] NaN</code></pre>
+<p>En resumen, <code>is.na(xx)</code> es <code>TRUE</code> <em>tanto</em> para los valores <code>NA</code> como para los <code>NaN</code>, para diferenciar estos ultimos existe la funcion <code>is.nan(xx)</code> que solo toma el valor <code>TRUE</code> para los valores <code>NaN</code>.</p>
 </div>
