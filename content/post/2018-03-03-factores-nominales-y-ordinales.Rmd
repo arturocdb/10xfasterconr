@@ -1,0 +1,94 @@
+---
+title: Factores Nominales y Ordinales
+author: Charlie Do Amaral
+date: '2018-03-03'
+slug: factores-nominales-y-ordinales
+categories:
+  - estadistica
+  - fundamentos
+  - R
+tags:
+  - fundamentos
+  - R
+---
+
+### Factores Nominales y Ordinales
+Un _factor_ es un vector utilizado para especificar una clasificacion discreta de los elementos de otro vector de igual longitud. En R existen factores _nominales_ y factores _ordinales_
+
+#### Un ejemplo especifico
+Suponga que dispone de una muestra de 30 personas de Australia, de tal modo que su estado o territorio se especifica mediante un vector de caracteres con las abreviaturas de los mismos
+
+```{r}
+estado <- c("tas", "sa", "qld", "nsw", "nsw", "nt", "wa", "wa", "qld", "vic", "nsw", "vic", "qld", "qld", "sa", "tas",
+"sa", "nt", "wa", "vic", "qld", "nsw", "nsw", "wa", "sa", "act", "nsw", "vic", "vic", "act")
+```
+
+Recuerda que, para un vector de caracteres, la palabra "ordenado" indica que esta en orden alfabetico.
+
+Un _factor_ se crea utilizando la funcion `factor()` 
+
+```{r}
+FactorEstado <- factor(estado)
+```
+
+La funcion `print()` trata a los factores de un modo distinto al de los vectores ordinarios:
+
+```{r}
+FactorEstado
+```
+
+Puede utilizar la funcion `levels()` para ver los niveles de un factor
+```{r}
+levels(FactorEstado)
+```
+
+#### La funcion `tapply()`. Variables desastradas (ragged arrays)
+Como continuacion del ejemplo anterior, suponga que disponemos en otro vector de los ingresos de las mismas personas (medidos con unas unidades apropiadas)
+
+```{r}
+ingresos <- c(60, 49, 40, 61, 64, 60, 59, 54, 62, 69, 70, 42, 56, 61, 61, 61, 58, 51, 48, 65, 49, 49, 41, 48, 52, 46, 59, 46, 58, 43)
+```
+
+Para calcular la _media muestral_ para cada estado podemos usar la funcion `tapply()`
+
+```{r}
+MediaIngresos <- tapply(ingresos, FactorEstado, mean)
+MediaIngresos
+```
+
+que devuelve el vector de _medias_ con las componentes etiquetadas con los niveles.
+
+La funcion `tapply()` aplica una funcion, en este ejemplo la funcion `mean()` a cada grupo de componentes del primer argumento, en este ejemplo `ingresos` definidos por los niveles del segundo argumento, en este ejemplo `FactorEstado` como si cada grupo fuese un vector por si solo. El resultado es una estructura cuya longitud es el numero de niveles del factor, en la ayuda encontraras mas detalles.
+
+Supongamos que ahora deseamos calcular las _desviaciones tipicas_ de las _medias_ de `ingresos` por estados. Para ello es necesario escribir una funcion en **R** que calcule la _desviacion tipica_ de un vector. Aunque aun no hemos visto en este post como escribir funciones, podemos admitir que existe la funcion `var()` que calcula la _varianza muestral_ o _cuasi-varianza_ y que la funcion buscada puede construirse con la asignacion:
+
+```{r}
+StdErr <- function(x) sqrt(var(x)/length(x))
+```
+
+Ahora puedes calcular los valores buscados mediante
+
+```{r}
+ErrorTipicoIngresos <- tapply(ingresos, FactorEstado, StdErr)
+```
+
+con el siguiente resultado
+
+```{r}
+ErrorTipicoIngresos
+```
+
+Como ejercicio puedes calcular el intervalo de confianza al 95% de la media de ingresos por estados. Para ello puedes utilizar la funcion `tapply()`, la funcion `length()` para calcular los tamaños muestrales, la funcion `qt()` para encontrar los percentiles de las distribuciones _t_ de Student correspondientes.
+
+La funcion `tapply` puede utilizarse para aplicar una funcion a un vector indexado por diferentes categorias simultaneamente. Por ejemplo, para dividir la muestra tanto por el estado como por el sexo. Los elementos del vector se dividiran en grupos correspondientes a las distintas categorias y se aplicara la funcion a cada uno de dichos grupos. El resultado es una variable indexada etiquetada con os niveles de cada categoria.
+
+La combinacion de un vector con un factor para etiquetarlo, es un ejemplo de lo que se llama: _variable indexada desastrada_ (ragged array) puesto que los tamaños de las subclases son posiblemente irregulares. Cuando estos tamaños son iguales la indexacion puede hacerse implicitamente y ademas mas eficientemente, como veremos a continuacion.
+
+### Factores Ordinales
+Los niveles de los factores se almacenan en orden alfabetico, o en el orden en que se especificaron en la funcion **factor** si ello se hizo explicitamente.
+
+A veces existe una ordenacion natural en los niveles de un factor, orden que deseamos tener en cuenta en los analisis estadisticos, la funcion `ordered()` crea este tipo de factores y su uso es identico al de la funcion factor. Los factores creados por la funcion factor los denominaremos _nominales_ o simplemente factores cuando no haya lugar a confusion, y los creados por la funcion `ordered()` los denominaremos ordinales. En la mayoria de los casos la unica diferencia entre ambos tipos de factores consiste en que los ordinales se imprimen indicando el orden de los niveles. Sin embargo, los contrastes generados por los dos tipos de factores al ajustar Modelos Lineales, son diferentes.
+
+
+
+

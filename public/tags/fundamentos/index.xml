@@ -31,6 +31,17 @@ Es decir, una dispersion pequeña nos indica que los datos se encuentran acumula
     </item>
     
     <item>
+      <title>Factores Nominales y Ordinales</title>
+      <link>/2018/03/03/factores-nominales-y-ordinales/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/03/03/factores-nominales-y-ordinales/</guid>
+      <description>Factores Nominales y OrdinalesUn factor es un vector utilizado para especificar una clasificacion discreta de los elementos de otro vector de igual longitud. En R existen factores nominales y factores ordinales
+Un ejemplo especificoSuponga que dispone de una muestra de 30 personas de Australia, de tal modo que su estado o territorio se especifica mediante un vector de caracteres con las abreviaturas de los mismos
+estado &amp;lt;- c(&amp;quot;tas&amp;quot;, &amp;quot;sa&amp;quot;, &amp;quot;qld&amp;quot;, &amp;quot;nsw&amp;quot;, &amp;quot;nsw&amp;quot;, &amp;quot;nt&amp;quot;, &amp;quot;wa&amp;quot;, &amp;quot;wa&amp;quot;, &amp;quot;qld&amp;quot;, &amp;quot;vic&amp;quot;, &amp;quot;nsw&amp;quot;, &amp;quot;vic&amp;quot;, &amp;quot;qld&amp;quot;, &amp;quot;qld&amp;quot;, &amp;quot;sa&amp;quot;, &amp;quot;tas&amp;quot;,&amp;quot;sa&amp;quot;, &amp;quot;nt&amp;quot;, &amp;quot;wa&amp;quot;, &amp;quot;vic&amp;quot;, &amp;quot;qld&amp;quot;, &amp;quot;nsw&amp;quot;, &amp;quot;nsw&amp;quot;, &amp;quot;wa&amp;quot;, &amp;quot;sa&amp;quot;, &amp;quot;act&amp;quot;, &amp;quot;nsw&amp;quot;, &amp;quot;vic&amp;quot;, &amp;quot;vic&amp;quot;, &amp;quot;act&amp;quot;)Recuerda que, para un vector de caracteres, la palabra “ordenado” indica que esta en orden alfabetico.</description>
+    </item>
+    
+    <item>
       <title>Funciones Basicas en R</title>
       <link>/2018/02/22/funciones-basicas-en-r/</link>
       <pubDate>Thu, 22 Feb 2018 00:00:00 +0000</pubDate>
