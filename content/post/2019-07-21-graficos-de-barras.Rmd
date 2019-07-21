@@ -147,42 +147,6 @@ Con `geom_bar()` el comportamiento por defecto es usar `stat = "bin"`, que cuent
 
 En este ejemplo, la variable en el eje x es _discreta_, si usamos una variable _continua_ en el eje x obtendremos una barra en cada valor unico de x en los datos.
 
-### Usando colores en los Graficos de Barras
-#### Problema
-Como usar diferentes colores para las barras en tus graficos
-
-#### Solucion
-Mapear la variable apropiada a la estetica de relleno.
-
-Usaremos el conjunto de datos `uspopchange` para este ejemplo, contiene el cambio porcentual de la poblacion de EEUU, de 2000 a 2010, tomaremos los 10 estados con mayor crecimiento y graficaresmos su cambio porcentual. Tambien colorearemos las barras por region (noreste, sur, norte central u oeste). Tambien utilizaremos el formato del paquete `dplyr`
-
-Primero filtramos los 10 mejores estados
-
-```{r}
-library(gcookbook)
-library(dplyr)
-upc <- uspopchange %>%
-  arrange(desc(Change)) %>%
-  slice(1:10)
-upc
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
