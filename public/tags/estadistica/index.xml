@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>estadistica on Diseñando una experiencia ... enseñando.</title>
+    <link>/tags/estadistica/</link>
+    <description>Recent content in estadistica on Diseñando una experiencia ... enseñando.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/estadistica/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Distribucion de Frecuencias</title>
+      <link>/2018/03/05/distribucion-de-frecuencias/</link>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/03/05/distribucion-de-frecuencias/</guid>
+      <description>Distribucion de FrecuenciasFrente a un conjunto de datos, el primer paso a dar, debe ser expresarlo y clasificarlo de acuerdo a criterios convenientes, el alguna forma simple que permita ver rapidamente todas las caracteristicas posibles para obtener conclusiones utiles, ya sea directamente o por medio de calculos posteriores. Se consideran los siguientes pasos:
+Revision y correccion de los datosConstruccion de Tablas de FrecuenciasRepresentacion Tabular o cuadros estadisticos y grafica.</description>
+    </item>
+    
+  </channel>
+</rss>

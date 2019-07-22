@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<title>Distribucion de Frecuencias - Diseñando una experiencia ... enseñando.</title>
+<meta property="og:title" content="Distribucion de Frecuencias - Diseñando una experiencia ... enseñando.">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/proyecto/">Proyecto</a></li>
+    
+    <li><a href="/curso/">Curso</a></li>
+    
+    <li><a href="/unete/">Únete</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">2 min read</span>
+    
+
+    <h1 class="article-title">Distribucion de Frecuencias</h1>
+
+    
+    <span class="article-date">2018-03-05</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="distribucion-de-frecuencias" class="section level3">
+<h3>Distribucion de Frecuencias</h3>
+<p>Frente a un conjunto de datos, el primer paso a dar, debe ser expresarlo y clasificarlo de acuerdo a criterios convenientes, el alguna forma simple que permita ver rapidamente todas las caracteristicas posibles para obtener conclusiones utiles, ya sea directamente o por medio de calculos posteriores. Se consideran los siguientes pasos:</p>
+<ol style="list-style-type: decimal">
+<li>Revision y correccion de los datos</li>
+<li>Construccion de Tablas de Frecuencias</li>
+<li>Representacion Tabular o cuadros estadisticos y grafica.</li>
+</ol>
+<div id="revision-y-correccion-de-los-datos" class="section level4">
+<h4>Revision y correccion de los datos</h4>
+<p>Ningun analisis estadistico, por acabado y seguro que sea, es capaz de suministrar respuestas adecuadas a un problema en estudio, si aquel se basa en una informacion incorrecta. De aqui que la revision y correccion de la informacion recolectada debe ser obligatoriamente el paso previo a la clasificacion y computacion de los datos.</p>
+<p>Una regla empirica ampliamente contrastada <strong>(Huber 1984)</strong> es esperar entre un 2 y un 5% de observaciones con errores de medicion, transcripcion, etc. Por tanto, antes de utilizar los datos muestrales conviene aplicar tecnicas simples para probarlos, como dar respuesta a las siguientes preguntas:</p>
+<ol style="list-style-type: decimal">
+<li>Los datos apoyan o contradicen otra evidencia que tengamos?</li>
+<li>Es logica la conclusion?, hemos tenido conclusiones que no esten sustentados por los datos?</li>
+<li>Cuantas observaciones se tiene?, ellas representan a todos los grupos que se desea estudiar?</li>
+</ol>
+</div>
+<div id="tablas-de-distribucion-de-frecuencias" class="section level4">
+<h4>Tablas de Distribucion de Frecuencias</h4>
+<p>Si los datos que se dispone son numerosos, es indispensable clasificarlos en un cuadro o tabla resumen de las observaciones originales, a las que en adelante llamaremos <strong><em>Tablas de Distribucion de Frecuencias</em></strong> o simplemente <strong><em>Tabla de Frecuencias</em></strong>.</p>
+<p>Para obterner los calculos de una distribucion de frecuencias haremos uso de algunos paquetes, como ser <code>fdth</code>, el cual es un paquete que contiene un conjunto de funciones que permite al usuario crear facilmente <em>tablas de distribucion de frecuencias</em> (<strong>F</strong>recuency <strong>D</strong>istribution <strong>T</strong>ables), sus histogramas asociados y poligonos de frecuencia absoluta, relativa y acumulativa.</p>
+<p>Ingresamos el conjunto de datos</p>
+<pre class="r"><code># instalamos el paquete &#39;fdth&#39; y activamos la libreria
+library(fdth)
+x &lt;- c(61,33,35,74,48,53,53,48,23,19,15,57,72,40,27,25,75,66,34,27,38,16,42,57,27,59,37,63,71,48)</code></pre>
+<p>Calculamos la distribucion de frecuencias usando la <strong><em>Regla de Sturges</em></strong> (Propuesta por Herbert Sturges en 1926, es una regla practica acerca del numero de clases que deben considerar al elaborarse un histograma)</p>
+<p>en proceso…</p>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

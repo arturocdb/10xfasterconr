@@ -1,0 +1,69 @@
+---
+title: Distribucion de Frecuencias
+author: Charlie Do Amaral
+date: '2018-03-05'
+slug: distribucion-de-frecuencias
+categories:
+  - estadistica
+tags:
+  - estadistica
+---
+
+### Distribucion de Frecuencias
+Frente a un conjunto de datos, el primer paso a dar, debe ser expresarlo y clasificarlo de acuerdo a criterios convenientes, el alguna forma simple que permita ver rapidamente todas las caracteristicas posibles para obtener conclusiones utiles, ya sea directamente o por medio de calculos posteriores. Se consideran los siguientes pasos:
+
+1. Revision  y correccion de los datos
+2. Construccion de Tablas de Frecuencias
+3. Representacion Tabular o cuadros estadisticos y grafica.
+
+#### Revision y correccion de los datos
+Ningun analisis estadistico, por acabado y seguro que sea, es capaz de suministrar respuestas adecuadas a un problema en estudio, si aquel se basa en una informacion incorrecta. De aqui que la revision y correccion de la informacion recolectada debe ser obligatoriamente el paso previo a la clasificacion y computacion de los datos.
+
+Una regla empirica ampliamente contrastada **(Huber 1984)** es esperar entre un 2 y un 5% de observaciones con errores de medicion, transcripcion, etc. Por tanto, antes de utilizar los datos muestrales conviene aplicar tecnicas simples para probarlos, como dar respuesta a las siguientes preguntas:
+
+1. Los datos apoyan o contradicen otra evidencia que tengamos?
+2. Es logica la conclusion?, hemos tenido conclusiones que no esten sustentados por los datos?
+3. Cuantas observaciones se tiene?, ellas representan a todos los grupos que se desea estudiar?
+
+#### Tablas de Distribucion de Frecuencias
+Si los datos que se dispone son numerosos, es indispensable clasificarlos en un cuadro o tabla resumen de las observaciones originales, a las que en adelante llamaremos **_Tablas de Distribucion de Frecuencias_** o simplemente **_Tabla de Frecuencias_**.
+
+Para obterner los calculos de una distribucion de frecuencias haremos uso de algunos paquetes, como ser `fdth`, el cual es un paquete que contiene un conjunto de funciones que permite al usuario crear facilmente _tablas de distribucion de frecuencias_ (**F**recuency **D**istribution **T**ables), sus histogramas asociados y poligonos de frecuencia absoluta, relativa y acumulativa. 
+
+Ingresamos el conjunto de datos
+
+```{r message=FALSE}
+# instalamos el paquete 'fdth' y activamos la libreria
+library(fdth)
+x <- c(61,33,35,74,48,53,53,48,23,19,15,57,72,40,27,25,75,66,34,27,38,16,42,57,27,59,37,63,71,48)
+```
+
+Calculamos la distribucion de frecuencias usando la **_Regla de Sturges_** (Propuesta por Herbert Sturges en 1926, es una regla practica acerca del numero de clases que deben considerar al elaborarse un histograma)
+
+en proceso...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

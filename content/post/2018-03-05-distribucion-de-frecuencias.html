@@ -1,0 +1,43 @@
+---
+title: Distribucion de Frecuencias
+author: Charlie Do Amaral
+date: '2018-03-05'
+slug: distribucion-de-frecuencias
+categories:
+  - estadistica
+tags:
+  - estadistica
+---
+
+
+
+<div id="distribucion-de-frecuencias" class="section level3">
+<h3>Distribucion de Frecuencias</h3>
+<p>Frente a un conjunto de datos, el primer paso a dar, debe ser expresarlo y clasificarlo de acuerdo a criterios convenientes, el alguna forma simple que permita ver rapidamente todas las caracteristicas posibles para obtener conclusiones utiles, ya sea directamente o por medio de calculos posteriores. Se consideran los siguientes pasos:</p>
+<ol style="list-style-type: decimal">
+<li>Revision y correccion de los datos</li>
+<li>Construccion de Tablas de Frecuencias</li>
+<li>Representacion Tabular o cuadros estadisticos y grafica.</li>
+</ol>
+<div id="revision-y-correccion-de-los-datos" class="section level4">
+<h4>Revision y correccion de los datos</h4>
+<p>Ningun analisis estadistico, por acabado y seguro que sea, es capaz de suministrar respuestas adecuadas a un problema en estudio, si aquel se basa en una informacion incorrecta. De aqui que la revision y correccion de la informacion recolectada debe ser obligatoriamente el paso previo a la clasificacion y computacion de los datos.</p>
+<p>Una regla empirica ampliamente contrastada <strong>(Huber 1984)</strong> es esperar entre un 2 y un 5% de observaciones con errores de medicion, transcripcion, etc. Por tanto, antes de utilizar los datos muestrales conviene aplicar tecnicas simples para probarlos, como dar respuesta a las siguientes preguntas:</p>
+<ol style="list-style-type: decimal">
+<li>Los datos apoyan o contradicen otra evidencia que tengamos?</li>
+<li>Es logica la conclusion?, hemos tenido conclusiones que no esten sustentados por los datos?</li>
+<li>Cuantas observaciones se tiene?, ellas representan a todos los grupos que se desea estudiar?</li>
+</ol>
+</div>
+<div id="tablas-de-distribucion-de-frecuencias" class="section level4">
+<h4>Tablas de Distribucion de Frecuencias</h4>
+<p>Si los datos que se dispone son numerosos, es indispensable clasificarlos en un cuadro o tabla resumen de las observaciones originales, a las que en adelante llamaremos <strong><em>Tablas de Distribucion de Frecuencias</em></strong> o simplemente <strong><em>Tabla de Frecuencias</em></strong>.</p>
+<p>Para obterner los calculos de una distribucion de frecuencias haremos uso de algunos paquetes, como ser <code>fdth</code>, el cual es un paquete que contiene un conjunto de funciones que permite al usuario crear facilmente <em>tablas de distribucion de frecuencias</em> (<strong>F</strong>recuency <strong>D</strong>istribution <strong>T</strong>ables), sus histogramas asociados y poligonos de frecuencia absoluta, relativa y acumulativa.</p>
+<p>Ingresamos el conjunto de datos</p>
+<pre class="r"><code># instalamos el paquete &#39;fdth&#39; y activamos la libreria
+library(fdth)
+x &lt;- c(61,33,35,74,48,53,53,48,23,19,15,57,72,40,27,25,75,66,34,27,38,16,42,57,27,59,37,63,71,48)</code></pre>
+<p>Calculamos la distribucion de frecuencias usando la <strong><em>Regla de Sturges</em></strong> (Propuesta por Herbert Sturges en 1926, es una regla practica acerca del numero de clases que deben considerar al elaborarse un histograma)</p>
+<p>en proceso…</p>
+</div>
+</div>
