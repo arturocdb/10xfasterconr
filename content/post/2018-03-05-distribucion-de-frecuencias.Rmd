@@ -40,29 +40,122 @@ x <- c(61,33,35,74,48,53,53,48,23,19,15,57,72,40,27,25,75,66,34,27,38,16,42,57,2
 
 Calculamos la distribucion de frecuencias usando la **_Regla de Sturges_** (Propuesta por Herbert Sturges en 1926, es una regla practica acerca del numero de clases que deben considerar al elaborarse un histograma)
 
-en proceso...
+```{r}
+frec <- fdt(x, breaks='Sturges')
+frec
+```
 
+El parametro `breaks` le indica el metodo en que se generara la lista o intervalo de clase, en este caso `Sturges`
 
+Donde:
 
+* `f`: frecuencia
+* `rf`: frecuencia relativa
+* `rf(%)`: frecuencia relativa porcentual
+* `cf`: frecuencia acumulada
+* `cf(%)`: frecuencia acumulada porcentual
 
+En este caso vemos que un 16.67% de los casos se encuentran en el intervalo de clase entre 55 y 66.
 
+Creamos el histograma tambien utilizando el metodo `Sturges`
+```{r fig.height=4, fig.width=5}
+hist(x, breaks = "Sturges")
+```
 
+Histograma de _Frecuencias Acumuladas_
+```{r fig.height=4, fig.width=5}
+plot(frec, type="cfh")
+```
 
+Poligono de _Frecuencias Acumuladas_
+```{r fig.height=4, fig.width=5}
+plot(frec, type='cfp')
+```
 
+Continuamos explorando pero utilizando el data set incorporado en R **Loblolly**, el cual contiene datos del crecimiento de los arboles de pino Loblolly, contiene 84 filas y 3 columnas, veamos
+```{r}
+head(Loblolly)
+```
 
+Para crear una _distribucion de frecuencias_ primero buscamos el rango de los valores de la variable de interes, en nuestro caso con la variable `age`
 
+```{r}
+datosfrec <- Loblolly$age
+datosfrec
+```
 
+Observamos el rango
+```{r}
+range(datosfrec)
+```
 
+El rango va de 3 a 25, en este caso edad de los arboles.
 
+Generamos la _tabla de distribucion de frecuencias_
+```{r}
+dist.age <- fdt(Loblolly$age, breaks = 'Sturges')
+dist.age
+```
 
+Vemos que la mayor cantidad de arboles tienen corta edad.
 
+En caso que necesitemos utilizar un rango diferente, con amplitud definida, lo realizamos de la siguiente manera:
+```{r}
+dist.age.2 <- fdt(Loblolly$age, start = 3, end = 28, h = 5)
+dist.age.2
+```
 
+Empieza en 3, va hasta 28 y lo hace de 5 en 5.
 
+Si necesitamos utilizar el numero de clase diferente, utilizamos el argumento `k`, veamos:
+```{r}
+dist.age.3 <- fdt(Loblolly$age, k = 9)
+dist.age.3
+```
 
+Ahora tenemos 9 limites de clase.
 
+#### Caso 1.- Aplicando la formula
+Ya que nuestro set de datos contiene 84 observaciones
 
+$$k=\frac{1+log(84)}{log(2)}$$
 
+Obtenemos:
+$$k=7.392317$$
 
+En **R**
+```{r}
+k <- (1 + log(84) / log(2))
+k
+```
+
+Obtenemos el numero de clases sugeridas para nuestros datos
+
+#### Caso 2.- Aplicando la Regla de Sturges
+Ya que nuestro set de datos contiene 84 observaciones
+$$k=1+3.322*log10(n)$$
+
+En **R**
+```{r}
+k.1 <- 1 + (3.322*log10(84))
+k.1
+```
+
+Resultados muy similares, como conclusion: _podemos formar 7 clases_
+
+De igual forma existe una funcion en R que estima el numero de clases: `nclass.Sturges()` 
+```{r}
+nclass.Sturges(datosfrec)
+```
+
+Nos recomienda 8 clases
+
+Realicemos un histograma
+```{r fig.height=4, fig.width=5}
+hist(Loblolly$height, xlab="cantidad", ylab="frecuencia", main="Histograma", col="green3")
+```
+
+Gracias!
 
 
 
