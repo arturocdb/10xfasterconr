@@ -1,0 +1,170 @@
+---
+title: Monte Carlo con R
+author: Charlie Do Amaral
+date: '2018-03-08'
+slug: monte-carlo-con-r
+categories:
+  - R
+tags:
+  - R
+  - fundamentos
+---
+
+
+
+<div id="introduccion" class="section level3">
+<h3>Introduccion</h3>
+<p>En este tutorial aprenderá sobre una poderosa técnica llamada Simulación de Monte Carlo que nos permite usar R para calcular probabilidades en lugar de usar las diversas reglas y fórmulas de las clases de estadistica, simplemente una alternativa, definitivamente nada reemplaza a las clases de estadistica!.</p>
+<p>En términos generales, la simulación de Monte Carlo significa usar una computadora para llevar a cabo repetidamente un experimento aleatorio y realizar un seguimiento de los resultados.</p>
+<p>En principio, los métodos de Monte Carlo se pueden usar para resolver cualquier problema que tenga una interpretación probabilística.</p>
+<p>Los métodos de Monte Carlo (o experimentos de Monte Carlo) son una amplia clase de algoritmos computacionales que dependen del muestreo aleatorio repetido para obtener resultados numéricos; es decir, ejecutando simulaciones muchas veces para calcular esas mismas probabilidades de forma heurística al igual que jugar y registrar sus resultados en una situación real de casino: de ahí el nombre.</p>
+<p>Lanzar una moneda un millón de veces a mano sería tedioso. Pero simular un millón de lanzamientos de monedas en R lleva menos de un segundo. Es por eso que la simulacion Monte Carlo es una herramienta tan valiosa.</p>
+</div>
+<div id="monte-carlo-con-r" class="section level3">
+<h3>Monte Carlo Con R</h3>
+<p>Trabajaremos con una funcion simple llamada <code>sample()</code> que nos permite simular experimentos discretos, como tirar dados, sacar algo de una urna o lanzar una moneda, necesitamos codigo para repetir algo una y otra vez, este paso siempre sera el mismo, independientemente de los detalles del primer paso, usaremos la funcion <code>replicate()</code></p>
+<p>La funcion <code>sample()</code> simula la extraccion de canicas de una bolsa, y pensar que hay muchos experimentos aleatorios que pueden reducirse a pensar en una bolsa que contenga diferentes tipos de canicas, la funcion <code>sample()</code> es de forma general la mas adecuada para esta tarea.</p>
+<p>La funcion <code>sample()</code> toma tres argumentos, <code>n</code> es un vector que contiene las canicas, <code>size</code> le dice a R cuantas canicas y <code>replace()</code> que solo tiene las opciones de <code>TRUE</code> o <code>FALSE</code>dependiendo si el experimento lo queremos con la opcion de reemplazo o no, con reemplazo significaria colocar la canica de nuevo en la bolsa luego de su extraccion, y en <code>FALSE</code> lo contrario, no devolver la canica a la bolsa.</p>
+<p>De estos tres argumentos, <code>x</code> es el mas misterioso, veamos un muy simeple ejemplo, de una bolsa que contiene 3 canicas “roja”, “verde” y “azul” la extraccion de dos de ellas sin reemplazo</p>
+<pre class="r"><code>canicas &lt;- c(&#39;roja&#39;, &#39;verde&#39;, &#39;azul&#39; )
+sample(x = canicas, size = 2, replace = FALSE)</code></pre>
+<pre><code>## [1] &quot;verde&quot; &quot;azul&quot;</code></pre>
+<p>Note que en todas los eventos no tendremos ninguna repetida, gracias al argumento <code>replace = FALSE</code></p>
+<p>En el ejemplo anterior, las canicas eran un vector de caracteres, pero tambien podemos usar <code>sample()</code> como un vector numerico, el siguiente ejemplo extrae 5 numeros de entre 1 y 10 sin reemplazo.</p>
+<pre class="r"><code>sample(x = 1:10, size = 5, replace = F)</code></pre>
+<pre><code>## [1] 3 2 9 8 6</code></pre>
+<p>Si en cambio, establecemos <code>replace = TRUE</code> podemos tener numeros repetidos, para ver los repetidos cambiaremos el tamano a 20.</p>
+<pre class="r"><code>numeros &lt;- 1:10
+sample(x = numeros, size = 20, replace = TRUE)</code></pre>
+<pre><code>##  [1]  6  1  7  9  9  2  6  5  3  4  2  8  7  9  5  2 10  3  7  8</code></pre>
+<p>Cada vez que ejecutamos el codigo obtendremos un resultado diferente, debido a que <code>sample()</code> lleva a cabo un experimento aleatorio.</p>
+</div>
+<div id="continuando-con-mas-ejemplos" class="section level3">
+<h3>Continuando con mas ejemplos</h3>
+<p>Estoy llevando a cabo un sorteo y necesito seleccionar dos estudiantes diferentes al azar, por simplicidad solo tengo 5 estudiantes, usamos sample para nuestro experimento</p>
+<pre class="r"><code>estudiantes &lt;- c(&#39;luis&#39;, &#39;ana&#39;, &#39;pedro&#39;, &#39;pablo&#39;, &#39;camila&#39;)
+sample(x = estudiantes, size = 2, replace = F)</code></pre>
+<pre><code>## [1] &quot;pedro&quot; &quot;luis&quot;</code></pre>
+<p>Uno de mis estudiantes (Pedro) esta aburrido, y le enacanta resolver problemas matematicos por diversion (es un tipo extraño, al igual que yo, pero en mi caso es jugar con R, :), para pasar el tiempo etiqueta 10 tarjetas con los numeros del 1 al 10 y las coloca en un tazon, luego saca 5 de estas tarjetas con reemplazo y calcula su suma, usamos R para replicar una de las sumas de las sumas aleatorias de Pedro.</p>
+<pre class="r"><code>numeros.aleatorios &lt;- sample(1:10, size = 5, replace = T)
+sum(numeros.aleatorios)</code></pre>
+<pre><code>## [1] 26</code></pre>
+</div>
+<div id="lanzando-dados-con-sample" class="section level3">
+<h3>Lanzando dados con <code>sample()</code></h3>
+<p>La teoría de la probabilidad se desarrolló inicialmente en los siglos XVI y XVII para resolver problemas relacionados con los juegos de azar. Muchos de estos problemas involucraban lanzar una cantidad de dados justos de seis lados. Podemos simular uno de esos dados en R de la siguiente manera:</p>
+<pre class="r"><code>sample(1:6, size = 1, replace = T)</code></pre>
+<pre><code>## [1] 6</code></pre>
+<p><em><strong>Pregunta</strong></em> habria alguna diferencia si hubieramos configrado <code>replace = TRUE</code> en la instruccion anterior?</p>
+<p><em><strong>Respuesta</strong></em> No, porque <code>size = 1</code> si solo extraemos uno no hay forma de que el experimento sea influenciado por la opcion <code>replace</code></p>
+<p>Lanzar un dado es un ejemplo bastante aburrido, pero podemos usarlo para construir cosas mas interesantes, que pasaria si quisieramos tirar dos dados de seis caras y calcular su suma, asi lo hacemos con R:</p>
+<pre class="r"><code>sample(1:6, size = 1, replace = T) + sample(1:6, size = 1, replace = T)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<p>Pero, resulta que hay una manera mucho mas facil</p>
+<pre class="r"><code>lanzar.dados &lt;- sample(1:6, size = 2, replace = T)
+lanzar.dados</code></pre>
+<pre><code>## [1] 3 4</code></pre>
+<pre class="r"><code>sum(lanzar.dados)</code></pre>
+<pre><code>## [1] 7</code></pre>
+<p>O con una simple instruccion:</p>
+<pre class="r"><code>sum(sample(1:6, size = 2, replace = T))</code></pre>
+<pre><code>## [1] 8</code></pre>
+</div>
+<div id="usando-la-funcion-replicate" class="section level3">
+<h3>Usando la funcion <code>replicate()</code></h3>
+<p>Ya que aprendimos a usar <code>sample()</code> para experimentos aleatorios, ahora la pregunta es: como podemos repetir estos experimentos?, en algunas situaciones usar simplemente <code>sample()</code> no es suficiente, por ejemplo podriamos repetir el experiemnto de lanzar un dado justo 20 veces de la siguiente manera:</p>
+<pre class="r"><code>lanzar.dados &lt;- sample(x = 1:6, size = 20, replace = T)
+lanzar.dados</code></pre>
+<pre><code>##  [1] 2 3 6 1 2 1 2 5 3 5 5 5 2 3 4 2 4 5 4 6</code></pre>
+<p>Pero si quisieramos repetir el experimento que invlucra la suma de dos dados, no seria una manera facil usando <code>sample()</code>, sin embargo podemos usar la funcion <code>replicate()</code>, cuyo unico proposito es repetir alguna funcion de R una y otra vez almacenando el resultado en un formato conveniente.</p>
+<p>Usando <code>replicate()</code> para tareas comunes en lugar de el loop <code>for()</code> hace nuestra instruccion mas legible y hace mas facil obtener la salida en el formato que deseamos.</p>
+<p>La manera mas facil de usar <code>replicate()</code> para una simulacion Monte Carlo es seguir los siguientes pasos sencillos:</p>
+<ol style="list-style-type: decimal">
+<li>Escribir una funcion que haga la simulacion una sola vez</li>
+<li>Repetir el experimento usando la funcion <code>replicate()</code> y almacenar el resultado</li>
+</ol>
+<p>Vamos paso a paso:</p>
+</div>
+<div id="paso-1-creando-la-funcion" class="section level3">
+<h3>Paso 1: creando la funcion</h3>
+<p>Crearemos una funcion para tirar dos dados de seis caras y devolver la suma, de la siguiente manera:</p>
+<pre class="r"><code>suma.dos.dados &lt;- function(){
+  dados &lt;- sample(1:6, size = 2, replace = T)
+  return(sum(dados))
+  
+}</code></pre>
+<p>Ten en cuenta que esta funcion en particular no toma ningun argumento, pero aun asi necesitamos los parentesis para crear la funcion.</p>
+<pre class="r"><code>suma.dos.dados()</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>Los parentesis son necesarios en funciones en R, ya que para ver el codigo de nuestra funcion, simplemente la llamamos sin usar parentesis, de este modo:</p>
+<pre class="r"><code>suma.dos.dados</code></pre>
+<pre><code>## function(){
+##   dados &lt;- sample(1:6, size = 2, replace = T)
+##   return(sum(dados))
+##   
+## }</code></pre>
+<p>Una belleza no?, que lenguaje hace esto tan facil?.</p>
+</div>
+<div id="paso-2-llamando-a-la-funcion-repetidamente-usando-la-funcion-replicate" class="section level3">
+<h3>Paso 2: Llamando a la funcion repetidamente usando la funcion <code>replicate()</code></h3>
+<p>Para usar <code>replicate()</code> necesitamos dos argumentos, <code>n</code> le dice a R cuantas veces queremos repetir algo, y <code>expr</code> es la funcion que queremos repetir, por ejemplo:</p>
+<pre class="r"><code>replicate(n = 20, expr = suma.dos.dados())</code></pre>
+<pre><code>##  [1] 11  6  4 11 12 10  7  6  5  8  8  5  5  3  9  6  5  6  7  7</code></pre>
+<p>Y como en todas las funciones en R, no es necesarios colocar el nombre de los parametros, mnientras respetemos el orden de los mismos obtendremos el mismo resultado.</p>
+<pre class="r"><code>replicate(20, suma.dos.dados())</code></pre>
+<pre><code>##  [1]  8 10  6 11  5  8  8  7  5  3  7 10  9  6 10 10  5  4  9  5</code></pre>
+<p>Obviamente el resultado numerico es diferente debido a aleatoriedad de la simulacion.</p>
+<div id="nota." class="section level4">
+<h4>Nota.</h4>
+<p>Si la funcion que usamos para el argumento <code>expr</code> devuelve un escalar (un simple numero), entonces la funcion <code>replicate()</code> devolvera un vector, si nuestra funcion devuelve un vector (del mismo tamano cada repeticion) entonces <code>replicate()</code> devolvera una matriz, una columna para cada repeticion y las filas iguales a la longitud de la salida de cada experimento.</p>
+<pre class="r"><code>replicate(10, sample(1:10, 1, replace = F))</code></pre>
+<pre><code>##  [1] 5 2 6 2 6 1 3 1 4 9</code></pre>
+<pre class="r"><code>replicate(10, sample(1:10, 5, replace = F))</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]    7    2    6    6    5    3    9    2    7     4
+## [2,]    6    3    4    1    4    4   10    3    2     8
+## [3,]    2    4    9    7    7    7    6    7    6     1
+## [4,]   10    9    1    4   10    8    1    6    4     9
+## [5,]    5    1   10   10    8    9    3   10    5    10</code></pre>
+<p>Ahora escribamos una funcion mas general de nuestra funcion <code>suma.dos.dados()</code> a modo que podamos ver como usar <code>replicate()</code> con una funcion que la toma com su argumento, la funcion <code>sumar.dos.dados.mejorada()</code> toma el argumento <code>n.dados</code> que especifica cuantos dados de seis lados lanzaremos y sumaremos</p>
+<pre class="r"><code>sumar.dos.dados.mejorada &lt;- function(n.dados){
+  dados &lt;- sample(1:6, size = n.dados, replace = T)
+  return(sum(dados))
+}</code></pre>
+<p>Usando <code>replicate()</code> podemos lanzar tres dados de seis caras y calcular la suma 50 veces de la siguiente manera</p>
+<pre class="r"><code>replicate(50, sumar.dos.dados.mejorada(3))</code></pre>
+<pre><code>##  [1] 18  9 13 10  8  5  9 13  9 12 13 13 17  6  8  7 16 11 12 12 15 16 13
+## [24]  9 13 12 10 11  5 15 10 12  8  8  6 15 12  9 15 13 15 14 11 13 12 13
+## [47]  7 10 13  8</code></pre>
+</div>
+</div>
+<div id="escribiendo-una-version-aun-mas-general" class="section level3">
+<h3>Escribiendo una version aun mas general</h3>
+<p>Escribiremos una funcion mas general de la funcion <code>suma.dos.dados()</code> llamada <code>mi.suma.dos.dados()</code> que toma dos argumentos: <code>n.lados</code> que nos dice cuantos lados tiene cada dado y <code>n.dados</code> que nos dice cuantos dados lanzaremos, por ejemplo: <code>n.lados = 4</code> y <code>n.dados = 3</code> estamos lanzando tres dados de cuatro lados, usaremos <code>replicate()</code> para simular la suma de cinco dados de cuatro lados un total de 100 veces.</p>
+<pre class="r"><code>mi.suma.dos.dados &lt;- function(n.dados, n.lados){
+  dados &lt;- sample(1:n.lados, size = n.dados, replace = T)
+  return(sum(dados))
+}
+replicate(100, mi.suma.dos.dados(5,4))</code></pre>
+<pre><code>##   [1] 12  8 10 12 10 14 13 13 12 11 15 16  8 14 15 14 15 11 13 13 12  8 15
+##  [24] 12 11 14 14 11 11 16 12 16 12  9 16 13 11  9 13 11 11 13 13 16  9 16
+##  [47]  9 11 14 14 13 12 12 15 11 12 11 11 16 13 12 14  8 15 17 12 12 11 16
+##  [70] 13 13 10  6 11 17  9 13 13 11 10 12 16 13 15 14 13 10 12  9 11 11 14
+##  [93] 17 17 10 10 14 16  8  9</code></pre>
+<div id="importante" class="section level4">
+<h4>Importante!</h4>
+<p>Algo que nos puede facilmente causar confusion es la diferencia entre una funcion cuyo resultado es aleatorio y el resultado de ejecutar dicha funcion, aqui un ejemplo, supongamos que corremos la simulacion <code>sample(1:10, 10, FALSE)</code> y almacenamos el resultado en una variable llamada <code>simulacion</code></p>
+<pre class="r"><code>simulacion &lt;- sample(1:10, 10, FALSE)</code></pre>
+<p>Veamos el contenindo de <code>simulacion</code></p>
+<pre class="r"><code>simulacion</code></pre>
+<pre><code>##  [1]  9  6  2  3  7  1  8 10  4  5</code></pre>
+<p>ahora ingresamos simulacion nuevamente</p>
+<pre class="r"><code>simulacion</code></pre>
+<pre><code>##  [1]  9  6  2  3  7  1  8 10  4  5</code></pre>
+<p>What?, tenemos el mimsmo resultado!, esto es porque simulacion no es random o aleatorio, es solo un vector ordinario, y esto sucede porque para obtener simulacion realizamos un experimento aleatorio, en contraste, si ejecutamos simplemente <code>sample(1:10, 10, FALSE)</code> obtendremos en definitiva un resultado diferente</p>
+<pre class="r"><code>sample(1:10, 10, FALSE)</code></pre>
+<pre><code>##  [1]  4  9  8  6  7  5  2  3 10  1</code></pre>
+<p>Si todo esto te parece obvio, excelente!, sino, trata de pensar cuidadosamente sobre lo que esta pasando aqui, la distincion es importante cuando llevamos a cabo estudios de simulacion, ya que debemos asegurarnos de que realmente generamos la aleatoriedad cada vez que realizamos un experimento, asegurate de entender la diferencia!.</p>
+<p><em>gracias!</em></p>
+</div>
+</div>

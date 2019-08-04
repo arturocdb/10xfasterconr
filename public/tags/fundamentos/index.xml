@@ -40,6 +40,16 @@ Es decir, una dispersion pequeña nos indica que los datos se encuentran acumula
     </item>
     
     <item>
+      <title>Monte Carlo con R</title>
+      <link>/2018/03/08/monte-carlo-con-r/</link>
+      <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/2018/03/08/monte-carlo-con-r/</guid>
+      <description>IntroduccionEn este tutorial aprenderá sobre una poderosa técnica llamada Simulación de Monte Carlo que nos permite usar R para calcular probabilidades en lugar de usar las diversas reglas y fórmulas de las clases de estadistica, simplemente una alternativa, definitivamente nada reemplaza a las clases de estadistica!.
+En términos generales, la simulación de Monte Carlo significa usar una computadora para llevar a cabo repetidamente un experimento aleatorio y realizar un seguimiento de los resultados.</description>
+    </item>
+    
+    <item>
       <title>Factores Nominales y Ordinales</title>
       <link>/2018/03/03/factores-nominales-y-ordinales/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>

@@ -1,0 +1,234 @@
+---
+title: Monte Carlo con R
+author: Charlie Do Amaral
+date: '2018-03-08'
+slug: monte-carlo-con-r
+categories:
+  - R
+tags:
+  - R
+  - fundamentos
+---
+
+### Introduccion
+En este tutorial aprenderá sobre una poderosa técnica llamada Simulación de Monte Carlo que nos permite usar R para calcular probabilidades en lugar de usar las diversas reglas y fórmulas de las clases de estadistica, simplemente una alternativa, definitivamente nada reemplaza a las clases de estadistica!.
+
+En términos generales, la simulación de Monte Carlo significa usar una computadora para llevar a cabo repetidamente un experimento aleatorio y realizar un seguimiento de los resultados.
+
+En principio, los métodos de Monte Carlo se pueden usar para resolver cualquier problema que tenga una interpretación probabilística.
+
+Los métodos de Monte Carlo (o experimentos de Monte Carlo) son una amplia clase de algoritmos computacionales que dependen del muestreo aleatorio repetido para obtener resultados numéricos; es decir, ejecutando simulaciones muchas veces para calcular esas mismas probabilidades de forma heurística al igual que jugar y registrar sus resultados en una situación real de casino: de ahí el nombre.
+
+Lanzar una moneda un millón de veces a mano sería tedioso. Pero simular un millón de lanzamientos de monedas en R lleva menos de un segundo. Es por eso que la simulacion Monte Carlo es una herramienta tan valiosa.
+
+### Monte Carlo Con R
+Trabajaremos con una funcion simple llamada `sample()` que nos permite simular experimentos discretos, como tirar dados, sacar algo de una urna o lanzar una moneda, necesitamos codigo para repetir algo una y otra vez, este paso siempre sera el mismo, independientemente de los detalles del primer paso, usaremos la funcion `replicate()`
+
+La funcion `sample()` simula la extraccion de canicas de una bolsa, y pensar que hay muchos experimentos aleatorios que pueden reducirse a pensar en una bolsa que contenga diferentes tipos de canicas, la funcion `sample()` es de forma general la mas adecuada para esta tarea.
+
+La funcion `sample()` toma tres argumentos, `n` es un vector que contiene las canicas, `size` le dice a R cuantas canicas y `replace()` que solo tiene las opciones de `TRUE` o `FALSE`dependiendo si el experimento lo queremos con la opcion de reemplazo o no, con reemplazo significaria colocar la canica de nuevo en la bolsa luego de su extraccion, y en `FALSE` lo contrario, no devolver la canica a la bolsa.  
+
+De estos tres argumentos, `x` es el mas misterioso, veamos un muy simeple ejemplo, de una bolsa que contiene 3 canicas “roja”, “verde” y “azul” la extraccion de dos de ellas sin reemplazo
+
+```{r}
+canicas <- c('roja', 'verde', 'azul' )
+sample(x = canicas, size = 2, replace = FALSE)
+
+```
+
+Note que en todas los eventos no tendremos ninguna repetida, gracias al argumento `replace = FALSE`
+
+En el ejemplo anterior, las canicas eran un vector de caracteres, pero tambien podemos usar `sample()` como un vector numerico, el siguiente ejemplo extrae 5 numeros de entre 1 y 10 sin reemplazo.
+
+```{r}
+sample(x = 1:10, size = 5, replace = F)
+```
+
+Si en cambio, establecemos `replace = TRUE` podemos tener numeros repetidos, para ver los repetidos cambiaremos el tamano a 20.
+
+```{r}
+numeros <- 1:10
+sample(x = numeros, size = 20, replace = TRUE)
+
+```
+
+Cada vez que ejecutamos el codigo obtendremos un resultado diferente, debido a que `sample()` lleva a cabo un experimento aleatorio.
+
+### Continuando con mas ejemplos
+Estoy llevando a cabo un sorteo y necesito seleccionar dos estudiantes diferentes al azar, por simplicidad solo tengo 5 estudiantes, usamos sample para nuestro experimento
+
+```{r}
+estudiantes <- c('luis', 'ana', 'pedro', 'pablo', 'camila')
+sample(x = estudiantes, size = 2, replace = F)
+
+```
+
+Uno de mis estudiantes (Pedro) esta aburrido, y le enacanta resolver problemas matematicos por diversion (es un tipo extraño, al igual que yo, pero en mi caso es jugar con R, :), para pasar el tiempo etiqueta 10 tarjetas con los numeros del 1 al 10 y las coloca en un tazon, luego saca 5 de estas tarjetas con reemplazo y calcula su suma, usamos R para replicar una de las sumas de las sumas aleatorias de Pedro.
+
+```{r}
+numeros.aleatorios <- sample(1:10, size = 5, replace = T)
+sum(numeros.aleatorios)
+
+```
+
+### Lanzando dados con `sample()`
+La teoría de la probabilidad se desarrolló inicialmente en los siglos XVI y XVII para resolver problemas relacionados con los juegos de azar. Muchos de estos problemas involucraban lanzar una cantidad de dados justos de seis lados. Podemos simular uno de esos dados en R de la siguiente manera:
+
+```{r}
+sample(1:6, size = 1, replace = T)
+```
+
+_**Pregunta**_ habria alguna diferencia si hubieramos configrado `replace = TRUE` en la instruccion anterior?
+
+_**Respuesta**_ No, porque `size = 1` si solo extraemos uno no hay forma de que el experimento sea influenciado por la opcion `replace`
+
+Lanzar un dado es un ejemplo bastante aburrido, pero podemos usarlo para construir cosas mas interesantes, que pasaria si quisieramos tirar dos dados de seis caras y calcular su suma, asi lo hacemos con R:
+
+```{r}
+sample(1:6, size = 1, replace = T) + sample(1:6, size = 1, replace = T)
+```
+
+Pero, resulta que hay una manera mucho mas facil
+
+```{r}
+lanzar.dados <- sample(1:6, size = 2, replace = T)
+lanzar.dados
+```
+
+```{r}
+sum(lanzar.dados)
+```
+
+O con una simple instruccion:
+
+```{r}
+sum(sample(1:6, size = 2, replace = T))
+```
+
+### Usando la funcion `replicate()`
+Ya que aprendimos a usar `sample()` para experimentos aleatorios, ahora la pregunta es: como podemos repetir estos experimentos?, en algunas situaciones usar simplemente `sample()` no es suficiente, por ejemplo podriamos repetir el experiemnto de lanzar un dado justo 20 veces de la siguiente manera:
+
+```{r}
+lanzar.dados <- sample(x = 1:6, size = 20, replace = T)
+lanzar.dados
+```
+
+Pero si quisieramos repetir el experimento que invlucra la suma de dos dados, no seria una manera facil usando `sample()`, sin embargo podemos usar la funcion `replicate()`, cuyo unico proposito es repetir alguna funcion de R una y otra vez almacenando el resultado en un formato conveniente.
+
+Usando `replicate()` para tareas comunes en lugar de el loop `for()` hace nuestra instruccion mas legible y hace mas facil obtener la salida en el formato que deseamos.
+
+La manera mas facil de usar `replicate()` para una simulacion Monte Carlo es seguir los siguientes pasos sencillos:
+
+1. Escribir una funcion que haga la simulacion una sola vez
+2. Repetir el experimento usando la funcion `replicate()` y almacenar el resultado
+
+Vamos paso a paso:
+
+### Paso 1: creando la funcion
+Crearemos una funcion para tirar dos dados de seis caras y devolver la suma, de la siguiente manera:
+
+```{r}
+suma.dos.dados <- function(){
+  dados <- sample(1:6, size = 2, replace = T)
+  return(sum(dados))
+  
+}
+```
+
+Ten en cuenta que esta funcion en particular no toma ningun argumento, pero aun asi necesitamos los parentesis para crear la funcion.
+
+```{r}
+suma.dos.dados()
+```
+
+Los parentesis son necesarios en funciones en R, ya que para ver el codigo de nuestra funcion, simplemente la llamamos sin usar parentesis, de este modo:
+
+```{r}
+suma.dos.dados
+```
+
+Una belleza no?, que lenguaje hace esto tan facil?.
+
+### Paso 2: Llamando a la funcion repetidamente usando la funcion `replicate()`
+Para usar `replicate()` necesitamos dos argumentos, `n` le dice a R cuantas veces queremos repetir algo, y `expr` es la funcion que queremos repetir, por ejemplo:
+
+```{r}
+replicate(n = 20, expr = suma.dos.dados())
+```
+
+Y como en todas las funciones en R, no es necesarios colocar el nombre de los parametros, mnientras respetemos el orden de los mismos obtendremos el mismo resultado.
+
+```{r}
+replicate(20, suma.dos.dados())
+```
+
+Obviamente el resultado numerico es diferente debido a aleatoriedad de la simulacion.
+
+#### Nota.
+Si la funcion que usamos para el argumento `expr` devuelve un escalar (un simple numero), entonces la funcion `replicate()` devolvera un vector, si nuestra funcion devuelve un vector (del mismo tamano cada repeticion) entonces `replicate()` devolvera una matriz, una columna para cada repeticion y las filas iguales a la longitud de la salida de cada experimento.
+
+```{r}
+replicate(10, sample(1:10, 1, replace = F))
+```
+
+```{r}
+replicate(10, sample(1:10, 5, replace = F))
+```
+
+Ahora escribamos una funcion mas general de nuestra funcion `suma.dos.dados()` a modo que podamos ver como usar `replicate()` con una funcion que la toma com su argumento, la funcion `sumar.dos.dados.mejorada()` toma el argumento `n.dados` que especifica cuantos dados de seis lados lanzaremos y sumaremos
+
+```{r}
+sumar.dos.dados.mejorada <- function(n.dados){
+  dados <- sample(1:6, size = n.dados, replace = T)
+  return(sum(dados))
+}
+```
+
+Usando `replicate()` podemos lanzar tres dados de seis caras y calcular la suma 50 veces de la siguiente manera
+
+```{r}
+replicate(50, sumar.dos.dados.mejorada(3))
+```
+
+### Escribiendo una version aun mas general
+Escribiremos una funcion mas general de la funcion `suma.dos.dados()` llamada `mi.suma.dos.dados()` que toma dos argumentos: `n.lados` que nos dice cuantos lados tiene cada dado y `n.dados` que nos dice cuantos dados lanzaremos, por ejemplo: `n.lados = 4` y `n.dados = 3` estamos lanzando tres dados de cuatro lados, usaremos `replicate()` para simular la suma de cinco dados de cuatro lados un total de 100 veces.
+
+```{r}
+mi.suma.dos.dados <- function(n.dados, n.lados){
+  dados <- sample(1:n.lados, size = n.dados, replace = T)
+  return(sum(dados))
+}
+replicate(100, mi.suma.dos.dados(5,4))
+```
+
+#### Importante!
+Algo que nos puede facilmente causar confusion es la diferencia entre una funcion cuyo resultado es aleatorio y el resultado de ejecutar dicha funcion, aqui un ejemplo, supongamos que corremos la simulacion `sample(1:10, 10, FALSE)` y almacenamos el resultado en una variable llamada `simulacion`
+
+```{r}
+simulacion <- sample(1:10, 10, FALSE)
+```
+
+Veamos el contenindo de `simulacion`
+
+```{r}
+simulacion
+```
+
+ahora ingresamos simulacion nuevamente
+
+```{r}
+simulacion
+```
+
+What?, tenemos el mimsmo resultado!, esto es porque simulacion no es random o aleatorio, es solo un vector ordinario, y esto sucede porque para obtener simulacion realizamos un experimento aleatorio, en contraste, si ejecutamos simplemente `sample(1:10, 10, FALSE)` obtendremos en definitiva un resultado diferente
+
+```{r}
+sample(1:10, 10, FALSE)
+```
+
+Si todo esto te parece obvio, excelente!, sino, trata de pensar cuidadosamente sobre lo que esta pasando aqui, la distincion es importante cuando llevamos a cabo estudios de simulacion, ya que debemos asegurarnos de que realmente generamos la aleatoriedad cada vez que realizamos un experimento, asegurate de entender la diferencia!.
+
+_gracias!_
+
+
+
