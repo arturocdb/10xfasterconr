@@ -1,0 +1,316 @@
+---
+title: Comprendiendo las Distribuciones de Probabilidad con R
+author: Charlie Do Amaral
+date: '2018-03-12'
+slug: comprendiendo-las-distribuciones-de-probabilidad-con-r
+categories:
+  - estadistica
+  - R
+tags:
+  - estadistica
+  - R
+---
+
+### Introduccion y Aplicaciones de distribuciones de Probabilidad Continua
+La division de productos quimicos para la industria de la empresa G&P es una de las principales proveedoras de alcoholes grasos obtenidos de sustancias naturales, como el aceite de coco y derivados del petroleo.
+
+La division deseaba saber que riesgos economicos y cuales oportunidades existen para la expansion de sus instalaciones dedicadas a la produccion de alcoholes grasos, por tanto solicito la ayuda de expertos de G&P en descisiones probabilisticas y en analisis de riesgos. Despues de estructurar y modelar el problema, los expertos determinaron que la clave para la rentabilidad era la diferencia entre los costos de las materias primas provenientes del petroleo y del coco.
+
+Los costos futuros no se podian saber, pero los analistas calcularon mediante las siguientes variables aleatorias continuas
+
+- `x` = precio del aceite de coco por libra de alcoholes grasos
+
+- `y` = precio de la materia proveniente del petroleo por libra de alcoholes grasos
+
+Como la clave de la rentabilidad era la diferencia entre dos variables aleatorias `d = x - y`, para determinar las distribuciones de probabilidad de `x` e `y` entrevistaron a varios expertos.
+
+Despues esta informacion se empleo para elaborar una distribucion de probabilidad de la diferencia entre los precios `d`.
+
+En esta distribucion de probabilidad continua se encontro:
+
+- la probabilidad de que la diferencia entre los precios fuera $0.0655 o menos era 0.90
+- la probabilidad de que la diferenica entre los precios fuera $0.035 o menos era 0.50
+- la probabilidad de que la diferencia fuera $0.0045 o menos era 0.10
+
+La direccion de esta division penso que la clave para alcanzar un consenso estaba en poder cuantificar el impacto de las diferencias entre los precios de las materias primas.
+
+Las probabilidades obtenidas se usaron en un analisis sensible a la diferencia entre los precios de las materias primas. Este analisis arrojo suficiente informacion como para sustentar una recomendacion para los directivos.
+
+Usar variables aleatorias continuas y sus distribuciones de probabilidad ayudo a G&P a analizar los riesgos economicos relacionados con su produccion de alcoholes grasos.
+
+En este articulo conoceremos mediante un ejemplo simple el uso de las variables aleatorias continuas y sus distribuciones de probabilidad, entre ellas una de las distribuciones de probabilidad mas importantes de la estadistica, la distribucion normal.
+
+### Diferencia entre Funcion de Probabilidad Discreta y Funcion de Probabilidad Continua
+Una diferencia fundamental entre las _variables aleatorias discretas_ y las _variables aleatorias continuas_ es como se calculan las probabilidades. En las variables aleatorias discretas la funcion de probabilidad $$f(x)$$ da la probabilidad de que la variable aleatoria tome un valor determinado.
+
+En las _variables aleatorias continuas_ la contraparte de la funcion de la probabilidad es la **funcion de densidad de probabilidad**, que tambien se denota $$f(x)$$, la diferencia esta en que la funcion de densidad de probabilidad no da probabilidades directamente. Sino que, el area bajo la curva de $$f(x)$$ que corresponde a un intervalo determninado proporciona la probabilidad de que la variable aleatoria tome uno de los valores de ese intervalo.
+
+De manera que cuando se calculan probabilidades de _variables aleatorias continuas_ se calcula la probabilidad de que la variable aleatoria tome alguno de los valores dentro de un intervalo.
+
+### Usando las distribuciones de Probabilidad en R (`dnorm`, `pnorm`, `qnorm` y `rnorm`)
+R es una gran herramienta para trabajar con distribuciones. Sin embargo, uno tiene que saber qué función específica es la correcta o incorrecta. Aquí, analizaré qué funciones que están disponibles para manejar la distribución normal: `dnorm`, `pnorm`, `qnorm` y `rnorm`.
+
+Cada distribución tiene cuatro funciones asociadas cuyo prefijo indica el tipo de función y el sufijo indica la distribución. Para ejemplificar el uso de estas funciones, me limitaré a la distribución normal (gaussiana). Las cuatro funciones de distribución normales son:
+
+- **d**norm: funcion de densidad de la distribucion normal
+- **p**norm: funcion de densidad acumulada de la distribucion normal
+- **q**norm: funcion cuartil de la distribucion normal
+- **r**norm: funcion de muestreo aleatorio de la distribucion normal
+
+### Funcion de densidad de Probabilidad: **d**norm()
+La funcion de densidad de probabilidad indica la probabilidad de observar una medicion con un valor especifico, o dicho de otra manera, describe la probabilidad relativa segun la cual la variable aleatoria tomara determinado valor, la densidad de la integral es siempre 1
+
+Usando la densidad es posible determinar las probabilidades de eventos, por ejemplo:, te puedes preguntar cual es la probabilidad de que una persona tenga un cociente intelectual de exactamente 140? (aclaracion: la RAE aclaro que no se dice coeficiente intelectual, sino cociente intelectual), en este caso, necesitaremos recuperar el valor 140 de la densidad de distribucion, la CI (cociente intelectual) puede modelarse con una media = 100 y una desviacion estandar = 15, generamos la densidad correspondiente en R:
+
+Primero graficaremos la funcion de probabilidad normal para luego ver como la aplicamos con un ejemplo, creamos un vector de valores z
+
+```{r}
+valores.z <- seq(-3, 3, by = .1)
+valores.z
+```
+
+Recordemos que los valores por defecto de la funcion `dnorm()` son los mismos que la funcion de probabilidad normal estandarizada, es decir; _media = 0_ y _desviacion estandar = 1_
+
+Ahora hagamos un vector de los valores que toma la funcion de probabilidad normal dados los valores z
+
+```{r}
+valores.d <- dnorm(valores.z)
+# examinemos los valores
+valores.d
+```
+
+Y graficando obtenemos:
+
+```{r}
+plot(valores.d,
+     xaxt = "n", # no ploteamos el eje x 
+     type = "l", # tipo linea
+     main = "Probabilidad de Distribucion Normal Estandar",
+     xlab = "Valores z"
+     )
+
+# Los siguientes valores etiquetan el eje x
+axis(1, at=which(valores.d == dnorm(0)), labels=c(0))
+axis(1, at=which(valores.d == dnorm(1)), labels=c(-1, 1))
+axis(1, at=which(valores.d == dnorm(2)), labels=c(-2, 2))
+```
+
+Como podemos ver, `dnorm()` nos da la "altura" de la distribucion de probabilidad de la distribucion normal en cualquier valor z que proporcionemos como argumento para `dnorm()`
+
+Ahora con un Ejemplo:
+
+```{r}
+rango.muestra <- 50:150
+media.ci <- 100
+desv.ci <- 15
+```
+
+Creamos nuestra distribucion normal y la almacenamos en la variable `ci.dist`
+
+```{r}
+ci.dist <- dnorm(rango.muestra, mean = media.ci, sd = desv.ci)
+```
+
+Creamos un Data Frame que contiene 2 columnas, CI (el cociente intelectual) y Densidad (La distibucion de probabilidad generada)
+
+```{r}
+df.ci <- data.frame("CI" = rango.muestra, "Densidad" = ci.dist)
+df.ci
+```
+
+Visulizacion grafica
+```{r}
+library(ggplot2)
+ggplot(df.ci, aes(x = CI, y = Densidad)) + geom_point()
+```
+
+posteriormente simplemente ubicamos la probabilidad que corresponde al valor 140 y la multiplicamos por 100 para tener la respuesta en porcentaje
+
+```{r}
+df.ci$Densidad[df.ci$CI == 140] *100
+```
+
+En el procedimiento anterior simulamos todo el proceso de manejo y extraccion de datos, sin embargo podemos llegar a la misma conclusion aplicando directamente la funcion `dnorm()` y con una sola linea de instruccion:
+
+```{r}
+dnorm(140, mean = media.ci, sd = desv.ci) * 100
+```
+
+_Respuesta_: La probabilidad de que una persona tenga un cociente intelectual de 140 es de 0.076% 
+
+Y tambien podemos preguntar por la probabilidad de que CI >= 140 (mayor o igual a 140)
+
+```{r}
+sum(df.ci$Densidad[df.ci$CI >= 140]) *100
+```
+
+De igual forma, con la funcion de probabilidad de probabilidad de densidad acumulada (de la cual hablaremos luego) llegamos a la misma conslusion con una sola instruccion:
+
+```{r}
+(1-pnorm(140, media.ci, desv.ci)) * 100
+```
+
+**Nota**, es preciso colocar `1-` por delante ya que se trata de una probabilidad mayor o igual que, recordemos que la funcion devuelve la integral de `-infinito` a `q`
+
+Sin embargo, podemos omitir `-1` haciendo uso del parametro `lower.tail = FALSE`, y obtenemos el mismo resultado 
+
+```{r}
+(pnorm(140, media.ci, desv.ci, lower.tail = F)) * 100
+```
+
+_Respuesta_: 0.38%
+
+De igual manera si deseamos saber la probabilidad de que CI <= 90 (menor o igual a 90)
+
+```{r}
+sum(df.ci$Densidad[df.ci$CI <= 90]) *100
+```
+
+De igual forma, utilizando la instruccion directa:
+
+```{r}
+(pnorm(90, mean = media.ci, sd = desv.ci)) * 100
+```
+
+_Respuesta_: 26.3%
+
+### Funcion de Densidad Acumulada **p**norm()
+Para ponerlo de una manera muy simple, las probabilidades acumuladas se obtienen de distribuciones de probabilidad acumulada, que son analogas a las distribuciones de frecuencias relativas acumuladas.
+
+La funcion `pnorm()` devuelve la integral de - infinito a `q` de una distribucion normal, donde `q` es la unidad estandarizada o z-score, en realidad es otro nombre para la desviacion estandar.
+
+La funcion `pnorm()` tambien tiene los mismos valores por defecto que `dnorm()` es decir:
+
+- `q = 0`
+- `media = 0`
+- `desviacion estandar = 1`
+
+Comprobando
+
+```{r}
+pnorm(0)
+```
+
+Es correcto!, ya que `0.5` representa exactamente la mitad de la distribucion.
+
+La funcion `pnorm()` tiene el argumento `lower.tail` que se encuentra por defecto en `TRUE` (valores de `- infinito` a `q`) si lo parametrizamos a `FALSE` obtendremos los valores de `q` a `infinito`
+
+**Importante**, tomar en cuenta que `pnorm(q)` es lo mismo que `1-pnorm(q, lower.tail = FALSE)`
+
+Veamos algunos ejemplos:
+
+Al limite izquierdo de la distribucion normal estandarizada `q = 3`
+
+```{r}
+pnorm(3)
+```
+
+Con nuestros valores de _media_ y _desviacion estandar_
+
+```{r}
+pnorm(2, mean = 5, sd = 3)
+```
+
+o lo que es lo mismo:
+
+```{r}
+1 - pnorm(2, mean = 5, sd = 3, lower.tail = FALSE)
+```
+
+Con la funcion `pnorm()` ya no necesitamos acudir a los valores de la tabla z de nuestros antiguos libros de estadistica, para comprenderlo mejor, utilizaremos nuestro vector de valores z para calcular nuestro nuevo vector usando `pnorm()`.
+
+```{r}
+valores.z
+```
+
+Ahora visualizando nuestro nuevo grafico
+
+```{r}
+valores.p <- pnorm(valores.z)
+plot(valores.p,
+     xaxt = "n",
+     type = "l",
+     main = "Distribucion de la Probabilidad Acumulada de la Normal Estandar",
+     xlab = "Cuantiles",
+     ylab = "Densidad de Probabilidad"
+     )
+
+# Los siguientes valores etiquetan el eje x
+axis(1, at=which(valores.p == pnorm(-2)), labels=round(pnorm(-2), 2))
+axis(1, at=which(valores.p == pnorm(-1)), labels=round(pnorm(-1), 2))
+axis(1, at=which(valores.p == pnorm(0)), labels=c(.5))
+axis(1, at=which(valores.p == pnorm(1)), labels=round(pnorm(1), 2))
+axis(1, at=which(valores.p == pnorm(2)), labels=round(pnorm(2), 2))
+
+```
+
+Es el grafico de la _Funcion de Distribucion Acumulada_ de la _Distribucion normal_
+
+### Funcion `qnorm()`
+Para simplificarlo, podemos considerar `qnorm()` como la inversa de la funcion `pnorm()`, podemos usar `qnorm()` para en preguntas como: _cual es el valor z del cuantil 0.5 de la distribucion normal?_ 
+
+```{r}
+qnorm(0.5)
+```
+
+_Cual es el valor z del cuantil 96 de la distribucion normal?_
+
+```{r}
+qnorm(0.96)
+```
+
+Son realmente inversas!
+
+```{r}
+pnorm(qnorm(0))
+```
+
+```{r}
+qnorm(pnorm(0))
+```
+
+### Funcion `rnorm()`
+La funcion `rnorm()` nos permite generar un vector de numeros aleatorios distribuidos normalmente, el primer argumento `n` es la cantidad de numeros que se desea generar, seguido de los argumetos _media_ y _desviacion estandar_, veamos un ejemplo usando la _ley de los grandes numeros_
+
+```{r}
+# La funcion set.seed() es un generador de numeros aleatorio, la cual es util para crear simulaciones
+# de objetos aleatorios que pueden ser reproducidos, los numeros que reproducimos seran los mismos
+# sin importar cuanto abarque la simulacion
+# para el ejemplo lo parametrizaremos con una fecha
+set.seed(10-1-2015)
+rnorm(5)
+
+```
+
+Ahora, generemos diferentes vectores numericos de una distribucion normal
+```{r}
+n10 <- rnorm(10, mean = 70, sd = 5)
+n100 <- rnorm(100, mean = 70, sd = 5)
+n10000 <-  rnorm(10000, mean = 70, sd = 5)
+
+# veamos el vector n10
+n10
+```
+
+Ahora bien, _cuales valores de los siguientes histogramas estaran mas concentrados al rededor de su media?_
+
+```{r}
+# Los graficos estaran lado a lado
+oldpar <- par()
+par(mfrow=c(1,3))
+
+# el argumento breaks especifica cuantas barras estaran en el histograma
+hist(n10, breaks = 5)
+hist(n100, breaks = 20)
+hist(n10000, breaks = 100)
+```
+
+Los conceptos que vimos generalmente son validos para todas las funciones de distribucion integradas en R, puedes obtener mas ayuda sobre las funciones de distribucion ingresando en la consola de R `help(Distributions)`. 
+
+_Gracias!_
+
+
+
+
+
+

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<title>Comprendiendo las Distribuciones de Probabilidad con R - Diseñando una experiencia ... enseñando.</title>
+<meta property="og:title" content="Comprendiendo las Distribuciones de Probabilidad con R - Diseñando una experiencia ... enseñando.">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/proyecto/">Proyecto</a></li>
+    
+    <li><a href="/curso/">Curso</a></li>
+    
+    <li><a href="/unete/">Únete</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">12 min read</span>
+    
+
+    <h1 class="article-title">Comprendiendo las Distribuciones de Probabilidad con R</h1>
+
+    
+    <span class="article-date">2018-03-12</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="introduccion-y-aplicaciones-de-distribuciones-de-probabilidad-continua" class="section level3">
+<h3>Introduccion y Aplicaciones de distribuciones de Probabilidad Continua</h3>
+<p>La division de productos quimicos para la industria de la empresa G&amp;P es una de las principales proveedoras de alcoholes grasos obtenidos de sustancias naturales, como el aceite de coco y derivados del petroleo.</p>
+<p>La division deseaba saber que riesgos economicos y cuales oportunidades existen para la expansion de sus instalaciones dedicadas a la produccion de alcoholes grasos, por tanto solicito la ayuda de expertos de G&amp;P en descisiones probabilisticas y en analisis de riesgos. Despues de estructurar y modelar el problema, los expertos determinaron que la clave para la rentabilidad era la diferencia entre los costos de las materias primas provenientes del petroleo y del coco.</p>
+<p>Los costos futuros no se podian saber, pero los analistas calcularon mediante las siguientes variables aleatorias continuas</p>
+<ul>
+<li><p><code>x</code> = precio del aceite de coco por libra de alcoholes grasos</p></li>
+<li><p><code>y</code> = precio de la materia proveniente del petroleo por libra de alcoholes grasos</p></li>
+</ul>
+<p>Como la clave de la rentabilidad era la diferencia entre dos variables aleatorias <code>d = x - y</code>, para determinar las distribuciones de probabilidad de <code>x</code> e <code>y</code> entrevistaron a varios expertos.</p>
+<p>Despues esta informacion se empleo para elaborar una distribucion de probabilidad de la diferencia entre los precios <code>d</code>.</p>
+<p>En esta distribucion de probabilidad continua se encontro:</p>
+<ul>
+<li>la probabilidad de que la diferencia entre los precios fuera $0.0655 o menos era 0.90</li>
+<li>la probabilidad de que la diferenica entre los precios fuera $0.035 o menos era 0.50</li>
+<li>la probabilidad de que la diferencia fuera $0.0045 o menos era 0.10</li>
+</ul>
+<p>La direccion de esta division penso que la clave para alcanzar un consenso estaba en poder cuantificar el impacto de las diferencias entre los precios de las materias primas.</p>
+<p>Las probabilidades obtenidas se usaron en un analisis sensible a la diferencia entre los precios de las materias primas. Este analisis arrojo suficiente informacion como para sustentar una recomendacion para los directivos.</p>
+<p>Usar variables aleatorias continuas y sus distribuciones de probabilidad ayudo a G&amp;P a analizar los riesgos economicos relacionados con su produccion de alcoholes grasos.</p>
+<p>En este articulo conoceremos mediante un ejemplo simple el uso de las variables aleatorias continuas y sus distribuciones de probabilidad, entre ellas una de las distribuciones de probabilidad mas importantes de la estadistica, la distribucion normal.</p>
+</div>
+<div id="diferencia-entre-funcion-de-probabilidad-discreta-y-funcion-de-probabilidad-continua" class="section level3">
+<h3>Diferencia entre Funcion de Probabilidad Discreta y Funcion de Probabilidad Continua</h3>
+<p>Una diferencia fundamental entre las <em>variables aleatorias discretas</em> y las <em>variables aleatorias continuas</em> es como se calculan las probabilidades. En las variables aleatorias discretas la funcion de probabilidad <span class="math display">\[f(x)\]</span> da la probabilidad de que la variable aleatoria tome un valor determinado.</p>
+<p>En las <em>variables aleatorias continuas</em> la contraparte de la funcion de la probabilidad es la <strong>funcion de densidad de probabilidad</strong>, que tambien se denota <span class="math display">\[f(x)\]</span>, la diferencia esta en que la funcion de densidad de probabilidad no da probabilidades directamente. Sino que, el area bajo la curva de <span class="math display">\[f(x)\]</span> que corresponde a un intervalo determninado proporciona la probabilidad de que la variable aleatoria tome uno de los valores de ese intervalo.</p>
+<p>De manera que cuando se calculan probabilidades de <em>variables aleatorias continuas</em> se calcula la probabilidad de que la variable aleatoria tome alguno de los valores dentro de un intervalo.</p>
+</div>
+<div id="usando-las-distribuciones-de-probabilidad-en-r-dnorm-pnorm-qnorm-y-rnorm" class="section level3">
+<h3>Usando las distribuciones de Probabilidad en R (<code>dnorm</code>, <code>pnorm</code>, <code>qnorm</code> y <code>rnorm</code>)</h3>
+<p>R es una gran herramienta para trabajar con distribuciones. Sin embargo, uno tiene que saber qué función específica es la correcta o incorrecta. Aquí, analizaré qué funciones que están disponibles para manejar la distribución normal: <code>dnorm</code>, <code>pnorm</code>, <code>qnorm</code> y <code>rnorm</code>.</p>
+<p>Cada distribución tiene cuatro funciones asociadas cuyo prefijo indica el tipo de función y el sufijo indica la distribución. Para ejemplificar el uso de estas funciones, me limitaré a la distribución normal (gaussiana). Las cuatro funciones de distribución normales son:</p>
+<ul>
+<li><strong>d</strong>norm: funcion de densidad de la distribucion normal</li>
+<li><strong>p</strong>norm: funcion de densidad acumulada de la distribucion normal</li>
+<li><strong>q</strong>norm: funcion cuartil de la distribucion normal</li>
+<li><strong>r</strong>norm: funcion de muestreo aleatorio de la distribucion normal</li>
+</ul>
+</div>
+<div id="funcion-de-densidad-de-probabilidad-dnorm" class="section level3">
+<h3>Funcion de densidad de Probabilidad: <strong>d</strong>norm()</h3>
+<p>La funcion de densidad de probabilidad indica la probabilidad de observar una medicion con un valor especifico, o dicho de otra manera, describe la probabilidad relativa segun la cual la variable aleatoria tomara determinado valor, la densidad de la integral es siempre 1</p>
+<p>Usando la densidad es posible determinar las probabilidades de eventos, por ejemplo:, te puedes preguntar cual es la probabilidad de que una persona tenga un cociente intelectual de exactamente 140? (aclaracion: la RAE aclaro que no se dice coeficiente intelectual, sino cociente intelectual), en este caso, necesitaremos recuperar el valor 140 de la densidad de distribucion, la CI (cociente intelectual) puede modelarse con una media = 100 y una desviacion estandar = 15, generamos la densidad correspondiente en R:</p>
+<p>Primero graficaremos la funcion de probabilidad normal para luego ver como la aplicamos con un ejemplo, creamos un vector de valores z</p>
+<pre class="r"><code>valores.z &lt;- seq(-3, 3, by = .1)
+valores.z</code></pre>
+<pre><code>##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7
+## [15] -1.6 -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3
+## [29] -0.2 -0.1  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1
+## [43]  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5
+## [57]  2.6  2.7  2.8  2.9  3.0</code></pre>
+<p>Recordemos que los valores por defecto de la funcion <code>dnorm()</code> son los mismos que la funcion de probabilidad normal estandarizada, es decir; <em>media = 0</em> y <em>desviacion estandar = 1</em></p>
+<p>Ahora hagamos un vector de los valores que toma la funcion de probabilidad normal dados los valores z</p>
+<pre class="r"><code>valores.d &lt;- dnorm(valores.z)
+# examinemos los valores
+valores.d</code></pre>
+<pre><code>##  [1] 0.004431848 0.005952532 0.007915452 0.010420935 0.013582969
+##  [6] 0.017528300 0.022394530 0.028327038 0.035474593 0.043983596
+## [11] 0.053990967 0.065615815 0.078950158 0.094049077 0.110920835
+## [16] 0.129517596 0.149727466 0.171368592 0.194186055 0.217852177
+## [21] 0.241970725 0.266085250 0.289691553 0.312253933 0.333224603
+## [26] 0.352065327 0.368270140 0.381387815 0.391042694 0.396952547
+## [31] 0.398942280 0.396952547 0.391042694 0.381387815 0.368270140
+## [36] 0.352065327 0.333224603 0.312253933 0.289691553 0.266085250
+## [41] 0.241970725 0.217852177 0.194186055 0.171368592 0.149727466
+## [46] 0.129517596 0.110920835 0.094049077 0.078950158 0.065615815
+## [51] 0.053990967 0.043983596 0.035474593 0.028327038 0.022394530
+## [56] 0.017528300 0.013582969 0.010420935 0.007915452 0.005952532
+## [61] 0.004431848</code></pre>
+<p>Y graficando obtenemos:</p>
+<pre class="r"><code>plot(valores.d,
+     xaxt = &quot;n&quot;, # no ploteamos el eje x 
+     type = &quot;l&quot;, # tipo linea
+     main = &quot;Probabilidad de Distribucion Normal Estandar&quot;,
+     xlab = &quot;Valores z&quot;
+     )
+
+# Los siguientes valores etiquetan el eje x
+axis(1, at=which(valores.d == dnorm(0)), labels=c(0))
+axis(1, at=which(valores.d == dnorm(1)), labels=c(-1, 1))
+axis(1, at=which(valores.d == dnorm(2)), labels=c(-2, 2))</code></pre>
+<p><img src="/post/2018-03-12-comprendiendo-las-distribuciones-de-probabilidad-con-r_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Como podemos ver, <code>dnorm()</code> nos da la “altura” de la distribucion de probabilidad de la distribucion normal en cualquier valor z que proporcionemos como argumento para <code>dnorm()</code></p>
+<p>Ahora con un Ejemplo:</p>
+<pre class="r"><code>rango.muestra &lt;- 50:150
+media.ci &lt;- 100
+desv.ci &lt;- 15</code></pre>
+<p>Creamos nuestra distribucion normal y la almacenamos en la variable <code>ci.dist</code></p>
+<pre class="r"><code>ci.dist &lt;- dnorm(rango.muestra, mean = media.ci, sd = desv.ci)</code></pre>
+<p>Creamos un Data Frame que contiene 2 columnas, CI (el cociente intelectual) y Densidad (La distibucion de probabilidad generada)</p>
+<pre class="r"><code>df.ci &lt;- data.frame(&quot;CI&quot; = rango.muestra, &quot;Densidad&quot; = ci.dist)
+df.ci</code></pre>
+<pre><code>##      CI     Densidad
+## 1    50 0.0001028186
+## 2    51 0.0001281199
+## 3    52 0.0001589392
+## 4    53 0.0001962978
+## 5    54 0.0002413624
+## 6    55 0.0002954566
+## 7    56 0.0003600704
+## 8    57 0.0004368688
+## 9    58 0.0005276968
+## 10   59 0.0006345818
+## 11   60 0.0007597324
+## 12   61 0.0009055313
+## 13   62 0.0010745239
+## 14   63 0.0012694000
+## 15   64 0.0014929687
+## 16   65 0.0017481259
+## 17   66 0.0020378140
+## 18   67 0.0023649729
+## 19   68 0.0027324837
+## 20   69 0.0031431044
+## 21   70 0.0035993978
+## 22   71 0.0041036534
+## 23   72 0.0046578051
+## 24   73 0.0052633439
+## 25   74 0.0059212307
+## 26   75 0.0066318093
+## 27   76 0.0073947223
+## 28   77 0.0082088348
+## 29   78 0.0090721655
+## 30   79 0.0099818310
+## 31   80 0.0109340050
+## 32   81 0.0119238944
+## 33   82 0.0129457370
+## 34   83 0.0139928197
+## 35   84 0.0150575218
+## 36   85 0.0161313816
+## 37   86 0.0172051884
+## 38   87 0.0182690978
+## 39   88 0.0193127702
+## 40   89 0.0203255285
+## 41   90 0.0212965337
+## 42   91 0.0222149735
+## 43   92 0.0230702595
+## 44   93 0.0238522286
+## 45   94 0.0245513427
+## 46   95 0.0251588818
+## 47   96 0.0256671250
+## 48   97 0.0260695129
+## 49   98 0.0263607894
+## 50   99 0.0265371151
+## 51  100 0.0265961520
+## 52  101 0.0265371151
+## 53  102 0.0263607894
+## 54  103 0.0260695129
+## 55  104 0.0256671250
+## 56  105 0.0251588818
+## 57  106 0.0245513427
+## 58  107 0.0238522286
+## 59  108 0.0230702595
+## 60  109 0.0222149735
+## 61  110 0.0212965337
+## 62  111 0.0203255285
+## 63  112 0.0193127702
+## 64  113 0.0182690978
+## 65  114 0.0172051884
+## 66  115 0.0161313816
+## 67  116 0.0150575218
+## 68  117 0.0139928197
+## 69  118 0.0129457370
+## 70  119 0.0119238944
+## 71  120 0.0109340050
+## 72  121 0.0099818310
+## 73  122 0.0090721655
+## 74  123 0.0082088348
+## 75  124 0.0073947223
+## 76  125 0.0066318093
+## 77  126 0.0059212307
+## 78  127 0.0052633439
+## 79  128 0.0046578051
+## 80  129 0.0041036534
+## 81  130 0.0035993978
+## 82  131 0.0031431044
+## 83  132 0.0027324837
+## 84  133 0.0023649729
+## 85  134 0.0020378140
+## 86  135 0.0017481259
+## 87  136 0.0014929687
+## 88  137 0.0012694000
+## 89  138 0.0010745239
+## 90  139 0.0009055313
+## 91  140 0.0007597324
+## 92  141 0.0006345818
+## 93  142 0.0005276968
+## 94  143 0.0004368688
+## 95  144 0.0003600704
+## 96  145 0.0002954566
+## 97  146 0.0002413624
+## 98  147 0.0001962978
+## 99  148 0.0001589392
+## 100 149 0.0001281199
+## 101 150 0.0001028186</code></pre>
+<p>Visulizacion grafica</p>
+<pre class="r"><code>library(ggplot2)
+ggplot(df.ci, aes(x = CI, y = Densidad)) + geom_point()</code></pre>
+<p><img src="/post/2018-03-12-comprendiendo-las-distribuciones-de-probabilidad-con-r_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>posteriormente simplemente ubicamos la probabilidad que corresponde al valor 140 y la multiplicamos por 100 para tener la respuesta en porcentaje</p>
+<pre class="r"><code>df.ci$Densidad[df.ci$CI == 140] *100</code></pre>
+<pre><code>## [1] 0.07597324</code></pre>
+<p>En el procedimiento anterior simulamos todo el proceso de manejo y extraccion de datos, sin embargo podemos llegar a la misma conclusion aplicando directamente la funcion <code>dnorm()</code> y con una sola linea de instruccion:</p>
+<pre class="r"><code>dnorm(140, mean = media.ci, sd = desv.ci) * 100</code></pre>
+<pre><code>## [1] 0.07597324</code></pre>
+<p><em>Respuesta</em>: La probabilidad de que una persona tenga un cociente intelectual de 140 es de 0.076%</p>
+<p>Y tambien podemos preguntar por la probabilidad de que CI &gt;= 140 (mayor o igual a 140)</p>
+<pre class="r"><code>sum(df.ci$Densidad[df.ci$CI &gt;= 140]) *100</code></pre>
+<pre><code>## [1] 0.3841945</code></pre>
+<p>De igual forma, con la funcion de probabilidad de probabilidad de densidad acumulada (de la cual hablaremos luego) llegamos a la misma conslusion con una sola instruccion:</p>
+<pre class="r"><code>(1-pnorm(140, media.ci, desv.ci)) * 100</code></pre>
+<pre><code>## [1] 0.3830381</code></pre>
+<p><strong>Nota</strong>, es preciso colocar <code>1-</code> por delante ya que se trata de una probabilidad mayor o igual que, recordemos que la funcion devuelve la integral de <code>-infinito</code> a <code>q</code></p>
+<p>Sin embargo, podemos omitir <code>-1</code> haciendo uso del parametro <code>lower.tail = FALSE</code>, y obtenemos el mismo resultado</p>
+<pre class="r"><code>(pnorm(140, media.ci, desv.ci, lower.tail = F)) * 100</code></pre>
+<pre><code>## [1] 0.3830381</code></pre>
+<p><em>Respuesta</em>: 0.38%</p>
+<p>De igual manera si deseamos saber la probabilidad de que CI &lt;= 90 (menor o igual a 90)</p>
+<pre class="r"><code>sum(df.ci$Densidad[df.ci$CI &lt;= 90]) *100</code></pre>
+<pre><code>## [1] 26.28401</code></pre>
+<p>De igual forma, utilizando la instruccion directa:</p>
+<pre class="r"><code>(pnorm(90, mean = media.ci, sd = desv.ci)) * 100</code></pre>
+<pre><code>## [1] 25.24925</code></pre>
+<p><em>Respuesta</em>: 26.3%</p>
+</div>
+<div id="funcion-de-densidad-acumulada-pnorm" class="section level3">
+<h3>Funcion de Densidad Acumulada <strong>p</strong>norm()</h3>
+<p>Para ponerlo de una manera muy simple, las probabilidades acumuladas se obtienen de distribuciones de probabilidad acumulada, que son analogas a las distribuciones de frecuencias relativas acumuladas.</p>
+<p>La funcion <code>pnorm()</code> devuelve la integral de - infinito a <code>q</code> de una distribucion normal, donde <code>q</code> es la unidad estandarizada o z-score, en realidad es otro nombre para la desviacion estandar.</p>
+<p>La funcion <code>pnorm()</code> tambien tiene los mismos valores por defecto que <code>dnorm()</code> es decir:</p>
+<ul>
+<li><code>q = 0</code></li>
+<li><code>media = 0</code></li>
+<li><code>desviacion estandar = 1</code></li>
+</ul>
+<p>Comprobando</p>
+<pre class="r"><code>pnorm(0)</code></pre>
+<pre><code>## [1] 0.5</code></pre>
+<p>Es correcto!, ya que <code>0.5</code> representa exactamente la mitad de la distribucion.</p>
+<p>La funcion <code>pnorm()</code> tiene el argumento <code>lower.tail</code> que se encuentra por defecto en <code>TRUE</code> (valores de <code>- infinito</code> a <code>q</code>) si lo parametrizamos a <code>FALSE</code> obtendremos los valores de <code>q</code> a <code>infinito</code></p>
+<p><strong>Importante</strong>, tomar en cuenta que <code>pnorm(q)</code> es lo mismo que <code>1-pnorm(q, lower.tail = FALSE)</code></p>
+<p>Veamos algunos ejemplos:</p>
+<p>Al limite izquierdo de la distribucion normal estandarizada <code>q = 3</code></p>
+<pre class="r"><code>pnorm(3)</code></pre>
+<pre><code>## [1] 0.9986501</code></pre>
+<p>Con nuestros valores de <em>media</em> y <em>desviacion estandar</em></p>
+<pre class="r"><code>pnorm(2, mean = 5, sd = 3)</code></pre>
+<pre><code>## [1] 0.1586553</code></pre>
+<p>o lo que es lo mismo:</p>
+<pre class="r"><code>1 - pnorm(2, mean = 5, sd = 3, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.1586553</code></pre>
+<p>Con la funcion <code>pnorm()</code> ya no necesitamos acudir a los valores de la tabla z de nuestros antiguos libros de estadistica, para comprenderlo mejor, utilizaremos nuestro vector de valores z para calcular nuestro nuevo vector usando <code>pnorm()</code>.</p>
+<pre class="r"><code>valores.z</code></pre>
+<pre><code>##  [1] -3.0 -2.9 -2.8 -2.7 -2.6 -2.5 -2.4 -2.3 -2.2 -2.1 -2.0 -1.9 -1.8 -1.7
+## [15] -1.6 -1.5 -1.4 -1.3 -1.2 -1.1 -1.0 -0.9 -0.8 -0.7 -0.6 -0.5 -0.4 -0.3
+## [29] -0.2 -0.1  0.0  0.1  0.2  0.3  0.4  0.5  0.6  0.7  0.8  0.9  1.0  1.1
+## [43]  1.2  1.3  1.4  1.5  1.6  1.7  1.8  1.9  2.0  2.1  2.2  2.3  2.4  2.5
+## [57]  2.6  2.7  2.8  2.9  3.0</code></pre>
+<p>Ahora visualizando nuestro nuevo grafico</p>
+<pre class="r"><code>valores.p &lt;- pnorm(valores.z)
+plot(valores.p,
+     xaxt = &quot;n&quot;,
+     type = &quot;l&quot;,
+     main = &quot;Distribucion de la Probabilidad Acumulada de la Normal Estandar&quot;,
+     xlab = &quot;Cuantiles&quot;,
+     ylab = &quot;Densidad de Probabilidad&quot;
+     )
+
+# Los siguientes valores etiquetan el eje x
+axis(1, at=which(valores.p == pnorm(-2)), labels=round(pnorm(-2), 2))
+axis(1, at=which(valores.p == pnorm(-1)), labels=round(pnorm(-1), 2))
+axis(1, at=which(valores.p == pnorm(0)), labels=c(.5))
+axis(1, at=which(valores.p == pnorm(1)), labels=round(pnorm(1), 2))
+axis(1, at=which(valores.p == pnorm(2)), labels=round(pnorm(2), 2))</code></pre>
+<p><img src="/post/2018-03-12-comprendiendo-las-distribuciones-de-probabilidad-con-r_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Es el grafico de la <em>Funcion de Distribucion Acumulada</em> de la <em>Distribucion normal</em></p>
+</div>
+<div id="funcion-qnorm" class="section level3">
+<h3>Funcion <code>qnorm()</code></h3>
+<p>Para simplificarlo, podemos considerar <code>qnorm()</code> como la inversa de la funcion <code>pnorm()</code>, podemos usar <code>qnorm()</code> para en preguntas como: <em>cual es el valor z del cuantil 0.5 de la distribucion normal?</em></p>
+<pre class="r"><code>qnorm(0.5)</code></pre>
+<pre><code>## [1] 0</code></pre>
+<p><em>Cual es el valor z del cuantil 96 de la distribucion normal?</em></p>
+<pre class="r"><code>qnorm(0.96)</code></pre>
+<pre><code>## [1] 1.750686</code></pre>
+<p>Son realmente inversas!</p>
+<pre class="r"><code>pnorm(qnorm(0))</code></pre>
+<pre><code>## [1] 0</code></pre>
+<pre class="r"><code>qnorm(pnorm(0))</code></pre>
+<pre><code>## [1] 0</code></pre>
+</div>
+<div id="funcion-rnorm" class="section level3">
+<h3>Funcion <code>rnorm()</code></h3>
+<p>La funcion <code>rnorm()</code> nos permite generar un vector de numeros aleatorios distribuidos normalmente, el primer argumento <code>n</code> es la cantidad de numeros que se desea generar, seguido de los argumetos <em>media</em> y <em>desviacion estandar</em>, veamos un ejemplo usando la <em>ley de los grandes numeros</em></p>
+<pre class="r"><code># La funcion set.seed() es un generador de numeros aleatorio, la cual es util para crear simulaciones
+# de objetos aleatorios que pueden ser reproducidos, los numeros que reproducimos seran los mismos
+# sin importar cuanto abarque la simulacion
+# para el ejemplo lo parametrizaremos con una fecha
+set.seed(10-1-2015)
+rnorm(5)</code></pre>
+<pre><code>## [1] -0.7197035 -1.4442137 -1.0120381  1.4577066 -0.1212466</code></pre>
+<p>Ahora, generemos diferentes vectores numericos de una distribucion normal</p>
+<pre class="r"><code>n10 &lt;- rnorm(10, mean = 70, sd = 5)
+n100 &lt;- rnorm(100, mean = 70, sd = 5)
+n10000 &lt;-  rnorm(10000, mean = 70, sd = 5)
+
+# veamos el vector n10
+n10</code></pre>
+<pre><code>##  [1] 54.70832 72.89000 70.27049 69.16508 72.97937 67.91004 67.77183
+##  [8] 72.29231 74.33411 63.57151</code></pre>
+<p>Ahora bien, <em>cuales valores de los siguientes histogramas estaran mas concentrados al rededor de su media?</em></p>
+<pre class="r"><code># Los graficos estaran lado a lado
+oldpar &lt;- par()
+par(mfrow=c(1,3))
+
+# el argumento breaks especifica cuantas barras estaran en el histograma
+hist(n10, breaks = 5)
+hist(n100, breaks = 20)
+hist(n10000, breaks = 100)</code></pre>
+<p><img src="/post/2018-03-12-comprendiendo-las-distribuciones-de-probabilidad-con-r_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Los conceptos que vimos generalmente son validos para todas las funciones de distribucion integradas en R, puedes obtener mas ayuda sobre las funciones de distribucion ingresando en la consola de R <code>help(Distributions)</code>.</p>
+<p><em>Gracias!</em></p>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+
