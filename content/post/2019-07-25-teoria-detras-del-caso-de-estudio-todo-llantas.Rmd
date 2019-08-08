@@ -17,7 +17,7 @@ tags:
 Dar a conocer una de las distribuciones mas importantes de la estadistica, como emplearla para resover problemas y obtener informacion de utilidad.  
 
 ### El problema de la empresa de neumaticos "Todo Llantas"  
-La empresa "Todo Llantas" ha fabrizado un nuevo neumatico que sera vendido por una cadena nacional de tiendas, como este neumatico es un nuevo producto, los directivos de "Todo Llantas" piensan que la garantia de duracion sera un factor importante en la acpetacion del neumatico, antes de finalizar la poliza de garantia, los directivos necesitan informacion probabilistica acerca de la duracion del neumatico en numero de millas.
+La empresa "Todo Llantas" ha fabrizado un nuevo neumatico que sera vendido por una cadena nacional de tiendas, como este neumatico es un nuevo producto, los directivos de "Todo Llantas" piensan que la garantia de duracion sera un factor importante en la aceptacion del neumatico, antes de finalizar la poliza de garantia, los directivos necesitan informacion probabilistica acerca de la duracion del neumatico en numero de millas.
 
 De acuerdo con las pruebas realizadas al neumatico, los ingenieros de "Todo Llantas" estiman que la duracion media en millas es $μ = 36500$ millas, y la desviacion estandar es: $σ = 5000$, ademas, los datos recogidos indican que es razonable suponer una distribucion normal, surgio la siguiente pregunta:
 
