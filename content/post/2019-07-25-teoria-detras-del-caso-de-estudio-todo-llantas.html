@@ -1,0 +1,170 @@
+---
+title: 'Teoria detras del caso de Estudio: "Todo Llantas"'
+author: Charlie Do Amaral
+date: '2019-07-25'
+slug: teoria-detras-del-caso-de-estudio-todo-llantas
+categories:
+  - estadistica
+  - R
+  - Casos de Estudio
+tags:
+  - estadistica
+  - R
+  - Casos de Estudio
+---
+
+
+
+<div id="objetivo" class="section level3">
+<h3>Objetivo</h3>
+<p>Dar a conocer una de las distribuciones mas importantes de la estadistica, como emplearla para resover problemas y obtener informacion de utilidad.</p>
+</div>
+<div id="el-problema-de-la-empresa-de-neumaticos-todo-llantas" class="section level3">
+<h3>El problema de la empresa de neumaticos “Todo Llantas”</h3>
+<p>La empresa “Todo Llantas” ha fabrizado un nuevo neumatico que sera vendido por una cadena nacional de tiendas, como este neumatico es un nuevo producto, los directivos de “Todo Llantas” piensan que la garantia de duracion sera un factor importante en la acpetacion del neumatico, antes de finalizar la poliza de garantia, los directivos necesitan informacion probabilistica acerca de la duracion del neumatico en numero de millas.</p>
+<p>De acuerdo con las pruebas realizadas al neumatico, los ingenieros de “Todo Llantas” estiman que la duracion media en millas es <span class="math inline">\(μ = 36500\)</span> millas, y la desviacion estandar es: <span class="math inline">\(σ = 5000\)</span>, ademas, los datos recogidos indican que es razonable suponer una distribucion normal, surgio la siguiente pregunta:</p>
+<ol style="list-style-type: decimal">
+<li>Que porcentaje de los neumaticos se espera que duren mas de 40 000 millas? (en otras palabras: cual es la probabilidad de que la duracion de los neumaticos sea superior a 40 000?)</li>
+<li>“Todo Llantas” esta considerando una garantia que de un descuento en la sustitucion del neumatico original si este no dura lo que asegura la garantia, cual deberia ser la duracion en millas especificada en la garantia si “Todo Llantas” desea que no mas de 10% de los neumaticos alcancen la garantia?</li>
+</ol>
+<p>Conoce la solucion a este problema al final del post.</p>
+<p>Empecemos con la teoria primero.</p>
+</div>
+<div id="la-distribucion-normal-en-r" class="section level3">
+<h3>La Distribucion Normal en R</h3>
+<p>Una de las distribuciones más fundamentales en todas las estadísticas es la Distribución Normal o la Distribución Gaussiana.A menudo tambien conocida como curva de campana.</p>
+<p>La distribucion normal tiene una gran cantidad de aplicaciones practicas en las cuales la variable aleatoria puede ser el peso o la estatura de las personas, puntuaciones de examenes, resultados de mediciones cientificas, precipitacion pluvual u otras cantidades similares.</p>
+<p>La distribucion normal tambien tiene una importante aplicacion en inferencia estadistica ya que describe que tan probables son los resultados obtenidos de un muestreo.</p>
+</div>
+<div id="la-funcion-de-densidad-de-probabilidad-o-curva-normal" class="section level3">
+<h3>La Funcion de Densidad de Probabilidad o Curva Normal</h3>
+<p>Las siguientes observaciones son importantes acerca de las caracteristicas de las distribuciones normales</p>
+<ol style="list-style-type: decimal">
+<li>Toda la familia de distribuciones normales se diferencian por medio de dos parametros: la <em>media</em> y la <em>desviacion estandar</em></li>
+<li>El punto mas alto de una curva normal se encuentra sobre la <em>media</em>, la cual coincide con la <em>mediana</em> y la <em>moda</em>.</li>
+<li>La media de una distribucion normal puede tener cualquier valor: negativo, positivo o cero.</li>
+<li>La distribucion normal es simetrica, siendo la forma de la curva normal al lado izquierdo de la <em>media</em>, las colas de la curva normal se extienden al infinito en ambas direcciones y en teoria jamas tocan el eje horizontal, dado que es simetrica, la distribucion normal no es sesgada, sus sesgo es cero.</li>
+<li>La <em>desviacion estandar</em> determina que tan plana y ancha es la curva normal, <em>desviaciones estandar</em> grandes corresponden a curvas mas planas y mas anchas, lo cual indica mayor variabilidad en los datos.</li>
+<li>Las probabilidades correspondientes a la variable aleatoria se dan mediante <em>areas bajo la curva normal</em>. Toda area bajo la curva de uan distribucion normal es 1. Como esta distribucion es simetrica, el area bajo la curva y a la izquierda de la <em>media</em> es 0.50 y el area bajo la curva y a la derecha de la media es 0.50.</li>
+<li>Los porcentajes de los valores que se encuentran en algunos intervalos comunmente usados son:</li>
+</ol>
+<ul>
+<li>68.3% de los valores de una variable aleatoria normal se encuentran mas o menos <strong>una</strong> desviacion estandar de la media.</li>
+<li>95.4% de los valores de una variable aleatoria normal se encuentran mas o menos <strong>dos</strong> desviacion estandar de la media.</li>
+<li>99.7% de los valores de una variable aleatoria normal se encuentran mas o menos <strong>tres</strong> desviacion estandar de la media.</li>
+</ul>
+<p>En R es simple producir un grafico de la funcion de densidad de probabilidad para la distribucion normal estandar, de la cual hablaremos en publicaciones posteriores.</p>
+<pre class="r"><code>x = seq(-4,4,length=200) # generamos una secuencia de 200 valores de -4 a 4 y lo asignamos a x
+y = 1/sqrt(2*pi)*exp(-x^2/2) # evalua la funcion de densidad de probabilidad en cada valor de x y lo almacena en y
+plot(x,y,type=&quot;l&quot;,lwd=2,col=&quot;red&quot;) # grafica las y versus x</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="una-alternativa" class="section level3">
+<h3>Una Alternativa</h3>
+<p>La funcion <code>dnorm()</code> se puede usar para producir el mismo resultado que la funcion de densidad de probabilidad, la <strong>“d”</strong> en <code>dnorm()</code> sgnifica <strong>densidad</strong>, por lo tanto, la funcion <code>dnorm()</code> esta diseñada para proporcionar valores a la funcion de densidad de probabilidad para la distribucion normal</p>
+<pre class="r"><code>x = seq(-4,4,length=200)
+y = dnorm(x,mean=0,sd=1)
+plot(x,y,type=&quot;l&quot;,lwd=2,col=&quot;red&quot;)</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="la-desviacion-estandar" class="section level3">
+<h3>La Desviacion Estandar</h3>
+<p>La distribucion estandar representa la dispersion o esparcimiento de los datos en la distribucion normal, esperariamos que una distribucion normal con una desviacion estandar de 2 sea mas extendida que una distribucion normal con una desviacion estandar de 1, simulemos esta idea en R.</p>
+<pre class="r"><code>x = seq(-8,8,length=500) 
+y1 = dnorm(x,mean=0,sd=1)
+plot(x,y1,type=&quot;l&quot;,lwd=2,col=&quot;red&quot;)
+y2 = dnorm(x,mean=0,sd=2)
+lines(x,y2,type=&quot;l&quot;,lwd=2,col=&quot;blue&quot;)</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p><strong>La idea central</strong> es la importancia de observar la curva normal que tiene una desviacion estandar de 2 (azul) esta dos veces mas extendida que la curva normal estandar que tiene una desviacion estandar de 1 (roja).</p>
+<p>De manera similar, la curva de con desviacion estandar de 1/2 seria la mitad de ancha que la curva de la normal estandar.</p>
+<pre class="r"><code>x=seq(-8,8,length=500)
+y3 = dnorm(x,mean=0,sd=1/2)
+plot(x,y3,type=&quot;l&quot;,lwd=2,col=&quot;green&quot;)
+y2 = dnorm(x,mean=0,sd=2)
+lines(x,y2,type=&quot;l&quot;,lwd=2,col=&quot;blue&quot;)
+y1 = dnorm(x,mean=0,sd=1)
+lines(x,y1,type=&quot;l&quot;,lwd=2,col=&quot;red&quot;)
+legend(&quot;topright&quot;,c(&quot;sigma=1/2&quot;,&quot;sigma=2&quot;,&quot;sigma=1&quot;),lty=c(1,1,1),col=c(&quot;green&quot;,&quot;blue&quot;,&quot;red&quot;))</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><strong>La idea central</strong> es tener en cuenta que la curva normal que tiene desviacion estandar igual a 1/2 es la mitad de extendida hacia los lados que la curva normal estandar que tiene una desviacion estandar de 1</p>
+</div>
+<div id="la-media" class="section level3">
+<h3>La Media</h3>
+<p>En las figuras anteriores notaste que cada una de las curvas normales estan “centrada” sobre una <em>media</em> de cero, si la media fuera diferente esperariamos que la curva normal este centrada sobre la nueva <em>media</em>, en el siguiente ejemplo crearemos una curva normal con una <em>media</em> de 10 y una <em>desviacion estandar</em> de 2.</p>
+<pre class="r"><code>x = seq(4,16,length=200)
+y = dnorm(x,mean=10,sd=2)
+plot(x,y,type=&quot;l&quot;,lwd=2,col=&quot;red&quot;)</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Como sabemos todos los datos ocurren dentro de las tres desviaciones estandar de la <em>media</em>, como la <em>desviacion estandar</em> es 2, tres desviaciones estandar a la izquierda de la media nos llevan a 4, mientras que tres desviaciones estandar a la derecha de la media nos llevan a 16</p>
+<p><strong>La idea central</strong> es tener en cuenat que esta curva normal esta centrada o equilibrada sobre su media 10 (como vemos en el grafico, los anteriores graficos estan sobre su media 0).</p>
+<p>Para ilustrar mejor, el siguiente grafico de la curva normal tiene una media de 100 y una desviacion estandar de 10</p>
+<pre class="r"><code>x = seq(70,130,length=200)
+y = dnorm(x,mean=100,sd=10)
+plot(x,y,type=&quot;l&quot;,lwd=2,col=&quot;red&quot;)</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><strong>La idea central</strong> vemos que lo unico que esta haciendo la media es recorrer la curva a la izquierda o a la derecha, en este caso lo importante es saber que siempre siempre estara centrada bajo su media, sea esta 10, 100, 120, etc. Y para recordar la teoria, la media puede tener cualquier valor negativo, positivo o cero.</p>
+</div>
+<div id="el-area-bajo-la-funcion-de-densidad-de-probabilidad." class="section level3">
+<h3>El Area bajo la Funcion de Densidad de Probabilidad.</h3>
+<p>El area por debajo de una curva de densidad es una proporcion de observaciones de una distribucion, cualquier pregunta sobre que proporcion de observaciones se encuentra en algun intervalo de valores se puede responder hallando el area por debajo de la curva en ese intervalo. Como todas las distribuciones normales son la misma cuando la estandarizamos, podemos hallar las areas por debajo de cualquier curva normal utilizando una sola tabla, la tabla Z, que por supuesto con <strong>R</strong> ya no se usa la tabla z, las funciones incorporadas realizan esa tarea, pero la mencionamos para no apartarnos de la teoria principal, esta tabla da las areas por debajo de la <em>curva normal estandarizada</em>.</p>
+<p><strong>Resumiendo</strong>, los calculos de la probabilidad en cualquier distribucion normal se hacen calculando el area bajo la grafica de la funcion de densidad de probabilidad, por lo tanto, para hallar la probabilidad de que una variable aleatoria normal este dentro de un determinado intervalo, se tiene que calcular el area que se encuentra bajo la curva normal y sobre ese intervalo.</p>
+</div>
+<div id="calculos-con-distribuciones-normales" class="section level3">
+<h3>Calculos con Distribuciones Normales</h3>
+<p>En R a funcion indicada para esta tarea es <strong>p</strong>norm() que nos da la funcion de distribucion calculando el area bajo la curva de un valor x:</p>
+<pre class="r"><code>x = seq(70,130,length=200)
+y = dnorm(x,mean=100,sd=10)
+plot(x,y,type=&quot;l&quot;,lwd=2,col=&quot;pink&quot;)
+x = seq(70,90,length=100)
+y = dnorm(x,mean=100,sd=10)
+polygon(c(70,x,90),c(0,y,0),col=&quot;gray&quot;)</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>El area a la izquierda de 90 representa la probabilidad de seleccionar un numero menor menor que 90 de una distribucion normal con una media de 100 y una desviacion estandar de 10.</p>
+<p>Y con la siguiente instruccion calculamos el area sombreada bajo la curva, osea la probabilidad</p>
+<pre class="r"><code>pnorm(90,mean=100,sd=10)</code></pre>
+<pre><code>## [1] 0.1586553</code></pre>
+<p>Por lo tanto, la probabilidad de seleccionar un numero aleatorio menor que 90 de una distribucion normal con una media 100 y una desviacion estandar de 10 es 0.1586553 o 15.87%</p>
+<p>Veamos manualmente que esta pasando o como llegamos aqui.</p>
+<ol style="list-style-type: decimal">
+<li>visualizamos el problema al realizar el grafico (paso muy importante para entender el problema)</li>
+<li>Estadarizamos el valor que deseamos encontrar mediante la formula del valor z</li>
+</ol>
+<p><span class="math display">\[z=\frac{x-\mu}{\sigma}\]</span></p>
+<p>Resolviendo:</p>
+<p><span class="math display">\[z=\frac{90-100}{10}=-1\]</span></p>
+<p>La <strong>Tabla z</strong> es la tabla de las areas por debajo de la curva normal estandarizada, el valor -1 que obtuvimos realizando nuestro calculo con la anterior formula ya es un valor estandariza, el valor de la tabla correspondiente de cada valor z es el area por debajo de la curva situada a la izquierda de z.</p>
+<p>Tomamos nuestra tabla z y buscamos el valor -1, tenemos la misma respuesta de 0.1586, asi es como se hacia antes ;)</p>
+</div>
+<div id="aplicaciones-y-casos" class="section level3">
+<h3>Aplicaciones y Casos</h3>
+</div>
+<div id="solucion-caso-empresa-todo-llantas" class="section level3">
+<h3>Solucion Caso empresa “Todo Llantas”</h3>
+<p>Respondiendo las preguntas:</p>
+<ol style="list-style-type: decimal">
+<li>Que porcentaje de los neumaticos se espera que duren mas de 40 000 millas? (en otras palabras: cual es la probabilidad de que la duracion de los neumaticos sea superior a 40 000?)</li>
+</ol>
+<p>Esta pregunta se responde hallando el area bajo la curva, la cual sombrearemos en nuestro grafico.</p>
+<p><strong>Nota</strong>, para simplicar vamos a utilizar datos en decenas</p>
+<pre class="r"><code>x &lt;- seq(20,50, length = 200)
+y &lt;- dnorm(x, mean = 36.5, sd = 5)
+plot(x,y,type=&quot;l&quot;,lwd=2,col=&quot;blue&quot;)
+x = seq(40,50,length=100)
+y = dnorm(x,mean=36.5,sd=5)
+polygon(c(40,x,50),c(0,y,0),col=&quot;pink&quot;)</code></pre>
+<p><img src="/post/2019-07-25-teoria-detras-del-caso-de-estudio-todo-llantas_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>Utilizando la funcion <code>pnorm()</code></p>
+<pre class="r"><code>pnorm(40, mean = 36.5, sd = 5, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.2419637</code></pre>
+<p>El parametro <code>lower.tail = FALSE</code> solo le indica a R que el area de interes se encuentra en la cola superior del grafico.</p>
+<p>Entonces, la respuesta es que 24.19% de los neumaticos durara mas de 40 000 millas.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>“Todo Llanatas” esta considerando una garantia que de un descuento en la sustitucion del neumatico original si este no dura lo que asegura la garantia, cual deberia ser la duracion en millas especificada en la garantia si “Todo Llantas” desea que no mas de 10% de los neumaticos alcancen la garantia?</li>
+</ol>
+<p>Aqui tenemos la situacion contraria, es decir, tenmemos una probabilidad y necesitamos encontrar el valor que corresponde a la misma, para ello tenemos en R a la funcion <code>qnorm()</code> que hace exactamente eso, da la respuesta contraria que obtuvimos con <code>pnorm()</code>, veamos:</p>
+<pre class="r"><code>qnorm(0.10, mean = 36500, sd = 5000)</code></pre>
+<pre><code>## [1] 30092.24</code></pre>
+<p>Es decir, una garantia de 30 000 millas cumplira con el requerimiento de que aproximadamente 10% de los neumaticos sean aptos para la garantia, con esta informacion quizas la empresa establezca una garantia de 30 000 millas.</p>
+<p><em>gracias!</em></p>
+</div>
