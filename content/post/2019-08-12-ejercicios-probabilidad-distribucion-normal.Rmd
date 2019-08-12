@@ -297,9 +297,6 @@ En una distribucion normal, la proporcion de observaciones con `x > 240` es igua
 
 Para que no te equivoques cuando utilices un programa estadistico o cuando uses la tabla z para hacer calculos con distribuciones normales, te aconsejo que hagas un dibujo de una normal y señales el area que quieres, luego fijate en el area que te da la tabla o el programa estadistico.
 
-### Como hallar un valor dado una proporcion
-**Calculos normales _"hacia atras"_**
-
 gracias!
 
 
