@@ -6,10 +6,20 @@
     <description>Recent content on Diseñando una experiencia ... enseñando.</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 25 Jul 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 12 Aug 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Ejercicios Probabilidad Distribucion Normal</title>
+      <link>/2019/08/12/ejercicios-probabilidad-distribucion-normal/</link>
+      <pubDate>Mon, 12 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/12/ejercicios-probabilidad-distribucion-normal/</guid>
+      <description>ObjetivoLa practica hace al maestro dice un dicho muy sabio, nuestro objetivo es que practiques lo mas posible de modo que cuando tengas el proximo reto lo puedas resolver sin problemas. Los siguientes Ejericios son unicamente sobre calculo de probabilidades con datos normalmente distribuidos, que lo disfrutes!.
+Ejercicios Probabilidad Distribucion NormalEjercicio 1Una Variable aleatoria es normalmente distribuida con media \(μ = 50\) y desviacion estandar \(σ = 5\),+ a.</description>
+    </item>
     
     <item>
       <title>Teoria detras del caso de Estudio: &#34;Todo Llantas&#34;</title>

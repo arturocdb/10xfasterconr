@@ -1,0 +1,306 @@
+---
+title: Ejercicios Probabilidad Distribucion Normal
+author: Charlie Do Amaral
+date: '2019-08-12'
+slug: ejercicios-probabilidad-distribucion-normal
+categories:
+  - estadistica
+  - R
+tags:
+  - estadistica
+  - R
+---
+
+### Objetivo
+La practica hace al maestro dice un dicho muy sabio, nuestro objetivo es que practiques lo mas posible de modo que cuando tengas el proximo reto lo puedas resolver sin problemas. Los siguientes Ejericios son unicamente sobre calculo de probabilidades con datos normalmente distribuidos, que lo disfrutes!.
+
+### Ejercicios Probabilidad Distribucion Normal
+### Ejercicio 1
+Una Variable aleatoria es normalmente distribuida con media $μ = 50$ y desviacion estandar $σ = 5$,
+  + a. dibuje la curva normal de la funcion de densidad de probabilidad
+  + b. Cual es la probabilidad de que la variable aleatoria tome un valor entre 45 y 55?
+  + c. De que la variable aleatoria tome un valor entre 40 y 60?
+
+#### Solucion
+Para todos los casos que veremos se aplican los mismos siguientes pasos:
+
+1. Plantea el problema en terminos de la variable observada x
+2. Estandariza x para replantear el problema en terminos de la variable normal estandarizada z. Situa el area de interes en la curva normal estandarizada (solo en caso que trabajemos con la curva normal estandarizada), como veremos en la solucion de mas abajo, R nos permite evitar la estandarizacion
+3. Halla el area buscada por debajo de la curva normal estandarizada tomando siempre en cuenta que el area por debajo de la curva es 1.
+
+1. _Plantea el problema_, llamamos x en este caso a la variable aleatoria que tiene una distribucion $N(50,5)$, queremos las siguientes proporciones
+
+- a. la variable aleatoria tome un valor entre 45 y 55 $\mathbb{P}(45< x <55)$
+- b. la variable aleatoria tome un valor entre 40 y 60 $\mathbb{P}(40< x <60)$
+
+**Caso a.**, la mejor manera de plantear y entender el problema es graficando.
+
+```{r}
+# generamos una secuencia de 200 valores
+x = seq(30,70,length=200) 
+
+# generamos la curva de densidad de la distribucion normal
+y = dnorm(x, mean = 50, sd = 5)
+
+# graficamos
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(45,55,length=100)
+
+# sombreamos la primer area que debemos encontrar (valor entre 45 y 55)
+y = dnorm(x,mean=50,sd=5)
+polygon(c(45,x,55),c(0,y,0),col="forestgreen")
+
+```
+
+3. _Hallamos el area de interes_, en este caso nuestra area de interes es el intervalo entre 45 y 55. Lo que podemos hacer en este caso en encontrar primero el area mayor a 45 (cola superior) para luego restar el area mayor a 55 (cola superior), esa operacion nos daria el area que queremos. Este justamente es el motivo del porque graficar el problema nos ayuda a encontrar la solucion
+
+```{r}
+pnorm(45, mean = 50, sd = 5, lower.tail = F) - pnorm(55, mean = 50, sd = 5, lower.tail = F)
+```
+
+**Algo interesante sucedio aqui**, si calculamos manualmente el valor z de 45 es -1, y para 55 el valor z es 1, es decir; nuestros valores se encuentran mas o menos **una** desviacion estandar de la _media_, y como sabemos una de las carcateristicas de la distribucion normal dice que 68.3% de los valores de una variable se encuentran mas o menos **una** _desviacion estandar_ de la _media_ y es exactamente lo que ha sucedido en este caso, teoria comprobada!.   
+
+_Respuesta_: 68.27% de probabilidad de que la variable aleatoria tome un valor entre 45 y 55
+
+Ahora encontremos el caso en que la variable aleatoria tome un valor entre 40 y 60
+
+```{r}
+x = seq(20,80,length=200) 
+y = dnorm(x, mean = 50, sd = 5)
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(40,60,length=100)
+y = dnorm(x,mean=50,sd=5)
+polygon(c(40,x,60),c(0,y,0),col="forestgreen")
+```
+
+_Hallamos el Area de interes_, este caso es el mismo, solo cambiemos los valores de nuestras funciones `pnorm()`
+
+```{r}
+pnorm(40, mean = 50, sd = 5, lower.tail = F) - pnorm(60, mean = 50, sd = 5, lower.tail = F)
+```
+
+_Respuesta_: 95.45% de probabilidad de que la variable aleatoria tome un valor entre 40 y 60.
+
+Si te detienes a analizar la respuesta, tiene todo el sentido que la probabilidad sea de 95.45%, el area sombreada abarca gran parte del centro e incluso la mitad de las colas inferior y superior.
+
+### Ejercicio 2
+El peso de cierto modelo de baterias sigue una distibucion normal con una media de 6g y una desviacion estandar de 2g, determine el porcentaje de baterias cuyo peso es mayor a 8g.
+
+1. _Planteamos el problema_, nos piden la proporcion $\mathbb{P}(x > 8)$ de baterias definida por $N(6,2)$
+
+2. _Visualizando el problema_
+
+```{r}
+x = seq(0,12,length=200) 
+y = dnorm(x, mean = 6, sd = 2)
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(8,12,length=100)
+y = dnorm(x,mean=6,sd=2)
+polygon(c(8,x,12),c(0,y,0),col="firebrick1")
+legend("topright",c("Peso mayor a 8g"),lty=c(1),col=c("firebrick1"))
+```
+
+Utilizando la funcion `pnorm()` para hallar el area bajo la curva
+
+```{r}
+pnorm(8, mean = 6, sd = 2, lower.tail = FALSE)
+```
+
+_Respuesta_: 15.86% de las baterias tienen un peso mayor a 8g
+
+### Ejercicio 3
+Los precios de las acciones de cierta industria se distribuyen en forma normal con media de 20 y una desviacion estandar de 3, cual es la probabilidad de que el precio de las acciones de una empresa de esta industria se encuentre entre 18 y 20?
+
+1. _Planteamos el problema_, nos piden el intervalo en proporcion de $\mathbb{P}(18< x < 20)$ con $N(20,3)$
+
+2. _Visualizando el problema_
+
+```{r}
+x = seq(10,28,length=100) 
+y = dnorm(x, mean = 20, sd = 3)
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(18,20,length=100)
+y = dnorm(x,mean = 20,sd = 3)
+polygon(c(18,x,20),c(0,y,0),col="deepskyblue2")
+```
+
+Utilizando la funcion `pnorm()` para hallar el area bajo la curva, para este caso; primero calculamos de 20 hacia la derecha, a esa respuesta le restamos el area de 18 hacia la izquierda, recordemos que por defecto la funcion `pnorm()` siempre calcula areas hacia la izquierda, en la respuesta final solo quedara el area que nos interesa. 
+
+```{r}
+pnorm(20, mean = 20, sd = 3, lower.tail = F) - pnorm(18, mean = 20, sd = 3)
+```
+
+_Respuesta_: Existe una probabilidad de que el precio de las acciones de una empresa en esa industria sea de 24.75%
+
+### Ejercicio 3
+**_Longitudes de Peces_**, en cierta poblacion de arenques, las longitudes de los peces individuales siguen una distribucion normal, la longitud media del pez es 54mm, y la desviacion tipica es 4.5mm, para este ejemplo utilizaremos el calculo manual convencional para luego dar la solucion en **R**, R no es el fin, sino el medio, veamos:
+
+- a). Que porcentaje de los peces miden menos de 60mm de longitud?.
+
+_visualizamos el problema_
+
+```{r}
+x = seq(40,70,length=200)
+y = dnorm(x, mean = 54, sd = 4.5)
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(40,60,length=100)
+y = dnorm(x, mean = 54, sd = 4.5)
+polygon(c(40,x,60),c(0,y,0),col="darkorchid1")
+
+```
+
+Utilizaremos la formula para encontrar el valor z para convertir los limites del area de la variable a escala z, para 60 el valor z es:
+
+$$z = \frac{x - \mu}{\sigma} = \frac{60 - 54}{4.5} = 1.33$$
+
+Por tanto; la pregunta: que porcentaje de los peces miden menos de 60mm de longitud?, es equivalente a la pregunta: cual es el area bajo la curva normal tipificada por debajo del valor de z de 1.33?.
+
+Buscando $z = 1.33$ en la tabla z encontramos que el area es **0.9082**, por tanto, el 90.82% de los peces miden menos de 60mm de longitud.
+
+Ahora con R:
+
+```{r}
+pnorm(60, mean = 54, sd = 4.5)
+```
+
+**Nota**, las diferencias se dan por redondeos en decimales.
+
+- b). Que porcentaje de los peces miden mas de 51mm de longitud?, o una progunta mas adecuadamente planteada seria: cual es la probabilidad de que el valor de la variable aleatoria tome un valor mayor a 51?. No olvidemos, estos son calculos probabilisticos.  
+_visualizamos el problema_
+
+```{r}
+x = seq(40,70,length=200)
+y = dnorm(x, mean = 54, sd = 4.5)
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(51,70,length=100)
+y = dnorm(x, mean = 54, sd = 4.5)
+polygon(c(51,x,70),c(0,y,0),col="darkorchid1")
+```
+
+$$z = \frac{x - \mu}{\sigma} = \frac{51 - 54}{4.5} = -0.67$$
+
+Por lo tanto; el area por debajo del valor de z de -0.67 es 0.2514, recordemos que las areas de los valores de z estan calculadas hacia la izquierda, es por eso que en R tambien la funcion calcula hacia la izquierda, pero nuestro grafico tiene el area sombreada hacia la derecha, simplemente calculamos el otro lado del area: 
+
+```{r}
+1 - 0.2514
+```
+
+Eso nos da la respuesta que buscamos: 74.86%
+
+Ahora con R, recordemos que la funcion `pnorm()` tiene por defecto el parametro `lower.tail = TRUE`, es decir; siempre calcula hacia la izquierda de nuestro valor, para este caso debemos colocar el parametro en `FALSE` para que calcule a la derecha ya que el problema nos pide que peces miden mas de 51mm
+
+```{r}
+pnorm(51, mean = 54, sd = 4.5, lower.tail = FALSE)
+```
+
+_Respuesta_:, el 74.86% de los peces miden mas de 51mm de longitud. 
+
+- c). Que porcentaje de los peces miden entre 51 y 60mm de longitud?
+
+_visualizamos el problema_
+
+```{r}
+x = seq(40,70,length=200)
+y = dnorm(x, mean = 54, sd = 4.5)
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(51,60,length=100)
+y = dnorm(x, mean = 54, sd = 4.5)
+polygon(c(51,x,60),c(0,y,0),col="darkorchid1")
+```
+
+El grafico nos muestra el area que nos interesa, esta area se puede expresar como la diferencia de 2 areas que se obtienen de la tabla z, el area por debajo de 60 es de 0.9082 y el area por debajo de 51 es 0.2514, entonces el area deseada se calcula como:
+
+$$0.9082 - 0.2514 = 0.6568$$
+
+Es decir; la respuesta es 65.68%
+
+Ahora con R, misma logica:
+
+```{r}
+pnorm(60, mean = 54, sd = 4.5) - pnorm(51, mean = 54, sd = 4.5)
+```
+
+_Respuesta_: el 65.64% de los peces miden entre 51 y 60mm de longitud.
+
+Algunas veces nos pueden hacer la pregunta contraria, es decir; suponemos que se conoce el area bajo la curva a la izquierda de algun numero desconocido, cual es ese numero desconocido?, ese numero desconocido es el valor valor que toma nuestra variable en esa area de la curva que nos dieron.
+
+Las funciones `pnorm()` y `qnorm()` en R cumplen funciones inversas, por un lado `pnorm()` recibe un numero y se le pide que encuentre una probabilidad de que una seleccion aleatoria de la distribucion normal estandar caiga a la izquierda de ese numero, y por otro lado la funcion `qnorm()` recibe la probabilidad y se le pide que encuentre un numero limite para que el area debajo de la curva a la izquierda de ese numero sea igual a la probabilidad dada.
+
+- d). Supongamos que deseamos obtener el percentil 70 de la distribucion de longitudes de peces, es decir; estamos buscando la longitud de los peces cuando es menor al 70%
+
+_visualizamos el problema_
+
+Para este ejemplo usaremos la normal estandarizada ya que no contamos con el valor dado 
+
+```{r}
+x = seq(-3,3,length=200)
+y = dnorm(x,mean=0,sd=1)
+plot(x,y,type="l",lwd=2,col="red")
+x = seq(-4,0.7,length=100)
+y = dnorm(x, mean = 0, sd = 1)
+polygon(c(-4,x,0.7),c(0,y,0),col="darkorchid1")
+```
+
+Usando la funcion `qnorm()`, 
+
+```{r}
+qnorm(0.70, mean = 54, sd = 5.4)
+```
+
+_Respuesta_: El percentil 70 de la distribucion de la longitud de peces es 56.83mm 
+
+Veamos a continuacion un caso mas desarrollado a detalle
+
+### Nivel de Colesterol
+El nivel de colesterol en la sangre es importante, ya que un nivel alto puede aumentar el riesgo de enfermedades coronarias. En una gran poblacion de genete de la misma edad y sexo, la distribucion del nivel de colesterol es aproximadamente normal. Para chicos de 14 años , la media es $μ = 170$ miligramos de colesterol por decilitro de sangre (mg/dl) y desviacion tipica es $σ = 30$ mg/dl. Los niveles de colesterol superiores a 240 mg/dl pueden exigir atencion medica.
+
+Que porcentaje de los chicos de 14 años tiene mas de 240 mg/dl de colesterol?
+
+_Planteamos el problema_, llamamos `x` al nivel de colesterol en la sangre, la variable x tiene una distibucion $N(170,30)$ 
+
+_Estandarizamos_, Usamos la formula para obtener el valor z, restando la _media_ y dividendo por la _desviacion estandar_ para convertir x en una z normal estandarizada.
+
+$$z = \frac{x - \mu}{\sigma} = \frac{240 - 170}{30} = 2.33$$
+
+En el siguiente grafico mostramos la curva normal estandarizada sombreando el area de interes.
+
+En la tabla z vemos que la proporcion de observaciones menores que 2.33 es 0.9901. Cerca del 99% de los chicos tienen niveles de colesterol menores que 240, el area situada a la derecha de 2.33 es portanto `1 - 0.9901 = 0.0099`, esta area es aproximadamente 0.01 o un 1%. solo un 1% de los chicos tienen niveles de colesterol tan altos.
+
+```{r}
+x = seq(-3,3,length=200)
+y = dnorm(x,mean=0,sd=1)
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(2.33,3,length=100)
+y = dnorm(x, mean = 0, sd = 1)
+polygon(c(2.33,x,3),c(0,y,0),col="firebrick2")
+```
+
+Veamos con R, vamos a obtener diferencias por decimales en los metodos de calculo, perocon todos obtenemos un resultado muy aproximado:
+
+```{r}
+qnorm(0.9901, mean = 170, sd = 30, lower.tail = F)
+```
+
+Del area total 1, restamos que no nos interesan para obtener el valor del area que nos interesa. 
+
+```{r}
+(1 - 0.9901) * 100
+```
+
+Otra forma
+
+```{r}
+qnorm(0.9901, mean = 170, sd = 30, lower.tail = F) - 1
+```
+
+En una distribucion normal, la proporcion de observaciones con `x > 240` es igual que la proporcion de observaciones con `x <= 240`. El area por debajo de la curva y exactamente encima de 240 es cero, por consiguiente, las areas por debajo de la curva con `x > 240` y `x >= 240` son iguales. Esto no es cierto en el caso de datos reales, puede haber un chico con exactamente 240mg/dl de colesterol en la sangre. La distribucion normal es solo una aproximacion facil de utilizar, no es una descripcion de cada uno de los detalles de los datos reales.
+
+Para que no te equivoques cuando utilices un programa estadistico o cuando uses la tabla z para hacer calculos con distribuciones normales, te aconsejo que hagas un dibujo de una normal y señales el area que quieres, luego fijate en el area que te da la tabla o el programa estadistico.
+
+### Como hallar un valor dado una proporcion
+**Calculos normales _"hacia atras"_**
+
+gracias!
+
+
+
