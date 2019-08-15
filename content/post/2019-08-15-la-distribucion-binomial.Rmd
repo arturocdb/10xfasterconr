@@ -1,0 +1,409 @@
+---
+title: La Distribucion Binomial
+author: Charlie Do Amaral
+date: '2019-08-15'
+slug: la-distribucion-binomial
+categories:
+  - estadistica
+  - probabilidad
+tags:
+  - estadistica
+  - probabilidad
+---
+
+### Objetivo
+Hola!, gracias por seguir y leer nuestras publicaciones, ahora le prestamos atencion a la Distribucion Binomial, nuestro objetivo es darte a conocer como R puede ayudarte a resolver problemas relacionados con la Distribucion Binomial, aquellas situaciones con dos posibles resultados que se puedan presentar en la vida diaria, laboral, etc.
+
+Como siempre, comenzamos con la teoria para luego conocer como resolvemos las situaciones planteadas con R, que lo disfrutes!.
+
+### La Distribucion Binomial
+Muchas de las aplicaciones de Probabilidad y Estadistica hacen referencia a la repeticion de un experimento, llamamos cada repeticion una prueba, ensayo o en ingles trial, y estamos especificamente interesados en los casos en el que el experimento (cada prueba) solo tiene dos resultados posibles, exito o fracaso, verdadero o falso, 0 o 1.
+
+Una forma corriente de descripcion de los experimentos aleatorios equiprobables con variable discreta es la distribucion binomial. En este tipo de distribucion se estudia la probabilidad de que se produzca cierto resultado, que se describe por medio de dos parametros; el numero de repeticiones realizadas del experimento y la probabilidad individual del suceso aleatorio que se persigue como resultado
+
+Para Analizar pruebas repetidas de un experimento que tiene dos posibles resultados, se requiere conocimiento de factoriales coheficientes binomiales y ensayos de Bernoulli.
+
+Sobre la base de estos requisitos previos la distribucion binomial, que es una distribucion de probabilidad para el numero de exitos en una secuencia de ensayos de Bernoulli.
+
+### Factoriales
+El producto de los $k $ enteros positivos (conteo numerico) es llamado $k! factorial$ y se denota mediante $k!$.
+
+$$k! = k(k-1)x...x2 x1$$
+
+Esta definido que $0!=1$
+
+En R lo podemos escribir como
+```{r}
+6*5*4*3*2*1
+```
+
+O mas facil aun, usamos la funcion incorporada `factorial()`
+
+```{r}
+factorial(6)
+```
+
+### Coeficientes binomiales, numeros combinatorios o combinaciones
+son numeros estudiados en combinatoria, que corresponden al numero de formas en que se puede extraer subconjuntos a partir de un conjunto dado (wikipedia)
+
+Un concepto estadistico; es una regla de conteo util que permite contar el numero de resultados experimentales cuando cuanod el experimento consiste en seleccionar $n$ objetos de un conjunto (usualmente mayor) de $N$ objetos. Esta es la regla de conteo para combinaciones 
+
+#### Regla de conteo para Combinaciones
+El numero de Combinaciones de n objetos tomados de $k$ en $k$ es $$\binom{n}{k} = \frac{n!}{k!(n-k)!}$$ 
+
+La notacion $!$ significa $factorial$, por ejemplo; 5 factorial es $5!=(5)(4)(3)(2)(1)=120$.
+
+Como ejemplo del uso de la regla de conteo para combinaciones, considere un procedimiento de control de calidad en el que un inspector selecciona al azar 2 de 5 piezas para probar que no tengan defectos. En un conjunto de cinco partes, cuantas combinaciones de dos partes pueden seleccionarse?, de acuerdo con la regla de conteo, es claro que son $n=5$ y $k=2$, se tiene:
+
+$$\binom{5}{2} = \frac{5!}{2!(5-2)!}=\frac{(5)(4)(3)(2)(1)}{(2)(1)(3)(2)(1)}=\frac{120}{12}=10$$
+
+De manera que hay 10 resultados posibles en este experimento de la seleccion aleatoria de dos partes de un conjunto de cinco, si etiquetamos dichas partes como A,B,C,D y E, las 10 combinaciones o resultados experimentales serian AB, AC, AD, AE, BC, BD, BE, CD, CE y DE.
+
+Para ver otro ejemplo, consideremos la loteria de una gran ciudad en la que se seleccionan seis numeros de un conjunto de 53 numeros para determinar al ganador de la semana. Para establecer distintas variables en la seleccion  de seis enteros de un conjunto de 53, se usa la regla de conteo para combinaciones.
+
+$$\binom{53}{6} = \frac{53!}{6!(53-6)!}=\frac{(53)(52)(51)(50)(49)(48)}{(6)(5)(4)(3)(2)(1)}=22 957 480$$
+
+La regla de conteo para combinaciones arroja casi 23 millones de resultados experimentales en esta loteria. Si una persona compra un billete de loteria, tiene una en 22 957 480 posibilidades de ganar la loteria
+
+### Un poco mas sobre el coeficiente binomial
+La notacion $\binom{n}{k}$ no tiene nada que ver con la fraccion $\frac{n}{k}$. Se trata del coeficiente binomial o numero combinatorio, es decir; del numero de combinaciones que pueden efectuarse con `n` elementos tomados de `k` en `k`. Los coeficientes binomiales tienen muchas aplicaciones en matematicas. De todas formas, nosotros estamos interesados en ellos solo como una ayuda para hallar las probabilidades binomiales. El coeficiente binomial $\binom{n}{k}$ determina el numero de maneras con las que `k` _exitos_ se pueden distribuir entre `n` observaciones. La probabilidad binomial $P(X=k)$ es este numero multiplicado por la probabilidad de cualquier combinacion concreta de los `k` _exitos_ entre las `n` observaciones. 
+En R tenemos la funcion `choose()` que calcula el numero de combinaciones sin repeticiones o reemplazos, donde `n` es el numero de alternativas a elegir, eligiendo 2 de ellas `k`
+
+```{r}
+choose(n = 53, k = 6)
+```
+
+Para el ejemplo de control de calidad
+
+```{r}
+choose(n = 5, k = 2)
+```
+
+```{r}
+choose(5,3)     # de cuantas maneras podemos seleccionar 3 items de 5 items?  
+```
+
+```{r}
+choose(50,3)    # de cuantas maneras podemos seleccionar 3 items de 50 items?
+```
+
+```{r}
+choose(50,30)   # de cuantas maneras podemos seleccionar 30 items de 50 items?
+```
+
+Estos numeros tambien son conocidos como coeficientes binomiales.
+
+Continuaremos utilizando esta funcion mas adelante.
+
+### La Distribucion Binomial
+Para simplificar, la distribucion binomial es la distribucion de probabilidad para el numero de exitos en una secuencia de ensayos de Bernoulli.
+
+La distribucion de probabilidad binomial es una distribucion de probabilidad que tiene aplicaciones multiples, esta relacionada con un experimento de pasos multiples, al que se le llama _Experimento Binomial_.
+
+### Ensayos de Bernoulli
+Los ensayos repetidos de un experimeto se denominan _Ensayos de Bernoulli_ 
+
+#### Propiedades de un Experimento Binomial
+
+1. El experimento consiste en una serie de `n` ensayos identicos
+2. En cada ensyao hay dos resultados posibles, a uno de estos resultados se le llama _exito_ y al otro se le llama _fracaso_.
+3. La probabilidad de exito, que se denota _p_, no cambia de un ensayo a otro. Por ende, la probabilidad de fracaso, que se denota _1 - p_, tampoco cambia de un ensayo a otro.
+4. Los ensayos son independientes
+
+Si se presentan las propiedades 2,3 y 4, se dice que los ensayos son generados por un proceso de Bernoulli, si ademas, se presenta la propiedad 1, se trata de un experimento binomial.
+
+En un experimento binomial lo que interesa es el _numero de exitos en_ n _ensayos_, si _x_ denota el numero de exitos en _n_ ensayos, es claro que _x_ tomara los valores 0,1,2,3... _n_. Dado que el numero de estos es finito, _x_ es una variable aleatoria _discreta_. A la distribucion de probabilidad correspondiente a esta variable aleatoria se le llama _**Distribucion de Probabilidad Binomial**_.
+
+Por ejemplo, considere el experimento de lanzar una moneda cinco veces y observar si la cara de la moneda que cae hacia arriba es cara o cruz, suponga que se desea contar el numero de caras que aparecen en los cinco lanzamientos, la pregunta es: presenta este experimento las propiedades de un experimento binomial?, cual es la variable aleatoria que interesa?, veamos:
+
+1. el experimento consiste en cinco ensayos identicos, cada ensayo consiste en lanzar una moneda.
+2. en cada ensayo hay dos resultados posibles: cara o cruz, se puede considerar cara como exito y cruz como fracaso
+3. la probabilidad de exito y la probabilidad de fracaso son iguales en todos los ensayos, siendo `p = 0.5` y `1 - p = 0.5`
+4. los ensayos o lanzamientos 
+
+Por tanto, se satisfacen las propiedades de un experimento binomial. La variable aleatoria que interesa es _x = numero de caras que aprecen en cinco ensayos_, en este caso x puede puede tomar los valores 0,1,2,3,4 o 5.
+
+Ahora vemaos un ejemplo de la vida real
+
+### Estadisticas de Estadistica
+Las estadisticas a largo plazo nos dicen que la posibilidad de aprobar un examen final de estadistica es 0.3. Si!, aproximadamente el 70% de los estudiantes fallan en su examen de estadistica,por cierto, si completas la lectura de este post, tus posibilidades para el examen final definitivamente aumentaran! ;).
+
+Consideremos una clase de 25 estudiantes, cual es la posibilidad de que exactamente 3 estudiantes de esa clase aprueben el examen final de estadistica?, o escrito mas formalmente $P(X = 3)$. Comencemos aplicando un enfoque ingenuo en R.
+
+```{r}
+n <- 25 # numero de estudiantes
+p <- 0.3 # probabilidad de exito
+k <- 3 # exactamente 3 estudiantes pasaran el examen
+```
+
+Veamos la formula de la funcion de probabilidad binomial: $$\binom{n}{k} = p^k(1-p)^{n-k}$$
+
+en R la anterior formula se expresaria asi:
+
+```{r}
+choose(n,k)*p^k*(1-p)^(n-k)
+```
+
+Wow!,2.4% es la probabilidad de que exactamente 3 de cada 25 estudiantes $(P(X = 3))$ aprobara el examen final de estadistica es bastante baja.
+
+_Recuerda_: que aun estamos aplicando un enfoque ingenuo en R, la idea es demostrar que aunque con ingenuidad aun asi obtendras la solucion correcta.
+
+Volviendo al problema de los estudiantes, que pasa con la probabilidad de que exactamente 15 de los 25 estudiantes pasen el examen final de estadistica?, veamos:
+
+```{r}
+n <- 25 # numero de estudiantes
+p <- 0.3 # probabilidad de exito
+k <- 15 # exactamente 15 estudiantes pasaran el examen
+choose(n,k)*p^k*(1-p)^(n-k)
+```
+
+La probabilidad es aproximadamente 0.1%, y asi podemos continuar con nuestros experimentos para descubrir todas las probabilidades de exactamente un resultado para $k = 0,1,2,3... n$. Toma en cuenta que para nuestro ejemplo particular quizas no sea muy informativo saber la probabilidad de aprobar el examen de exactamente un numero en particular de estudiantes `(k)`. 
+
+Quizas fuera mas interesante si podemos responder a la pregunta: cual es la probabilidad de que _k_ o menos estudinates $(P(X<=k))$ pasen el examen, o que _k_ o mas estudiantes pasen el examen $(P(X>=k))$
+
+Y como tarea nos ponemos en R a determinar cual es la probabilidad de que 9 o menos estudiantes pasen el examen final de estadistica, para calcular la probabilidad podemos extender nuestro enfoque ingenuo para calcular:
+
+$$P(X=0)+P(X=1)+P(X=2)+P(X=3)+...+P(X=9).$$
+
+```{r}
+n <- 25 # numero de estudiantes 
+p <- 0.3 # probabilidad de exito
+
+choose(n,0)*p^0*(1-p)^(n-0)+
+choose(n,1)*p^1*(1-p)^(n-1)+
+choose(n,2)*p^2*(1-p)^(n-2)+
+choose(n,3)*p^3*(1-p)^(n-3)+
+choose(n,4)*p^4*(1-p)^(n-4)+
+choose(n,5)*p^5*(1-p)^(n-5)+
+choose(n,6)*p^6*(1-p)^(n-6)+
+choose(n,7)*p^7*(1-p)^(n-7)+
+choose(n,8)*p^8*(1-p)^(n-8)+
+choose(n,9)*p^9*(1-p)^(n-9)
+
+```
+
+Entonces, la probabilidad de que 9 o menos $(P(X<=9))$ estudiantes pasen el examen de estadistica es 81.05%, a su vez significa que la probabilidad de que 10 o mas estudiantes pasen el examen es $P(X>9) = 1-p(X<=9)$ o solo 18.95%
+
+Ademas de la vision honestamente bastande desmotivadora en las probabilidades de aprobar el examen de estadistica, esta claro que la implementacion ingenua de arriba es bastante tediosa, pero nos ayuda la comprender mucho mejor cual es la escencia del calculo que se realiza.
+
+sin embargo, te tenemos buenas noticias!, R cuenta con funciones incorporadas nativas para realzar esta tarea de una manera extremadamente sencilla, el unico requisito es conocer la teoria para poder usarla correctamente!, por eso nos centramos siempre en el blog en presentar y explicar a detalle la teoria, ya que sin ella nada fuera posible!.
+
+Como veras en R es extremadamente sencillo calcular probabilidades para variables aletorias discretas, es el caso de la distribucion binomial tenemos la palabra reservada **binom** que siemplemente anteponiendo el prefijo que corresponda la convertimos en una funcion
+
+- **d** para la funcion de probabilidad. `dbinom()`
+- **p** para funcion de probabilidad acumulada `pbinom()`
+- **r** para generar valores aleatorios `rbinom()`
+- **q** para la funcion binomial cuantil `qbinom()`
+
+Para nuestro caso, usamos la funcion `dbinom()` que tiene los parametros: `(x, size, prob, log)`, donde x corresponde a nuestro $k$, `size` a nuestro $n$ y `prob` a nuesro $p$, veamos su uso para nuestro ejemplo anterior donde: $P(X=3)$ y $P(X=15)$
+
+```{r}
+dbinom(x = 3, size = 25, prob = 0.3)
+```
+
+```{r}
+dbinom(x = 15, size = 25, prob = 0.3)
+```
+
+Compare estos resultados con los de arriba, deberian ser iguales, la funcion se vuelve muy util tambien si deseamos acunular las probabilidades, como ser $P(X<=x)$ o $P(X>x)$, porque podemos especificar un vector para el argumento `x`  y sumarlo despues, siguiendo con nuestro ejemplo:
+
+```{r}
+n <- 25
+p <- 0.3
+k <- 1:9
+
+dbinom(k, n, p)
+```
+
+Obtenemos un vector con todas las probabilidades, desde 1 a 9, y las sumamos:
+
+```{r}
+sum(dbinom(k, n, p))
+```
+
+sin embargo, R tambien cuenta con la funcion `pbinom()` anteponiendo solamente la **p** a nuestra palabra reservada, esta funcion nos ayuda a resolver problemas de probabilidad de la funcion de distribucion binomial acumulativa, es decir caso como $(P<=9)$, por lo tanto podemos omitir el uso de la funcion `sum()`, la funcion `pbinom()` de igual forma cuenta con los parametros `(x, size, prob, lower.tail, log.p)`, notemos que tenemos un argumento extra: `lower.tail`, el mmismo que ya utilizamos bastante en el post de Distribucion Normal del blog.
+
+Ahora apliquemos la funcion a nuestro ejemplo, para calcular $P(X<=9)$, el resultado que obtuvimos fue 0.8104299, aplicando la funcion `pbinom()` deberiamos tener el mismo resultado  
+
+```{r}
+n <- 25
+p <- 0.3
+k <- 9
+
+pbinom(k, n, p, lower.tail = TRUE)
+```
+
+simplemente difiere por temas de redondeo, no es lo mimos sumar las probabilidades que aplicar directamente directamente la funcion, eso siempre tenemos que tenerlo en cuenta en R.
+
+El parametro `lower.tail = TRUE` esta por defecto en `TRUE` en la funcion `pbinom()`, solo lo colocamos para visualizar mejor que esta sucediendo, como los valores de menos o iguales a 9 se encuentran de lado izquierdo o en la cola inferior de la funcion por eso es que debe estar en `TRUE`, por otra parte, si necesitamos calcular $P(X>9)$ o lo que es lo mismo $1-p(X<=9)$ colocamos nuestro argumento `lower.tail = FALSE`, veamos:
+
+```{r}
+n <- 25
+p <- 0.3
+k <- 9
+
+pbinom(k, n, p, lower.tail = FALSE)
+```
+
+Es decir, estamos calculando los valores que estan del lado derecho de la funcion de distribucion de Probabilidad binomial.
+
+finalmente, para visualizar la **Funcion de Probabilidad Binomial**, aplicando la funcion `rbinom()` la cual genera desviaciones aleatorias para una distribucion binomial definida por su tamaño _n_ y su probabilidad _exito_ o _fracaso_ **p**
+
+```{r}
+tam <- 25 # tamaño
+p <- 0.3 #probabilidad de exito
+n <- 1000 #numero de muestras aleatorias
+
+set.seed(3) #inicilizamos el generador de numeros aleatorios en 3 (set.seed permite que siempre se generen los mismos numeros)
+
+num.aleat.binom <- rbinom(n, tam, p) 
+
+h <- hist(num.aleat.binom, breaks = length(unique(num.aleat.binom)), plot = FALSE)
+
+plot(h, freq = F,
+     space = NULL,
+     xlim = c(0, tam),
+     xlab = "Estudiantes que pasan el examen final", # etiqueta para el eje x
+     ylab = "Probabilidad", # etiqueta para el eje y
+     main = "Distribucion de Probabilidad Binomial \npara tamaño = 25 y p = 0.3",
+     col = "#fc9d12",
+     xaxt = "n")
+    
+axis(side = 1, at= seq(0.5, tam, by = 1), labels = seq(1, tam, by = 1))
+```
+
+La Funcion de Probabilidad Binomial es aplicable a _cualquier_ experimento binomial. Si encuentra que una situacion presenta las propiedades de un experimento binomial y conoce los valores de _n_ y _p_, entonces puede usar la anterior ecuacion y funciones en 
+R para calcular la probabilidad de _x_ exitos en _n_ ensayos.
+
+### Practicando
+#### Ejemplo 1
+Se conoce que el musgo es un inhibidor de flotacion en plantaciones de cacao, se realiza un experimento con un tipo de fertilizante organico para eliminar el musgo en una plantacion de cacao organico. Se encontro una efectividad del fertilizante en los primeros 10 experimentos del 64%, encontrar la probabilidad de que se aplique el mismo fertilizante con otras fincas de cacao organico en 10 parcelas del mismo tamaño y bajo las mismas condiciones.
+
+- _Determinar cual es la probabilidad de que exactamente 3 parcelas no pierdan su coceha_
+
+Datos, `n = 10`, `x = 3` (3 parcelas no pierdan su cocecha), `p = 0.64` (p el exito), `q = 0.25` (q el fracaso) 
+
+```{r}
+dbinom(x = 3, size = 10, prob = 0.64)
+```
+
+_Respuesta_: la probabilidad de que exactamente 3 parcelas no pierdan su cocecha es de aprox. **2.46%**
+
+- _Cual es la probabilidad de que exactamente 3 parcelas pierdan su cocecha?_
+
+En este caso estamos interesados en que el exito sea perdida, si la efectividad es de 64% entonces la perdida es de 36%, por lo que `p = 0.36` y `q = 0.64`, invertimos nuestros valores.
+
+```{r}
+dbinom(x = 3, size = 10, prob = 0.36)
+```
+
+Mas facil imposible!, continuemos...
+
+- _Cual es la probabilidad de que al menos 3 parcelas tengan perdida de cocecha?_
+
+Entonces tenemos: `n = 10`, `x = 3`, `p = 0.25`, `q = 0.75`, "por lo menos" hace referencia a la funcion acumulada, esto podemos resolverlo de dos formas:
+
+```{r}
+1 - pbinom(q = 3, size = 10, prob = 0.25)
+```
+
+y tambien de la forma:
+
+```{r}
+pbinom(3, 10, 0.25, lower.tail = FALSE)
+```
+
+Recordemos que `lower.tail = FALSE` le dice a R que la probabilidad que queremos se encuentra del lado derecho de la distribucion o cola superior.
+
+Es decir; la probabilidad de que al menos 3 parcelas pierdan su cocecha es de **22.41%**
+
+#### forma grafica de la distribucion binomial
+10 parcelas NO mpierdan su cocecha, datos: `n = 10`, `p = 0.75` y `q = 0.25`
+
+```{r}
+y <- dbinom(x = 0:10, size = 10, prob = 0.75) # almacenamos la distribucion binomial en la variable y
+cbind(x = 0:10, datos = y) # creamos un cuadro de resultados
+
+```
+
+Graficamos
+
+```{r}
+plot(y, type = "o", col = "red")
+```
+
+Ahora veamos el caso que las parcelas pierdan su cocecha
+
+```{r}
+x <- 0:10
+z <- dbinom(x = 0:10, size = 10, prob = 0.25)
+cbind(eventos = 0:10, datos = z)
+```
+
+Graficamos:
+
+```{r}
+plot(z, type="o", col="orange")
+```
+
+#### Ejemplo 2
+Un estudio reciente indica que los estudiantes de universidades de 1er semestre utilizan aproximadamente 35.4% el recurso de libros impresos para obtener su informacion de trabajos o tareas. El dato se obtuvo de 23 estudiantes encuestados.
+
+_Encontrar la probabilidad de que 5 estudiantes utilicen libros impresos_
+
+Veamos, `n = 23`, `x = 5`, `p = 0.354`, `q = 0.646`
+
+```{r}
+dbinom(x = 5, size = 23, prob = 0.354)
+```
+
+_Encontrar la probabilidad de al menos 7 estudiantes utilicen libros impresos_ 
+
+```{r}
+1 - pbinom(q = 7, size = 23, prob = 0.354)
+```
+
+#### Ejemplo 3
+Encontrar el cuantil de una variable aleatoria binomial, segun datos: `n = 15`, `p = 0.4` 
+
+Solucion:
+
+```{r}
+qbinom(p = 0.25, size = 15, prob = 0.4)
+```
+
+Eso no da los valores menores que puede asumir el cuantil 25
+
+#### Ejemplo 4
+Cada hijo nacido de unos determinados padres tiene una probabilidad de 0.25 de tener sangre del tipo O. Si estos padres tienen 5 hijos, cual es la probabilidad de que exactamente 2 de ellos sean del tipo O?
+
+_Respuesta_:, en otras palabras nos piden: hallar la probabilidad de un caso concreto de 2 exitos en 5 observaciones, donde: `n = 5`, `x = 2` y `p = 0.25`, calcular $P(X=2)$
+
+```{r}
+dbinom(x = 2, size = 5, prob = 0.25)
+```
+
+Es decir; existe un 26.36% de probabilidad de que 2 de los hijos sean del tipo O.
+
+#### Ejemplo 5
+Una empresa emplea a varios miles de trabajadores, de los cuales el 30% son extranjeros. Si los 15 miembros del comite ejecutivo se escogieran al azar entre los trabajadores, el numero de extranjeros en el comite tendria una distribucion binomial con `n = 15` y `p = 0.3` 
+
+- Cual es la probabilidad de que exactamente 3 miembros del comite sean extranjeros?
+
+```{r}
+dbinom(x = 3, size = 15, prob = 0.3)
+```
+
+#### Ejemplo 6
+Los atletas, terminan la carrera?, una universidad asegura que el 80% de los jugadores de baloncesto del equipo universitario se licencian. Una investigacion examina el destino de los 20 jugadores que se matricularon en la universidad durante un periodo determinado que finalizo hace seis años. De estos jugadores, 11 se licenciaron y los 9 restantes abandonaron la universidad antes de licenciarse. Si la afirmacion de la universidad es cierta, el numero de jugadores de baloncesto, que, entre los 20, se licencian deberia tener una distribucion binomial con `n = 20` y `p = 0.8`. Cual es la probabilidad de que exactamente 11 de los 20 jugadores se licencien?
+
+```{r}
+dbinom(x = 11, size = 20, prob = 0.8)
+```
+
+Es decir; 0.73%
+
+_gracias!_
+
+
+

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>probabilidad on Diseñando una experiencia ... enseñando.</title>
+    <link>/categories/probabilidad/</link>
+    <description>Recent content in probabilidad on Diseñando una experiencia ... enseñando.</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Thu, 15 Aug 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/probabilidad/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>La Distribucion Binomial</title>
+      <link>/2019/08/15/la-distribucion-binomial/</link>
+      <pubDate>Thu, 15 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/08/15/la-distribucion-binomial/</guid>
+      <description>ObjetivoHola!, gracias por seguir y leer nuestras publicaciones, ahora le prestamos atencion a la Distribucion Binomial, nuestro objetivo es darte a conocer como R puede ayudarte a resolver problemas relacionados con la Distribucion Binomial, aquellas situaciones con dos posibles resultados que se puedan presentar en la vida diaria, laboral, etc.
+Como siempre, comenzamos con la teoria para luego conocer como resolvemos las situaciones planteadas con R, que lo disfrutes!</description>
+    </item>
+    
+  </channel>
+</rss>
