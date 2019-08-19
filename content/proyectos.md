@@ -17,19 +17,12 @@ Las cifras lo dicen todo, una encuesta de **The Economist** reportó que tres cu
 
 #### Servicios de Análisis de Datos
 - [x] Captura y análisis de data de todas las oficinas, tiendas, departamentos o _cualquier punto de contacto con clientes._
-
 - [x] Análisis de información de diferentes fuentes (tiendas, sensores y otros dispositivos) para la gestión de precios, inventario y distribución.
-
 - [x] Agregación y enriquecimiento con diversas fuentes de datos de terceras partes, como redes sociales, noticias, climatológicas, información bursátil,… para realizar mejores predicciones.
-
 - [x] **Predicciones del comportamiento** y generar patrones para aprovechar los datos actuales e históricos de una variedad de fuentes de datos.
-
 - [x] Generación de algoritmos para poder analizar y obtener **insights** de valor en grandes volúmenes de información. _Machine Learning_, _Procesamiento de Lenguaje Natural_, _Deep Learning_
-
 - [x] Ejecución de consultas de datos de alta complejidad en entornos transaccionales (sesiones temporales, streaming data, logs de aplicaciones) para ver los patrones pasados, presentes y predecir futuros.
-
 - [x] Análisis los datos de transacciones de los clientes actuales e históricos de diversas fuentes para **detectar patrones** de fraude o identificar las oportunidades durante el **ciclo de vida del cliente**.
-
 - [x] Procesamiento de datos de clientes, como miles de millones de registros de llamadas, textos, datos en streaming, historial del GPS
 
 
