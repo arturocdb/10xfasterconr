@@ -30,7 +30,7 @@ Generación de indicadores, métricas e impactos que generan la aplicación de c
 ### Analítica de Redes Sociales
 Identificación y reconocimiento de patrones de comportamiento e información oculta que se encuentra en **_Redes Sociales_** 
 
-Nuestro servicio va mas allá de lo que las herramientas de analítica de redes sociales ofrecen (Google Analytics, Facebook Insights, Twitter Analytics, etc) que te ofrecen solo vision general con información sobre me gustas, seguidores, tweets, cantidad de visitas, etc, nosotros nos enfocamos en extraer la información y utlizar estadística, probabilidades, análisis de regresión para brindarte información aún mas relevante de la que puedes obtener de alguna herramienta
+Nuestro servicio va mas allá de lo que las herramientas de analítica de redes sociales ofrecen (Google Analytics, Facebook Insights, Twitter Analytics, etc) que te ofrecen solo vision general con información sobre me gustas, seguidores, tweets, cantidad de visitas, etc, nosotros nos enfocamos en extraer la información y utlizar estadística, probabilidades, análisis de regresión para brindarte información aún mas relevante de la que puedes obtener de alguna herramienta.
 
 El análisis de sentimiento también conocido como minería de opiniones, consiste en el uso de tecnologías de procesamiento del lenguaje natural, analítica de textos y linguistica computacional para identificar y extraer información subjetiva de contenido de diversos tipos.
 
@@ -43,7 +43,7 @@ El servicio de Data Mining abarca desde el uso de la información generada en or
 ### Servicios de Capacitación y Formación en R
 Las nuevas credenciales profesionales en Bolivia muestran que en el mercado laboral nada es permanente, todo evoluciona, se ensancha el horizonte laboral con nuevos puestos, que hasta hace un lustro no existían en Bolivia.
 
-Según la guía Salarial _**Executive 2018**_ especialistas en data mining integran la lista de profesiones mas deseadas.
+Según la guía Salarial _**Executive 2018**_ especialistas en data mining integran la lista de profesiones mas deseadas en Bolivia
 
 En **10x Faster con R** somos pioneros en brindar una propuesta de capacitación en el lenguaje de Análisis de Datos del presente y futuro **R**, se trata de uno de los lenguajes mas utilizados actualmente por la comunidad científica en campos como la minería de datos, investigación científica, big data, machine learmning, inteligencia artificial, finanzas entre otros. 
 
