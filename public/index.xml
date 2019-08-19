@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Diseñando una experiencia ... enseñando.</title>
+    <title>Diseñando una experiencia ...</title>
     <link>/</link>
-    <description>Recent content on Diseñando una experiencia ... enseñando.</description>
+    <description>Recent content on Diseñando una experiencia ...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Thu, 15 Aug 2019 00:00:00 +0000</lastBuildDate>
@@ -174,6 +174,16 @@ Nuestra comunidad en Facebook desarrolla:
     </item>
     
     <item>
+      <title>Nos presentamos</title>
+      <link>/nosotros/</link>
+      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
+      
+      <guid>/nosotros/</guid>
+      <description>Perfil Somos una firma especializada en realizar Estudios de Mercado y consultorias en Analitica de Datos, mediante el uso de estadísticas, técnicas probabilísticas y algoritmos (modelos de Data mining, Árboles de Decisión, Redes Neuronales, Algoritmos de Predicción, modelos de clasificación y Agrupamiento).
+Nuestro principal objetivo es transformar los datos en conocimiento para soportar el proceso de toma de decisiones, creación de ventaja competitiva y generación de valor en su organización.</description>
+    </item>
+    
+    <item>
       <title>Se parte de nuestro equipo...</title>
       <link>/unete/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
@@ -181,16 +191,6 @@ Nuestra comunidad en Facebook desarrolla:
       <guid>/unete/</guid>
       <description>¿Te gustaría dar cursos de R? Pues si la la respuesta es si!, estas en el lugar adecuado. 10x Faster con R cuenta con un programa listo para implementar, contenido completo que se entrega a nuestros alumnos los cuales incluyen no solo toda lo visto en la clase sino tambien ejercicios y retos para practicar.
 Esta todo listo para que comiences, por supuesto para cuidar nuestros estandares vamos a precisar una entrevista técnica que te habilite como uno de nuestros instructores.</description>
-    </item>
-    
-    <item>
-      <title>¿Qué es 10x Faster con R?</title>
-      <link>/nosotros/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/nosotros/</guid>
-      <description>Perfil Somos una firma especializada en realizar Estudios de Mercado y consultorias en Analitica de Datos, mediante el uso de estadísticas, técnicas probabilísticas y algoritmos (modelos de Data mining, Árboles de Decisión, Redes Neuronales, Algoritmos de Predicción, modelos de clasificación y Agrupamiento).
-Nuestro principal objetivo es transformar los datos en conocimiento para soportar el proceso de toma de decisiones, creación de ventaja competitiva y generación de valor en su organización.</description>
     </item>
     
     <item>

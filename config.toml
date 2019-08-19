@@ -1,6 +1,6 @@
 baseurl = "/"
 languageCode = "en-us"
-title = "Diseñando una experiencia ... enseñando."
+title = "Diseñando una experiencia ..."
 theme = "hugo-lithium"
 googleAnalytics = "UA-142402614-1"
 disqusShortname = "www-10xfasterconr-com"
@@ -10,8 +10,8 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
     post = "/:year/:month/:day/:slug/"
 
 [[menu.main]]
-    name = "Proyecto"
-    url = "/proyecto/"
+    name = "Nosotros"
+    url = "/nosotros/"
     weight = 1
 [[menu.main]]
     name = "Contacto"
