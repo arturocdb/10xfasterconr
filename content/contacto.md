@@ -3,13 +3,11 @@ date: "2016-05-05T21:48:51-07:00"
 title: Contacto
 ---
 
-### Como encontrarnos...
+### Contacta con nosotros.
 
-Poco a poco crece nuestra presencia en Redes Sociales, comenzamos desde 0, literalmente!, no estamos interesados en tener ~~cantidad~~, sino **calidad** ante todo.
+Nuestros perfiles en Redes sociales reflejan parte de nuestro trabajo.
 
-Nuestro perfil en Facebook refleja nuestro trabajo ante el público en general.
-
-Nuestra comunidad en Facebook desarrolla:
+Nuestra comunidad desarrolla:
 
 - [x] "Casos de Estudio", sean estos simples o complejos.
 - [x] Compartimos conocimiento y formas de afrontar los retos.
@@ -19,22 +17,19 @@ Nuestra comunidad en Facebook desarrolla:
 
 [Fan Page Facebook](https://www.facebook.com/10xfasterconr)
 
-### LinkedIn
-
-[Conoce a nuestro CEO-Founder](https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/)
+### Perfil en LinkedIn
 
 [10x Faster con R](https://www.linkedin.com/company/10x-faster-con-r/about/?viewAsMember=true)
 
+Conócenos:
 
-### Contacto
+[Lic. Charlie Arturo Do Amaral Becerra - Co-Founder](https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/)
 
-_Contacto:_ Charlie Arturo Do Amaral Becerra
+[Lic. Luis Fernando Parada Guachalla - Co-Founder](https://www.linkedin.com/in/luis-fernando-parada-guachalla-bba7a5138/)
 
 _Ubicación:_ Santa Cruz de la Sierra, Bolivia
 
-_whatsApp:_ 591-76622727
-
-_Email:_ arturocdb@gmail.com
+_Email:_ 10xfasterconr@gmail.com
 
 
 
