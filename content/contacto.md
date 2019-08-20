@@ -21,15 +21,19 @@ Nuestra comunidad desarrolla:
 
 [10x Faster con R](https://www.linkedin.com/company/10x-faster-con-r/about/?viewAsMember=true)
 
-Conócenos:
+### Conócenos:
 
-[Lic. Charlie Arturo Do Amaral Becerra - Co-Founder](https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/)
+[Charlie Arturo Do Amaral Becerra - Co-Founder](https://www.linkedin.com/in/charlie-arturo-do-amaral-becerra/)
 
-[Lic. Luis Fernando Parada Guachalla - Co-Founder](https://www.linkedin.com/in/luis-fernando-parada-guachalla-bba7a5138/)
+[Luis Fernando Parada Guachalla - Co-Founder](https://www.linkedin.com/in/luis-fernando-parada-guachalla-bba7a5138/)
 
-_Ubicación:_ Santa Cruz de la Sierra, Bolivia
+[Mathias Do Amaral Argote - Territory Manager La Paz](https://www.linkedin.com/in/mathias-do-amaral-argote-9139b3174/)
 
-_Email:_ 10xfasterconr@gmail.com
+[Ronald Hinojosa Meneses - Comunity Manager](https://www.linkedin.com/in/ronaldhinojosameneses/)
+
+_**Ubicación**:_ Santa Cruz de la Sierra, Bolivia
+
+_**Email**:_ 10xfasterconr@gmail.com
 
 
 
