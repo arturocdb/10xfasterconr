@@ -29,7 +29,7 @@ Nuestra comunidad desarrolla:
 
 [Mathias Do Amaral Argote - Territory Manager La Paz](https://www.linkedin.com/in/mathias-do-amaral-argote-9139b3174/)
 
-[Ronald Hinojosa Meneses - Comunity Manager](https://www.linkedin.com/in/ronaldhinojosameneses/)
+[Ronald Hinojosa Meneses - Marketing Strategist](https://www.linkedin.com/in/ronaldhinojosameneses/)
 
 _**Ubicación**:_ Santa Cruz de la Sierra, Bolivia
 
