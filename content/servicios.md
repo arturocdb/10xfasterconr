@@ -3,6 +3,24 @@ date: "2016-05-05T21:48:51-07:00"
 title: Productos y Servicios
 ---
 
+### Propuesta de Valor
+#### Nuestra propuesta se centra en:
+
+- **Inteligencia de Negocio**
+  + Estudios de Mercado
+  + Planificación de la Demanda
+  + Pronósticos en los negocios
+  + Inteligencia de Mercado
+
+- **Data Mining y Analítica**
+  + Analítica de Redes Sociales y Marketing
+  + Métricas de Marketing
+  + Métricas de Operaciones con Clientes
+  + Business and customer Analytics
+  
+- **Formación**
+  + Capacitación para Analistas en el lenguaje R
+
 ### Porqué Data Analytics?
 El análisis de datos se define como las herramientas y técnicas para organizar, estudiar, encontrar conclusiones y en ocasiones hacer predicciones a partir de un conjunto de datos.
 
