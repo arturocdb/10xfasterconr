@@ -8,7 +8,7 @@ title: Productos y Servicios
 
 - **Inteligencia de Negocio**
   + Estudios de Mercado
-  + Estimación de la Demanda
+  + Planificación de la Demanda
   + Pronósticos en los negocios
   + Inteligencia de Mercado
 
