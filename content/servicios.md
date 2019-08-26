@@ -58,9 +58,6 @@ Analizamos todo tipo de fuentes de interaccción con el cliente y _**Customer In
 ### Data Mining (Minería de Datos)
 El servicio de **Data Mining** abarca desde el uso de la información generada en organizaciones o empresas (facturas, histórico de ventas, listado de clientes, promotores, entre otros) hasta el uso de bases de datos (estructuradas y no estructuradas) e información recolectada vía encuestas, con el objeto de identificar patrones de comportamiento del mercado o población objetivo.
 
-![](sitio/themes/hugo-lithium/static/images/datamining.png)
-
-
 ### Servicios de Capacitación y Formación en R
 Las nuevas credenciales profesionales en Bolivia muestran que en el mercado laboral nada es permanente, todo evoluciona, se ensancha el horizonte laboral con nuevos puestos, que hasta hace un lustro no existían en Bolivia.
 
