@@ -45,7 +45,7 @@ El servicio de _**Investigación de mercados**_ según la necesidad del cliente 
 #### Medición de Camapñas Publicitarias y de Marketing
 Generación de indicadores, métricas e impactos que generan la aplicación de campañas publicitarias y de marketing, ya sean en medios convencionales o no convencionales, tanto _**off-line**_ como _**on-line**_.
 
-### Analítica de Redes Sociales
+### Analítica de Medios Digitales
 Identificación y reconocimiento de _**patrones de comportamiento**_ e información oculta que se encuentra en **_Redes Sociales_** 
 
 Nuestro servicio va mas allá de lo que las herramientas de analítica de redes sociales ofrecen (**Google Analytics**, **Facebook Insights**, **Twitter Analytics**, etc) que te ofrecen solo vision general con información sobre me gustas, seguidores, tweets, cantidad de visitas, etc, nosotros nos enfocamos en extraer la información y utlizar _**estadística**_, _**probabilidades**_, _**análisis de regresión**_ para brindarte información aún mas relevante de la que puedes obtener de alguna herramienta.
@@ -57,6 +57,8 @@ Analizamos todo tipo de fuentes de interaccción con el cliente y _**Customer In
 
 ### Data Mining (Minería de Datos)
 El servicio de **Data Mining** abarca desde el uso de la información generada en organizaciones o empresas (facturas, histórico de ventas, listado de clientes, promotores, entre otros) hasta el uso de bases de datos (estructuradas y no estructuradas) e información recolectada vía encuestas, con el objeto de identificar patrones de comportamiento del mercado o población objetivo.
+
+![](\sitio\content\img\datamining.png)
 
 ### Servicios de Capacitación y Formación en R
 Las nuevas credenciales profesionales en Bolivia muestran que en el mercado laboral nada es permanente, todo evoluciona, se ensancha el horizonte laboral con nuevos puestos, que hasta hace un lustro no existían en Bolivia.
