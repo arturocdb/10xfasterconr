@@ -35,7 +35,7 @@ Es un curso 90% practico y pese a que es un curso de fundamentos, **"Empieza con
 
 ## Indice
 
-**Módulo I - fundamentos de R**
+**Módulo I - Fundamentos de R**
 
 **Módulo II - Estadística Descriptiva con R**
 
