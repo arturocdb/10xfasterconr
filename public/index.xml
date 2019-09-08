@@ -154,20 +154,12 @@ library(ggplot2)mediciones &amp;lt;- c(80,83,85,78,76,86,72)mediciones## [1] 
     
     <item>
       <title>Aprende a Analizar con R hoy mismo!</title>
-      <link>/curso-r/</link>
-      <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
-      
-      <guid>/curso-r/</guid>
-      <description> curso: Comienza con R! Descripción del curso </description>
-    </item>
-    
-    <item>
-      <title>Aprende a Analizar con R hoy mismo!</title>
       <link>/curso/</link>
       <pubDate>Thu, 05 May 2016 21:48:51 -0700</pubDate>
       
       <guid>/curso/</guid>
-      <description>Comienza con R, curso para principiantes Contenido del curso  Introducción ¿Para quién es este curso? Metodología y Enfoque ¿Qué recibirás? Requisitos Duración y Costo Contenido del Curso  Introducción Definitivamente R es el lenguaje de análisis de datos del presente y futuro. R posee un enfoque totalmente estadístico, de hecho, es creado por estadistas, no por programadores, se trata de uno de los lenguajes mas utilizados actualmente por la comunidad científica en campos como la minería de datos, investigación científica, Big Data, Machine Learning, Inteligencia Artificial, finanzas entre otros.</description>
+      <description>Curso: Comienza con R! Introducción Definitivamente R es el lenguaje de análisis de datos del presente y futuro. R posee un enfoque totalmente estadístico, de hecho, es creado por estadistas, no por programadores, se trata de uno de los lenguajes mas utilizados actualmente por la comunidad científica en campos como la minería de datos, investigación científica, Big Data, Machine Learning, Inteligencia Artificial, finanzas entre otros.
+Objetivo del curso El objetivo de este curso es proporcionar los elementos básicos para empezar a analizar datasets y aplicar estadística con el lenguaje con el lenguaje de Ciencia de Datos R</description>
     </item>
     
     <item>
