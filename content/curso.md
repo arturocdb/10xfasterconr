@@ -118,7 +118,7 @@ _No hace falta ninguna experiencia en programación_.
 
 ## Duracion y Costo
 - El curso tiene una duración de 1 mes (4 clases), dedicando 4 horas por clase.
-- Tiene un Costo de Bs 750.- (si prefieres cancelados en 2 cuotas, 50% al inicio y el saldo al finalizar el curso)
+- Tiene un Costo de Bs 750.- (si prefieres cancelados en 2 cuotas, 50% al inicio y el saldo al avance del 75% del curso)
 - Si cancelas el total del curso al inicio, obtienes un descuento del 6%
 
 ## Oferta especial!!!
