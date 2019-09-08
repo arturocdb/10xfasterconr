@@ -17,7 +17,7 @@ Los estudiantes tendrán la capacidad de analizar y representar gráficamente co
 Es un curso 90% practico y pese a que es un curso de fundamentos, **"Empieza con R"** es un curso **COMPLETO**, ya cubre todos los temas que abarca el lenguaje en sí, como ser `vectores`, `matrices`, `data frames`, creación de gráficos e inclusive publicación de documentos científicos y acabado profesional.
 
 ## Motivo: Porque el software R?
-**R**es el **lenguaje estadístico** líder para el análisis, su robustez lo convierten en el **software elegido por la comunidad científica internacional**, es utilizado por las universidades, empresas, industrias e instituciones mas prestigiosas del mundo, su impantación ya ha superado a otras herramientas comerciales comerciales como SPSS, Minitab y SAS.
+**R** es el **lenguaje estadístico** líder para el análisis, su robustez lo convierten en el **software elegido por la comunidad científica internacional**, es utilizado por las universidades, empresas, industrias e instituciones mas prestigiosas del mundo, su impantación ya ha superado a otras herramientas comerciales comerciales como SPSS, Minitab y SAS.
 
 ## Metodología del curso
 100% presencial (90% práctico)
