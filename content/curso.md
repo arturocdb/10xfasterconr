@@ -125,7 +125,7 @@ _No hace falta ninguna experiencia en programación_.
 Al inscribirte hasta el **12 de Septiembre 2019** obtienes **1 semana de asesoría** para despejar tus dudas.
 
 ## Como reservo mi cupo?
-Ingresa [Aqui](www.10xfasterconr.com/curso) para solicitar una reserva de tu cupo.
+Ingresa [Aqui](https://forms.gle/QfAtcoDWhRo2nnfw5) para solicitar una reserva de tu cupo.
 
 
 
