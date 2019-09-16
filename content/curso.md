@@ -121,13 +121,5 @@ _No hace falta ninguna experiencia en programación_.
 - Tiene un Costo de Bs 750.- (si prefieres cancelados en 2 cuotas, 50% al inicio y el saldo al avance del 75% del curso)
 - Si cancelas el total del curso al inicio, obtienes un descuento del 6%
 
-## Oferta especial!!!
-Al inscribirte hasta el **12 de Septiembre 2019** obtienes **1 semana de asesoría** para despejar tus dudas.
-
-## Como reservo mi cupo?
-Ingresa [Aqui](https://forms.gle/QfAtcoDWhRo2nnfw5) para solicitar una reserva de tu cupo.
-
-
-
 
 
