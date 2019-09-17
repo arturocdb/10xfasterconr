@@ -159,7 +159,7 @@ library(ggplot2)mediciones &amp;lt;- c(80,83,85,78,76,86,72)mediciones## [1] 
       
       <guid>/curso/</guid>
       <description>Curso práctico: Empieza con R! Introducción Definitivamente R es el lenguaje de análisis de datos del presente y futuro. R posee un enfoque totalmente estadístico, de hecho, es creado por estadistas, no por programadores, se trata de uno de los lenguajes mas utilizados actualmente por la comunidad científica en campos como la minería de datos, investigación científica, Big Data, Machine Learning, Inteligencia Artificial, finanzas entre otros.
-Objetivo del curso El objetivo de este curso es proporcionar los elementos básicos para empezar a analizar datasets y aplicar estadística con el lenguaje con el lenguaje de Ciencia de Datos R</description>
+Objetivo del curso El objetivo de este curso es proporcionar los elementos básicos para empezar a analizar datasets y aplicar estadística con el lenguaje de Ciencia de Datos R</description>
     </item>
     
     <item>

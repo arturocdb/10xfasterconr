@@ -32,19 +32,13 @@
   </url>
   
   <url>
-    <loc>/tags/estadistica/</loc>
-    <lastmod>2019-08-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/categories/estadistica/</loc>
     <lastmod>2019-08-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/probabilidad/</loc>
+    <loc>/tags/estadistica/</loc>
     <lastmod>2019-08-15T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
@@ -56,14 +50,14 @@
   </url>
   
   <url>
-    <loc>/2019/08/12/ejercicios-probabilidad-distribucion-normal/</loc>
-    <lastmod>2019-08-12T00:00:00+00:00</lastmod>
+    <loc>/tags/probabilidad/</loc>
+    <lastmod>2019-08-15T00:00:00+00:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/r/</loc>
+    <loc>/2019/08/12/ejercicios-probabilidad-distribucion-normal/</loc>
     <lastmod>2019-08-12T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -73,13 +67,19 @@
   </url>
   
   <url>
-    <loc>/tags/casos-de-estudio/</loc>
-    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <loc>/tags/r/</loc>
+    <lastmod>2019-08-12T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/categories/casos-de-estudio/</loc>
+    <lastmod>2019-07-25T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/casos-de-estudio/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
