@@ -123,5 +123,9 @@ _No hace falta ninguna experiencia en programación_.
 - Descuento especial para estudiantes.
 - Descuento para grupos a partir de 4 personas.
 
+## Reserva tu cupo!
+Ingresando [Aqui](https://forms.gle/QMm71ybp6aAEoWiU6), puedes solicitar la reserva de tu cupo!.
+
+
 Contactanos al Whatsapp: 76622727.
 
