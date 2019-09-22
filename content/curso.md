@@ -111,6 +111,10 @@ El enfoque es para **Analistas de datos** y/o quienes trabajan con datos constan
 
 - Certificado impreso.
 
+- Acceso a sala de Chat en Gitter **_Exclusiva para alumnos de 10x Faster con R_**, donde podras obtener ayuda en todo momento de nuestra comunidad de alumnos y entusiastas de R y poder resolver los problemas o consultas que se te presenten cuando implementes tus proyectos con R
+
+[![Gitter](https://badges.gitter.im/10x-Faster-con-R/community.svg)](https://gitter.im/10x-Faster-con-R/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 ## Requisitos
 _¡No hay ningún requisito_, excepto que traigas tu propia laptop, el software que utilizaremos R y Rstudio, son gratis!
 
