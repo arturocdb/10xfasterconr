@@ -1,0 +1,183 @@
+---
+title: Guia para Histogramas con Rstudio
+author: Charlie Do Amaral
+date: '2019-10-07'
+slug: guia-para-histogramas-con-rstudio
+categories:
+  - estadistica
+  - R
+tags:
+  - R
+---
+
+## Bienvenido
+Los Histogramas son la forma mas popular de visualizar distribuciones continuas, en este tutorial los veremos a ellos y sus derivados, aprenderas a:
+
+- Hacer e interpretar histogramas
+- Ajustar el ancho `binwidth` de un histograma para revelar nueva informacion
+- Utilizar `geoms` o geometrias que sean similares a los histogramas, coomo diagrama de puntos `dotplots`, poligosnos de frecuencias y densidades
+
+## Como hacer un histograma
+Para hacer un histograma con **ggplot2** se debe usar la funcion `geom_histogram()` a modo de template o plantilla de ggplot, el siguiente codigo grafica un histograma de la variable `carat` en el dataset `diamonds` que viene con **ggplot2**
+
+```{r}
+library(ggplot2)
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat))
+```
+
+## La variable `y`
+Como con `geom_bar()` no es necesario que des `geom_histogram()` a la variable `y`. `geom_histogram()` construira su propia variable `y` contabilizando el numero de observaciones que caigan en cada `bin` del eje `x`
+
+## `binwidth` (ancho de las barras)
+Por defecto **ggplot2** escogera el ancho de las barras en tu histograma que resultara cerca de 30 bins, puedes configurar el binwidth manualmente con el argumento `binwidth` que se interpreta en las unidades del eje `x`  
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 1)
+```
+
+## bins (contenedores o cajones)
+Alternativamente puedes configurar los bins con el argumento `bins` el cual toma el numero total de bins a usar 
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), bins = 10)
+```
+
+Es mas dificil determinar el ancho de los bins reales cuando usas `bins`
+
+## boundary (limite)
+Puedes mover los contenedores (bins) a izquierda y derecha a lo largo del eje `x` con el argumento `boundary`,  el argumento `boundary` toma un valor de `x` para usarlo como limite entre dos bins (contenedores), ggplot2 alineara el resto de los contenedores en consecuencia
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), bins = 10, boundary = 0)
+```
+
+## Ejercicio 1 `binwidth` (ancho de las barras)
+Cuando utilizas `geom_histogram()` debes siempre experimentar con diferentes binwidths porque diferentes tamaños de bins revelaran diferentes tipos de informacion.
+
+Para ver un ejemplo, hacemos un histograma de la variable `carat` en el dataset `diamonds`. Usar un tamaño de bin de 0.5 carcats, como piensas que se vera la distribucion?
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5)
+```
+
+## Ejercicio 2 Otro `binwidth`
+Recrea tu histograma de la variable `caract` pero esta vez usa un binwidth de 0.1, el nuevo grafico revela nueva informacion, mira de cerca, hay mas de un pico?, donde ocurren los picos?
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.1)
+```
+
+## Ejercicio 3 Otro `binwidth`
+Recrea tu histograma de la variable `caract` como ultima vez, pero esta vez usa un binwidth de 0.01 y configura el primer boundary (limite) a cero, intenta encontrar un nuevo patron en el resultado 
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.01, boundary = 0)
+```
+
+## Aesthetics (estetica)
+Visualmente un histograma es muy similar a un grafico de barras (bar charts) como resultado de esto usan la misma aesthetics: `alpha`, `color`, `fill`, `linetype`, y `size.`
+
+Tambien se comportan de la misma manera extraña cuando usas la estetica del color
+
+## Ejercicio 4, poniendolo todo junto
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0)
+```
+
+## geoms similares
+### Un problema
+Al agregar un color de relleno a un histograma hemos dividido los datos en cinco "sub-distribuciones", la distibucion del precio para los diamantes de corte justo `Fair`, corte bueno `Good`, corte muy bueno `Very Good`, corte `Premium` e ideales `Ideal`
+
+Pero tiene algunas deficiencias
+
+- Es dificil ver las **formas** de las distribuciones individuales
+- Es dificil de comparar las distribuciones individuales, ya que no comparten un valor de referencia comun para `y`
+
+## Una solucion
+Podemos mejorar la grafica usando una `geom` diferente para mostrar las distribuciones de los valores de los precios, **ggplo2** incluye 3 geoms que muestran la misma informacion que un histograma, pero de diferentes maneras
+
+1. `geom_freqpoly()`
+2. `geom_density()`
+3. `geom_dotplot()`
+
+## `geom_freqpoly()`
+`geom_freqpoly()` grafica un poligono de frecuencias, que usa una linea par mostrar la misma informacion que un histograma, puede pensar en un poligono de frecuencia como una linea que conectaria la parte superior de cada barra que aparece en un histograma, tenga en cuenta que las barras no son parte del poligino de frecuencias, solo estan ahi como referencia, `geom_freqpoly()` reconoce los mismo parametros que `geom_histogram()`, como `bins`, `binwidth`, y `boundary`
+
+## Ejercicio 5 Poligono de Fecuencias
+Cree un poligono de frecuencias con ancho de `bin` de 0.25 y `boundary` cero
+
+```{r}
+ggplot(data = diamonds) +
+  geom_freqpoly(mapping = aes(x = carat), binwidth = 0.25, boundary = 0)
+```
+
+## Ejercicio 6 Poligono de Frecuencia Multiple
+Use un poligono de frecuencias para recrear nuestro grafico de precio y corte, como las lineas no tienen barras, querra usar la estetica de color en lugar de la de relleno
+
+```{r}
+ggplot(data = diamonds) +
+  geom_freqpoly(mapping = aes(x = price, color = cut), binwidth = 1000, boundary = 0)
+```
+
+## `geom_density()`
+Nuestro poligono de frecuencia resalta una segunda deficiencia con nuestro grafico, es dificil comparar las formas de las distribuciones, porque algunos subgrupos contienen mas diamantes que otros, esto comprime subgrupos mas pequeños en la parte inferior del grafico, se puede evitar esto con `geom_density()`
+
+## Curvas de densidad
+`geom_density()` traza una estimacion de densidad del nucleo (es decir; una curva de densidad), esta es una representacion suavizada de los datos, similar a un histograma suvaizdo
+
+Las curvas de densidad no trazan el recuento en el eje `y` sino la densidad, que es analoga al recuento dividido por el nnumero total de observaciones, las densidades facilitan la comprension de las distribuciones de subgrupos, cuando traza varios subgrupos, cada curva de densidad contendra la misma area debajo de su curva
+
+## Ejercicio 7 Curvas de densidad 
+Redibujando nuestro grafico de curva de densidad, como interpretas los resultados?
+
+```{r}
+ggplot(data = diamonds) +
+  geom_density(mapping = aes(x = price, color = cut))
+```
+
+## Parametros de densidad
+Los graficos de densidad no toman los parametros `bin`, `binwidth` y `boundary`, en cambio, reconocen los parametros de kernel y suavizado que se usan en el algoritmo de ajuste de densidad , que es bastante sofisticado
+
+En la practica, puede obtener resultados utiles rapidamente con los parametros predeterminados de `geom_density()`, si deseas obtener mas informacion sobre las estimaciones de densidad y sus parametros de ajuste, comienza con la pagina de ayuda en `?geom_density()`
+
+## `geom_dotplot()`
+ggplot2 proporciona un ultimo geom para mostrar distribuciones unidimensionales `geom_dotplot()`. `geom_dotplot()` representa cada observacion con un punto y luego apila puntos dentro de los contenedores para crear la apariencia de un histograma.
+
+Dotplot puede proporcionar una visulizacion intuitiva de los datos, pero tienen varias diferencias, los dotplots o diagramas de puntos no son ideales para grandes conjuntos de datos como `diamonds` y proporcionan poco sentido a las etiquetas del eje `y`, tambien encuetra que los parametros de ajuste de `geom_dotplot()` hacen que los graficos dotplots sean demasiado lentos para trabajar con EDA ( _Exploratory Data Analiis_ )  
+
+```{r}
+ggplot(data = mpg) +
+  geom_dotplot(mapping = aes(x = displ), dotsize = 0.5, stackdir = "up", stackratio = 1.1)
+```
+
+## Ejercicio 8 Facets
+en lugar de cambiar geoms puede hacer que los subgrupos en nuestro grafico original sean mas faciles de comparar al aplicar Facets o facetas a los datos. El siguiente codigo facetea por corte.
+
+```{r}
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0)
+```
+
+## Resumen
+En este tutorial, aprendio a visualizar distribuciones con histogramas, poligonos de frecuencias y densidades , pero, que debes buscar en estas visualizaciones
+
+- **Busque lugares con muchos datos**, las barras altas revelan los valores mas comunes en sus datos, puede esperar que estos valores sean los "valores tipicos" para sus variables.
+- **Busque lugares con poca información**. Las barras cortas revelan valores poco comunes. Estos valores aparecen raramente y es posible que pueda descubrir por qué.
+- **Busque valores atípicos** (Outliers). Las barras que aparecen lejos del grueso de los datos son valores atípicos, casos especiales que pueden revelar ideas inesperadas.
+
+A veces, los valores atipicos no se pueden ver en un grafico, pero se pueden inferir del rango del eje `x`, muchos de los graficos de este tutorial parecian extenderse mucho mas alla del final de los datos, Porque?, porque el rango se extendio para incluir valores atipicos. Cuando su conjunto de datos es grande, como los datos de `diamonds` la barra que describe un valor atipico puede ser invisible (es decir, menos de un pixel de altura)
+- **Busque clusters (grupos)**
+- **Busque forma**. La forma de un histograma a menudo puede indicar si una variable se comporta o no de acuerdo con una distribución de probabilidad conocida.
+
+Lo más importante que debe recordar acerca de los histogramas, los polígonos de frecuencia y los diagramas de puntos es explorar diferentes anchos de `bin`. El `binwidth` (ancho de bin) de un histograma determina qué información muestra el histograma. No puede predecir con anticipación qué `binwidth` revelará información inesperada.
+
+

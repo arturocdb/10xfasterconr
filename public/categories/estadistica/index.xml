@@ -6,10 +6,20 @@
     <description>Recent content in estadistica on Diseñando una experiencia ...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 15 Aug 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 07 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/estadistica/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Guia para Histogramas con Rstudio</title>
+      <link>/2019/10/07/guia-para-histogramas-con-rstudio/</link>
+      <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/07/guia-para-histogramas-con-rstudio/</guid>
+      <description>BienvenidoLos Histogramas son la forma mas popular de visualizar distribuciones continuas, en este tutorial los veremos a ellos y sus derivados, aprenderas a:
+Hacer e interpretar histogramasAjustar el ancho binwidth de un histograma para revelar nueva informacionUtilizar geoms o geometrias que sean similares a los histogramas, coomo diagrama de puntos dotplots, poligosnos de frecuencias y densidadesComo hacer un histogramaPara hacer un histograma con ggplot2 se debe usar la funcion geom_histogram() a modo de template o plantilla de ggplot, el siguiente codigo grafica un histograma de la variable carat en el dataset diamonds que viene con ggplot2</description>
+    </item>
     
     <item>
       <title>La Distribucion Binomial</title>

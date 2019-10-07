@@ -1,0 +1,180 @@
+---
+title: Guia para Histogramas con Rstudio
+author: Charlie Do Amaral
+date: '2019-10-07'
+slug: guia-para-histogramas-con-rstudio
+categories:
+  - estadistica
+  - R
+tags:
+  - R
+---
+
+
+
+<div id="bienvenido" class="section level2">
+<h2>Bienvenido</h2>
+<p>Los Histogramas son la forma mas popular de visualizar distribuciones continuas, en este tutorial los veremos a ellos y sus derivados, aprenderas a:</p>
+<ul>
+<li>Hacer e interpretar histogramas</li>
+<li>Ajustar el ancho <code>binwidth</code> de un histograma para revelar nueva informacion</li>
+<li>Utilizar <code>geoms</code> o geometrias que sean similares a los histogramas, coomo diagrama de puntos <code>dotplots</code>, poligosnos de frecuencias y densidades</li>
+</ul>
+</div>
+<div id="como-hacer-un-histograma" class="section level2">
+<h2>Como hacer un histograma</h2>
+<p>Para hacer un histograma con <strong>ggplot2</strong> se debe usar la funcion <code>geom_histogram()</code> a modo de template o plantilla de ggplot, el siguiente codigo grafica un histograma de la variable <code>carat</code> en el dataset <code>diamonds</code> que viene con <strong>ggplot2</strong></p>
+<pre class="r"><code>library(ggplot2)
+ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat))</code></pre>
+<pre><code>## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+</div>
+<div id="la-variable-y" class="section level2">
+<h2>La variable <code>y</code></h2>
+<p>Como con <code>geom_bar()</code> no es necesario que des <code>geom_histogram()</code> a la variable <code>y</code>. <code>geom_histogram()</code> construira su propia variable <code>y</code> contabilizando el numero de observaciones que caigan en cada <code>bin</code> del eje <code>x</code></p>
+</div>
+<div id="binwidth-ancho-de-las-barras" class="section level2">
+<h2><code>binwidth</code> (ancho de las barras)</h2>
+<p>Por defecto <strong>ggplot2</strong> escogera el ancho de las barras en tu histograma que resultara cerca de 30 bins, puedes configurar el binwidth manualmente con el argumento <code>binwidth</code> que se interpreta en las unidades del eje <code>x</code></p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 1)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="bins-contenedores-o-cajones" class="section level2">
+<h2>bins (contenedores o cajones)</h2>
+<p>Alternativamente puedes configurar los bins con el argumento <code>bins</code> el cual toma el numero total de bins a usar</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), bins = 10)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Es mas dificil determinar el ancho de los bins reales cuando usas <code>bins</code></p>
+</div>
+<div id="boundary-limite" class="section level2">
+<h2>boundary (limite)</h2>
+<p>Puedes mover los contenedores (bins) a izquierda y derecha a lo largo del eje <code>x</code> con el argumento <code>boundary</code>, el argumento <code>boundary</code> toma un valor de <code>x</code> para usarlo como limite entre dos bins (contenedores), ggplot2 alineara el resto de los contenedores en consecuencia</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), bins = 10, boundary = 0)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+</div>
+<div id="ejercicio-1-binwidth-ancho-de-las-barras" class="section level2">
+<h2>Ejercicio 1 <code>binwidth</code> (ancho de las barras)</h2>
+<p>Cuando utilizas <code>geom_histogram()</code> debes siempre experimentar con diferentes binwidths porque diferentes tamaños de bins revelaran diferentes tipos de informacion.</p>
+<p>Para ver un ejemplo, hacemos un histograma de la variable <code>carat</code> en el dataset <code>diamonds</code>. Usar un tamaño de bin de 0.5 carcats, como piensas que se vera la distribucion?</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.5)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="ejercicio-2-otro-binwidth" class="section level2">
+<h2>Ejercicio 2 Otro <code>binwidth</code></h2>
+<p>Recrea tu histograma de la variable <code>caract</code> pero esta vez usa un binwidth de 0.1, el nuevo grafico revela nueva informacion, mira de cerca, hay mas de un pico?, donde ocurren los picos?</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.1)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+</div>
+<div id="ejercicio-3-otro-binwidth" class="section level2">
+<h2>Ejercicio 3 Otro <code>binwidth</code></h2>
+<p>Recrea tu histograma de la variable <code>caract</code> como ultima vez, pero esta vez usa un binwidth de 0.01 y configura el primer boundary (limite) a cero, intenta encontrar un nuevo patron en el resultado</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = carat), binwidth = 0.01, boundary = 0)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="aesthetics-estetica" class="section level2">
+<h2>Aesthetics (estetica)</h2>
+<p>Visualmente un histograma es muy similar a un grafico de barras (bar charts) como resultado de esto usan la misma aesthetics: <code>alpha</code>, <code>color</code>, <code>fill</code>, <code>linetype</code>, y <code>size.</code></p>
+<p>Tambien se comportan de la misma manera extraña cuando usas la estetica del color</p>
+</div>
+<div id="ejercicio-4-poniendolo-todo-junto" class="section level2">
+<h2>Ejercicio 4, poniendolo todo junto</h2>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="geoms-similares" class="section level2">
+<h2>geoms similares</h2>
+<div id="un-problema" class="section level3">
+<h3>Un problema</h3>
+<p>Al agregar un color de relleno a un histograma hemos dividido los datos en cinco “sub-distribuciones”, la distibucion del precio para los diamantes de corte justo <code>Fair</code>, corte bueno <code>Good</code>, corte muy bueno <code>Very Good</code>, corte <code>Premium</code> e ideales <code>Ideal</code></p>
+<p>Pero tiene algunas deficiencias</p>
+<ul>
+<li>Es dificil ver las <strong>formas</strong> de las distribuciones individuales</li>
+<li>Es dificil de comparar las distribuciones individuales, ya que no comparten un valor de referencia comun para <code>y</code></li>
+</ul>
+</div>
+</div>
+<div id="una-solucion" class="section level2">
+<h2>Una solucion</h2>
+<p>Podemos mejorar la grafica usando una <code>geom</code> diferente para mostrar las distribuciones de los valores de los precios, <strong>ggplo2</strong> incluye 3 geoms que muestran la misma informacion que un histograma, pero de diferentes maneras</p>
+<ol style="list-style-type: decimal">
+<li><code>geom_freqpoly()</code></li>
+<li><code>geom_density()</code></li>
+<li><code>geom_dotplot()</code></li>
+</ol>
+</div>
+<div id="geom_freqpoly" class="section level2">
+<h2><code>geom_freqpoly()</code></h2>
+<p><code>geom_freqpoly()</code> grafica un poligono de frecuencias, que usa una linea par mostrar la misma informacion que un histograma, puede pensar en un poligono de frecuencia como una linea que conectaria la parte superior de cada barra que aparece en un histograma, tenga en cuenta que las barras no son parte del poligino de frecuencias, solo estan ahi como referencia, <code>geom_freqpoly()</code> reconoce los mismo parametros que <code>geom_histogram()</code>, como <code>bins</code>, <code>binwidth</code>, y <code>boundary</code></p>
+</div>
+<div id="ejercicio-5-poligono-de-fecuencias" class="section level2">
+<h2>Ejercicio 5 Poligono de Fecuencias</h2>
+<p>Cree un poligono de frecuencias con ancho de <code>bin</code> de 0.25 y <code>boundary</code> cero</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_freqpoly(mapping = aes(x = carat), binwidth = 0.25, boundary = 0)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+</div>
+<div id="ejercicio-6-poligono-de-frecuencia-multiple" class="section level2">
+<h2>Ejercicio 6 Poligono de Frecuencia Multiple</h2>
+<p>Use un poligono de frecuencias para recrear nuestro grafico de precio y corte, como las lineas no tienen barras, querra usar la estetica de color en lugar de la de relleno</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_freqpoly(mapping = aes(x = price, color = cut), binwidth = 1000, boundary = 0)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+<div id="geom_density" class="section level2">
+<h2><code>geom_density()</code></h2>
+<p>Nuestro poligono de frecuencia resalta una segunda deficiencia con nuestro grafico, es dificil comparar las formas de las distribuciones, porque algunos subgrupos contienen mas diamantes que otros, esto comprime subgrupos mas pequeños en la parte inferior del grafico, se puede evitar esto con <code>geom_density()</code></p>
+</div>
+<div id="curvas-de-densidad" class="section level2">
+<h2>Curvas de densidad</h2>
+<p><code>geom_density()</code> traza una estimacion de densidad del nucleo (es decir; una curva de densidad), esta es una representacion suavizada de los datos, similar a un histograma suvaizdo</p>
+<p>Las curvas de densidad no trazan el recuento en el eje <code>y</code> sino la densidad, que es analoga al recuento dividido por el nnumero total de observaciones, las densidades facilitan la comprension de las distribuciones de subgrupos, cuando traza varios subgrupos, cada curva de densidad contendra la misma area debajo de su curva</p>
+</div>
+<div id="ejercicio-7-curvas-de-densidad" class="section level2">
+<h2>Ejercicio 7 Curvas de densidad</h2>
+<p>Redibujando nuestro grafico de curva de densidad, como interpretas los resultados?</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_density(mapping = aes(x = price, color = cut))</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+</div>
+<div id="parametros-de-densidad" class="section level2">
+<h2>Parametros de densidad</h2>
+<p>Los graficos de densidad no toman los parametros <code>bin</code>, <code>binwidth</code> y <code>boundary</code>, en cambio, reconocen los parametros de kernel y suavizado que se usan en el algoritmo de ajuste de densidad , que es bastante sofisticado</p>
+<p>En la practica, puede obtener resultados utiles rapidamente con los parametros predeterminados de <code>geom_density()</code>, si deseas obtener mas informacion sobre las estimaciones de densidad y sus parametros de ajuste, comienza con la pagina de ayuda en <code>?geom_density()</code></p>
+</div>
+<div id="geom_dotplot" class="section level2">
+<h2><code>geom_dotplot()</code></h2>
+<p>ggplot2 proporciona un ultimo geom para mostrar distribuciones unidimensionales <code>geom_dotplot()</code>. <code>geom_dotplot()</code> representa cada observacion con un punto y luego apila puntos dentro de los contenedores para crear la apariencia de un histograma.</p>
+<p>Dotplot puede proporcionar una visulizacion intuitiva de los datos, pero tienen varias diferencias, los dotplots o diagramas de puntos no son ideales para grandes conjuntos de datos como <code>diamonds</code> y proporcionan poco sentido a las etiquetas del eje <code>y</code>, tambien encuetra que los parametros de ajuste de <code>geom_dotplot()</code> hacen que los graficos dotplots sean demasiado lentos para trabajar con EDA ( <em>Exploratory Data Analiis</em> )</p>
+<pre class="r"><code>ggplot(data = mpg) +
+  geom_dotplot(mapping = aes(x = displ), dotsize = 0.5, stackdir = &quot;up&quot;, stackratio = 1.1)</code></pre>
+<pre><code>## `stat_bindot()` using `bins = 30`. Pick better value with `binwidth`.</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+</div>
+<div id="ejercicio-8-facets" class="section level2">
+<h2>Ejercicio 8 Facets</h2>
+<p>en lugar de cambiar geoms puede hacer que los subgrupos en nuestro grafico original sean mas faciles de comparar al aplicar Facets o facetas a los datos. El siguiente codigo facetea por corte.</p>
+<pre class="r"><code>ggplot(data = diamonds) +
+  geom_histogram(mapping = aes(x = price, fill = cut), binwidth = 1000, boundary = 0)</code></pre>
+<p><img src="/post/2019-10-07-guia-para-histogramas-con-rstudio_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+</div>
+<div id="resumen" class="section level2">
+<h2>Resumen</h2>
+<p>En este tutorial, aprendio a visualizar distribuciones con histogramas, poligonos de frecuencias y densidades , pero, que debes buscar en estas visualizaciones</p>
+<ul>
+<li><strong>Busque lugares con muchos datos</strong>, las barras altas revelan los valores mas comunes en sus datos, puede esperar que estos valores sean los “valores tipicos” para sus variables.</li>
+<li><strong>Busque lugares con poca información</strong>. Las barras cortas revelan valores poco comunes. Estos valores aparecen raramente y es posible que pueda descubrir por qué.</li>
+<li><strong>Busque valores atípicos</strong> (Outliers). Las barras que aparecen lejos del grueso de los datos son valores atípicos, casos especiales que pueden revelar ideas inesperadas.</li>
+</ul>
+<p>A veces, los valores atipicos no se pueden ver en un grafico, pero se pueden inferir del rango del eje <code>x</code>, muchos de los graficos de este tutorial parecian extenderse mucho mas alla del final de los datos, Porque?, porque el rango se extendio para incluir valores atipicos. Cuando su conjunto de datos es grande, como los datos de <code>diamonds</code> la barra que describe un valor atipico puede ser invisible (es decir, menos de un pixel de altura)
+- <strong>Busque clusters (grupos)</strong>
+- <strong>Busque forma</strong>. La forma de un histograma a menudo puede indicar si una variable se comporta o no de acuerdo con una distribución de probabilidad conocida.</p>
+<p>Lo más importante que debe recordar acerca de los histogramas, los polígonos de frecuencia y los diagramas de puntos es explorar diferentes anchos de <code>bin</code>. El <code>binwidth</code> (ancho de bin) de un histograma determina qué información muestra el histograma. No puede predecir con anticipación qué <code>binwidth</code> revelará información inesperada.</p>
+</div>
