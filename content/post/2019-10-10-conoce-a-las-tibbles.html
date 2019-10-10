@@ -1,0 +1,218 @@
+---
+title: Conoce a las tibbles
+author: Charlie Do Amaral
+date: '2019-10-10'
+slug: conoce-a-las-tibbles
+categories:
+  - R
+  - fundamentos
+tags:
+  - R
+---
+
+
+
+<div id="introduccion" class="section level2">
+<h2>Introducción</h2>
+<p>A lo largo de este tutorial trabajaremos con “<strong>tibbles</strong>” (pronunciado / <em>tibl</em>/) en lugar de los tradicionales <code>data.frame</code> de R. Los <strong>tibbles</strong> son data frames, pero modifican algunas características antiguas para hacernos la vida más fácil. R es un lenguaje viejo y algunas cosas que eran útiles hace 10 o 20 años actualmente pueden resultar inconvenientes. Es difícil modificar R base sin romper código existente, así que la mayor parte de la innovación ocurre en paquetes. Aquí describiremos el paquete <strong>tibble</strong>, que provee una versión de data frames que facilita el trabajo con el <code>tidyverse.</code> La mayoría de las veces voy a usaremos el término <strong>tibble</strong> y data frame de manera indistinta; cuando queremos referirnos de manera particular al data frame que viene incluido en R lo llamaremos <code>data.frame</code>.</p>
+<p>Si luego de leer este capítulo te quedas con ganas de aprender más sobre <strong>tibbles</strong>, quizás disfrutes <code>vignette("tibble")</code></p>
+</div>
+<div id="requisitos" class="section level2">
+<h2>Requisitos</h2>
+<p>En este capítulo exploraremos el paquete <strong>tibble</strong>, parte de los paquetes principales del <code>tidyverse.</code> Usaremos datasets incluidos en el paquete <strong>datos</strong></p>
+<pre class="r"><code>library(tidyverse)
+library(datos)</code></pre>
+</div>
+<div id="creando-tibbles" class="section level2">
+<h2>Creando tibbles</h2>
+<p>La mayoría de las funciones que usarás en este tutorial producen tibbles, ya que son una de las características trasversales del <code>tidyverse.</code> La mayoría de los paquetes de R suelen usar data frames clásicos, así que algo que podrías querer hacer es convertir un data frame en un tibble. Esto lo puedes hacer con <code>as_tibble()</code>:</p>
+<pre class="r"><code>as_tibble(flores)</code></pre>
+<pre><code>## # A tibble: 150 x 5
+##    Largo.Sepalo Ancho.Sepalo Largo.Petalo Ancho.Petalo Especies
+##           &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;   
+##  1          5.1          3.5          1.4          0.2 setosa  
+##  2          4.9          3            1.4          0.2 setosa  
+##  3          4.7          3.2          1.3          0.2 setosa  
+##  4          4.6          3.1          1.5          0.2 setosa  
+##  5          5            3.6          1.4          0.2 setosa  
+##  6          5.4          3.9          1.7          0.4 setosa  
+##  7          4.6          3.4          1.4          0.3 setosa  
+##  8          5            3.4          1.5          0.2 setosa  
+##  9          4.4          2.9          1.4          0.2 setosa  
+## 10          4.9          3.1          1.5          0.1 setosa  
+## # ... with 140 more rows</code></pre>
+<p>Puedes crear un nuevo tibble a partir de vectores individuales con <code>tibble()</code>. Esta función recicla vectores de longitud 1 automáticamente y te permite usar variables creadas dentro de la propia función, como se muestra abajo.</p>
+<pre class="r"><code>tibble(
+  x = 1:5,
+  y = 1,
+  z = x^2 + y
+)</code></pre>
+<pre><code>## # A tibble: 5 x 3
+##       x     y     z
+##   &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1     1     1     2
+## 2     2     1     5
+## 3     3     1    10
+## 4     4     1    17
+## 5     5     1    26</code></pre>
+<p>Si ya te has familiarizado con <code>data.frame()</code>, es importante que tomes en cuenta que <code>tibble()</code> hace menos cosas: nunca cambia el tipo de los inputs (p. ej., ¡nunca convierte caracteres en factores!), nunca cambia el nombre de las variables y nunca asigna nombres a las filas.</p>
+<p>Un <strong>tibble</strong> puede usar nombres de columnas que no son nombres de variables válidos en R (también conocidos como nombres <strong>no sintácticos</strong>). Por ejemplo, pueden empezar con un caracter diferente a una letra o contener caracteres poco comunes, como espacios. Para referirse a estas variables, tienes que rodearlos de acentos graves, ```</p>
+<pre class="r"><code>tb &lt;- tibble(
+  `:)` = &quot;sonrisa&quot;,
+  ` ` = &quot;espacio&quot;,
+  `2000` = &quot;número&quot;
+)
+tb</code></pre>
+<pre><code>## # A tibble: 1 x 3
+##   `:)`    ` `     `2000`
+##   &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; 
+## 1 sonrisa espacio número</code></pre>
+<p>También necesitarás los acentos graves al trabajar con estas variables en otros paquetes, como <code>ggplot2</code>, <code>dplyr</code> y <code>tidyr.</code></p>
+<p>Otra forma de crear un tibble es con <code>tribble()</code>, que es una abreviación de tibble <strong>transpuesto.</strong> Esta función está pensada para realizar la entrada de datos en el código: los nombres de las columnas se definen con fórmulas (esto es, comienzan con <code>~</code>) y cada entrada está separada por comas. Esto permite escribir pocos datos de manera legible.</p>
+<pre class="r"><code>tribble(
+  ~x, ~y, ~z,
+  #--|--|----
+  &quot;a&quot;, 2, 3.6,
+  &quot;b&quot;, 1, 8.5
+)</code></pre>
+<pre><code>## # A tibble: 2 x 3
+##   x         y     z
+##   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1 a         2   3.6
+## 2 b         1   8.5</code></pre>
+<p>Usualmente agregamos un comentario para dejar en claro cuál es el encabezado (esta línea debe empezar con <code>#</code>).</p>
+</div>
+<div id="tibbles-vs.-data.frame" class="section level2">
+<h2>Tibbles vs. data.frame</h2>
+<p>Existen dos diferencias principales entre el uso de un <strong>tibble</strong> y un <strong>data.frame</strong> clásico: la impresión en la consola y la selección de los subconjuntos.</p>
+</div>
+<div id="impresion-en-la-consola" class="section level2">
+<h2>Impresión en la consola</h2>
+<p>Los tibbles tienen un método de impresión en la consola refinado: solo muestran las primeras 10 filas y solo aquellas columnas que entran en el ancho de la pantalla. Esto simplifica y facilita trabajar con bases de datos grandes. Además del nombre, cada columna muestra su tipo. Esto último es una gran característica tomada de <code>str()</code>.</p>
+<pre class="r"><code>tibble(
+  a = lubridate::now() + runif(1e3) * 86400,
+  b = lubridate::today() + runif(1e3) * 30,
+  c = 1:1e3,
+  d = runif(1e3),
+  e = sample(letters, 1e3, replace = TRUE)
+)</code></pre>
+<pre><code>## # A tibble: 1,000 x 5
+##    a                   b              c      d e    
+##    &lt;dttm&gt;              &lt;date&gt;     &lt;int&gt;  &lt;dbl&gt; &lt;chr&gt;
+##  1 2019-10-11 09:12:34 2019-11-07     1 0.454  u    
+##  2 2019-10-11 00:02:14 2019-11-03     2 0.630  c    
+##  3 2019-10-10 15:16:12 2019-11-07     3 0.158  o    
+##  4 2019-10-11 02:46:45 2019-10-16     4 0.541  l    
+##  5 2019-10-10 20:18:54 2019-11-02     5 0.200  x    
+##  6 2019-10-11 09:13:12 2019-11-01     6 0.983  a    
+##  7 2019-10-11 10:34:53 2019-11-08     7 0.0200 o    
+##  8 2019-10-11 10:49:50 2019-11-03     8 0.808  z    
+##  9 2019-10-11 09:24:27 2019-11-05     9 0.227  r    
+## 10 2019-10-10 18:23:34 2019-11-08    10 0.367  a    
+## # ... with 990 more rows</code></pre>
+<p>Los tibbles están diseñados para no inundar tu consola accidentalmente al mirar data frames muy grandes. Sin embargo, a veces es necesario un output mayor que el que se obtiene por defecto. Existen algunas opciones que pueden ayudar.</p>
+<p>Primero, puedes usar <code>print()</code> en el data frame y controlar el número de filas (<code>n</code>) y el ancho (<code>width</code>) mostrado. Por otro lado, <code>width = Inf</code> muestra todas las columnas:</p>
+<pre class="r"><code>library(magrittr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;magrittr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:purrr&#39;:
+## 
+##     set_names</code></pre>
+<pre><code>## The following object is masked from &#39;package:tidyr&#39;:
+## 
+##     extract</code></pre>
+<pre class="r"><code>library(nycflights13)
+
+datos::vuelos %&gt;%
+  print(n = 10, width = Inf)</code></pre>
+<pre><code>## # A tibble: 336,776 x 19
+##     anio   mes   dia horario_salida salida_programada atraso_salida
+##    &lt;int&gt; &lt;int&gt; &lt;int&gt;          &lt;int&gt;             &lt;int&gt;         &lt;dbl&gt;
+##  1  2013     1     1            517               515             2
+##  2  2013     1     1            533               529             4
+##  3  2013     1     1            542               540             2
+##  4  2013     1     1            544               545            -1
+##  5  2013     1     1            554               600            -6
+##  6  2013     1     1            554               558            -4
+##  7  2013     1     1            555               600            -5
+##  8  2013     1     1            557               600            -3
+##  9  2013     1     1            557               600            -3
+## 10  2013     1     1            558               600            -2
+##    horario_llegada llegada_programada atraso_llegada aerolinea vuelo
+##              &lt;int&gt;              &lt;int&gt;          &lt;dbl&gt; &lt;chr&gt;     &lt;int&gt;
+##  1             830                819             11 UA         1545
+##  2             850                830             20 UA         1714
+##  3             923                850             33 AA         1141
+##  4            1004               1022            -18 B6          725
+##  5             812                837            -25 DL          461
+##  6             740                728             12 UA         1696
+##  7             913                854             19 B6          507
+##  8             709                723            -14 EV         5708
+##  9             838                846             -8 B6           79
+## 10             753                745              8 AA          301
+##    codigo_cola origen destino tiempo_vuelo distancia  hora minuto
+##    &lt;chr&gt;       &lt;chr&gt;  &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;
+##  1 N14228      EWR    IAH              227      1400     5     15
+##  2 N24211      LGA    IAH              227      1416     5     29
+##  3 N619AA      JFK    MIA              160      1089     5     40
+##  4 N804JB      JFK    BQN              183      1576     5     45
+##  5 N668DN      LGA    ATL              116       762     6      0
+##  6 N39463      EWR    ORD              150       719     5     58
+##  7 N516JB      EWR    FLL              158      1065     6      0
+##  8 N829AS      LGA    IAD               53       229     6      0
+##  9 N593JB      JFK    MCO              140       944     6      0
+## 10 N3ALAA      LGA    ORD              138       733     6      0
+##    fecha_hora         
+##    &lt;dttm&gt;             
+##  1 2013-01-01 05:00:00
+##  2 2013-01-01 05:00:00
+##  3 2013-01-01 05:00:00
+##  4 2013-01-01 05:00:00
+##  5 2013-01-01 06:00:00
+##  6 2013-01-01 05:00:00
+##  7 2013-01-01 06:00:00
+##  8 2013-01-01 06:00:00
+##  9 2013-01-01 06:00:00
+## 10 2013-01-01 06:00:00
+## # ... with 3.368e+05 more rows</code></pre>
+<p>También puedes controlar las características de impresión, modificando las opciones que estan determinadas por default.</p>
+<ul>
+<li><code>options(tibble.print_max = n</code>, <code>tibble.print_min = m</code>): si hay más de <code>n</code> filas, mostrar solo <code>m</code> filas.</li>
+<li>Usa <code>options(tibble.print_min = Inf</code>) para mostrar siempre todas las filas</li>
+<li>Usa <code>options(tibble.width = Inf)</code> para mostrar siempre todas las columnas sin importar el ancho de la pantalla.</li>
+</ul>
+<p>Puedes ver una lista completa de opciones en la ayuda del paquete con <code>package?tibble</code>.</p>
+<p>La opción final es usar el visualizador de datos de RStudio para obtener una versión interactiva del set de datos completo. Esto también es útil luego de realizar una larga cadena de manipulaciones.</p>
+<pre class="r"><code>datos::vuelos %&gt;%
+  View()</code></pre>
+</div>
+<div id="seleccion-de-subconjuntos" class="section level2">
+<h2>Selección de subconjuntos</h2>
+<p>Hasta ahora, todas las herramientas que aprendiste funcionan con el data frame completo. Si quieres recuperar una variable individual, necesitas algunas herramientas nuevas: <code>$</code> y <code>[[</code>. Mientras que <code>[[</code> permite extraer variables usando tanto su nombre como su suposición, con <code>$</code> sólo se puede extraer mediante el nombre. La única diferencia es que <code>$</code> implica escribir un poco menos.</p>
+<pre class="r"><code>df &lt;- tibble(
+  x = runif(5),
+  y = rnorm(5)
+)</code></pre>
+<pre class="r"><code># Extraer usando el nombre
+df$x</code></pre>
+<pre><code>## [1] 0.4371601 0.5160343 0.9654438 0.2719408 0.9620166</code></pre>
+<pre class="r"><code>df[[&quot;x&quot;]]</code></pre>
+<pre><code>## [1] 0.4371601 0.5160343 0.9654438 0.2719408 0.9620166</code></pre>
+<pre class="r"><code># extraer indicando la posicion
+df[[1]]</code></pre>
+<pre><code>## [1] 0.4371601 0.5160343 0.9654438 0.2719408 0.9620166</code></pre>
+<p>Para usar estas herramientas dentro de un pipe, necesitarás usar el marcador de posición <code>.</code>:</p>
+<pre class="r"><code>df %&gt;% .$x</code></pre>
+<pre><code>## [1] 0.4371601 0.5160343 0.9654438 0.2719408 0.9620166</code></pre>
+<pre class="r"><code>df %&gt;% .[[&quot;x&quot;]]</code></pre>
+<pre><code>## [1] 0.4371601 0.5160343 0.9654438 0.2719408 0.9620166</code></pre>
+<p>En comparación a un <code>data.frame</code>, los tibbles son más estrictos: nunca funcionan con coincidencias parciales y generan una advertencia si la columna a la que intentas de acceder no existe.</p>
+</div>
+<div id="interactuando-con-codigo-antiguo" class="section level2">
+<h2>Interactuando con código antiguo</h2>
+<p>Algunas funciones más antiguas no funcionan con los tibbles. Si te encuentras en uno de esos casos, usa <code>as.data.frame()</code> para convertir un <strong>tibble</strong> de nuevo en un <code>data.frame</code>:</p>
+<pre class="r"><code>class(as.data.frame(tb))</code></pre>
+<pre><code>## [1] &quot;data.frame&quot;</code></pre>
+<p>La principal razón de que algunas funciones previas no funcionen con tibbles es la función <code>[</code>. En este tutorial no usamos mucho <code>[</code> porque <code>dplyr::filter()</code> y <code>dplyr::select()</code> resuelven los mismos problemas con un código más claro</p>
+<p>Con los data frames de R base, <code>[</code> a veces devuelve un data frame y a veces devuelve un vector. Con tibbles, <code>[</code> siempre devuelve otro tibble.</p>
+</div>
