@@ -1,0 +1,197 @@
+---
+title: La familia apply parte I
+author: Charlie Do Amaral
+date: '2019-10-14'
+slug: la-familia-apply-parte-i
+categories:
+  - R
+tags:
+  - R
+---
+
+
+
+<div id="la-familia-apply" class="section level2">
+<h2>La familia <code>apply</code></h2>
+<p>La familia de funciones <code>apply</code> es usada para aplicar una función a cada elemento de una estructura de datos. En particular, es usada para aplicar funciones en matrices, data frames, arrays y listas.</p>
+<p>Con esta familia de funciones podemos automatizar tareas complejas usando poca líneas de código y es una de las características distintivas de R como lenguaje de programación.</p>
+<p>La familia de funciones <code>apply</code> es una expresión de los rasgos del paradigma funcional de programación presentes en R. Sobre esto no profundizaremos demasiado, pero se refiere saber que en R las funciones son “ciudadanos de primera”, con la misma importancia que los objetos, y por lo tanto, operamos en ellas.</p>
+<p>La familia de funciones apply no sólo recibe datos como argumentos, también recibe funciones.</p>
+</div>
+<div id="un-recordatorio-sobre-vectorización" class="section level2">
+<h2>Un recordatorio sobre vectorización</h2>
+<p>Para entender más fácilmente el uso de la familia apply, recordemos la vectorización de operaciones.</p>
+<p>Hay operaciones que, si las aplicamos a un vector, son aplicadas a todos sus elementos.</p>
+<pre class="r"><code>mi_vector &lt;- 1:10
+
+mi_vector</code></pre>
+<pre><code>##  [1]  1  2  3  4  5  6  7  8  9 10</code></pre>
+<pre class="r"><code>mi_vector ^ 2</code></pre>
+<pre><code>##  [1]   1   4   9  16  25  36  49  64  81 100</code></pre>
+<p>Lo anterior es, generalmente, preferible a escribir una operación para cada elemento o a usar un bucle <strong>for</strong>, como se describió en la seccion sobre estructuras de control.</p>
+<p>Como todo lo que ocurre en R es una función, podemos decir que al <strong>vectorizar estamos aplicando una función a cada elemento de un vector</strong>. La familia de funciones <strong>apply</strong> nos permite implementar esto en estructuras de datos distintas a los vectores.</p>
+</div>
+<div id="las-funciones-de-la-familia-apply" class="section level2">
+<h2>Las funciones de la familia apply</h2>
+<p>La familia apply esta formada por las siguientes funciones:</p>
+<ul>
+<li><code>apply()</code></li>
+<li><code>eapply()</code></li>
+<li><code>lapply()</code></li>
+<li><code>mapply()</code></li>
+<li><code>rapply()</code></li>
+<li><code>sapply()</code></li>
+<li><code>tapply()</code></li>
+<li><code>vapply()</code></li>
+</ul>
+<p>Es una familia numerosa y esta variedad de funciones se debe a que varias de ellas tienen aplicaciones sumamente específicas.</p>
+<p>Todas las funciones de esta familia tienen una característica en común: <strong>reciben como argumentos a un objeto y al menos una función.</strong></p>
+<p>Hasta ahora, todas las funciones que hemos usado han recibido como argumentos estructuras de datos, sean vectores, data frames o de otro tipo. Las funciones de la familia apply tienen la particularidad que pueden recibir a otra función como un argumento. Lo anterior puede sonar confuso, pero es más bien intuitivo al verlo implementado.</p>
+<p>Nosotros trabajaremos con las funciones más generales y de uso común de esta familia:</p>
+<ul>
+<li><code>apply()</code></li>
+<li><code>lapply()</code></li>
+</ul>
+<p>Estas dos funciones nos permitirán solucionar casi todos los problemas a los que nos encontremos. Además, conociendo su uso, las demás funciones de la familia <strong>apply</strong> serán relativamente fáciles de entender.</p>
+</div>
+<div id="apply" class="section level2">
+<h2>apply</h2>
+<p><code>apply</code> aplica una función a todos los elementos de una <strong>matriz.</strong></p>
+<p>La estructura de esta función es la siguiente.</p>
+<pre><code>apply(X, MARGIN, FUN)</code></pre>
+<p><code>apply</code> tiene tres argumentos:</p>
+<ul>
+<li><code>x</code>: Una matriz o un objeto que pueda coercionarse a una matriz, generalmente, un data frame.</li>
+<li><code>MARGIN</code>: La dimensión (margen) que agrupará los elementos de la matriz <code>X</code>, para aplicarles una función. Son identificadas con números, <strong>1</strong> son filas y <strong>2</strong> son colummnas.</li>
+<li><code>FUN</code>: La función que aplicaremos a la matriz <code>X</code> en su dimención <code>MARGIN</code></li>
+</ul>
+</div>
+<div id="qué-es-x" class="section level2">
+<h2>¿Qué es X</h2>
+<p><code>X</code> es una matriz o cualquier otro objeto que sea posible coercionar a una matriz. Esto es, principalmente, vectores y data frames.</p>
+<p>Recuerda que puedes coercionar objetos a matriz usando <code>as.matrix()</code> y puedes comprobar si un objeto es de esta clase con <code>is.matrix()</code>.</p>
+<pre class="r"><code># Creamos un data frame
+mi_df &lt;- data.frame(v1 = 1:3, v2 = 4:6)
+
+mi_df</code></pre>
+<pre><code>##   v1 v2
+## 1  1  4
+## 2  2  5
+## 3  3  6</code></pre>
+<pre class="r"><code># Coerción a matriz
+mi_matriz &lt;- as.matrix(mi_df)</code></pre>
+<pre class="r"><code># Verificamos que sea matriz
+is.matrix(mi_matriz)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
+<pre class="r"><code># Resultado
+mi_matriz</code></pre>
+<pre><code>##      v1 v2
+## [1,]  1  4
+## [2,]  2  5
+## [3,]  3  6</code></pre>
+<p>Aunque también podemos coercionar listas y arrays a matrices, los resultados que obtenemos no siempre son apropiados para <code>apply()</code>, por lo que no es recomendable usar estos objetos como argumentos.</p>
+</div>
+<div id="qué-es-margin" class="section level2">
+<h2>¿Qué es MARGIN?</h2>
+<p>Recuerda que las matrices y los data frames están formadas por vectores y que estas estructuras tienen dos dimensiones, ordenadas en renglones y columnas. Esto lo vimos en en Matrices, arrays y Data frames.</p>
+<p>Para <code>MARGIN</code>:</p>
+<ul>
+<li><strong>1</strong> es filas</li>
+<li><strong>2</strong> es columnas</li>
+</ul>
+<p>Por ejemplo, podemos usar <code>apply()</code> para obtener la sumatoria de los elementos de una matriz, por fila</p>
+<p>Creamos una matriz de cuatro filas.</p>
+<pre class="r"><code>matriz &lt;- matrix(1:14, nrow = 4) </code></pre>
+<pre><code>## Warning in matrix(1:14, nrow = 4): la longitud de los datos [14] no es un
+## submúltiplo o múltiplo del número de filas [4] en la matriz</code></pre>
+<p>Aplicamos <code>apply()</code>, dando la función <code>sum()</code> el argumento <code>FUN</code>, nota que sólo necesitamos el nombre de la función, sin paréntesis.</p>
+<p>Por último, damos el argumento <code>MARGIN = 1</code>, para aplicar la función por filas.</p>
+<pre class="r"><code>apply(X = matriz, MARGIN = 1, FUN = sum)</code></pre>
+<pre><code>## [1] 28 32 22 26</code></pre>
+<p>Esto es equivalente a hacer lo siguiente.</p>
+<pre class="r"><code>sum(matriz[1, ])</code></pre>
+<pre><code>## [1] 28</code></pre>
+<pre class="r"><code>sum(matriz[2, ])</code></pre>
+<pre><code>## [1] 32</code></pre>
+<pre class="r"><code>sum(matriz[3, ])</code></pre>
+<pre><code>## [1] 22</code></pre>
+<pre class="r"><code>sum(matriz[4, ])</code></pre>
+<pre><code>## [1] 26</code></pre>
+<p><strong>Estamos aplicando una función a cada elemento de nuestra matriz. Los elementos son las filas Cada fila es un vector. Cada vector es usado como argumento de la función.</strong></p>
+<p>Si cambiamos el argumento <code>MARGIN</code> de <code>MARGIN = 1</code> a <code>MARGIN = 2</code>, entonces la función se aplicará por columna.</p>
+<pre class="r"><code>apply(X = matriz, MARGIN = 2, FUN = sum)</code></pre>
+<pre><code>## [1] 10 26 42 30</code></pre>
+<p>En este caso, la función <code>sum()</code> ha sido aplicado a cada elementos de nuestra matriz, los elementos son las columnas, y cada columna es un vector.</p>
+</div>
+<div id="qué-es-fun" class="section level2">
+<h2>¿Qué es FUN?</h2>
+<p><code>FUN</code> es un argumento que nos pide el nombre de una función que se se aplicarla a todos los elementos de nuestra matriz.</p>
+<p>El ejemplo de la sección anterior aplicamos las funciones <code>mean()</code> y <code>sum()</code> usando sus nombres, sin paréntesis, esto es, sin especificar argumentos.</p>
+<p>Podemos dar como argumento cualquier nombre de función, siempre y cuando ésta acepte vectores como argumentos.</p>
+<p>Probemos cambiando el argumento <code>FUN</code>. Usaremos la función <code>mean()</code> para obtener la media de cada fila y de cada columna.</p>
+<p>Aplicado a las filas.</p>
+<pre class="r"><code>apply(matriz, 1, mean)</code></pre>
+<pre><code>## [1] 7.0 8.0 5.5 6.5</code></pre>
+<p>Aplicado a las columnas</p>
+<pre class="r"><code>apply(matriz, 2, mean)</code></pre>
+<pre><code>## [1]  2.5  6.5 10.5  7.5</code></pre>
+<p>Las siguientes llamadas a <code>sd()</code>, <code>max()</code> y <code>quantile()</code> se ejecutan sin necesidad de especificar argumentos.</p>
+<pre class="r"><code># Desviación estándar
+apply(matriz, 1, FUN = sd)</code></pre>
+<pre><code>## [1] 5.163978 5.163978 4.434712 4.434712</code></pre>
+<pre class="r"><code># Máximo
+apply(matriz, 1, FUN = max)</code></pre>
+<pre><code>## [1] 13 14 11 12</code></pre>
+<pre class="r"><code># Cuantiles
+apply(matriz, 1, FUN = quantile)</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## 0%      1    2  1.0  2.0
+## 25%     4    5  2.5  3.5
+## 50%     7    8  5.0  6.0
+## 75%    10   11  8.0  9.0
+## 100%   13   14 11.0 12.0</code></pre>
+</div>
+<div id="cómo-sabe-fun-cuáles-son-sus-argumentos" class="section level2">
+<h2>¿Cómo sabe FUN cuáles son sus argumentos?</h2>
+<p>Recuerda que podemos llamar una función y proporcionar sus argumentos en orden, tal como fueron establecidos en su definición.</p>
+<p>Por lo tanto, el primer argumento que espera la función, será la <code>X</code> del <code>apply()</code></p>
+<p>Para ilustrar esto, usaremos la función <code>quantile()</code>. Llama <code>?quantile</code> en la consola para ver su documentación.</p>
+<pre><code>?quantile</code></pre>
+<p><code>quantile()</code> espera siempre un argumento x, que debe ser un vector numérico, además tener varios argumentos adicionales.</p>
+<ul>
+<li><code>probs</code> es un vector numérico con las probabilidades de las que queremos extraer cuantiles</li>
+<li><code>na.rm</code>, si le asignamos <code>TRUE</code> quitará de x los <code>NA</code> y <code>NaN</code> antes de realizar operaciones.</li>
+<li><code>names</code>, si le asignamos <code>TRUE</code>, hará que el objeto resultado de la función tenga nombres.</li>
+<li><code>type</code> espera un valor entre 1 y 9, para determinar el algoritmo usado para el cálculo de los cuantiles.</li>
+</ul>
+<p>En orden, el primer argumento es <code>x</code>, el segundo <code>probs</code>, y así sucesivamente.</p>
+<p>Cuando usamos <code>quantile()</code> en un <code>apply()</code>, el argumento x de la función será cada elemento de nuestra matriz. Es decir, los vectores como filas o columnas de los que está constituida la matriz.</p>
+<p>Esto funcionará siempre y cuando los argumentos sean apropiados para la función. Si proporcionamos un argumento inválido, la función no se ejecutará y <strong>apply</strong> fallará.</p>
+<p>Por ejemplo, intentamos obtener cuantiles de las columnas de una matriz, en la que una de ellas es de tipo caracter.</p>
+<p>Creamos una matriz.</p>
+<pre><code>matriz2 &lt;- matrix(c(1:2, &quot;a&quot;, &quot;b&quot;), nrow = 2)
+
+# Resultado</code></pre>
+<p>Aplicamos la función y obtenemos un error.</p>
+<pre><code>apply(matriz2, 2, quantile)</code></pre>
+<pre><code># Error in (1 - h) * qs[i]: argumento no-numérico para operador binario</code></pre>
+<p>Por lo tanto, <strong>apply sólo puede ser usado con funciones que esperan vectores como argumentos.</strong></p>
+</div>
+<div id="qué-pasa-si-deseamos-utilizar-los-demás-argumentos-de-una-función-con-apply" class="section level2">
+<h2>¿Qué pasa si deseamos utilizar los demás argumentos de una función con apply?</h2>
+<p>En los casos en los que una función tiene recibe más de un argumento, asignamos los valores de estos del nombre de la función, separados por comas, usando sus propios nombres (a este procedimiento es al que se refiere el argumento <code>...</code> descrito en la documentación de <code>apply</code></p>
+<p>Supongamos que deseamos encontrar los cuantiles de un vector, correspondientes a las probabilidades <strong>.33</strong> y <strong>.66</strong>. Esto es definido con el argumento <code>probs</code> de esta función</p>
+<p>Para ello, usamos <code>quantile()</code> y después de haber escrito el nombre de la función, escribimos el nombre del argumento <code>probs</code> y los valores que deseamos para este.</p>
+<pre class="r"><code>apply(X = matriz, MARGIN = 2, FUN = quantile, probs = c(.33, .66))</code></pre>
+<pre><code>##     [,1] [,2]  [,3]  [,4]
+## 33% 1.99 5.99  9.99  1.99
+## 66% 2.98 6.98 10.98 12.78</code></pre>
+<p>Como podrás ver, hemos obtenido los resultados esperados.</p>
+<p>Si además deseamos que el resultado aparezca sin nombres, entonces definimos el valor del argumento <code>names</code> de la misma manera</p>
+<pre class="r"><code>apply(matriz, 2, quantile, probs = c(.33, .66), names = FALSE)</code></pre>
+<pre><code>##      [,1] [,2]  [,3]  [,4]
+## [1,] 1.99 5.99  9.99  1.99
+## [2,] 2.98 6.98 10.98 12.78</code></pre>
+<p>De este modo es posible aplicar funciones complejas que aceptan múltiples argumentos, con la ventaja que usamos pocas líneas de código.</p>
+<p><em>continuara</em>…</p>
+</div>

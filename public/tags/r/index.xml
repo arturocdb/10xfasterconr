@@ -6,10 +6,21 @@
     <description>Recent content in R on Diseñando una experiencia ...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 10 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>La familia apply parte I</title>
+      <link>/2019/10/14/la-familia-apply-parte-i/</link>
+      <pubDate>Mon, 14 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/14/la-familia-apply-parte-i/</guid>
+      <description>La familia applyLa familia de funciones apply es usada para aplicar una función a cada elemento de una estructura de datos. En particular, es usada para aplicar funciones en matrices, data frames, arrays y listas.
+Con esta familia de funciones podemos automatizar tareas complejas usando poca líneas de código y es una de las características distintivas de R como lenguaje de programación.
+La familia de funciones apply es una expresión de los rasgos del paradigma funcional de programación presentes en R.</description>
+    </item>
     
     <item>
       <title>Conoce a las tibbles</title>
