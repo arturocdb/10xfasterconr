@@ -24,6 +24,16 @@ mat_cuant &amp;lt;- apply(matriz, 1, quantile)class(mat_cuant)## [1] &amp;quot
     </item>
     
     <item>
+      <title>Otras medidas de dispersion</title>
+      <link>/2019/10/23/otras-medidas-de-dispersion/</link>
+      <pubDate>Wed, 23 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/23/otras-medidas-de-dispersion/</guid>
+      <description>Otras medidas de dispersionAunque la varianza y la desviacion estandar son las medidas de dispersion mas utiles en analisis estadistico, existen otras tecnicas con las cuales puede medirse la dispersion de un conjunto de datos. Estas medidas adicionales de dispersion son los cuartiles, los deciles y los percentiles.
+Cada conjunto de datos tiene 3 cuartiles, que lo dividen en 3 partes iguales. El primer cuartil es ese valor debajo del cual se clasifica el 25% de las observaciones.</description>
+    </item>
+    
+    <item>
       <title>Guia para Histogramas con Rstudio</title>
       <link>/2019/10/07/guia-para-histogramas-con-rstudio/</link>
       <pubDate>Mon, 07 Oct 2019 00:00:00 +0000</pubDate>

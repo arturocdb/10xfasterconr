@@ -1,0 +1,137 @@
+---
+title: Otras medidas de dispersion
+author: Charlie Do Amaral
+date: '2019-10-23'
+slug: otras-medidas-de-dispersion
+categories:
+  - estadistica
+  - R
+tags:
+  - estadistica
+  - R
+---
+
+## Otras medidas de dispersion
+Aunque la varianza y la desviacion estandar son las medidas de dispersion mas utiles en analisis estadistico, existen otras tecnicas con las cuales puede medirse la dispersion de un conjunto de datos. Estas medidas adicionales de dispersion son los **cuartiles**, los **deciles** y los **percentiles.**
+
+Cada conjunto de datos tiene 3 cuartiles, que lo dividen en 3 partes iguales. El primer cuartil es ese valor debajo del cual se clasifica el 25% de las observaciones. y sobre el cual puede encontrarse el 75% restante. El segundo cuartil es justo la mitad. La mitad de las observaciones estan por debajo y la mitad por encima; en este sentido, es lo mismo que la mediana. el tercer cuartil es el valor debajo del cual esta el 75% de las observaciones y encima del cual puede encontrarse el 25% restante.
+
+La determinacion de cuartiles con frecuencia es de utilidad. por ejemplo; muchas escuelas de postgrados admitiran solo aquellos estudiantes que esten en el 25% superior (tercer cuartil) de los candidatos. Las empresas, con frecuencia desean señalar las plantas cuyos deficientes registros de produccion los colocan por debajo del cuartil inferior. Con un poco de imaginacion es posible preveer numerosos ejemplos en los cuales la determninacion de cuartiles puede ser de gran beneficio.
+
+Los deciles separan un conjunto de datos en 10 subconjuntos iguales, y los percentiles en 100 partes. El primer decil es la observacion debajo de la cual se encuentra el 10% de las observaciones, mientras que el 90% restante se encuentra encima de este. El primer percentil es el valor debajo del cual se encuentra el 1% de las observaciones, y el rresto estan encima de este. Puede aplicarse una interpretacion similar al resto de deciles y percentiles. Todo conjunto de datos tiene 9 deciles y 99 percentiles.
+
+Un percentil y su ubicacion en un arreglo ordenado se identifica mediante los subindices, por ejemplo, el decimo quinto percentil se indica como $P_{15}$ y su ubicacion en la serie ordenada es $L_{15}$.
+
+Para ilustrar el calculo de percentiles, se asume que se tienen observaciones para el numero de acciones correspondientes a 50 acciones transados en la Bolsa de Valores de Nueva York, como se muestra en la tabla 3.4.
+
+![](./imagenes/65.png)
+
+Vale ala pena destacar que los datos han sido puestos en una serie ordenada. Elk lugar del _P_ esimo percentil se halla 
+
+$$Lp = (n+1)\frac{P}{100}$$
+
+En donde:
+
+- _Lp_: es el sitio del percentil deseado en una serie ordenada
+- _n_: es el numero de obervaciones
+- _P_: es el percentil deseado
+
+Se asume que desea calcular el percentil 25 $P_{25}$, para las acciones de la tabla 3.4, se debe hallar primero su ubicacion en la serie ordenada.
+
+$$Lp_{25} = (50+1)\frac{25}{100}=12.75$$
+
+El valor resultante de 12.75 dice que el percentil 25 esta ubicado al 75% del trayecto comprendido entre la doceava observacion, que es 20, y la terceava observacion que es 21, es decir; $P_{25} = 20 + 0.75 (21-20)=20.75$ 
+
+Si desea calcular el percentil 35, se halla:
+
+$$Lp_{35} = (50+1)\frac{35}{100}=17.85$$
+
+El percentil 35 esta al 85% del trayecto comprendido entre la observacion 17, que es 29, y la observacion 18 que es 31, es decir; $P_{35} = 20 + (0.85) (31-29)=30.7$. Por tanto, el 35% de las observaciones esta por debajo de 30.7 y el 65% restante por encima de 30.7 
+
+Regresando a los deciles y cuartiles por un momento, se nota que el primer decil es igual a $P_{10}$, el segundo decil es igual a $P_{20}$ y asi sucesivamente. Adicionalmente el primer cuartil es igual a $P_{25}$, el segundo cuartil es igual a $P_{50}$ y $P_{75}$ se encuentra en el tercer cuartil. Teniendo esto en mente, el calculo de deciles y cuartiles, se vuelve simplemente un asunto de determinacion de los percentiles apropiados de acuerdo con las reglas que se acaban de establecer.
+
+## R al rescate
+Veamos con R como resolvemos este problema, pues muy simple y sencillo, existe la funcion `quantile()`, pero primero carguemos nuestro conjunto de datos.
+
+```{r}
+x <- c(3,4,7,9,10,10,12,14,15,17,19,20,21,25,27,
+       27,29,31,31,34,34,34,36,37,38,38,39,43,
+       45,47,48,48,52,53,56,56,59,62,63,64,67,
+       67,69,72,73,74,74,76,79,80)
+```
+
+Resolvamos los mismo ejemplos, para el percentil 25
+
+```{r}
+percentil.25 <- quantile(x, probs = 0.25)
+percentil.25
+```
+
+Un resultado muy aproximado, ahora veamos para el percentil 35
+
+```{r}
+percentil.35 <- quantile(x, probs = 0.35)
+percentil.35
+```
+
+Una medida unica de dispersion es el **Rango o recorrido intercuartilico** (Interquartile Range - IQR), es español RIC. El RIC es la diferencia entre el 3er cuartil y el primer cuartil. Es decir; $P_{75} - P_{25}$, la mitad de las observaciones se clasifican dentro de este rango. Consta del 50% de la mitad de las observaciones y corta el 25% inferior y el 25% superior de los puntos de datos. Como resultado, el RIC proporciona una medida de dispersion que no esta muy influenciada por unas cuantas observaciones extremas
+
+En R se utiliza la funcion `IQR()` la cual calcula el rango intercuartilico de los valores de un vector, y tambien es muy facil de utilizar.
+
+```{r}
+library(stats)
+IQR(x)
+```
+
+## Usos frecuentes de la desviacion estandar
+Como se ha enfatizado, la desbiacion estandar es util para describir un conjunto de datos midiendo el grado de dispersion de las observaciones individuales al rededor de su media. Existen dos aplicaciones adicionales para la desviaciopn estandar.
+
+1. Teorema de Chebyshev
+2. Regla empirica
+
+## Teorema de Chebyshev
+El teorema de Chebyshev (algunas veces escrito como Tchebysheff) fue formulado por el matematico ruso P.L. Chebyshev (1821 - 1894). Establece que para todo conjunto de datos, por lo menos $1-\frac{1}{K^{2}}$ % de las observaciones estan dentro de _K_ desviaciones estandar de la media, en donde _K_ es cualquier numero mayor que
+
+El teorema de Chebyshev se expresa como:
+
+$$1-[\frac{1}{K^{2}}]$$
+
+Asi por ejemplo, si se forma un intervalo de _K_ = 3 desviaciones estandar por encima de la media hasta 3 desviaciones estandar por debajo de la media, entonces por lo menos
+
+$$1-\frac{1}{3^{2}}=88.89 \%$$
+
+de todas las observaciones estaran dentro de dicho intervalo
+
+### Ejemplo caso: Aerolinea People
+La aerolinea People revelo una media de 78.7 pasajeros por dia, con una desviacion estandar de 12.14. Para programar los tiempos para una nueva ruta que abrio la aerolinea, la gerencia desea saber con que frecuencia los pasajer estan dentro de _K_ dos desviaciones estandar de la media, y cual es dicho intervalo.
+
+### Solucion
+Si se transportan dos desviaciones estandar (2 x 12.14) = 24.28 pasajeros por encima y por debajo de la media de 78.7, se tendra un intervalo de (78.7 - 24.28) = 54.42 a (78.7 + 24.28) = 102.98 pasajeros se puede estar seguros de que por lo menos 
+
+$$1-\frac{1}{2^{2}}=75 \%$$
+
+del timepo, el numero de pasajeros diarios estuvo entre 54 y 103
+
+### Interpretacion
+En por lo menos 75% de los dias (es decir; 75% de 50 es igual a 37 dias) el numero de pasajeros estuvo entre 54 y 103, esto proporciona a la gerencia una valiosa informacion sobre para cuantos pasajeros deben prepararse en terminos de operaciones en vuelo.
+
+## Coeficiente de variacion
+Como se ha enfatizado, un uso importante de la desviacion estandar es servir como medida de dispersion. Sin embargo, se aplican ciertas limitaciones. Cuando se consideran dos o mas distribuciones que tienen medias significativamente diferentes, o que estan medidas en unidades distintas, es peligroso sacar conclusiones respecto a la dispersion solo en base en la desviacion estandar. Es como violar el viejo adagio sobre la comparacion entre manzanas y naranjas.
+
+Por tanto, con frecuencia debemos considerar el **coeficiente de variacion (CV)** el cual sirve como medida relativa de dispersion. El coeficiente de variacion determina el grado de dispersion de un conjunto de datos relativo a su media. Se calcula dividiendo la desviacion estandar de una distribucion por su media y multiplicando por 100.
+
+$$CV = \frac{\varsigma}{\bar{X}}(100)$$
+
+Los datos agrupados para la aerolinea People reportaron una media de 78.7 pasajeros por dia, con una desviacion estandar de 12.14 pasajeros, se supone que la aerolinea tambien recolecta datos sobre el mismo periodo para el numero de millas que la aerolinea volo y dicha media y desviacion estandar ha probado ser de 1,267.5 y 152.7 respectivamente. La desviacion estandar mas alta para las millas voladas puede sugerir que estos datos presentan una variacion muchho mayor.
+
+Sin embargo, si se calcula el coeficiente de variacion para pasajeros, se encuentra que es 
+
+$$CV = \frac{12.14}{78.70}(100)=15.43$$
+
+mientras que para las millas es solamente 
+
+$$CV = \frac{152.7}{1267.5}(100)=12.05$$
+
+Es claro que al comparar la variacion en dos conjuntos de datos muy diferentes, es sabio utilizar el coeficiente de variacion y no solo la desviacion estandar.
+
+_gracias!_
