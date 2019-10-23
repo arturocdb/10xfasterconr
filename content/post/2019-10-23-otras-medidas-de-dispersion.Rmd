@@ -24,7 +24,7 @@ Un percentil y su ubicacion en un arreglo ordenado se identifica mediante los su
 
 Para ilustrar el calculo de percentiles, se asume que se tienen observaciones para el numero de acciones correspondientes a 50 acciones transados en la Bolsa de Valores de Nueva York, como se muestra en la tabla 3.4.
 
-![](./imagenes/65.png)
+![](65.png)
 
 Vale ala pena destacar que los datos han sido puestos en una serie ordenada. Elk lugar del _P_ esimo percentil se halla 
 
