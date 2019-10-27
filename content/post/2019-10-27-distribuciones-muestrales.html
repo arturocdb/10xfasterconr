@@ -1,0 +1,138 @@
+---
+title: Distribuciones muestrales
+author: Charlie Do amaral
+date: '2019-10-27'
+slug: distribuciones-muestrales
+categories:
+  - estadistica
+  - R
+tags:
+  - R
+  - estadistica
+---
+
+
+
+<div id="distribuciones-muestrales" class="section level2">
+<h2>Distribuciones muestrales</h2>
+<p>Por razones de simplicidad y facil comprension del tema, realizare la explicacion con un ejemplo muy sencillo. Exactamente lo que no han los libros, siempren nos intentan acomplejar con usu cantidad de formulas, sin dudas las matematicas son importantes, pero la diferencia esta en la forma de como se transmite la informacion.</p>
+<p>Se tiene una poblacion de <code>N = 4</code>, ingresos para cuatro estudiantes universitarios, estos ingresos son de <code>100, 200, 300,</code> y <code>400</code>, el ingreso promedio puede calcularse como <span class="math inline">\(\mu = 250\)</span></p>
+<pre class="r"><code>N &lt;- c(100,200,300,400)
+mean(N)</code></pre>
+<pre><code>## [1] 250</code></pre>
+<p>Obtenemos una muestra con 12 elementos</p>
+<pre class="r"><code>m &lt;- combn(N, 2)
+m</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6]
+## [1,]  100  100  100  200  200  300
+## [2,]  200  300  400  300  400  400</code></pre>
+<p>Calculamos las medias por columnas</p>
+<pre class="r"><code>xbars &lt;- colMeans(m) 
+xbars</code></pre>
+<pre><code>## [1] 150 200 250 250 300 350</code></pre>
+<p>calculamos la frecuencia absoluta de las medias</p>
+<pre class="r"><code>table(xbars)</code></pre>
+<pre><code>## xbars
+## 150 200 250 300 350 
+##   1   1   2   1   1</code></pre>
+<p>Frecuencia relativa de las medias</p>
+<pre class="r"><code>prop.table(table(xbars))</code></pre>
+<pre><code>## xbars
+##       150       200       250       300       350 
+## 0.1666667 0.1666667 0.3333333 0.1666667 0.1666667</code></pre>
+<p>Y esto es lo que se conoce como <strong>distribucion muestral</strong>, son las medias obtenidas y sus probabilidades, para conceptualizar: la distribucion muestral es una lista de todos los valores posibles para un estadistico y la probabilidad relacionada con cada valor</p>
+<p>Graficamos</p>
+<pre class="r"><code>barplot(table(xbars))</code></pre>
+<p><img src="/post/2019-10-27-distribuciones-muestrales_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Sumamos las medias</p>
+<pre class="r"><code>sum(xbars)</code></pre>
+<pre><code>## [1] 1500</code></pre>
+<p>Calculamos la media de las medias muestrales, conocida tambien como <strong>la gran media</strong>, vale la pena notar que la distribucion muestral de las medias muestrales es simplemente una lista de todas las medias muestrales posibles, estas medias muestrales, al igual que cualquier lista de numeros tienen una media denominada <em>la media de las medias muestrales</em>, o la gran media, que se calcula de forma usual</p>
+<pre class="r"><code>gran.media &lt;- mean(xbars)
+gran.media</code></pre>
+<pre><code>## [1] 250</code></pre>
+<p>Obtuvimos la misma media, esto no es coincidencia, la media muestral siempre sera igual a la media poblacional</p>
+<div id="la-varianza-y-el-error-estandar-de-las-medias-muestrales" class="section level3">
+<h3>La varianza y el error estandar de las medias muestrales</h3>
+<p>La distribucion de las medias muestrales tambien tiene una varianza, la varianza de las medias muestrales es como cualquier otra varianza, mide la dispersion de las observaciones individuales (medias muestrales) al rededor de su media (la gran media). para calcularla vamos a crear una funcion en base a la formula</p>
+<p><span class="math display">\[\sigma_{\bar{x}}= \frac{\sum (\bar{x}-\mu)^2}{k}\]</span></p>
+<pre class="r"><code>var.muestral &lt;- function(xbars){
+  sum((xbars - mean(xbars))**2)/length(xbars)
+}
+
+vm &lt;- var.muestral(xbars)
+vm</code></pre>
+<pre><code>## [1] 4166.667</code></pre>
+<p>4166.66 dolares al cuadrado, pero por supuesto sabemos que la varianza nunca se debe interpretar</p>
+<p>Si se tuviese que sacar la raiz cuadrada de la varianza en la distribucion de estas medias muestrales, se tendria el <strong>error estandar de la distribucion muestral</strong> <span class="math inline">\(\sigma_{\bar{x}}\)</span></p>
+<p>El error estandar de la distribucion muestral de las medias muestrales</p>
+<p><span class="math display">\[\sigma_{\bar{x}}= \sqrt{\sigma_{\bar{x}}^2}\]</span></p>
+<pre class="r"><code>err.std &lt;- sqrt(vm)
+err.std</code></pre>
+<pre><code>## [1] 64.54972</code></pre>
+<p>64.55 dolares.</p>
+<p>El error estandar de la distribucion muestral o <strong>(error estandar)</strong> es una medida de la dispersion de las medias muestrales al rededor de <span class="math inline">\(\mu\)</span>.</p>
+<p>Es analogo con la desviacion estandar la cual mide la dispersion de las observaciones individuales al rededor de su media.</p>
+<p>Debido a que la diferencia entre <span class="math inline">\(\bar{x}\)</span> y <span class="math inline">\(\mu\)</span> es el error de muestreo, toda medida de la tendencia de la media muestral a desviarse de <span class="math inline">\(\mu\)</span> se le denomina acertadamente <strong>error estandar</strong>, por tanto, el error estandar mide la tendencia a sufrir del error de muestreo en el esfuerzo por estimar <span class="math inline">\(\mu\)</span></p>
+</div>
+<div id="ejemplo" class="section level3">
+<h3>Ejemplo</h3>
+<p>Las ventas en miles de dolares de E.C.M. durante los ultimos 5 meses fueron <code>68,73,65,80</code> y <code>72</code>, asumiendo que estos 5 meses constituyen la poblacion, la media claramente es <span class="math inline">\(\mu = 71.6\)</span>, como director de Marketing de E.C.M. se desea estimar este <span class="math inline">\(\mu\)</span> “desconocido”, tomando una muestra de tamaño <code>n = 3</code>, se espera que el error de muestreo, que es probable que ocurra, sea relativamente pequeño. Realice la distribucion muestral y haga comentarios sobre el posible error de muestreo</p>
+</div>
+<div id="solucion" class="section level3">
+<h3>Solucion</h3>
+<pre class="r"><code>Ventas &lt;- c(68,73,65,80,72)
+mean(Ventas)</code></pre>
+<pre><code>## [1] 71.6</code></pre>
+<p>Sacamos combinaciones de 10 columnas, cada columna con una muestra de 3</p>
+<pre class="r"><code>mue &lt;- combn(Ventas, 3)
+mue</code></pre>
+<pre><code>##      [,1] [,2] [,3] [,4] [,5] [,6] [,7] [,8] [,9] [,10]
+## [1,]   68   68   68   68   68   68   73   73   73    65
+## [2,]   73   73   73   65   65   80   65   65   80    80
+## [3,]   65   80   72   80   72   72   80   72   72    72</code></pre>
+<p>Sacamos las medias por columna</p>
+<pre class="r"><code>medias &lt;- round(colMeans(mue),2)
+medias</code></pre>
+<pre><code>##  [1] 68.67 73.67 71.00 71.00 68.33 73.33 72.67 70.00 75.00 72.33</code></pre>
+<p>Ahora ya tenemos 10 medias obtenidas de 10 muestras (cada muestra de 3 elementos)</p>
+<p>Calculamos las frecuencias absolutas de las medias</p>
+<pre class="r"><code>table(medias)</code></pre>
+<pre><code>## medias
+## 68.33 68.67    70    71 72.33 72.67 73.33 73.67    75 
+##     1     1     1     2     1     1     1     1     1</code></pre>
+<p>Frecuencia relativa de las medias</p>
+<pre class="r"><code>prop.table(table(medias))</code></pre>
+<pre><code>## medias
+## 68.33 68.67    70    71 72.33 72.67 73.33 73.67    75 
+##   0.1   0.1   0.1   0.2   0.1   0.1   0.1   0.1   0.1</code></pre>
+<p>Graficamos</p>
+<pre class="r"><code>barplot(table(medias))</code></pre>
+<p><img src="/post/2019-10-27-distribuciones-muestrales_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>Calculamos la media de las medias muestrales</p>
+<pre class="r"><code>media.de.medias &lt;- mean(medias)
+media.de.medias</code></pre>
+<pre><code>## [1] 71.6</code></pre>
+<p>Entonces, la media de la distribucion muestral es 71.6, ahora calculamos la varianza de la distribucion, para ello vamos a usar la misma funcion que creamos anteriormente</p>
+<pre class="r"><code>var.muestral.1 &lt;- function(medias){
+  sum((medias - mean(medias))**2)/length(medias)
+}
+
+vm.1 &lt;- var.muestral.1(medias)
+vm.1</code></pre>
+<pre><code>## [1] 4.30734</code></pre>
+<p>4.31 miles de dolares al cuadrado (no se debe interpretar la varianza, solo lo hacemos para fines educativos)</p>
+<p>Calculamos el error estandar de la distribucion</p>
+<pre class="r"><code>err.std.1 &lt;- sqrt(vm.1)
+err.std.1 </code></pre>
+<pre><code>## [1] 2.075413</code></pre>
+<p>El error estandar de la distribucion es 2.07 miles de dolares. (este dato nos dice cuanto puede variar la media muestral de la media poblacional), estamos hablando de 2.07 miles de dolares, te recuerdo que la media de muestros datos es 71.6 miles de dolares, osea estamos hablando de un porcentaje de</p>
+</div>
+<div id="interpretacion" class="section level3">
+<h3>Interpretacion</h3>
+<p>La media de la distribucion muestral es igual a la media de la poblacion original <span class="math inline">\(\mu = 71.6\)</span>, hasta aqui no hay sorpresa alguna, el error estandar el cual mide el grado de dispersion de las 10 medias muestrales al rededor de <span class="math inline">\(\mu\)</span> indica cuanto puede variar <span class="math inline">\(2.07/71.6 = 0.029\ x \ 100 = 2.9\)</span> %, wow, interesante no?.</p>
+<p>Recuerdas tambien que en la glosa del ejercicio decia: “se espera que el error muestral sea relativamente pequeño”, pues veamos, dijimos que el error muestral es la diferencia entre <span class="math inline">\(\mu\)</span> y la media muestral, es decir; la diferencia entre el valor real (parametro) obtenido con los valores de la poblacion y el valor estimado en base a los valores de una muestra (estimacion).</p>
+<p>A diferencia de un censo, los datos de una muestra estan sujetos a errores de muestreo, los cuales se presentan debido a que la investigacion estadistica se hace solo en una parte representativa de la poblacion, los mismos que estan asociados al azar y a otro tipo de errores como transcripcion, sesgo, etc.</p>
+<p><em>Gracias!</em></p>
+</div>
+</div>

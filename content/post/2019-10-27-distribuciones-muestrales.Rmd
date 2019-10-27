@@ -1,0 +1,174 @@
+---
+title: Distribuciones muestrales
+author: Charlie Do amaral
+date: '2019-10-27'
+slug: distribuciones-muestrales
+categories:
+  - estadistica
+  - R
+tags:
+  - R
+  - estadistica
+---
+
+## Distribuciones muestrales
+Por razones de simplicidad y facil comprension del tema, realizare la explicacion con un ejemplo muy sencillo. Exactamente lo que no han los libros, siempren nos intentan acomplejar con usu cantidad de formulas, sin dudas las matematicas son importantes, pero la diferencia esta en la forma de como se transmite la informacion.
+
+Se tiene una poblacion de `N = 4`, ingresos para cuatro estudiantes universitarios, estos ingresos son de `100, 200, 300,` y `400`, el ingreso promedio puede calcularse como $\mu = 250$   
+
+```{r}
+N <- c(100,200,300,400)
+mean(N)
+```
+
+Obtenemos una muestra con 12 elementos
+```{r}
+m <- combn(N, 2)
+m
+```
+
+Calculamos las medias por columnas
+```{r}
+xbars <- colMeans(m) 
+xbars
+```
+
+calculamos la frecuencia absoluta de las medias
+
+```{r}
+table(xbars)
+```
+
+Frecuencia relativa de las medias
+```{r}
+prop.table(table(xbars))
+```
+
+Y esto es lo que se conoce como **distribucion muestral**, son las medias obtenidas y sus probabilidades, para conceptualizar: la distribucion muestral es una lista de todos los valores posibles para un estadistico y la probabilidad relacionada con cada valor
+
+Graficamos
+```{r}
+barplot(table(xbars))
+```
+
+Sumamos las medias
+```{r}
+sum(xbars)
+```
+
+Calculamos la media de las medias muestrales, conocida tambien como **la gran media**, vale la pena notar que la distribucion muestral de las medias muestrales es simplemente una lista de todas las medias muestrales posibles, estas medias muestrales, al igual que cualquier lista de numeros tienen una media denominada _la media de las medias muestrales_, o la gran media, que se calcula de forma usual
+```{r}
+gran.media <- mean(xbars)
+gran.media
+```
+
+Obtuvimos la misma media, esto no es coincidencia, la media muestral siempre sera igual a la media poblacional
+
+### La varianza y el error estandar de las medias muestrales
+La distribucion de las medias muestrales tambien tiene una varianza, la varianza de las medias muestrales es como cualquier otra varianza, mide la dispersion de las observaciones individuales (medias muestrales) al rededor de su media (la gran media). para calcularla vamos a crear una funcion en base a la formula
+
+$$\sigma_{\bar{x}}= \frac{\sum (\bar{x}-\mu)^2}{k}$$
+
+```{r}
+var.muestral <- function(xbars){
+  sum((xbars - mean(xbars))**2)/length(xbars)
+}
+
+vm <- var.muestral(xbars)
+vm
+```
+
+4166.66 dolares al cuadrado, pero por supuesto sabemos que la varianza nunca se debe interpretar
+
+Si se tuviese que sacar la raiz cuadrada de la varianza en la distribucion de estas medias muestrales, se tendria el **error estandar de la distribucion muestral** $\sigma_{\bar{x}}$
+
+El error estandar de la distribucion muestral de las medias muestrales
+
+$$\sigma_{\bar{x}}= \sqrt{\sigma_{\bar{x}}^2}$$
+
+```{r}
+err.std <- sqrt(vm)
+err.std
+```
+
+64.55 dolares.
+
+El error estandar de la distribucion muestral o **(error estandar)** es una medida de la dispersion de las medias muestrales al rededor de $\mu$.
+
+Es analogo con la desviacion estandar la cual mide la dispersion de las observaciones individuales al rededor de su media.
+
+Debido a que la diferencia entre $\bar{x}$ y $\mu$ es el error de muestreo, toda medida de la tendencia de la media muestral a desviarse de $\mu$ se le denomina acertadamente **error estandar**, por tanto, el error estandar mide la tendencia a sufrir del error de muestreo en el esfuerzo por estimar $\mu$
+
+### Ejemplo
+Las ventas en miles de dolares de E.C.M. durante los ultimos 5 meses fueron `68,73,65,80` y `72`, asumiendo que estos 5 meses constituyen la poblacion, la media claramente es $\mu = 71.6$, como director de Marketing de E.C.M. se desea estimar este $\mu$ "desconocido", tomando una muestra de tamaño `n = 3`, se espera que el error de muestreo, que es probable que ocurra, sea relativamente pequeño. Realice la distribucion muestral y haga comentarios sobre el posible error de muestreo
+
+### Solucion
+
+```{r}
+Ventas <- c(68,73,65,80,72)
+mean(Ventas)
+```
+
+Sacamos combinaciones de 10 columnas, cada columna con una muestra de 3
+```{r}
+mue <- combn(Ventas, 3)
+mue
+```
+
+Sacamos las medias por columna
+```{r}
+medias <- round(colMeans(mue),2)
+medias
+```
+
+Ahora ya tenemos 10 medias obtenidas de 10 muestras (cada muestra de 3 elementos)
+
+Calculamos las frecuencias absolutas de las medias
+```{r}
+table(medias)
+```
+
+Frecuencia relativa de las medias
+```{r}
+prop.table(table(medias))
+```
+
+Graficamos
+```{r}
+barplot(table(medias))
+```
+
+Calculamos la media de las medias muestrales
+```{r}
+media.de.medias <- mean(medias)
+media.de.medias
+```
+
+Entonces, la media de la distribucion muestral es 71.6, ahora calculamos la varianza de la distribucion, para ello vamos a usar la misma funcion que creamos anteriormente
+
+```{r}
+var.muestral.1 <- function(medias){
+  sum((medias - mean(medias))**2)/length(medias)
+}
+
+vm.1 <- var.muestral.1(medias)
+vm.1
+```
+
+4.31 miles de dolares al cuadrado (no se debe interpretar la varianza, solo lo hacemos para fines educativos)
+
+Calculamos el error estandar de la distribucion
+```{r}
+err.std.1 <- sqrt(vm.1)
+err.std.1 
+```
+El error estandar de la distribucion es 2.07 miles de dolares. (este dato nos dice cuanto puede variar la media muestral de la media poblacional), estamos hablando de 2.07 miles de dolares, te recuerdo que la media de muestros datos es 71.6 miles de dolares, osea estamos hablando de un porcentaje de 
+
+### Interpretacion
+La media de la distribucion muestral es igual a la media de la poblacion original $\mu = 71.6$, hasta aqui no hay sorpresa alguna, el error estandar el cual mide el grado de dispersion de las 10 medias muestrales al rededor de $\mu$ indica cuanto puede variar $2.07/71.6 = 0.029\ x \ 100 = 2.9$ %, wow, interesante no?.   
+
+Recuerdas tambien que en la glosa del ejercicio decia: "se espera que el error muestral sea relativamente pequeño", pues veamos, dijimos que el error muestral es la diferencia entre $\mu$ y la media muestral, es decir; la diferencia entre el valor real (parametro) obtenido con los valores de la poblacion y el valor estimado en base a los valores de una muestra (estimacion).
+
+A diferencia de un censo, los datos de una muestra estan sujetos a errores de muestreo, los cuales se presentan debido a que la investigacion estadistica se hace solo en una parte representativa de la poblacion, los mismos que estan asociados al azar y a otro tipo de errores como transcripcion, sesgo, etc.
+
+_Gracias!_

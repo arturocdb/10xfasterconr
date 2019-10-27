@@ -6,10 +6,20 @@
     <description>Recent content in estadistica on Diseñando una experiencia ...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 27 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/estadistica/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Distribuciones muestrales</title>
+      <link>/2019/10/27/distribuciones-muestrales/</link>
+      <pubDate>Sun, 27 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/27/distribuciones-muestrales/</guid>
+      <description>Distribuciones muestralesPor razones de simplicidad y facil comprension del tema, realizare la explicacion con un ejemplo muy sencillo. Exactamente lo que no han los libros, siempren nos intentan acomplejar con usu cantidad de formulas, sin dudas las matematicas son importantes, pero la diferencia esta en la forma de como se transmite la informacion.
+Se tiene una poblacion de N = 4, ingresos para cuatro estudiantes universitarios, estos ingresos son de 100, 200, 300, y 400, el ingreso promedio puede calcularse como \(\mu = 250\)</description>
+    </item>
     
     <item>
       <title>La familia apply parte II</title>
