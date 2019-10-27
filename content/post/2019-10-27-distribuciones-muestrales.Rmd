@@ -162,7 +162,7 @@ Calculamos el error estandar de la distribucion
 err.std.1 <- sqrt(vm.1)
 err.std.1 
 ```
-El error estandar de la distribucion es 2.07 miles de dolares. (este dato nos dice cuanto puede variar la media muestral de la media poblacional), estamos hablando de 2.07 miles de dolares, te recuerdo que la media de muestros datos es 71.6 miles de dolares, osea estamos hablando de un porcentaje de 
+El error estandar de la distribucion es 2.07 miles de dolares. (este dato nos dice cuanto puede variar la media muestral de la media poblacional), estamos hablando de 2.07 miles de dolares, te recuerdo que la media de nuestros datos es 71.6 miles de dolares, osea estamos hablando de un porcentaje de 2.9% (ojo, esto nos dice cuanto puede varias, en nuestro caso no obtuvimos ninguna diferencia porque la muestra es pequeña, pero lo que este dato nos dice es cuanto "puede" variar)
 
 ### Interpretacion
 La media de la distribucion muestral es igual a la media de la poblacion original $\mu = 71.6$, hasta aqui no hay sorpresa alguna, el error estandar el cual mide el grado de dispersion de las 10 medias muestrales al rededor de $\mu$ indica cuanto puede variar $2.07/71.6 = 0.029\ x \ 100 = 2.9$ %, wow, interesante no?.   
