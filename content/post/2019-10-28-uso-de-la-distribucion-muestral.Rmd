@@ -10,3 +10,246 @@ tags:
   - estadistica
   - R
 ---
+
+## Uso de la distribucion muestral
+Muchas desiciones se toman en base en los resultados muestrales. Un gerente administrativo puede tomar una muestra de un producto para determinar su cumple con ciertas especificaciones de produccion, un oficial de gobierno tomara una muestra de los residentes para decidir si cierto plan tributario o programa de bienestar social producira los resultados deseados.
+
+con frecuencia los academicos toman muestras de estudiantes para evaluar el impacto de los esfuerzos de instruccion.
+
+Una aplicacion muy comun y de gran utilidad es una distribucion muestral es la de determinar la probabilidad de que una media muestral clasifique dentro de un rango dado.
+
+### Caso TelCom
+TelCom registro los mensajes telefonicos de voz para sus clientes, los cuales promediaron 150 segs, con una desviacion estandar de 15 segundos. TelCom deseaba determinar la probabilidad de que una sola llamada durar entre 125 y 150 segundos, esto se hizo utilizando la formula de conversion o la formula z. 
+
+$$z = \frac{x - \mu}{\sigma}$$
+
+En la cual x es la observacion unica de interes y $\sigma$ es la desviacion estandar poblacional, sin embargo; muchas desiciones en los negocios dependen de una muestra completa, no solo de una observacion, en este caso, la formula de conversion debe alterarse para explicar el hecho en el cual se esta interesado, no solo en una observacion x, sino en la media de varias observaciones x. Por tanto, cuando se hace un muestreo, la formula de conversion se vuelve
+
+$$z = \frac{\bar{x} - \mu}{\sigma_{\bar{x}}}$$
+
+El valor de interes en el numerador no es una observacion unica, sino la media de n observaciones, adermas, el denominador no es la desviacion estandar poblacional $\sigma$ sino el error estandar de la distribucion muestral $\sigma_{\bar{x}}$. 
+
+En lugar de determinar la probabilidad de duracion de una sola llamada, se puede calcular la probabilidad de que la media de n llamadas dure cierto periodo de tiempo.
+
+Por ejemplo, se desea encontrar la probabilidad de que la durracion promedio o media de `n = 50` llamadas este entre 150 y 155 segundos:
+
+$$z=\frac{\bar{x}-\mu }{\frac{\sigma}{\sqrt{n}}}$$
+
+$$\frac{155-150}{\frac{15}{\sqrt{50}}}=2.36$$
+
+Recordemos un poco sobre el valor-z, los valores-z o puntajes z son un sustituto de la medicion real y representan la distancia de un valor de la media en desviaciones estandar, por ejemplo, un valor-z de 2.0 significa que la medicion esta a 2 desviaciones estandar de la media
+
+Como vimos al inicio del caso TelCom, la formula para calcular z es para encontrar la probabilidad de un valor individual, pero para nuestro caso necesitamos la probabilidad para varios, es decir la media de todos esos valores, por eso es que modificamos la formula del valor, esta modificacion nos va a permitir seguir el mismo procedimiento para encontrar areas bajo la curva que ya aprendimos en anteriores publicaciones en como realizarlo. 
+
+Graficando nuestro planteamiento tenemos:
+
+```{r, echo=FALSE}
+# generamos una secuencia de 300 valores
+x = seq(120,180,length=200) 
+
+# generamos la curva de densidad de la distribucion normal
+y = dnorm(x, mean = 150, sd = 15)
+
+# graficamos
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(150,155,length=100)
+
+# sombreamos el area de interes
+y = dnorm(x, mean = 150, sd = 15)
+polygon(c(150,x,155),c(0,y,0),col="firebrick1")
+title("Probabilidades para TelCom", sub = "P(150 <= media <= 155)")
+text(153,0.010,"0.49")
+```
+
+El ejercicio anterior nos dio un valor-z de `2.36`, ahora bien, nuestra area de interes es un intervalo entre 150 y 155, lo que podemos hacer en este caso es primero encontrar el area mayor a 155 (cola superior) para luego restar el area mayor a 155 (tambien cola superior), esa operacion nos daria el area que queremos, este es el motivo del porque graficando el problema llegamos a encontrar mas facilmente la solucion
+
+```{r}
+pnorm(150, mean = 150, sd = 2.12132, 
+      lower.tail = F) - pnorm(155, mean = 150, sd = 2.12132, lower.tail = F)
+```
+
+Excelente! 0.4908 es el area que buscamos!.
+
+**Aclaracion importante**, notemos que en nuestro dato de ` sd = 2.12132`, 2.54 no corresponde a la desviacion estandar de la poblacion (15), sino al error estandar de la distribucion muestral, ya que nuestra nueva formula del valor z el **denominar** es: $\frac{15}{\sqrt{50}} = 2.12132$ y ese es el valor que debemos colocar en el calculo del area bajo la curva.
+
+### Interpretacion
+0.4908 nos dice que tenemos una probabilidad (en base a una muestra) del 49% de que la duracion de n llamadas  este entre 150 y 155 segundos. (en nuestro caso n corresponde a 50 llamadas) 
+
+Muchas desiciones en los negocios dependen de los valores de las medias estadisticas importantes.
+
+## Tomando desiciones en TelCom
+TelCom plantea instalar nuevos equipos que mejorarian la eficiencia de sus operaciones, sin embargo, antes que los ejecutivos puedan decidir si dicha inversion seria eficaz en funcion de los costos, deben determinar la probabilidad de que la media de una muestra de `n = 35`:
+
+a. Este entre 145 y 150.
+b. Sea mayor que 145.
+c. Sea menor que 155.
+d. Sea mayor que 155.
+
+### Solucion
+a. Probabilidad(145 <= $\bar{x}$ <= 150)
+
+```{r, echo=FALSE}
+# generamos una secuencia de 300 valores
+x = seq(120,180,length=200) 
+
+# generamos la curva de densidad de la distribucion normal
+y = dnorm(x, mean = 150, sd = 15)
+
+# graficamos
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(145,150,length=100)
+
+# sombreamos el area de interes
+y = dnorm(x, mean = 150, sd = 15)
+polygon(c(145,x,150),c(0,y,0),col="deepskyblue1")
+title("Probabilidades para TelCom", sub = "P(145 <= media <= 150)")
+text(148,0.010,"0.47")
+```
+
+Primero vamos a encontrar el area mayor a 145 (cola superior) para luego restar el area mayor a 150 (tambien cola superior)
+
+```{r}
+pnorm(145, mean = 150, sd = 2.535463, 
+      lower.tail = F) - pnorm(150, mean = 150, sd = 2.535463, lower.tail = F)
+```
+
+Recordemos que el valor `2.535463` corresponde al error estandar, el cual se obtiene de $\frac{15}{\sqrt{35}} = 2.535463$ 
+
+b. Probabilidad($\bar{x}$ > 145)
+
+```{r, echo=FALSE}
+# generamos una secuencia de 300 valores
+x = seq(120,180,length=200) 
+
+# generamos la curva de densidad de la distribucion normal
+y = dnorm(x, mean = 150, sd = 15)
+
+# graficamos
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(145,180,length=100)
+
+# sombreamos el area de interes
+y = dnorm(x, mean = 150, sd = 15)
+polygon(c(145,x,180),c(0,y,0),col="deeppink")
+title("Probabilidades para TelCom", sub = "P(media > 145)")
+abline(v = 150)
+text(148,0.010,"0.47")
+text(155,0.010,"0.50")
+```
+
+Recordemos que la funcion `pnorm()` tiene por defecto el parametro `lower.tail = True`, es decir; siempre calcula hacia la izquierda de nuestro valor, para este caso debemos colocar el parametro en `FALSE` para que calcule a la derecha, ya que el problema nos pide la probabilidad mayor a 145.
+
+```{r}
+pnorm(145, mean = 150, sd = 2.535463, lower.tail = FALSE)
+```
+
+$$P(\bar{x}\geqslant 145)= 0.47\ + \ 0.50 =\ 0.9756$$
+
+c. Probabilidad($\bar{x}$ < 155)
+
+```{r, echo=FALSE}
+# generamos una secuencia de 300 valores
+x = seq(120,180,length=200) 
+
+# generamos la curva de densidad de la distribucion normal
+y = dnorm(x, mean = 150, sd = 15)
+
+# graficamos
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(155,120,length=100)
+
+# sombreamos el area de interes
+y = dnorm(x, mean = 150, sd = 15)
+polygon(c(155,x,120),c(0,y,0),col="lawngreen")
+title("Probabilidades para TelCom", sub = "P(media < 155)")
+abline(v = 150)
+text(145,0.010,"0.50")
+text(153,0.010,"0.47")
+```
+
+```{r}
+pnorm(155, mean = 150, sd = 2.535463)
+```
+
+$$P(\bar{x}\leq 155)= 0.50\ + \ 0.47 =\ 0.9756$$
+
+d. Probabilidad($\bar{x}$ > 155)
+
+```{r, echo=FALSE}
+# generamos una secuencia de 300 valores
+x = seq(120,180,length=200) 
+
+# generamos la curva de densidad de la distribucion normal
+y = dnorm(x, mean = 150, sd = 15)
+
+# graficamos
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(155,180,length=100)
+
+# sombreamos el area de interes
+y = dnorm(x, mean = 150, sd = 15)
+polygon(c(155,x,180),c(0,y,0),col="orange")
+title("Probabilidades para TelCom", sub = "P(media > 155)")
+abline(v = 150)
+text(163,0.010,"0.024")
+```
+
+```{r}
+pnorm(155, mean = 150, sd = 2.535463, lower.tail = FALSE)
+```
+
+$$P(\bar{x}\geq 155)= 0.50\ - \ 0.47 =\ 0.024$$
+
+### Interpretacion
+con base en esta infromacion, TelCom puede tomar desiciones mas inteligentes respecto a la necesidad de nuevos equipos
+
+a. Este entre 145 y 150.: probabilidad del 49%
+b. Sea mayor que 145.: probabilidad del 97%
+c. Sea menor que 155.: probabilidad del 97%
+d. Sea mayor que 155.: probabilidad del 2.43%
+
+Si se puede predecir la probabilidad de que un cierto estadistico este dentro de un rango dado, la toma de desiciones se vuelve mas precisa y cientifica. por ejemplo, es posible determinar la probabilidad de error considerando una poblacion con una media de $\mu = 25$ y una desviacion estandar de $\sigma = 8.5$, como se muestra en la figura de abajo, si se toma una muestra de `n = 50` se presentara un error de muestreo de 2 o mas si la media muestral es 27 o mas o 23 o menos, por tanto: 
+
+$P(error) = P(\bar{x}\geq 27) + P(\bar{x}\leq 23)$
+
+$$z=\frac{\bar{x}-\mu }{\frac{\sigma}{\sqrt{n}}}$$
+
+$$z=\frac{27-\ 25 }{\frac{8.5}{\sqrt{50}}} = 1.66$$
+```{r, echo=FALSE}
+# generamos una secuencia de 300 valores
+x = seq(0,50) 
+
+# generamos la curva de densidad de la distribucion normal
+y = dnorm(x, mean = 25, sd = 8.5)
+
+# graficamos
+plot(x,y,type="l",lwd=2,col="black")
+x = seq(15,30)
+
+# sombreamos el area de interes
+y = dnorm(x, mean = 25, sd = 8.5)
+#polygon(c(155,x,180),c(0,y,0),col="orange")
+title("Probabilidades para TelCom", sub = "P(error >= 2)")
+#abline(v = 25)
+abline(v = 27, col = "blue")
+text(30,0.015,"0.0485", col = "blue")
+text(35,0.010,"27", col = "blue")
+arrows(33,0.008, 27,0,length=.15)
+#
+abline(v = 23, col = "red")
+text(18,0.015,"0.0485", col = "red")
+arrows(18,0.008, 23,0,length=.15)
+text(18,0.010,"23", col = "red")
+```
+
+```{r}
+pnorm(23, mean = 25, sd = 1.202082) + pnorm(27, mean = 25, sd = 1.202082, lower.tail = F)
+```
+
+Recordemos que el error de muestreo es la diferencia entre la media poblacion $\mu$ y la media muestral $\bar{x}$
+
+$P(error\geq 2) = 0.0485 * 2 =\ 0.0961564 =\ 9.7\%$
+
+Existe casi un 10% de probabilidad de que el error de muestreo resultante de un intento por estimar $\mu$ sea por lo menos 2.
+
+_Gracias!_

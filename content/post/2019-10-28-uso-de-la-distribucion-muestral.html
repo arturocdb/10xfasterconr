@@ -13,4 +13,101 @@ tags:
 
 
 
-
+<div id="uso-de-la-distribucion-muestral" class="section level2">
+<h2>Uso de la distribucion muestral</h2>
+<p>Muchas desiciones se toman en base en los resultados muestrales. Un gerente administrativo puede tomar una muestra de un producto para determinar su cumple con ciertas especificaciones de produccion, un oficial de gobierno tomara una muestra de los residentes para decidir si cierto plan tributario o programa de bienestar social producira los resultados deseados.</p>
+<p>con frecuencia los academicos toman muestras de estudiantes para evaluar el impacto de los esfuerzos de instruccion.</p>
+<p>Una aplicacion muy comun y de gran utilidad es una distribucion muestral es la de determinar la probabilidad de que una media muestral clasifique dentro de un rango dado.</p>
+<div id="caso-telcom" class="section level3">
+<h3>Caso TelCom</h3>
+<p>TelCom registro los mensajes telefonicos de voz para sus clientes, los cuales promediaron 150 segs, con una desviacion estandar de 15 segundos. TelCom deseaba determinar la probabilidad de que una sola llamada durar entre 125 y 150 segundos, esto se hizo utilizando la formula de conversion o la formula z.</p>
+<p><span class="math display">\[z = \frac{x - \mu}{\sigma}\]</span></p>
+<p>En la cual x es la observacion unica de interes y <span class="math inline">\(\sigma\)</span> es la desviacion estandar poblacional, sin embargo; muchas desiciones en los negocios dependen de una muestra completa, no solo de una observacion, en este caso, la formula de conversion debe alterarse para explicar el hecho en el cual se esta interesado, no solo en una observacion x, sino en la media de varias observaciones x. Por tanto, cuando se hace un muestreo, la formula de conversion se vuelve</p>
+<p><span class="math display">\[z = \frac{\bar{x} - \mu}{\sigma_{\bar{x}}}\]</span></p>
+<p>El valor de interes en el numerador no es una observacion unica, sino la media de n observaciones, adermas, el denominador no es la desviacion estandar poblacional <span class="math inline">\(\sigma\)</span> sino el error estandar de la distribucion muestral <span class="math inline">\(\sigma_{\bar{x}}\)</span>.</p>
+<p>En lugar de determinar la probabilidad de duracion de una sola llamada, se puede calcular la probabilidad de que la media de n llamadas dure cierto periodo de tiempo.</p>
+<p>Por ejemplo, se desea encontrar la probabilidad de que la durracion promedio o media de <code>n = 50</code> llamadas este entre 150 y 155 segundos:</p>
+<p><span class="math display">\[z=\frac{\bar{x}-\mu }{\frac{\sigma}{\sqrt{n}}}\]</span></p>
+<p><span class="math display">\[\frac{155-150}{\frac{15}{\sqrt{50}}}=2.36\]</span></p>
+<p>Recordemos un poco sobre el valor-z, los valores-z o puntajes z son un sustituto de la medicion real y representan la distancia de un valor de la media en desviaciones estandar, por ejemplo, un valor-z de 2.0 significa que la medicion esta a 2 desviaciones estandar de la media</p>
+<p>Como vimos al inicio del caso TelCom, la formula para calcular z es para encontrar la probabilidad de un valor individual, pero para nuestro caso necesitamos la probabilidad para varios, es decir la media de todos esos valores, por eso es que modificamos la formula del valor, esta modificacion nos va a permitir seguir el mismo procedimiento para encontrar areas bajo la curva que ya aprendimos en anteriores publicaciones en como realizarlo.</p>
+<p>Graficando nuestro planteamiento tenemos:</p>
+<p><img src="/post/2019-10-28-uso-de-la-distribucion-muestral_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>El ejercicio anterior nos dio un valor-z de <code>2.36</code>, ahora bien, nuestra area de interes es un intervalo entre 150 y 155, lo que podemos hacer en este caso es primero encontrar el area mayor a 155 (cola superior) para luego restar el area mayor a 155 (tambien cola superior), esa operacion nos daria el area que queremos, este es el motivo del porque graficando el problema llegamos a encontrar mas facilmente la solucion</p>
+<pre class="r"><code>pnorm(150, mean = 150, sd = 2.12132, 
+      lower.tail = F) - pnorm(155, mean = 150, sd = 2.12132, lower.tail = F)</code></pre>
+<pre><code>## [1] 0.4907889</code></pre>
+<p>Excelente! 0.4908 es el area que buscamos!.</p>
+<p><strong>Aclaracion importante</strong>, notemos que en nuestro dato de <code>sd = 2.12132</code>, 2.54 no corresponde a la desviacion estandar de la poblacion (15), sino al error estandar de la distribucion muestral, ya que nuestra nueva formula del valor z el <strong>denominar</strong> es: <span class="math inline">\(\frac{15}{\sqrt{50}} = 2.12132\)</span> y ese es el valor que debemos colocar en el calculo del area bajo la curva.</p>
+</div>
+<div id="interpretacion" class="section level3">
+<h3>Interpretacion</h3>
+<p>0.4908 nos dice que tenemos una probabilidad (en base a una muestra) del 49% de que la duracion de n llamadas este entre 150 y 155 segundos. (en nuestro caso n corresponde a 50 llamadas)</p>
+<p>Muchas desiciones en los negocios dependen de los valores de las medias estadisticas importantes.</p>
+</div>
+</div>
+<div id="tomando-desiciones-en-telcom" class="section level2">
+<h2>Tomando desiciones en TelCom</h2>
+<p>TelCom plantea instalar nuevos equipos que mejorarian la eficiencia de sus operaciones, sin embargo, antes que los ejecutivos puedan decidir si dicha inversion seria eficaz en funcion de los costos, deben determinar la probabilidad de que la media de una muestra de <code>n = 35</code>:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Este entre 145 y 150.</li>
+<li>Sea mayor que 145.</li>
+<li>Sea menor que 155.</li>
+<li>Sea mayor que 155.</li>
+</ol>
+<div id="solucion" class="section level3">
+<h3>Solucion</h3>
+<ol style="list-style-type: lower-alpha">
+<li>Probabilidad(145 &lt;= <span class="math inline">\(\bar{x}\)</span> &lt;= 150)</li>
+</ol>
+<p><img src="/post/2019-10-28-uso-de-la-distribucion-muestral_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>Primero vamos a encontrar el area mayor a 145 (cola superior) para luego restar el area mayor a 150 (tambien cola superior)</p>
+<pre class="r"><code>pnorm(145, mean = 150, sd = 2.535463, 
+      lower.tail = F) - pnorm(150, mean = 150, sd = 2.535463, lower.tail = F)</code></pre>
+<pre><code>## [1] 0.4756967</code></pre>
+<p>Recordemos que el valor <code>2.535463</code> corresponde al error estandar, el cual se obtiene de <span class="math inline">\(\frac{15}{\sqrt{35}} = 2.535463\)</span></p>
+<ol start="2" style="list-style-type: lower-alpha">
+<li>Probabilidad(<span class="math inline">\(\bar{x}\)</span> &gt; 145)</li>
+</ol>
+<p><img src="/post/2019-10-28-uso-de-la-distribucion-muestral_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Recordemos que la funcion <code>pnorm()</code> tiene por defecto el parametro <code>lower.tail = True</code>, es decir; siempre calcula hacia la izquierda de nuestro valor, para este caso debemos colocar el parametro en <code>FALSE</code> para que calcule a la derecha, ya que el problema nos pide la probabilidad mayor a 145.</p>
+<pre class="r"><code>pnorm(145, mean = 150, sd = 2.535463, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.9756967</code></pre>
+<p><span class="math display">\[P(\bar{x}\geqslant 145)= 0.47\ + \ 0.50 =\ 0.9756\]</span></p>
+<ol start="3" style="list-style-type: lower-alpha">
+<li>Probabilidad(<span class="math inline">\(\bar{x}\)</span> &lt; 155)</li>
+</ol>
+<p><img src="/post/2019-10-28-uso-de-la-distribucion-muestral_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>pnorm(155, mean = 150, sd = 2.535463)</code></pre>
+<pre><code>## [1] 0.9756967</code></pre>
+<p><span class="math display">\[P(\bar{x}\leq 155)= 0.50\ + \ 0.47 =\ 0.9756\]</span></p>
+<ol start="4" style="list-style-type: lower-alpha">
+<li>Probabilidad(<span class="math inline">\(\bar{x}\)</span> &gt; 155)</li>
+</ol>
+<p><img src="/post/2019-10-28-uso-de-la-distribucion-muestral_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>pnorm(155, mean = 150, sd = 2.535463, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.0243033</code></pre>
+<p><span class="math display">\[P(\bar{x}\geq 155)= 0.50\ - \ 0.47 =\ 0.024\]</span></p>
+</div>
+<div id="interpretacion-1" class="section level3">
+<h3>Interpretacion</h3>
+<p>con base en esta infromacion, TelCom puede tomar desiciones mas inteligentes respecto a la necesidad de nuevos equipos</p>
+<ol style="list-style-type: lower-alpha">
+<li>Este entre 145 y 150.: probabilidad del 49%</li>
+<li>Sea mayor que 145.: probabilidad del 97%</li>
+<li>Sea menor que 155.: probabilidad del 97%</li>
+<li>Sea mayor que 155.: probabilidad del 2.43%</li>
+</ol>
+<p>Si se puede predecir la probabilidad de que un cierto estadistico este dentro de un rango dado, la toma de desiciones se vuelve mas precisa y cientifica. por ejemplo, es posible determinar la probabilidad de error considerando una poblacion con una media de <span class="math inline">\(\mu = 25\)</span> y una desviacion estandar de <span class="math inline">\(\sigma = 8.5\)</span>, como se muestra en la figura de abajo, si se toma una muestra de <code>n = 50</code> se presentara un error de muestreo de 2 o mas si la media muestral es 27 o mas o 23 o menos, por tanto:</p>
+<p><span class="math inline">\(P(error) = P(\bar{x}\geq 27) + P(\bar{x}\leq 23)\)</span></p>
+<p><span class="math display">\[z=\frac{\bar{x}-\mu }{\frac{\sigma}{\sqrt{n}}}\]</span></p>
+<p><span class="math display">\[z=\frac{27-\ 25 }{\frac{8.5}{\sqrt{50}}} = 1.66\]</span>
+<img src="/post/2019-10-28-uso-de-la-distribucion-muestral_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<pre class="r"><code>pnorm(23, mean = 25, sd = 1.202082) + pnorm(27, mean = 25, sd = 1.202082, lower.tail = F)</code></pre>
+<pre><code>## [1] 0.0961564</code></pre>
+<p>Recordemos que el error de muestreo es la diferencia entre la media poblacion <span class="math inline">\(\mu\)</span> y la media muestral <span class="math inline">\(\bar{x}\)</span></p>
+<p><span class="math inline">\(P(error\geq 2) = 0.0485 * 2 =\ 0.0961564 =\ 9.7\%\)</span></p>
+<p>Existe casi un 10% de probabilidad de que el error de muestreo resultante de un intento por estimar <span class="math inline">\(\mu\)</span> sea por lo menos 2.</p>
+<p><em>Gracias!</em></p>
+</div>
+</div>
