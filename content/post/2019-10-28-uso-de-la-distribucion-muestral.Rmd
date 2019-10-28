@@ -1,0 +1,12 @@
+---
+title: Uso de la distribucion muestral
+author: Charlie Do Amaral
+date: '2019-10-28'
+slug: uso-de-la-distribucion-muestral
+categories:
+  - estadistica
+  - R
+tags:
+  - estadistica
+  - R
+---
