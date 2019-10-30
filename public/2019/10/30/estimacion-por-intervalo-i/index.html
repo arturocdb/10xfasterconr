@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<title>Estimacion por Intervalo I - Diseñando una experiencia ...</title>
+<meta property="og:title" content="Estimacion por Intervalo I - Diseñando una experiencia ...">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/nosotros/">Nosotros</a></li>
+    
+    <li><a href="/servicios/">Servicios</a></li>
+    
+    <li><a href="/curso/">Curso R</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">9 min read</span>
+    
+
+    <h1 class="article-title">Estimacion por Intervalo I</h1>
+
+    
+    <span class="article-date">2019-10-30</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="objetivos" class="section level2">
+<h2>Objetivos</h2>
+<ul>
+<li>Comprender los elementos y la intrepretacion de un intervalo de confianza</li>
+<li>Realizar calculos con confianza</li>
+<li>Analizar los factores que influyen en la amplitud de un intervalo de confianza</li>
+</ul>
+</div>
+<div id="introduccion" class="section level2">
+<h2>Introduccion</h2>
+<p>Actualmente se debe estar bien conciente de que las poblaciones son generalmente muy grandes como para ser estudiadas en su totalidad. Su tamaño requiere que se seleccionen muestras, las cuales se pueden utilizar mas tarde para hacer inferencias sobre las poblaciones. Si un gerente de una tienda desea saber sobre el gasto promedio de sus clientes durante el año anterior, podria encontrar dificil calcular el promedio de los cientos o quizas miles de clientes que pasaron por su tienda, seria mucho mas facil estimar la media poblacional con la media de una muestra representativa..</p>
+<p>La mayoria de los estadisticos se utilizan para estimar alguna caracteristica sobre una poblacion de interes, por ejemplo, los ingresos medios por unidad familiar, el porcentaje de personas que compran regalos por internet o la cantidad media de helado que consume un español en un año estas caracteristicas de una poblacion se llaman <strong>parametros</strong>.</p>
+</div>
+<div id="coeficiente-de-confianza" class="section level2">
+<h2>Coeficiente de confianza</h2>
+<p>El coeficiente de confianza es el nivel de confianza que se tiene en el que el intervalo contenga el valor desconocido del parametro</p>
+<p>Intervalo de confianza para estimar <span class="math inline">\(\mu\)</span> cuando <span class="math inline">\(\sigma\)</span> es desconocido</p>
+<p><span class="math display">\[\mu = \bar{X} \pm Z \sigma_{\bar{x}} \]</span></p>
+<p>Cuanto debe sumarse y restarse, depende en parete del nivel de confianza deseado, estipulado por el valor de Z en la anterior formula. El nivel de confianza del 95% requiere un valor de Z de 1.96 (<code>0.52/2 = 0.4750</code>), el area de 0.4750 corresponde a un valor de Z de 1.96</p>
+<p>Consideremos el caso de un promotor inmobiliario que intenta construir un gran centro comercial, puede estimar en el area el ingreso promedio por familia como indicador de las ventas esperadas, una muestra de <code>n = 100</code> familias de una media de <span class="math inline">\(\bar{X} = 35,500\)</span>, se asume que la desviacion estandar poblacional es <span class="math inline">\(\sigma = 7,200\)</span>, dado que <span class="math inline">\(\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}\)</span>, se estima un intervalo del 95% como</p>
+<p>I.C. (Intervalo de confianza) para estimar <span class="math inline">\(\mu\)</span></p>
+<p><span class="math display">\[\mu = 35,500 \pm (1.96)\ \frac{7,200}{\sqrt{100}}\]</span></p>
+<p><span class="math display">\[= 34,088.80 \leq \mu \leq 36,911.20\]</span></p>
+</div>
+<div id="interpretacion-de-un-intervalo-de-confianza" class="section level2">
+<h2>Interpretacion de un intervalo de confianza</h2>
+<p>El promotor puede interpretar los resultados de su intervalo de confianza de dos formas: la primera y la mas comun, establece que el promotor tiene un <em>“95% de confianza en que la media poblacional real desconocida este entre 34,088.80 y 36,911.20”</em>, aunque el valor real para la media poblacional sigue siendo desconocido, el promotor tiene un 95% de confianza en que este entre estos dos valores.</p>
+<div id="resolviendo-el-problema-con-r" class="section level3">
+<h3>Resolviendo el problema con R</h3>
+<p>Bueno, la primera solucion siempre viene por bucar una funcion en R que ya exista, para nuestro caso especifico no encontramos una, por ende la vamos a crear:</p>
+<pre class="r"><code>IC &lt;- function(media,valor.z,desv,muestra){
+  LIC &lt;- round(media - (valor.z*(desv/sqrt(muestra))),2)
+  LSC &lt;- round(media + (valor.z*(desv/sqrt(muestra))),2)
+  
+  return(c(LIC=LIC, LSC=LSC))
+}
+
+IC(media = 35500, valor.z = 1.96, desv = 7200, muestra = 100)</code></pre>
+<pre><code>##     LIC     LSC 
+## 34088.8 36911.2</code></pre>
+<p>donde:
+- <code>LIC</code>: <em>Limite inferior de confianza</em>
+- <code>LSC</code>: <em>Limite superior de confianza</em></p>
+<p>mismo resultado!</p>
+<p>La segunda interpretacion reconoce que se pueden desarrollar muchos intervalos de confianza diferentes. Otra muestra probablemente producira una media muestral diferente debido al error de muestreo, con una <span class="math inline">\(\bar{X}\)</span> diferente el intervalo tendria limite superior e inferior distintos. Por tanto, la segunda interpretacion establece que si se construyen todos las combinaciones <span class="math inline">\(\binom{N}{n}\)</span> intervalos de confianza, el 95% de ellos contendra la media poblacional desconocida.</p>
+<p>si una segunda muestra da una media de 35,600 en lugar de 35,500, el intervalo es:</p>
+<p><span class="math display">\[35,600\ \pm (1.96)\ \frac{7,200}{\sqrt{100}}\]</span></p>
+<p><span class="math display">\[= 34,188.80 \leq \mu \leq 37,011.20\]</span></p>
+<p>Para realizarlo con R, simplemente cambiamos los argumentos de nuestra funcion:</p>
+<pre class="r"><code>IC(media = 35600, valor.z = 1.96, 
+   desv = 7200, muestra = 100)</code></pre>
+<pre><code>##     LIC     LSC 
+## 34188.8 37011.2</code></pre>
+<p>El promotor puede estar 95% seguro de que la media poblacional esta comprendida entre 34,188.80 y 37,011.20. Si todos los intervalos posibles se construyeran con base en todas las medias muestrales diferentes, el 95% de ellas contendria la media poblacional desconocida.</p>
+<p>Esto por supuesto significa que el 5% de todos los intervalos estaria errado, no contendria la media poblacional. Este 5% hallado como (1 - coeficiente de confianza) es denominado el <strong>valor alfa</strong> y representa la probabilidad de error. El valor alfa es la probabilidad de que cualquier intervalo dado no contenga la media poblacional.</p>
+</div>
+<div id="valor-alfa" class="section level3">
+<h3>Valor Alfa</h3>
+<p>Es la probabilidad de error o la probabilidad de que un intervalo dado no contenga la media poblacional desconocida</p>
+</div>
+<div id="intervalo-de-confianza-cuando-la-desviacion-estandar-poblacional-es-desconocida" class="section level3">
+<h3>Intervalo de confianza cuando la desviacion estandar poblacional es desconocida</h3>
+<p>La formula anterior requiere la suposicion improbable que la desviacion estandar poblacional es <span class="math inline">\(\sigma\)</span> es conocida. En el evento probable que <span class="math inline">\(\sigma\)</span> sea desconocida, la desviacion estandar de la muestra debe sustituirse</p>
+<p><span class="math display">\[IC\ para\ estimar\ \mu = \bar{X} \pm Z \varsigma_{\bar{x}}\]</span></p>
+<p>en donde:</p>
+<p><span class="math display">\[\varsigma_{\bar{x}} = \frac{\varsigma}{\sqrt{n}}\]</span></p>
+<p><strong>Contadores Asociados S.A</strong>, acaba de registrar las declaraciones de impuestos de sus clientes, desea estimar la cantidad promedio que deben al Servicio de Renta Interna. De los <strong>50</strong> clientes que selecciono en su muestra, la cantidad promedio que se adeudaba era de <strong>652.68.</strong> Ya que la desviacion estandar de todos sus clientes <span class="math inline">\(\sigma\)</span> es desconocida, Contadores Asociados S.A. desea estimar <span class="math inline">\(\sigma\)</span> con la desviacion estandar de la muestra de <span class="math inline">\(\varsigma = 217.43\)</span>. Si se desea un nivel del <strong>99%</strong> de confianza, el valor-z apropiado es <strong>2.58</strong></p>
+<p><span class="math display">\[652.58 \pm 2.58\ \frac{217.43}{\sqrt{50}}\]</span></p>
+<p><span class="math display">\[573.35\leq \mu \leq 732.01\]</span></p>
+<p>Para la solucion son R utilizamos nuestra funcion <code>IC()</code></p>
+<pre class="r"><code>IC(media = 652.68, valor.z = 2.58,
+   desv = 217.43, muestra = 50)</code></pre>
+<pre><code>##    LIC    LSC 
+## 573.35 732.01</code></pre>
+<p><strong>Contadores Asociados S.A</strong> pueden tener un 99% de confianza en que la cantidad promedio que deben todos sus clientes al Servicio de Renta Interna esta entre <strong>573.35 y 732.01.</strong></p>
+<p>Que pasaria a este intervalo si <strong>Contadores Asociados S.A</strong> estuviera dispuesto a aceptar un nivel de confianza del 95%?. Con un valor Z de 1.96, el intervalo seria:</p>
+<p><span class="math display">\[652.68 \pm 1.96\ \frac{217.43}{\sqrt{50}}\]</span></p>
+<p><span class="math display">\[592.41\leq \mu \leq 712.96\]</span></p>
+<p>Con R, continuamos usando nuestra funcion sin ningun problema:</p>
+<pre class="r"><code>IC(media = 652.68, valor.z = 1.96,
+   desv = 217.43, muestra = 50)</code></pre>
+<pre><code>##    LIC    LSC 
+## 592.41 712.95</code></pre>
+<p>Los resultados son tan buenos como malos. Las buenas noticias son que el intervalo del 95% es mas estrecho y ofrece mayor <strong>precision.</strong> Un intervalo amplio no es especialmente util. Revelaria muy poco si el profesor le pidiera que la media del siguiente examen estuviera entre el 0 y el 100%. Entre mas estrecho sea el intervalo, mas significativo es.</p>
+<p>Las malas noticias son que <strong>Contadores Asociados S.A</strong> ahora esta el 95% seguro de que el intervalo contiene en realidad <span class="math inline">\(\mu\)</span>. Aunque el intervalo es mas preciso (mas estrecho) la probabilidad de que contenga <span class="math inline">\(\mu\)</span> se ha reducido del 99 al 95%. <strong>Contadores Asociados S.A</strong> tuvo que abandonar algo de confianza y ganar mas precision</p>
+</div>
+</div>
+<div id="ejemplo-cabs" class="section level2">
+<h2>Ejemplo Cabs</h2>
+<p>Cabs planea comprar una flota de nuevos taxis para sus operaciones, la decision depende de si el rendimiento del auto o modelo en consideracion es por lo menos 27.5 millas por galon de gasolina. Los 36 carros que prueba la compañia reportan una media de 25.6 millas por galon (MPG), con una desviacion estandar de 3.5 MPG. A un nivel de confianza del 99%, que acopnsejaria a Cabs que hiciera?.</p>
+<div id="solucion" class="section level3">
+<h3>Solucion</h3>
+<p>Se tiene que el intervalo de confianza para estimar <span class="math inline">\(\mu\)</span></p>
+<p><span class="math display">\[\mu = 25.6 \pm (2.58)\ \frac{3.5}{\sqrt{36}}\]</span></p>
+<p><span class="math display">\[= 24.10 \leq \mu \leq 27.11\]</span></p>
+</div>
+<div id="interpretacion" class="section level3">
+<h3>Interpretacion</h3>
+<p>Puede estar 99% seguro de que las MPG promedio de este modelo de vehiculo es menor que el minimo de 27.5 requerido. Usted deberia aconsejar a Cabs que busque un modelo alternativo.</p>
+</div>
+</div>
+<div id="elegir-un-nivel-de-confianza" class="section level2">
+<h2>Elegir un nivel de confianza</h2>
+<p>A cada intervalo de confianza (y por tanto, a cada margend de error) le corresponde un porcentaje que representa tu grado de confianza en que los resultados capturaran el parametro poblacional real, dependiendo de como el azar influya en la muestra aleatoria, este porcentaje se denomina <em>nivel de confianza</em></p>
+<p>El nivel de confianza te ayuda a justificar el resto de los resultados muestrales que podrias haber obtenido cuando estas estimando un parametro utilizando los datos procedentes de una unica muestra. Si quieres justificar el 95% del resto de los resultados posibles, tu nivel de confianza sera del 95%.</p>
+<p><strong><em>Que nivel de confianza suelen utilizar los investigadores?</em></strong>, yo he visto niveles de confianza entre el 80 y 99%, pero el mas frecuente es el 95%. De hecho, hay incluso un chiste sobre esta cuestion: <em>porque a los estadisticos les gusta su trabajo?</em>, porque solo tienen que acertar el 95% de las veces, (tiene un poco de gracia no ?).</p>
+<p>La variabilidad de los resultados muestrales se mide por el numero de errores estandar. Un <strong><em>error estandar</em></strong> es similar a la desviacion estandar de un conjunto de datos, solo qeu el error estandar se aplica a medias muestrales o porcentajes muestrales que podrias haber obtenido si hubieras tomado otras muestras.</p>
+<p>Los errores estandar son los elementos basicos de los intervalos de confianza. Un intervalo de confianza es un estadistico mas/menos un margen de error, y el margen de error es el numero de errores estandar que necesitas para llegar al nivel de confianza que quieres.</p>
+<p>A cada nivel de confianza le corresponde un numero de errores estandar que deben sumarse o restarse. Este numero de errores estandar es lo que se denomina <strong><em>valor critico</em></strong>. Si estas utilizando una distribucion Z para encontrar el numero de errores estandares, el valor critico se llama valor z, en la siguiente tabla encontraras una lista de valores z para los intervalos de confianza mas comunes.</p>
+<p>a medida que aumenta el nivel de confianza, aumenta tambien el numero de errores estandares, y por tanto, el margen de error.</p>
+<div id="tala-de-valores-z-para-varios-niveles-de-confianza" class="section level3">
+<h3>Tala de valores Z para varios niveles de confianza</h3>
+<table>
+<thead>
+<tr class="header">
+<th><strong>Nivel de confianza</strong></th>
+<th><strong>Valor Z</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>80%</td>
+<td>1.28</td>
+</tr>
+<tr class="even">
+<td>90%</td>
+<td>1.645 (por convencion)</td>
+</tr>
+<tr class="odd">
+<td>95%</td>
+<td>1.96</td>
+</tr>
+<tr class="even">
+<td>98%</td>
+<td>2.33</td>
+</tr>
+<tr class="odd">
+<td>99%</td>
+<td>2.58</td>
+</tr>
+</tbody>
+</table>
+<p>Si quieres un nivel de confianza en los resultados superior al 95%, tendras que sumar y restar mas de dos errores estandares aproximadamente. Por ejemplo, para tener una confianza del 99%, sumas y restas aproximadamente 2 errores estandares y medio (2.58 para ser exactos) para obtener el margen de error. Cuanto mayor es el nivel de confianza, mas grande es el valor Z y el margen de error, y mas ancho es el intervalo de confianza (suponiendo que todo lo demas permanece igual). <strong><em>Para tener mas confianza, hay que pagar un precio</em></strong>.</p>
+<p>Observa que he dicho <em>“suponiendo que todo lo demas permanece igual”</em>. Puedes compensar un incremento del margen de error incrementando tambien el tamaño de la muestra</p>
+<p><em>Gracias!</em></p>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

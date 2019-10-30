@@ -1,0 +1,170 @@
+---
+title: Estimacion por Intervalo I
+author: Charlie Do Amaral
+date: '2019-10-30'
+slug: estimacion-por-intervalo-i
+categories:
+  - estadistica
+  - R
+tags:
+  - estadistica
+  - R
+---
+
+## Objetivos
+- Comprender los elementos y la intrepretacion de un intervalo de confianza
+- Realizar calculos con confianza
+- Analizar los factores que influyen en la amplitud de un intervalo de confianza 
+
+## Introduccion
+Actualmente se debe estar bien conciente de que las poblaciones son generalmente muy grandes como para ser estudiadas en su totalidad. Su tamaño requiere que se seleccionen muestras, las cuales se pueden utilizar mas tarde para hacer inferencias sobre las poblaciones. Si un gerente de una tienda desea saber sobre el gasto promedio de sus clientes durante el año anterior, podria encontrar dificil calcular el promedio de los cientos o quizas miles de clientes que pasaron por su tienda, seria mucho mas facil estimar la media poblacional con la media de una muestra representativa..
+
+La mayoria de los estadisticos se utilizan para estimar alguna caracteristica sobre una poblacion de interes, por ejemplo, los ingresos medios por unidad familiar, el porcentaje de personas que compran regalos por internet o la cantidad media de helado que consume un español en un año estas caracteristicas de una poblacion se llaman **parametros**.
+
+## Coeficiente de confianza
+El coeficiente de confianza es el nivel de confianza que se tiene en el que el intervalo contenga el valor desconocido del parametro
+
+Intervalo de confianza para estimar $\mu$ cuando $\sigma$ es desconocido
+
+$$\mu = \bar{X} \pm Z \sigma_{\bar{x}} $$
+
+Cuanto debe sumarse y restarse, depende en parete del nivel de confianza deseado, estipulado por el valor de Z en la anterior formula. El nivel de confianza del 95% requiere un valor de Z de 1.96 (`0.52/2 = 0.4750`), el area de 0.4750 corresponde a un valor de Z de 1.96
+
+Consideremos el caso de un promotor inmobiliario que intenta construir un gran centro comercial, puede estimar en el area el ingreso promedio por familia como indicador de las ventas esperadas, una muestra de `n = 100` familias de una media de $\bar{X} = 35,500$, se asume que la desviacion estandar poblacional es $\sigma = 7,200$, dado que $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$, se estima un intervalo del 95% como 
+
+I.C. (Intervalo de confianza) para estimar $\mu$
+
+$$\mu = 35,500 \pm (1.96)\ \frac{7,200}{\sqrt{100}}$$
+
+$$= 34,088.80 \leq \mu \leq 36,911.20$$
+
+## Interpretacion de un intervalo de confianza 
+El promotor puede interpretar los resultados de su intervalo de confianza de dos formas: la primera y la mas comun, establece que el promotor tiene un _"95% de confianza en que la media poblacional real desconocida este entre 34,088.80 y 36,911.20"_, aunque el valor real para la media poblacional sigue siendo desconocido, el promotor tiene un 95% de confianza en que este entre estos dos valores.
+
+### Resolviendo el problema con R
+Bueno, la primera solucion siempre viene por bucar una funcion en R que ya exista, para nuestro caso especifico no encontramos una, por ende la vamos a crear: 
+
+```{r}
+IC <- function(media,valor.z,desv,muestra){
+  LIC <- round(media - (valor.z*(desv/sqrt(muestra))),2)
+  LSC <- round(media + (valor.z*(desv/sqrt(muestra))),2)
+  
+  return(c(LIC=LIC, LSC=LSC))
+}
+
+IC(media = 35500, valor.z = 1.96, desv = 7200, muestra = 100)
+```
+
+donde:
+- `LIC`: _Limite inferior de confianza_
+- `LSC`: _Limite superior de confianza_
+
+mismo resultado!
+
+La segunda interpretacion reconoce que se pueden desarrollar muchos intervalos de confianza diferentes. Otra muestra probablemente producira una media muestral diferente debido al error de muestreo, con una $\bar{X}$ diferente el intervalo tendria limite superior e inferior distintos. Por tanto, la segunda interpretacion establece que si se construyen todos las combinaciones $\binom{N}{n}$ intervalos de confianza, el 95% de ellos contendra la media poblacional desconocida.
+
+si una segunda muestra da una media de 35,600 en lugar de 35,500, el intervalo es:
+
+$$35,600\ \pm (1.96)\ \frac{7,200}{\sqrt{100}}$$
+
+$$= 34,188.80 \leq \mu \leq 37,011.20$$
+
+Para realizarlo con R, simplemente cambiamos los argumentos de nuestra funcion:
+
+```{r}
+IC(media = 35600, valor.z = 1.96, 
+   desv = 7200, muestra = 100)
+
+```
+
+El promotor puede estar 95% seguro de que la media poblacional esta comprendida entre 34,188.80 y 37,011.20. Si todos los intervalos posibles se construyeran con base en todas las medias muestrales diferentes, el 95% de ellas contendria la media poblacional desconocida.
+
+Esto por supuesto significa que el 5% de todos los intervalos estaria errado, no contendria la media poblacional. Este 5% hallado como (1 - coeficiente de confianza) es denominado el **valor alfa** y representa la probabilidad de error. El valor alfa es la probabilidad de que cualquier intervalo dado no contenga la media poblacional.
+
+### Valor Alfa
+Es la probabilidad de error o la probabilidad de que un intervalo dado no contenga la media poblacional desconocida
+
+### Intervalo de confianza cuando la desviacion estandar poblacional es desconocida
+La formula anterior requiere la suposicion improbable que la desviacion estandar poblacional es $\sigma$ es conocida. En el evento probable que $\sigma$ sea desconocida, la desviacion estandar de la muestra debe sustituirse  
+
+$$IC\ para\ estimar\ \mu = \bar{X} \pm Z \varsigma_{\bar{x}}$$
+
+en donde:
+
+$$\varsigma_{\bar{x}} = \frac{\varsigma}{\sqrt{n}}$$
+
+**Contadores Asociados S.A**, acaba de registrar las declaraciones de impuestos de sus clientes, desea estimar la cantidad promedio que deben al Servicio de Renta Interna. De los **50** clientes que selecciono en su muestra, la cantidad promedio que se adeudaba era de **652.68.** Ya que la desviacion estandar de todos sus clientes $\sigma$ es desconocida, Contadores Asociados S.A. desea estimar $\sigma$ con la desviacion estandar de la muestra de $\varsigma = 217.43$. Si se desea un nivel del **99%** de confianza, el valor-z apropiado es **2.58** 
+
+$$652.58 \pm 2.58\ \frac{217.43}{\sqrt{50}}$$
+
+$$573.35\leq \mu \leq 732.01$$
+
+Para la solucion son R utilizamos nuestra funcion `IC()`
+
+```{r}
+IC(media = 652.68, valor.z = 2.58,
+   desv = 217.43, muestra = 50)
+```
+
+**Contadores Asociados S.A** pueden tener un 99% de confianza en que la cantidad promedio que deben todos sus clientes al Servicio de Renta Interna esta entre **573.35 y 732.01.**
+
+Que pasaria a este intervalo si **Contadores Asociados S.A** estuviera dispuesto a aceptar un nivel de confianza del 95%?. Con un valor Z de 1.96, el intervalo seria:
+
+$$652.68 \pm 1.96\ \frac{217.43}{\sqrt{50}}$$
+
+$$592.41\leq \mu \leq 712.96$$
+
+Con R, continuamos usando nuestra funcion sin ningun problema:
+
+```{r}
+IC(media = 652.68, valor.z = 1.96,
+   desv = 217.43, muestra = 50)
+```
+
+Los resultados son tan buenos como malos. Las buenas noticias son que el intervalo del 95% es mas estrecho y ofrece mayor **precision.** Un intervalo amplio no es especialmente util. Revelaria muy poco si el profesor le pidiera que la media del siguiente examen estuviera entre el 0 y el 100%. Entre mas estrecho sea el intervalo, mas significativo es. 
+
+Las malas noticias son que **Contadores Asociados S.A** ahora esta el 95% seguro de que el intervalo contiene en realidad $\mu$. Aunque el intervalo es mas preciso (mas estrecho) la probabilidad de que contenga $\mu$ se ha reducido del 99 al 95%. **Contadores Asociados S.A** tuvo que abandonar algo de confianza y ganar mas precision  
+
+## Ejemplo Cabs
+Cabs planea comprar una flota de nuevos taxis para sus operaciones, la decision depende de si el rendimiento del auto o modelo en consideracion es por lo menos 27.5 millas por galon de gasolina. Los 36 carros que prueba la compañia reportan una media de 25.6 millas por galon (MPG), con una desviacion estandar de 3.5 MPG. A un nivel de confianza del 99%, que acopnsejaria a Cabs que hiciera?.
+
+### Solucion
+Se tiene que el intervalo de confianza para estimar $\mu$
+
+$$\mu = 25.6 \pm (2.58)\ \frac{3.5}{\sqrt{36}}$$
+
+$$= 24.10 \leq \mu \leq 27.11$$
+
+### Interpretacion
+Puede estar 99% seguro de que las MPG promedio de este modelo de vehiculo es menor que el minimo de 27.5 requerido. Usted deberia aconsejar a Cabs que busque un modelo alternativo.
+
+## Elegir un nivel de confianza
+A cada intervalo de confianza (y por tanto, a cada margend de error) le corresponde un porcentaje que representa tu grado de confianza en que los resultados capturaran el parametro poblacional real, dependiendo de como el azar influya en la muestra aleatoria, este porcentaje se denomina _nivel de confianza_
+
+El nivel de confianza te ayuda a justificar el resto de los resultados muestrales que podrias haber obtenido cuando estas estimando un parametro utilizando los datos procedentes de una unica muestra. Si quieres justificar el 95% del resto de los resultados posibles, tu nivel de confianza sera del 95%.
+
+**_Que nivel de confianza suelen utilizar los investigadores?_**, yo he visto niveles de confianza entre el 80 y 99%, pero el mas frecuente es el 95%. De hecho, hay incluso un chiste sobre esta cuestion: _porque a los estadisticos les gusta su trabajo?_, porque solo tienen que acertar el 95% de las veces, (tiene un poco de gracia no ?).
+
+La variabilidad de los resultados muestrales se mide por el numero de errores estandar. Un **_error estandar_** es similar a la desviacion estandar de un conjunto de datos, solo qeu el error estandar se aplica a medias muestrales o porcentajes muestrales que podrias haber obtenido si hubieras tomado otras muestras.
+
+Los errores estandar son los elementos basicos de los intervalos de confianza. Un intervalo de confianza es un estadistico mas/menos un margen de error, y el margen de error es el numero de errores estandar que necesitas para llegar al nivel de confianza que quieres.
+
+A cada nivel de confianza le corresponde un numero de errores estandar que deben sumarse o restarse. Este numero de errores estandar es lo que se denomina **_valor critico_**. Si estas utilizando una distribucion Z para encontrar el numero de errores estandares, el valor critico se llama valor z, en la siguiente tabla encontraras una lista de valores z para los intervalos de confianza mas comunes.
+
+a medida que aumenta el nivel de confianza, aumenta tambien el numero de errores estandares, y por tanto, el margen de error.
+
+### Tala de valores Z para varios niveles de confianza
+
+**Nivel de confianza** | **Valor Z**
+---------------------- | -------------
+80%                    | 1.28
+90%                    | 1.645 (por convencion)
+95%                    | 1.96
+98%                    | 2.33
+99%                    | 2.58
+
+Si quieres un nivel de confianza en los resultados superior al 95%, tendras que sumar y restar mas de dos errores estandares aproximadamente. Por ejemplo, para tener una confianza del 99%, sumas y restas aproximadamente 2 errores estandares y medio (2.58 para ser exactos) para obtener el margen de error. Cuanto mayor es el nivel de confianza, mas grande es el valor Z y el margen de error, y mas ancho es el intervalo de confianza (suponiendo que todo lo demas permanece igual). **_Para tener mas confianza, hay que pagar un precio_**.  
+
+Observa que he dicho _"suponiendo que todo lo demas permanece igual"_. Puedes compensar un incremento del margen de error incrementando tambien el tamaño de la muestra
+
+_Gracias!_

@@ -6,10 +6,19 @@
     <description>Recent content in R on Diseñando una experiencia ...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 28 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Oct 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Estimacion por Intervalo I</title>
+      <link>/2019/10/30/estimacion-por-intervalo-i/</link>
+      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/10/30/estimacion-por-intervalo-i/</guid>
+      <description>ObjetivosComprender los elementos y la intrepretacion de un intervalo de confianzaRealizar calculos con confianzaAnalizar los factores que influyen en la amplitud de un intervalo de confianzaIntroduccionActualmente se debe estar bien conciente de que las poblaciones son generalmente muy grandes como para ser estudiadas en su totalidad. Su tamaño requiere que se seleccionen muestras, las cuales se pueden utilizar mas tarde para hacer inferencias sobre las poblaciones.</description>
+    </item>
     
     <item>
       <title>Uso de la distribucion muestral</title>
