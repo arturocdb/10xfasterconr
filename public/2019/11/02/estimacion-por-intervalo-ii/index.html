@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.55.6" />
+
+
+<title>Estimacion por Intervalo II - Diseñando una experiencia ...</title>
+<meta property="og:title" content="Estimacion por Intervalo II - Diseñando una experiencia ...">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/nosotros/">Nosotros</a></li>
+    
+    <li><a href="/servicios/">Servicios</a></li>
+    
+    <li><a href="/curso/">Curso R</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">15 min read</span>
+    
+
+    <h1 class="article-title">Estimacion por Intervalo II</h1>
+
+    
+    <span class="article-date">2019-11-02</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="introduccion" class="section level2">
+<h2>Introduccion</h2>
+<p>Se dijo que un estimador puntual es un estadistico muestral que se usa para estimar un parametro poblacional. Por ejemplo, la media muestral <span class="math inline">\(\bar{x}\)</span> es un estimador puntual de la media poblacional <span class="math inline">\(\mu\)</span> y la proporcion muestral <span class="math inline">\(\bar{p}\)</span> es un estimador puntual de la media poblacional <span class="math inline">\(p\)</span>.</p>
+<p>Como no se puede esperar que un estimador puntual suministre el valor exacto del parametro poblacional, se suele calcular una <strong>estimacion por intervalo</strong> al sumar y restar al estimador puntual una cantidad llamada <strong>margen de error</strong>. La formula general de una estimacion por intervalo es:</p>
+<p><span class="math display">\[Estimacion\ puntual\ \pm\ Margen\ de\ error\]</span></p>
+<p>El objetivo de la estimacion por intervalo es aportar infromacion de que tan cerca se encuentra la estimacion puntual, obtenida de la muestra, del valor del parametro poblacional.</p>
+<p>En este post se muestra como obtener una estimacion por intervalo para la media poblacional <span class="math inline">\(\mu\)</span> y para la proporcion poblacional <span class="math inline">\(p\)</span>. La formula general para obtener una estimacion por intervalo para la media poblacional es:</p>
+<p><span class="math display">\[\bar{x}\ \pm Margen\ de\ error\]</span></p>
+<p>De manera similar, la formula para obtener una estimacion por intervalo para la proporcion poblacional es:</p>
+<p><span class="math display">\[\bar{p}\ \pm Margen\ de\ error\]</span></p>
+<p>Las distribuciones muestrales de <span class="math inline">\(\bar{x}\)</span> y de <span class="math inline">\(\bar{p}\)</span> son clave para calcular estas estimaciones por intervalo.</p>
+</div>
+<div id="media-poblacional-desviacion-estandar-conocida" class="section level2">
+<h2>Media poblacional: desviacion estandar conocida</h2>
+<p>Con objeto de obtener una estimacion por intervalo para la media poblacional, se necesita la desviacion estandar poblacional <span class="math inline">\(\sigma\)</span> o la desviacion estandar muestral <span class="math inline">\(\varsigma\)</span> para calcular el margen de error.</p>
+<p>En la mayor parte de los casos, no se conoce <span class="math inline">\(\sigma\)</span> y para calcular el margen de error se emplea <span class="math inline">\(\varsigma\)</span>. Sin embargo, en algunas ocasiones, se cuenta con una gran cantidad de datos anteriores (historicos) que se pueden usar para calcular la desviacion estandar poblacional antes de tomar la muestra.</p>
+<p>Tambien en aplicaciones al control de calidad, en las que se supone que el proceso se desarrolla correctamente “en control”, se considera que se conoce la desviacion estandar. A tales casos se les conoce como: <strong>de</strong> <span class="math inline">\(\sigma\)</span> <strong>conocida</strong>. En esta seccion se presenta un caso en el que es razonable considerar que se conoce <span class="math inline">\(\sigma\)</span> y se muestra como obtener una estimacion por intervalo.</p>
+<p>Cada semana, la empresa L&amp;S selecciona una muestra aleatoria simple de 100 clientes con el objeto de conseguir informacion acerca de la cantidad que gastan en cada visita a la tienda. Si <span class="math inline">\(x\)</span> representa la cantidad gastada eb cada visita a la tienda, la media muestra <span class="math inline">\(\bar{x}\)</span> es una estimacion puntual de <span class="math inline">\(\mu\)</span>, la cantidad media gastada en cada visita a la tienda por la poblacion formada por los clientes de L&amp;S. L&amp;S ha estado realizando estudios semanales durante varios años. Con base en sus datos anteriores, L&amp;S supones que el valor conocido de la desviacion estandar poblacional es <span class="math inline">\(\sigma = 20\)</span>. Los datos anteriores (historicos) indican tambien que la poblacion tiene una distribucion normal.</p>
+<p>En la ultima semana, en un estudio de 100 clientes <span class="math inline">\(n = 100\)</span>, L&amp;S obtuvo como media muestral <span class="math inline">\(\bar{x} = 82\)</span>. La media muestral de la cantidad gastada permite una estimacion puntual de la media poblacional de la cantidad gastada en cada visita, <span class="math inline">\(\mu\)</span>.</p>
+<p>A continuacion se muestra como calcular un margen de error para esta estimacion y como obtener una estimacion por intervalo para la media poblacional.</p>
+</div>
+<div id="margen-de-error-y-estimacion-por-intervalo" class="section level2">
+<h2>Margen de error y estimacion por intervalo</h2>
+<p>En anteriores publicaciones se mostro que la distribucion muestral de <span class="math inline">\(\bar{x}\)</span> sirve para calcular la probabilidad de que <span class="math inline">\(\bar{x}\)</span> este dentro de una distancia dada de <span class="math inline">\(\mu\)</span>. En el ejemplo de L&amp;S los datos historicos muestran que la poblacion constituida por las cantidades gastadas esta distribuida normalmente y que su desviacion estandar es <span class="math inline">\(\sigma = 20\)</span>. De manera que, usando lo aprendido, se puede concluir que la distribucion muestral de <span class="math inline">\(\bar{x}\)</span> es una distribucion normal con error estandar de</p>
+<p><span class="math display">\[\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}\]</span></p>
+<p><span class="math display">\[\frac{20}{\sqrt{100}} = 2\]</span></p>
+<p>En la tabla de probabilidad normal estandar se encuentra que 95% de los valores de cualquier variable aleatoria distribuida normalmente aparecen dentro de <span class="math inline">\(\pm\ 1.96\)</span> desviaciones estandar de la media. Por tanto, si la distribucion muestral se encuentra distribuida normalmente, 95% de los valores de <span class="math inline">\(\bar{x}\)</span> deben estar dentro <span class="math inline">\(\pm\ 1.96\ \sigma_{\bar{x}}\)</span> de la media <span class="math inline">\(\mu\)</span>.</p>
+<p>En el ejemplo de L&amp;S se sabe que la distribucion muestral de <span class="math inline">\(\bar{x}\)</span> esta distribuida normalmente y que el error estandar es <span class="math inline">\(\sigma_{\bar{x}} = 2\)</span>. Como <span class="math inline">\(\pm\ 1.96 \sigma_{\bar{x}} = 1.96(2) = 3.92\)</span>, se puede concluir que 95% de los valores de <span class="math inline">\(\bar{x}\)</span> obtenidos usando muestras de <span class="math inline">\(n = 100\)</span> estaran dentro de <span class="math inline">\(\pm\ 3.92\)</span> de la media poblacional</p>
+<p>Con cualquier media muestral <span class="math inline">\(\bar{x}\)</span> que se encuentre dentro de la region sombreada, se obtendra un intervalo que contenga a la media poblacional <span class="math inline">\(\mu\)</span>. Como 95% de todas las posibles medias muestrales se encuentran en la region sombreada, 95% de todos los intervalos que se obtengan restando 3.92 de <span class="math inline">\(\bar{x}\)</span> y sumando 3.92 a <span class="math inline">\(\bar{x}\)</span> abarcaran la media poblacion <span class="math inline">\(\mu\)</span>.</p>
+<p>Recuerde que en la ultima semana el equipo encargado del aseguramiento de la calidad de L&amp;S encuesto a 100 clientes y obtuvo una media muestral de <span class="math inline">\(\bar{x} = 82\)</span>. Usando <span class="math inline">\(\bar{x}\ \pm\ 3.92\)</span> para obtener la estimacion por intervalo que se basa en los datos de la ultima semana en el intervalo que va de <span class="math inline">\(82 - 3.92 = 78.08\)</span> a <span class="math inline">\(82 + 3.92 = 85.92\)</span>. Como 95% de todos los intervalos construidos usando <span class="math inline">\(\bar{x}\ \pm\ 3.92\)</span> contendran a la media poblacional, se tiene 95% de confianza que el intervalo 78.08 a 85.92 contenga a la media poblacional <span class="math inline">\(\mu\)</span>. Entonces dicho intervalo tiene un <strong>nivel de confianza</strong> de 95%, al valor 0.95 se le conoce como <strong>coeficiente de confianza</strong> y al intervalo 78.08 a 85.95 como el <strong>intervalo de confianza de 95%</strong></p>
+<p>Como el margen de error esta dado por <span class="math inline">\(Z_{\frac{\alpha}{2}}(\frac{\sigma}{\sqrt{n}})\)</span> la formula genral de una estimacion por intervalo de la media poblacional con <span class="math inline">\(\sigma\)</span> conocida , es la siguiente:</p>
+<p><span class="math display">\[\bar{x}\ \pm\ Z_{\frac{\alpha}{2}}(\frac{\sigma}{\sqrt{n}})\]</span></p>
+<p>donde (<span class="math inline">\(1- \alpha\)</span>) es el coeficiente de confianza y <span class="math inline">\(Z_{\frac{\alpha}{2}}\)</span> es el valor de z que proporciona un area <span class="math inline">\(\frac{\alpha}{2}\)</span> en la cola superior de la distribucion de probabilidad normal estandar</p>
+<p>En el ejemplo de L&amp;S se construye un intervalo de confianza de 95% con un coeficiente de confianza (<span class="math inline">\(1- \alpha = 0.95\)</span>) y por tanto a 0.05. En la tabla de la distribucion normal estandar aparece que un area de <span class="math inline">\(\frac{\alpha}{2}= \frac{0.05}{2} = 0.025\)</span> en la cola superior corresponde a <span class="math inline">\(Z_{0.025}=1.96\)</span>. Como en el ejemplo de L&amp;S, la media muestral es <span class="math inline">\(\bar{x} = 82\)</span>, <span class="math inline">\(\sigma = 20\)</span> y el tamaño de la muestra es <span class="math inline">\(n = 100\)</span> se obtiene</p>
+<p><span class="math display">\[82\ \pm\ 1.96\ \frac{20}{\sqrt{100}}\]</span></p>
+<p><span class="math display">\[82\ \pm\ 3.92\]</span></p>
+<p>Por tanto, el margen de error es 3.92 y el intervalo de confianza de 95% va de <span class="math inline">\(82 - 3.92 = 78.08\)</span> a <span class="math inline">\(82 + 3.92 = 85.92\)</span>.</p>
+<p>Aunque a menudo se usa un intervalo de confianza de 95%, tambien suele usarse otros niveles de confianza como 90% y 99%, en la tabla inferiro se muestran los valores <span class="math inline">\(Z_{\frac{\alpha}{2}}\)</span> correspondientes a los niveles de confianza mas utilizados.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Nivel de confianza</th>
+<th><span class="math inline">\(\alpha\)</span></th>
+<th><span class="math inline">\(\frac{\alpha}{2}\)</span></th>
+<th><span class="math inline">\(Z_{\frac{\alpha}{2}}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>90%</td>
+<td>.10</td>
+<td>.05</td>
+<td>1.645</td>
+</tr>
+<tr class="even">
+<td>95%</td>
+<td>0.05</td>
+<td>.025</td>
+<td>1.960</td>
+</tr>
+<tr class="odd">
+<td>99%</td>
+<td>.01</td>
+<td>.005</td>
+<td>2.576</td>
+</tr>
+</tbody>
+</table>
+<p>A partir de estos valores, el intervalo de confiaznza de 90% en el ejemplo de L&amp;S es:</p>
+<p><span class="math display">\[82\ \pm\ 1.645\ \frac{20}{\sqrt{100}}\]</span></p>
+<p><span class="math display">\[82\ \pm\ 3.29\]</span></p>
+<p>Por tanto, para 90% de confianza, el margen de error es 3.29 y el intervalo de confianza es <span class="math inline">\(82 - 3.29 = 78.71\)</span> a <span class="math inline">\(82 + 3.29 = 85.29\)</span>, de manera similar, el intervalo de confianza de 99% es:</p>
+<p><span class="math display">\[82\ \pm\ 2.576\ \frac{20}{\sqrt{100}}\]</span></p>
+<p><span class="math display">\[82\ \pm\ 5.15\]</span></p>
+<p>Entonces, para 99% de confianza el margen de error es 5.15 y el intervalo de confianza es <span class="math inline">\(82 - 5.15 = 76.85\)</span> a <span class="math inline">\(82 + 5.15 = 87.15\)</span></p>
+<p>Al comparar los resultados para los niveles de 90%, 95% y 99% de confianza, es claro que para tener mayor grado de confianza, el margen de error y con esto la amplitud del intervalo de confianza debe ser mayor</p>
+<div id="ejercicio-1" class="section level3">
+<h3>Ejercicio 1</h3>
+<p>La Asociacion Americana de gestion desea infromar acerca del ingreso medio de los gerentes de la industria del menudeo. Una muestra aleatoria de 256 gerentes revela una media muestral de 45,420. La desviacion estandar de esta muestra es 2,050. A la asociacion le gustaria responder las siguientes preguntas</p>
+<ol style="list-style-type: decimal">
+<li>Cual es la media de la poblacion?</li>
+<li>Cual es el conjunto de valores razonable para la media poblacional?</li>
+<li>Como se deben interpretar estos resultados?</li>
+</ol>
+<p>En general, las distribuciones de los salarios e ingresos tienen un sesgo positivo, pues unos cuantos individuos ganan considerablemente mas que otros, lo cual sesga la distribucion en en direccion positiva. Por fortuna, el teorema del limite central estipula que, si selecciona una muestra grande, la distribucion de las medias muestrales tendera a seguir una distribucion normal. En este caso, una muestra de 256 gerentes es lo bastante grande para suponer que la distribucion muestral tendera a seguir la distribucion normal. A continuacion se responden las preguntas planteadas.</p>
+<ol style="list-style-type: decimal">
+<li><p><strong>Cual es la media de la poblacion?</strong>. En este caso, se ignora, si se sabe que la media de la muestra es de 45,420. De ahi que la mejor estimacion del valor de la poblacion sea el estadistico de la muestra de 45,420 constituye un <strong>estimador puntual</strong> de la media poblacional desconocida.</p></li>
+<li><p><strong>Cual es el conjunto de valores razonable para la media poblacional?</strong>. La asociacion deice utilizar un nivel de confianza de 95%. Para determinar el intervalo de confianza correspondiente, se aplica la formula:</p></li>
+</ol>
+<p><span class="math display">\[\bar{x} \pm Z \frac{\sigma}{\sqrt{n}} \]</span></p>
+<p><span class="math display">\[45420 \pm 1.96\frac{2050}{\sqrt{256}} = 45420 \pm 251\]</span></p>
+<p>Es costumbre redondear estos puntos extremos a 45160 y 45671. Estos puntos extremos reciben el nombre de <em>imites de confianza</em>. El grado de confianza o nivel de confianza es de 95%, y el intervalo de confianza abarca de 45169 a 45671. Con frecuencia, <span class="math inline">\(\pm 251\)</span> se conoce como margen de error.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><strong>Como se deben interpretar estos resultados?</strong>
+Suponga que selecciona varias muestras de 256 gerentes, talvez varios cientos. Para cada muestra, calcula la media y despues construye un intervalo de confianza de 95%. Puede esperar que al rededor de 95% de estos intervalos de confianza contenga la media de la poblacion. Cerca de 5% de los intervalos no contendrian el ingreso anual medio poblacional <span class="math inline">\(\mu\)</span>. No obstante, un intervalo de confianza particular contiene el parametro poblacional o no lo contiene. El siguiente diagrama muestra los resultados de seleccionar muestras de la poblacion de gerentes en la industria del menudeo, se calcula la media de cada una y posteriormente, con la formula, se determina un intervalo de confianza de 95% para la media poblacional. Los dos puntos extremos de la quinta muestra son inferiores a la media poblacional. Esto se debe al error de muestreo, que constituye el riesgo que se asume cuando se selecciona el nivel de confianza</li>
+</ol>
+<p><img src="/img/1.png" /></p>
+</div>
+<div id="solucion-con-r" class="section level3">
+<h3>Solucion con R</h3>
+<p>Utilizamos la funcion que creamos en anteriores publicaciones.</p>
+<pre class="r"><code>IC &lt;- function(media,valor.z,desv,muestra){
+  LIC &lt;- round(media - (valor.z*(desv/sqrt(muestra))),2)
+  LSC &lt;- round(media + (valor.z*(desv/sqrt(muestra))),2)
+  
+  return(c(LIC=LIC, LSC=LSC))
+}
+
+IC(media = 45420, valor.z = 1.96,
+   desv = 2050, muestra = 256)</code></pre>
+<pre><code>##      LIC      LSC 
+## 45168.88 45671.12</code></pre>
+</div>
+</div>
+<div id="desviacion-estandar-poblacional-desconocida" class="section level2">
+<h2>Desviacion estandar poblacional desconocida</h2>
+<p>En la seccion anterior se supuso que se conocia la desviacion estandar de la poblacion, sin embargo, en la mayoria de los casos de muestreo, no se conoce la desviacion estandar de la poblacion <span class="math inline">\(\sigma\)</span>.</p>
+<p>Por fortuna se utiliza la desviacion eatandar de la muestra para estimar la desviacion estandar poblacional, es decir; se utiliza <span class="math inline">\(\varsigma\)</span>, la desviacion estandar de la muestra para estimar <span class="math inline">\(\sigma\)</span>, la desviacion estandar de la poblacion.</p>
+<p>No obstante, al hacerlo, no es posible utilizar la formula del intervalo de confianza para la media: <span class="math inline">\(\bar{X} \pm Z \frac{\sigma}{\sqrt{n}}\)</span>. Como no conoce <span class="math inline">\(\sigma\)</span>, no puede utitilizar la distribucion z (distribucion normal estandar), sin embargo, hay una solucion: utilizar la desviacion estandar de la media y sustituir la distribucion z con la distribucion <em>t</em></p>
+<p>La distribucion <em>t</em> es una distribucion de probabilidad continua, con muchas caracteristicas similares a las de la distribucion z. <strong>William Gosset</strong> experto cervecero, fue el primero en estudiar la distribucion <em>t</em></p>
+<p>Estaba especialmente interesado en el comportamiento exacto de la distribucion del siguiente estadistico</p>
+<p><span class="math display">\[t = \frac{\bar{X}-\mu}{\frac{\varsigma}{\sqrt{n}}}\]</span></p>
+<p>Aqui, <span class="math inline">\(\varsigma\)</span> es un denominador de <span class="math inline">\(\sigma\)</span>. Le preocupaba en particular la discrepancia entre <span class="math inline">\(\varsigma\)</span> y <span class="math inline">\(\sigma\)</span> cuando se calculaba a partir de una muestra muy pequeña. La distribucion <em>t</em> y la distribucion normal estandar se muestran en la grafica de abajo. Observe en particular que la distribucion <em>t</em> es mas plana y que se extiende mas que la distribucion normal estandar. Eso se debe a que la desviacion estandar de la distribucion <em>t</em> es mayor que la distribucion normal estandar</p>
+<p><img src="/img/2.png" /></p>
+<p>Las siguientes caracteristicas de la distribucion <em>t</em> se basan en el supuesto de que la poblacion de interes es de naturaleza normal, o casi normal.</p>
+<ol style="list-style-type: decimal">
+<li>Como en el caso de la distribucion Z, es una distribucion continua</li>
+<li>Como en el caso de la distribucion Z, tiene forma de campana y es simetrica</li>
+<li>No existe una distribucion <em>t</em>, sino una familia de distribuciones <em>t</em>. Todas las distribuciones <em>t</em> tienen una media de 0 y sus desviaciones estandares tienen de acuerdo con el tamaño de la muestra, n. Existe una distribucion <em>t</em> para un tamaño de muestra de 20, otro para un tamaño de muestra de 22, etc. La desviacion estandar para una distribucion <em>t</em> con 5 observaciones es mayor que para una distribucion <em>t</em> con 20 observaciones.</li>
+<li>La distribucion <em>t</em> se extiende mas y es mas plana por el centro que la distribucion normal estandar, sin embargo, conforme se incrementa el tamaño de la muestra, la distribucion <em>t</em> se aproxima a la distribucion normal estandar, pues los errores que se cometen al utilizar <span class="math inline">\(\varsigma\)</span> para estimar <span class="math inline">\(\sigma\)</span> disminuyen con muestras mas grandes.</li>
+</ol>
+<p>Como la distribucion <em>t</em> de Student posee mayor dispersion que la distribucion z, el valor de <em>t</em> para un nivel de confianza dado tiene una magnitud mayor que el valor z correspondiente, la grafica 9.2 muestra los valores de z para un nivel de confianza cuando el tamaño de la muestra es de n = 5. En breve se explicara la forma como se obtuvo el valor real de <em>t</em>. Por el momento, observe que, para el mismo nivel de confianza, la distribucion <em>t</em> es mas plana o mas amplia que la distribucion normal estandar.</p>
+<p><img src="/img/3.png" /></p>
+<p>Para crear un intervalo de confianza para la media poblacional con la distribucion <em>t</em>, se ajusta la formula que conocemos, de la siguiente manera:</p>
+<p><strong>Intervalo de confianza para la media poblacional con desviacion estandar desconocida</strong></p>
+<p><span class="math display">\[\bar{x}\ \pm\ t\frac{\varsigma}{\sqrt{n}}\]</span></p>
+<p>Para crear un intervalo de confianza para la media poblacional con una desviacion estandar desconocida:</p>
+<ol style="list-style-type: decimal">
+<li>Suponga que la poblacion muestreada es normal o apriximadamente normal.</li>
+<li>Estime la desviacion de la poblacion estandar (<span class="math inline">\(\sigma\)</span>) con la desviacion estandar de la muestra (<span class="math inline">\(\varsigma\)</span>)</li>
+<li>Utilice la distribucion <em>t</em> en lugar de la distribucion z.</li>
+</ol>
+<p>Cabe hacer una acalaracion en este momento. La desicion de utilizar <em>t</em> o z se basa en el hecho de que se conoce <span class="math inline">\(\sigma\)</span>, la desviacion estandar poblacional. Si se conoce la desviacion estandar poblacional, se debe utilizar z, Si NO se conoce la desviacion estandar poblacional, se debe utilizar <em>t</em>. La grafica 9.3 resume el proceso de toma de decision.</p>
+<p>El siguiente ejemplo ilustra un intervalo de confianza para una media poblacional cuando no se conoce la desviacion estandar de la poblacion y para determinar el valor apropiado de <em>t</em> en una tabla <em>t</em> de Student.</p>
+<p><img src="/img/4.png" /></p>
+</div>
+<div id="ejemplo" class="section level2">
+<h2>Ejemplo</h2>
+<p>Un fabricante de llantas desea investigar la durabilidad de sus productos. Una muestra de 10 llantas para recorrer 50,000 millas revelo una media muestral de 0.32 pulgadas de cuerda restante con una desviacion estandar de 0.09 pulgadas. Construya un intervalo de confianza de 95% para la media poblacional, seria razonable que el fabricante concluyera que despues de 50,000 millas la cantidad media poblacional de cuerda restante es de 0.30 pulgadas?.</p>
+</div>
+<div id="solucion" class="section level2">
+<h2>Solucion</h2>
+<p>Para comenzar, se supone que la distribucion de la poblacion es normal, en este caso no hay muchas evidencias, pero talvez la suposicion sea razonable. No se conoce la desviacion estandar de la poblacion, pero si se conoce la desviacion estandar de la muestra, que es de 0.09 pulgadas, se aplica la formula:</p>
+<p><span class="math display">\[\bar{x}\ \pm\ t\frac{\varsigma}{\sqrt{n}}\]</span></p>
+<p>De acuerdo con la infromacion dada, <span class="math inline">\(\bar{x} = 0.32\)</span>, <span class="math inline">\(\varsigma = 0.09\)</span> y <span class="math inline">\(n = 10\)</span>. Para hallar el valor de <em>t</em> utilice una tabla de valores <em>t</em> de Student, una parte de la cual se repoduce en la tabla 9.1 que se muestra mas abajo.</p>
+<p>El primer paso para localizar <em>t</em> consiste en desplazarse a lo largo de las columnas identificadas como “intervalos de confianza” hasta el nivel de confianza que se requiere. En este caso, desea el nivel de confianza de 95%, asi que vaya a la columna con el encabezamiento “95%”.</p>
+<p>La columna del margen izquierdo se identifica como “gl”. Esto se refiere al <strong>numero de grados de libertad</strong>. El numero de grados de libertad es el numero de observaciones en la muestra menos el numero de muestras, el cual se escribe <span class="math inline">\(n - 1\)</span>, en este caso es de <span class="math inline">\(10 - 1 = 9\)</span>. Porque se decidio que habia 9 grados de libertad?, cuando se utilizan estadisticas de la muestra, es necesario determinar el numero de valores que se encuentran <em>libres</em> para variar.</p>
+<p>La razon de que el numero de grados de libertad para el valor de <em>t</em> sea <span class="math inline">\(n - 1\)</span> se debe al uso de <span class="math inline">\(\varsigma\)</span> como estimacion de la desviacion estandar poblacional <span class="math inline">\(\sigma\)</span></p>
+<p>Por consiguiente, 1 grado de libertad se pierde en un problema de muestreo que implique la desviacion estandar de la muestra, pues se conoce un numero (la media aritmetica). En el caso de un nivel de confianza de 95% y 9 grados de libertad, seleccione la fila con 9 grados de libertad. El valor de <em>t</em> es 2.262.</p>
+<p><img src="/img/5.png" /></p>
+<p>Para determinar el intervalo de confianza se sustituyen los valores en la formula:</p>
+<p><span class="math display">\[\bar{x}\ \pm\ t\frac{\varsigma}{\sqrt{n}}\]</span></p>
+<p><span class="math display">\[0.32 \pm 2.262 \frac{0.09}{\sqrt{10}} = 0.32 \pm 0.64\]</span></p>
+<p>Los puntos extremos del intervalo de confianza son 0.256 y 0.384, como interpretar este resultado?, resulta razonable concluir que la media poblacional se encuentra en este intervalo. El fabricante puede estar seguro (95% seguro) de que la profundidad media de las cuerdas oscila entre 0.256 y 0.384 pulgadas. Como el valor de 0.30 se encuentra en este intervalo, es posible que la media de la poblacion sea de 0.30 pulgadas</p>
+</div>
+<div id="solucion-con-r-1" class="section level2">
+<h2>Solucion con R</h2>
+<p>Primeramente vamos a encontrar el valor t, lo realizamos con la funcion <code>qt()</code>, a la funcion <code>qt()</code> le tenemos que ingresar el percentil 0.025 que corresponde a un 95% de nivel de confianza, que es lo que necestiamos en este caso.</p>
+<pre class="r"><code>qt(0.025,9, lower.tail = F)</code></pre>
+<pre><code>## [1] 2.262157</code></pre>
+<p>Una vez tengamos el valor t, vamos a crear una funcion que resuleva la formula</p>
+<pre class="r"><code>IC.t &lt;- function(media, desv, n, t) {
+  punto.critico.inf &lt;- round(media-t*(desv/sqrt(n)),3)
+  punto.critico.sup &lt;- round(media+t*(desv/sqrt(n)),3)
+  return(c(punto.critico.inf=punto.critico.inf,
+           punto.critico.sup=punto.critico.sup))
+}</code></pre>
+<pre class="r"><code>IC.t(media = 0.32, desv = 0.09, n = 10, t = 2.262157)</code></pre>
+<pre><code>## punto.critico.inf punto.critico.sup 
+##             0.256             0.384</code></pre>
+<p>Llegamos al mismo resultado</p>
+<p><em>Gracias!</em></p>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+

@@ -1,0 +1,235 @@
+---
+title: Estimacion por Intervalo II
+author: Charlie Do Amaral
+date: '2019-11-02'
+slug: estimacion-por-intervalo-ii
+categories:
+  - estadistica
+tags: []
+---
+
+
+## Introduccion
+Se dijo que un estimador puntual es un estadistico muestral que se usa para estimar un parametro poblacional. Por ejemplo, la media muestral $\bar{x}$ es un estimador puntual de la media poblacional $\mu$ y la proporcion muestral $\bar{p}$ es un estimador puntual de la media poblacional $p$.
+
+Como no se puede esperar que un estimador puntual suministre el valor exacto del parametro poblacional, se suele calcular una **estimacion por intervalo** al sumar y restar al estimador puntual una cantidad llamada **margen de error**. La formula general de una estimacion por intervalo es:
+
+$$Estimacion\ puntual\ \pm\ Margen\ de\ error$$
+
+El objetivo de la estimacion por intervalo es aportar infromacion de que tan cerca se encuentra la estimacion puntual, obtenida de la muestra, del valor del parametro poblacional.
+
+En este post se muestra como obtener una estimacion por intervalo para la media poblacional $\mu$ y para la proporcion poblacional $p$. La formula general para obtener una estimacion por intervalo para la media poblacional es:
+
+$$\bar{x}\ \pm Margen\ de\ error$$
+
+De manera similar, la formula para obtener una estimacion por intervalo para la proporcion poblacional es:
+
+$$\bar{p}\ \pm Margen\ de\ error$$
+
+Las distribuciones muestrales de $\bar{x}$ y de $\bar{p}$ son clave para calcular estas estimaciones por intervalo.
+
+## Media poblacional: desviacion estandar conocida
+Con objeto de obtener una estimacion por intervalo para la media poblacional, se necesita la desviacion estandar poblacional $\sigma$ o la desviacion estandar muestral $\varsigma$ para calcular el margen de error.
+
+En la mayor parte de los casos, no se conoce $\sigma$ y para calcular el margen de error se emplea $\varsigma$. Sin embargo, en algunas ocasiones, se cuenta con una gran cantidad de datos anteriores (historicos) que se pueden usar para calcular la desviacion estandar poblacional antes de tomar la muestra.
+
+Tambien en aplicaciones al control de calidad, en las que se supone que el proceso se desarrolla correctamente "en control", se considera que se conoce la desviacion estandar. A tales casos se les conoce como: **de** $\sigma$ **conocida**. En esta seccion se presenta un caso en el que es razonable considerar que se conoce $\sigma$ y se muestra como obtener una estimacion por intervalo.
+
+Cada semana, la empresa L&S selecciona una muestra aleatoria simple de 100 clientes con el objeto de conseguir informacion acerca de la cantidad que gastan en cada visita a la tienda. Si $x$ representa la cantidad gastada eb cada visita a la tienda, la media muestra $\bar{x}$ es una estimacion puntual de $\mu$, la cantidad media gastada en cada visita a la tienda por la poblacion formada por los clientes de L&S. L&S ha estado realizando estudios semanales durante varios años. Con base en sus datos anteriores, L&S supones que el valor conocido de la desviacion estandar poblacional es $\sigma = 20$. Los datos anteriores (historicos) indican tambien que la poblacion tiene una distribucion normal. 
+
+En la ultima semana, en un estudio de 100 clientes $n = 100$, L&S obtuvo como media muestral $\bar{x} = 82$. La media muestral de la cantidad gastada permite una estimacion puntual de la media poblacional de la cantidad gastada en cada visita, $\mu$.
+
+A continuacion se muestra como calcular un margen de error para esta estimacion y como obtener una estimacion por intervalo para la media poblacional.
+
+## Margen de error y estimacion por intervalo
+En anteriores publicaciones se mostro que la distribucion muestral de $\bar{x}$ sirve para calcular la probabilidad de que $\bar{x}$ este dentro de una distancia dada de $\mu$. En el ejemplo de L&S los datos historicos muestran que la poblacion constituida por las cantidades gastadas esta distribuida normalmente y que su desviacion estandar es $\sigma = 20$. De manera que, usando lo aprendido, se puede concluir que la distribucion muestral de $\bar{x}$ es una distribucion normal con error estandar de  
+
+$$\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}$$
+
+$$\frac{20}{\sqrt{100}} = 2$$
+
+En la tabla de probabilidad normal estandar se encuentra que 95% de los valores de cualquier variable aleatoria distribuida normalmente aparecen dentro de $\pm\ 1.96$ desviaciones estandar de la media. Por tanto, si la distribucion muestral se encuentra distribuida normalmente, 95% de los valores de $\bar{x}$ deben estar dentro $\pm\ 1.96\ \sigma_{\bar{x}}$ de la media $\mu$.
+
+En el ejemplo de L&S se sabe que la distribucion muestral de $\bar{x}$ esta distribuida normalmente y que el error estandar es $\sigma_{\bar{x}} = 2$. Como $\pm\ 1.96 \sigma_{\bar{x}} = 1.96(2) = 3.92$, se puede concluir que 95% de los valores de $\bar{x}$ obtenidos usando muestras de $n = 100$ estaran dentro de $\pm\ 3.92$ de la media poblacional
+
+Con cualquier media muestral $\bar{x}$ que se encuentre dentro de la region sombreada, se obtendra un intervalo que contenga a la media poblacional $\mu$. Como 95% de todas las posibles medias muestrales se encuentran en la region sombreada, 95% de todos los intervalos que se obtengan restando 3.92 de $\bar{x}$ y sumando 3.92 a $\bar{x}$ abarcaran la media poblacion $\mu$.
+
+Recuerde que en la ultima semana el equipo encargado del aseguramiento de la calidad de L&S encuesto a 100 clientes y obtuvo una media muestral de $\bar{x} = 82$. Usando $\bar{x}\ \pm\ 3.92$ para obtener la estimacion por intervalo que se basa en los datos de la ultima semana en el intervalo que va de $82 - 3.92 = 78.08$ a $82 + 3.92 = 85.92$. Como 95% de todos los intervalos construidos usando $\bar{x}\ \pm\ 3.92$ contendran a la media poblacional, se tiene 95% de confianza que el intervalo 78.08 a 85.92 contenga a la media poblacional $\mu$. Entonces dicho intervalo tiene un **nivel de confianza** de 95%, al valor 0.95 se le conoce como **coeficiente de confianza** y al intervalo 78.08 a 85.95 como el **intervalo de confianza de 95%**
+
+Como el margen de error esta dado por $Z_{\frac{\alpha}{2}}(\frac{\sigma}{\sqrt{n}})$ la formula genral de una estimacion por intervalo de la media poblacional con $\sigma$ conocida , es la siguiente:
+
+$$\bar{x}\ \pm\ Z_{\frac{\alpha}{2}}(\frac{\sigma}{\sqrt{n}})$$
+
+donde ($1- \alpha$) es el coeficiente de confianza y $Z_{\frac{\alpha}{2}}$ es el valor de z que proporciona un area $\frac{\alpha}{2}$ en la cola superior de la distribucion de probabilidad normal estandar
+
+En el ejemplo de L&S se construye un intervalo de confianza de 95% con un coeficiente de confianza ($1- \alpha = 0.95$) y por tanto a 0.05. En la tabla de la distribucion normal estandar aparece que un area de $\frac{\alpha}{2}= \frac{0.05}{2} = 0.025$ en la cola superior corresponde a $Z_{0.025}=1.96$. Como en el ejemplo de L&S, la media muestral es $\bar{x} = 82$, $\sigma = 20$ y el tamaño de la muestra es $n = 100$ se obtiene
+
+$$82\ \pm\ 1.96\ \frac{20}{\sqrt{100}}$$
+
+$$82\ \pm\ 3.92$$
+
+Por tanto, el margen de error es 3.92 y el intervalo de confianza de 95% va de $82 - 3.92 = 78.08$ a $82 + 3.92 = 85.92$.
+
+Aunque a menudo se usa un intervalo de confianza de 95%, tambien suele usarse otros niveles de confianza como 90% y 99%, en la tabla inferiro se muestran los valores $Z_{\frac{\alpha}{2}}$ correspondientes a los niveles de confianza mas utilizados.
+
+Nivel de confianza | $\alpha$  | $\frac{\alpha}{2}$  | $Z_{\frac{\alpha}{2}}$
+------------------ | ----------| ------------------- | ----------------------
+90%                |  .10      |  .05                | 1.645
+95%                |  0.05     |  .025               | 1.960
+99%                |  .01      |  .005               | 2.576
+
+A partir de estos valores, el intervalo de confiaznza de 90% en el ejemplo de L&S es:
+
+$$82\ \pm\ 1.645\ \frac{20}{\sqrt{100}}$$
+
+$$82\ \pm\ 3.29$$
+
+Por tanto, para 90% de confianza, el margen de error es 3.29 y el intervalo de confianza es $82 - 3.29 = 78.71$ a $82 + 3.29 = 85.29$, de manera similar, el intervalo de confianza de 99% es:
+
+$$82\ \pm\ 2.576\ \frac{20}{\sqrt{100}}$$
+
+$$82\ \pm\ 5.15$$
+
+Entonces, para 99% de confianza el margen de error es 5.15 y el intervalo de confianza es $82 - 5.15 = 76.85$ a $82 + 5.15 = 87.15$
+
+Al comparar los resultados para los niveles de 90%, 95% y 99% de confianza, es claro que para tener mayor grado de confianza, el margen de error y con esto la amplitud del intervalo de confianza debe ser mayor
+
+### Ejercicio 1
+La Asociacion Americana de gestion desea infromar acerca del ingreso medio de los gerentes de la industria del menudeo. Una muestra aleatoria de 256 gerentes revela una media muestral de 45,420. La desviacion estandar de esta muestra es 2,050. A la asociacion le gustaria responder las siguientes preguntas
+
+1. Cual es la media de la poblacion?
+2. Cual es el conjunto de valores razonable para la media poblacional?
+3. Como se deben interpretar estos resultados?
+
+En general, las distribuciones de los salarios e ingresos tienen un sesgo positivo, pues unos cuantos individuos ganan considerablemente mas que otros, lo cual sesga la distribucion en en direccion positiva. Por fortuna, el teorema del limite central estipula que, si selecciona una muestra grande, la distribucion de las medias muestrales tendera a seguir una distribucion normal. En este caso, una muestra de 256 gerentes es lo bastante grande para suponer que la distribucion muestral tendera a seguir la distribucion normal. A continuacion se responden las preguntas planteadas.
+
+1. **Cual es la media de la poblacion?**. En este caso, se ignora, si se sabe que la media de la muestra es de 45,420. De ahi que la mejor estimacion del valor de la poblacion sea el estadistico de la muestra de 45,420 constituye un **estimador puntual** de la media poblacional desconocida.
+
+2. **Cual es el conjunto de valores razonable para la media poblacional?**. La asociacion deice utilizar un nivel de confianza de 95%. Para determinar el intervalo de confianza correspondiente, se aplica la formula:
+
+$$\bar{x} \pm Z \frac{\sigma}{\sqrt{n}} $$
+
+$$45420 \pm 1.96\frac{2050}{\sqrt{256}} = 45420 \pm 251$$
+
+Es costumbre redondear estos puntos extremos a 45160 y 45671. Estos puntos extremos reciben el nombre de _imites de confianza_. El grado de confianza o nivel de confianza es de 95%, y el intervalo de confianza abarca de 45169 a 45671. Con frecuencia, $\pm 251$ se conoce como margen de error.
+
+3. **Como se deben interpretar estos resultados?**
+Suponga que selecciona varias muestras de 256 gerentes, talvez varios cientos. Para cada muestra, calcula la media y despues construye un intervalo de confianza de 95%. Puede esperar que al rededor de 95% de estos intervalos de confianza contenga la media de la poblacion. Cerca de 5% de los intervalos no contendrian el ingreso anual medio poblacional $\mu$. No obstante, un intervalo de confianza particular contiene el parametro poblacional o no lo contiene. El siguiente diagrama muestra los resultados de seleccionar muestras de la poblacion de gerentes en la industria del menudeo, se calcula la media de cada una y posteriormente, con la formula, se determina un intervalo de confianza de 95% para la media poblacional. Los dos puntos extremos de la quinta muestra son inferiores a la media poblacional. Esto se debe al error de muestreo, que constituye el riesgo que se asume cuando se selecciona el nivel de confianza
+
+![](/img/1.png)
+
+### Solucion con R
+Utilizamos la funcion que creamos en anteriores publicaciones.
+```{r}
+IC <- function(media,valor.z,desv,muestra){
+  LIC <- round(media - (valor.z*(desv/sqrt(muestra))),2)
+  LSC <- round(media + (valor.z*(desv/sqrt(muestra))),2)
+  
+  return(c(LIC=LIC, LSC=LSC))
+}
+
+IC(media = 45420, valor.z = 1.96,
+   desv = 2050, muestra = 256)
+```
+
+## Desviacion estandar poblacional desconocida
+En la seccion anterior se supuso que se conocia la desviacion estandar de la poblacion, sin embargo, en la mayoria de los casos de muestreo, no se conoce la desviacion estandar de la poblacion $\sigma$.
+
+Por fortuna se utiliza la desviacion eatandar de la muestra para estimar la desviacion estandar poblacional, es decir; se utiliza $\varsigma$, la desviacion estandar de la muestra para estimar $\sigma$, la desviacion estandar de la poblacion.
+
+No obstante, al hacerlo, no es posible utilizar la formula del intervalo de confianza para la media: $\bar{X} \pm Z \frac{\sigma}{\sqrt{n}}$. Como no conoce $\sigma$, no puede utitilizar la distribucion z (distribucion normal estandar), sin embargo, hay una solucion: utilizar la desviacion estandar de la media y sustituir la distribucion z con la distribucion _t_
+
+La distribucion _t_ es una distribucion de probabilidad continua, con muchas caracteristicas similares a las de la distribucion z. **William Gosset** experto cervecero, fue el primero en estudiar la distribucion _t_ 
+
+Estaba especialmente interesado en el comportamiento exacto de la distribucion del siguiente estadistico
+
+$$t = \frac{\bar{X}-\mu}{\frac{\varsigma}{\sqrt{n}}}$$
+
+Aqui, $\varsigma$ es un denominador de $\sigma$. Le preocupaba en particular la discrepancia entre $\varsigma$ y $\sigma$ cuando se calculaba a partir de una muestra muy pequeña. La distribucion _t_ y la distribucion normal estandar se muestran en la grafica de abajo. Observe en particular que la distribucion _t_ es mas plana y que se extiende mas que la distribucion normal estandar. Eso se debe a que la desviacion estandar de la distribucion _t_ es mayor que la distribucion normal estandar
+
+![](/img/2.png)
+
+Las siguientes caracteristicas de la distribucion _t_ se basan en el supuesto de que la poblacion de interes es de naturaleza normal, o casi normal.
+
+1. Como en el caso de la distribucion Z, es una distribucion continua
+2. Como en el caso de la distribucion Z, tiene forma de campana y es simetrica
+3. No existe una distribucion _t_, sino una familia de distribuciones _t_. Todas las distribuciones _t_ tienen una media de 0 y sus desviaciones estandares tienen de acuerdo con el tamaño de la muestra, n. Existe una distribucion _t_ para un tamaño de muestra de 20, otro para un tamaño de muestra de 22, etc. La desviacion estandar para una distribucion _t_ con 5 observaciones es mayor que para una distribucion _t_ con 20 observaciones.
+4. La distribucion _t_ se extiende mas y es mas plana por el centro que la distribucion normal estandar, sin embargo, conforme se incrementa el tamaño de la muestra, la distribucion _t_ se aproxima a la distribucion normal estandar, pues los errores que se cometen al utilizar $\varsigma$ para estimar $\sigma$ disminuyen con muestras mas grandes.
+
+Como la distribucion _t_ de Student posee mayor dispersion que la distribucion z, el valor de _t_ para un nivel de confianza dado tiene una magnitud mayor que el valor z correspondiente, la grafica 9.2 muestra los valores de z para un nivel de confianza cuando el tamaño de la muestra es de n = 5. En breve se explicara la forma como se obtuvo el valor real de _t_. Por el momento, observe que, para el mismo nivel de confianza, la distribucion _t_ es mas plana o mas amplia que la distribucion normal estandar.
+
+![](/img/3.png)
+
+Para crear un intervalo de confianza para la media poblacional con la distribucion _t_, se ajusta la formula que conocemos, de la siguiente manera:
+
+**Intervalo de confianza para la media poblacional con desviacion estandar desconocida**
+
+$$\bar{x}\ \pm\ t\frac{\varsigma}{\sqrt{n}}$$
+
+Para crear un intervalo de confianza para la media poblacional con una desviacion estandar desconocida:
+
+1. Suponga que la poblacion muestreada es normal o apriximadamente normal.
+2. Estime la desviacion de la poblacion estandar ($\sigma$) con la desviacion estandar de la muestra ($\varsigma$)
+3. Utilice la distribucion _t_ en lugar de la distribucion z.
+
+Cabe hacer una acalaracion en este momento. La desicion de utilizar _t_ o z se basa en el hecho de que se conoce $\sigma$, la desviacion estandar poblacional. Si se conoce la desviacion estandar poblacional, se debe utilizar z, Si NO se conoce la desviacion estandar poblacional, se debe utilizar _t_. La grafica 9.3 resume el proceso de toma de decision. 
+
+El siguiente ejemplo ilustra un intervalo de confianza para una media poblacional cuando no se conoce la desviacion estandar de la poblacion y para determinar el valor apropiado de _t_ en una tabla _t_ de Student.
+
+![](/img/4.png)
+
+## Ejemplo
+Un fabricante de llantas desea investigar la durabilidad de sus productos. Una muestra de 10 llantas para recorrer 50,000 millas revelo una media muestral de 0.32 pulgadas de cuerda restante con una desviacion estandar de 0.09 pulgadas. Construya un intervalo de confianza de 95% para la media poblacional, seria razonable que el fabricante concluyera que despues de 50,000 millas la cantidad media poblacional de cuerda restante es de 0.30 pulgadas?.
+
+## Solucion
+Para comenzar, se supone que la distribucion de la poblacion es normal, en este caso no hay muchas evidencias, pero talvez la suposicion sea razonable. No se conoce la desviacion estandar de la poblacion, pero si se conoce la desviacion estandar de la muestra, que es de 0.09 pulgadas, se aplica la formula:
+
+$$\bar{x}\ \pm\ t\frac{\varsigma}{\sqrt{n}}$$
+
+De acuerdo con la infromacion dada, $\bar{x} = 0.32$, $\varsigma = 0.09$ y $n = 10$. Para hallar el valor de _t_ utilice una tabla de valores _t_ de Student, una parte de la cual se repoduce en la tabla 9.1 que se muestra mas abajo.
+
+El primer paso para localizar _t_ consiste en desplazarse a lo largo de las columnas identificadas como "intervalos de confianza" hasta el nivel de confianza que se requiere. En este caso, desea el nivel de confianza de 95%, asi que vaya a la columna con el encabezamiento "95%".
+
+La columna del margen izquierdo se identifica como "gl". Esto se refiere al **numero de grados de libertad**. El numero de grados de libertad es el numero de observaciones en la muestra menos el numero de muestras, el cual se escribe $n - 1$, en este caso es de $10 - 1 = 9$. Porque se decidio que habia 9 grados de libertad?, cuando se utilizan estadisticas de la muestra, es necesario determinar el numero de valores que se encuentran _libres_ para variar.
+
+La razon de que el numero de grados de libertad para el valor de _t_ sea $n - 1$ se debe al uso de $\varsigma$ como estimacion de la desviacion estandar poblacional $\sigma$
+
+Por consiguiente, 1 grado de libertad se pierde en un problema de muestreo que implique la desviacion estandar de la muestra, pues se conoce un numero (la media aritmetica). En el caso de un nivel de confianza de 95% y 9 grados de libertad, seleccione la fila con 9 grados de libertad. El valor de _t_ es 2.262.
+
+![](/img/5.png)
+
+Para determinar el intervalo de confianza se sustituyen los valores en la formula:
+
+$$\bar{x}\ \pm\ t\frac{\varsigma}{\sqrt{n}}$$
+
+$$0.32 \pm 2.262 \frac{0.09}{\sqrt{10}} = 0.32 \pm 0.64$$
+
+Los puntos extremos del intervalo de confianza son 0.256 y 0.384, como interpretar este resultado?, resulta razonable concluir que la media poblacional se encuentra en este intervalo. El fabricante puede estar seguro (95% seguro) de que la profundidad media de las cuerdas oscila entre 0.256 y 0.384 pulgadas. Como el valor de 0.30 se encuentra en este intervalo, es posible que la media de la poblacion sea de 0.30 pulgadas
+
+## Solucion con R
+Primeramente vamos a encontrar el valor t, lo realizamos con la funcion `qt()`, a la funcion `qt()` le tenemos que ingresar el percentil 0.025 que corresponde a un 95% de nivel de confianza, que es lo que necestiamos en este caso.
+
+```{r}
+qt(0.025,9, lower.tail = F)
+```
+
+Una vez tengamos el valor t, vamos a crear una funcion que resuleva la formula
+
+```{r}
+IC.t <- function(media, desv, n, t) {
+  punto.critico.inf <- round(media-t*(desv/sqrt(n)),3)
+  punto.critico.sup <- round(media+t*(desv/sqrt(n)),3)
+  return(c(punto.critico.inf=punto.critico.inf,
+           punto.critico.sup=punto.critico.sup))
+}
+```
+
+```{r}
+IC.t(media = 0.32, desv = 0.09, n = 10, t = 2.262157)
+```
+
+Llegamos al mismo resultado
+
+_Gracias!_
+
+

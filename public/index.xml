@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Estimacion por Intervalo II</title>
+      <link>/2019/11/02/estimacion-por-intervalo-ii/</link>
+      <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/2019/11/02/estimacion-por-intervalo-ii/</guid>
+      <description>IntroduccionSe dijo que un estimador puntual es un estadistico muestral que se usa para estimar un parametro poblacional. Por ejemplo, la media muestral \(\bar{x}\) es un estimador puntual de la media poblacional \(\mu\) y la proporcion muestral \(\bar{p}\) es un estimador puntual de la media poblacional \(p\).
+Como no se puede esperar que un estimador puntual suministre el valor exacto del parametro poblacional, se suele calcular una estimacion por intervalo al sumar y restar al estimador puntual una cantidad llamada margen de error.</description>
+    </item>
+    
+    <item>
       <title>La distribucion t de Student</title>
       <link>/2019/11/02/la-distribucion-t-de-student/</link>
       <pubDate>Sat, 02 Nov 2019 00:00:00 +0000</pubDate>
