@@ -120,7 +120,7 @@
 <h2>Que apariencia tiene la distribucion <em>t</em>?</h2>
 <p>La distribucion <em>t</em> se parece a la distribucion z en que ambas son simetricas alrededor de una media de cero. Ambas distribuciones tienen forma de campana, pero la distribucion <em>t</em> es mas variable, debido al hecho de que los valores <em>t</em> dependen de las fluctuaciones de dos cantidades <span class="math inline">\(\bar{X}\)</span> y <span class="math inline">\(\varsigma^{2}\)</span> miestran que los valores z dependen solo de los cambios en <span class="math inline">\(\bar{X}\)</span> de una muestra a otra. La distribucion <em>t</em> difiere de la z en la que la varianza de <em>t</em> depende del tamaño de la muestra n y siempre es mayor que 1, solo cuando el tamaño de la muestra <span class="math inline">\(n \rightarrow \infty\)</span> las dos distribuciones seran iguales.</p>
 <p>En la figura 8.8 se presenta la relacion entre una distribucion normal estandar (<span class="math inline">\(v = \infty\)</span>) y las distribuciones <em>t</em> con 2 y 5 grados de libertad</p>
-<p><img src="./img/7.png" /></p>
+<p><img src="/img/7.png" /></p>
 <p>El valor <em>t</em> por arriba del cual se encuentra un area igual a <span class="math inline">\(\alpha\)</span> por lo general se representa con <span class="math inline">\(t_{\alpha}\)</span>. Por consiguiente, el valor <em>t</em> con 10 grados de libertad que deja un area de 0.025 a la derecha es <span class="math inline">\(t = 2.228\)</span></p>
 <p>Con R ontenemos ese valor con la funcion <code>qt()</code>, la cual describiremos mas abajo</p>
 <pre class="r"><code>qt(0.025,10, lower.tail = F)</code></pre>
@@ -162,7 +162,7 @@
 <p>Vemos en rojo la distribucion normal y en azul la distribucion de la <em>t</em> de Student con 3 grados de libertad.</p>
 <p>Si comparamos la tabla de la distribucion normal con la tabla de <em>t</em> de Student vamos a encontrar algunas diferencias, por ejemplo, en la distribucion normal se utilizan los valores de z y el area, mientras que en la distribucion de la <em>t</em> de Student vamos a utilizar los grados de libertad, los grados de libertad estan representados por la letra griega <span class="math inline">\(\nu\)</span> (nu), ademas, en la distribucion de la <em>t</em> de Student utilizamos el percentil, que en este caso esta representado en la tabla por el numero en subindice al lado de <em>t</em>.</p>
 <p>Cuando decimos grados de libertad nos referimos al numero de datos independientes que podemos tomar de la poblacion para conformar la muestra, los grados de libertad se calculan restandole 1 a n (n - 1), <span class="math inline">\(\nu = n - 1\)</span>, para calcular en la tabla <em>t</em> el valor critico o teorico de <em>t</em> debemos interceptar los grados de libertad con el percentil.</p>
-<p><img src="./img/5.png" /></p>
+<p><img src="/img/5.png" /></p>
 <p>Las principales aplicaciones de la distribucion de la <em>t</em> de Student estan en el campo de la medicina, biologia y agricultura, precisamente de donde nacio, pero tambien la podemos aplicar en el campo de la educacion, por ejemplo, si quisieramos comparar el coeficiente intelectual de un grupo pequeño de estudiantes.</p>
 <p>Si has trabajado con teoria de la desicion, ya sabes que existen 3 tiposd de ensayos:</p>
 <ol style="list-style-type: decimal">
@@ -292,14 +292,14 @@ pt(-0.785, 14, lower.tail = FALSE)</code></pre>
 <pre class="r"><code>qt(0.90, df = 20)</code></pre>
 <pre><code>## [1] 1.325341</code></pre>
 <p>Tenga en cuenta que los <strong>valores criticos</strong> encontrados por <strong>qt</strong> coincidiran con los valores criticos encontrados en la tabla de distribucion <em>t</em></p>
-<p><img src="./img/8.png" /></p>
+<p><img src="/img/8.png" /></p>
 <p><strong>rt()</strong></p>
 <p>La funcion <code>rt()</code> genera un vector de variables aleatorias que siguen una distribucion de <em>t</em> de Student dada una longitud de vector <code>n</code> y grados de libertad <code>df</code>, la sintaxis es la siguiente: <code>rt(n, df)</code></p>
 <pre class="r"><code># genera un vector de 5 variables aleatorias
 # que siguen una distribucion t de Student
 # con 20 grados de libertad
 rt(n = 5, df = 20)</code></pre>
-<pre><code>## [1] -1.1114928  0.5227331  0.7548892 -0.3285865  0.9626289</code></pre>
+<pre><code>## [1] -1.6170800  1.3683846 -0.3850766  1.5737751 -0.0467145</code></pre>
 <pre class="r"><code># genera un vector de 1000 variables aleatorias
 # que siguen una distribucion t de Student
 # con 40 grados de libertad

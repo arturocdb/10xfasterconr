@@ -47,7 +47,7 @@ La distribucion _t_ se parece a la distribucion z en que ambas son simetricas al
 
 En la figura 8.8 se presenta la relacion entre una distribucion normal estandar ($v = \infty$) y las distribuciones _t_ con 2 y 5 grados de libertad
 
-![](./img/7.png)
+![](/img/7.png)
 
 El valor _t_ por arriba del cual se encuentra un area igual a $\alpha$ por lo general se representa con $t_{\alpha}$. Por consiguiente, el valor _t_ con 10 grados de libertad que deja un area de 0.025 a la derecha es $t = 2.228$
 
@@ -112,7 +112,7 @@ Si comparamos la tabla de la distribucion normal con la tabla de _t_ de Student 
 
 Cuando decimos grados de libertad nos referimos al numero de datos independientes que podemos tomar de la poblacion para conformar la muestra, los grados de libertad se calculan restandole 1 a n (n - 1), $\nu = n - 1$, para calcular en la tabla _t_ el valor critico o teorico de _t_ debemos interceptar los grados de libertad con el percentil.
 
-![](./img/5.png)
+![](/img/5.png)
 
 Las principales aplicaciones de la distribucion de la _t_ de Student estan en el campo de la medicina, biologia y agricultura, precisamente de donde nacio, pero tambien la podemos aplicar en el campo de la educacion, por ejemplo, si quisieramos comparar el coeficiente intelectual de un grupo pequeño de estudiantes.
 
@@ -320,7 +320,7 @@ qt(0.90, df = 20)
 
 Tenga en cuenta que los **valores criticos** encontrados por **qt** coincidiran con los valores criticos encontrados en la tabla de distribucion _t_
 
-![](./img/8.png)
+![](/img/8.png)
 
 **rt()**
 
