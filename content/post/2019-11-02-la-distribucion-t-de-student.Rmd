@@ -1,0 +1,10 @@
+---
+title: La distribucion t de Student
+author: Charlie Do Amaral
+date: '2019-11-02'
+slug: la-distribucion-t-de-student
+categories:
+  - estadistica
+tags:
+  - estadistica
+---
