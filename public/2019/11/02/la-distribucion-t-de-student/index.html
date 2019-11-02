@@ -22,6 +22,11 @@
 
 
 
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
 <link rel="stylesheet" href="/css/fonts.css" media="all">
 <link rel="stylesheet" href="/css/main.css" media="all">
 
@@ -59,7 +64,7 @@
 
   <article class="article">
     
-    <span class="article-duration">0 min read</span>
+    <span class="article-duration">15 min read</span>
     
 
     <h1 class="article-title">La distribucion t de Student</h1>
@@ -72,7 +77,250 @@
       
 
 
+<div id="definicion-wikipedia" class="section level2">
+<h2>Definicion Wikipedia</h2>
+<p>En probabilidad y estadistica, la <strong>distribucion t (de Student)</strong> es una distribucion de probabilidad que surge del problema de estimar la media de una <strong>poblacion normalmente distribuida</strong> cuanodo el tamaño de la muestra es <strong>pequeño</strong>.</p>
+<p>Aparece de manera natural al realizar la <strong>prueba t de Student</strong> para la determinacion de las diferencias entre dos varianzas muestrales y para la construccion del intervalo de confianza para la diferencia entre las partes de dos poblaciones cuando se desconoce la <strong>desviacion tipica</strong> de ua poblacion y esta debe ser estimada a partir de los datos de una muestra</p>
+</div>
+<div id="otras-definiciones" class="section level2">
+<h2>Otras definiciones</h2>
+<p>La distribucion t de Student se utiliza cuando nos encontramos con la dificultad de no conocer la desviacion tipica poblacional y nuestra muestra es menor de 30. Es similar a la curva normal, pero la distribucion t tiene mayor area a los extremos y menos en el centro. Esta fue descubierta por un experto en estadistica de una empresa irlandesa, este señor cuyo nombre era William Gossel hizo inferencias acerca de la media cuando la desviacion poblacional fuese desconocida; y ya que a los empleados de dicha entidad no les era permitido publicar el trabajo de investigacion bajo sus propios nombres, Gossel acepto el pseudonimo de “Student”.</p>
+<p>Sus funciones se basan en establecer un intervalo de confianza, utilizando un nivel de confianza y los grados de libertad, obteniendo valores de una tabla dada con respecto a estas variables y aplicarla en la formula.</p>
+<p>De gran utilidad, reduce tiempo, costo y esfuerzos. Se utiliza para probar hipotesis y tambien para saber si dos muestras provienen de la misma poblacion</p>
+</div>
+<div id="planteamiento-del-problema" class="section level2">
+<h2>Planteamiento del problema</h2>
+<p>En los estudios sobre la probabilidad y distribucion de una muestra anteriores se manejo el uso de la distribucion z, la cual se podia utilizar siempre y cuando los tamaños de las muestras fueran mayores o iguales a 30, o en muestras mas pequeñas si la distribucion de donde proviene la muestra o las muestras son normales.</p>
+</div>
+<div id="justificacion" class="section level2">
+<h2>Justificacion</h2>
+<p>Al hacer una investigacion tenemos que efectuar una serie de operaciones con respecto a nuestra poblacion y muestra, pero en el caso que nuestra poblacion sea pequeña, por consiguiente nuestra muestra tambien lo sera, es ahi donde la distribucion <em>t</em> se usa de manera extensa, en problemas que tienen que ver con inferencia acerca de la media de la poblacion o en problemas que implican muestras comparativas (es decir; en casos donde se trata de determinar si las medias de dos muestras son significativamente diferentes)</p>
+</div>
+<div id="bases-teoricas" class="section level2">
+<h2>Bases teoricas</h2>
+<p>En muchas ocasiones no se conoce <span class="math inline">\(\sigma\)</span> y el numero de observaciones en la muestra es menor de 30. En estos casos, se puede utilizar la desviacion estandar de la muestra <span class="math inline">\(\varsigma\)</span> como una estimacion de <span class="math inline">\(\sigma\)</span>, pero no es posible usar la distribucion z como estadistico de prueba, el estadistico de prueba adecuado es la distribucion <em>t</em>. A veces es necesario hacer analisis de muestras pequeñas por razones de tiempo y reduccion de costos, para ello fue descubierta la distribucion <em>t</em> por William Gosset.</p>
+</div>
+<div id="usos-y-aplicaciones" class="section level2">
+<h2>Usos y aplicaciones</h2>
+<ol style="list-style-type: decimal">
+<li>Determinar el intervalo de confianza dentro del cual se puede estimar la media de una poblacion a partir de muestras pequeñas (n &lt; 30)</li>
+<li>Para probar hipotesis cuando una investigacion se basa en muestreo pequeño.</li>
+<li>Para probar si dos muestras provienen de una misma poblacion.</li>
+</ol>
+</div>
+<div id="grados-de-libertad" class="section level2">
+<h2>Grados de libertad</h2>
+<p>Existe una distribucion <em>t</em> distinta para cada uno de los posibles grados de libertad. Que son los grados de libertad?, podemos definirlos como el numero de valores que podemos elegir libremente.</p>
+</div>
+<div id="como-diferenciarla-de-las-otras-distribuciones" class="section level2">
+<h2>Como diferenciarla de las otras distribuciones?</h2>
+<p>La distribucion <em>t</em> es similar a la distribucion z, pues ambas son simetricas al rededor de una media de 0. Ambas tienen distribuciones de campana, pero la distribucion <em>t</em> es mas variable debido a que tienen fluctuaciones en dos cantidades. Tambien la distribucion <em>t</em> difiere de la z en que la varianza de <em>t</em> depende del tamaño de la muestra n y siempre es mayor a 1, unicamente cuando n tiende a infinito las dos distribuciones seran iguales</p>
+</div>
+<div id="que-apariencia-tiene-la-distribucion-t" class="section level2">
+<h2>Que apariencia tiene la distribucion <em>t</em>?</h2>
+<p>La distribucion <em>t</em> se parece a la distribucion z en que ambas son simetricas alrededor de una media de cero. Ambas distribuciones tienen forma de campana, pero la distribucion <em>t</em> es mas variable, debido al hecho de que los valores <em>t</em> dependen de las fluctuaciones de dos cantidades <span class="math inline">\(\bar{X}\)</span> y <span class="math inline">\(\varsigma^{2}\)</span> miestran que los valores z dependen solo de los cambios en <span class="math inline">\(\bar{X}\)</span> de una muestra a otra. La distribucion <em>t</em> difiere de la z en la que la varianza de <em>t</em> depende del tamaño de la muestra n y siempre es mayor que 1, solo cuando el tamaño de la muestra <span class="math inline">\(n \rightarrow \infty\)</span> las dos distribuciones seran iguales.</p>
+<p>En la figura 8.8 se presenta la relacion entre una distribucion normal estandar (<span class="math inline">\(v = \infty\)</span>) y las distribuciones <em>t</em> con 2 y 5 grados de libertad</p>
+<p><img src="imagenes/7.png" /></p>
+<p>El valor <em>t</em> por arriba del cual se encuentra un area igual a <span class="math inline">\(\alpha\)</span> por lo general se representa con <span class="math inline">\(t_{\alpha}\)</span>. Por consiguiente, el valor <em>t</em> con 10 grados de libertad que deja un area de 0.025 a la derecha es <span class="math inline">\(t = 2.228\)</span></p>
+<p>Con R ontenemos ese valor con la funcion <code>qt()</code>, la cual describiremos mas abajo</p>
+<pre class="r"><code>qt(0.025,10, lower.tail = F)</code></pre>
+<pre><code>## [1] 2.228139</code></pre>
+<p>Como la distribucion <em>t</em> es simetrica alrededor de una media de cero, tenemos <span class="math inline">\(t_{1-\alpha} = -t_{\alpha}\)</span>, es decir el valor <em>t</em> que deja un area de <span class="math inline">\(1-\alpha\)</span> a la derecha y por lo tanto un area de <span class="math inline">\(\alpha\)</span> a la izquierda es igual al valor <em>t</em> negativo que deja un area de <span class="math inline">\(\alpha\)</span> en la cola derecha de la distribucion. Esto es <span class="math inline">\(t_{0.95} = -t_{0.05}\)</span>, <span class="math inline">\(t_{0.99} = -t_{0.001}\)</span>, etc.</p>
+</div>
+<div id="ejemplo-1" class="section level2">
+<h2>Ejemplo 1</h2>
+<p>El valor <em>t</em> con 14 grados de libertad que deja un area de 0.025 a la izquierda y, por lo tanto un area de 0.975 a la derecha es <span class="math inline">\(t_{0.975} = -t_{0.025} = -2.145\)</span></p>
+<pre class="r"><code>round(qt(0.025,14),3)</code></pre>
+<pre><code>## [1] -2.145</code></pre>
+</div>
+<div id="ejemplo-2" class="section level2">
+<h2>Ejemplo 2</h2>
+<p>Calcule <span class="math inline">\(P(-t_{0.025}&lt;T&lt;t_{0.05})\)</span></p>
+</div>
+<div id="solucion" class="section level2">
+<h2>Solucion</h2>
+<p>Como <span class="math inline">\(t_{0.05}\)</span> deja un area de 0.05 a la derecha y <span class="math inline">\(-t_{0.025}\)</span> deja un area de 0.025 a la izquierda, obtenemos un area total de</p>
+<p><span class="math display">\[1- 0.05 - 0.025 = 0.925\]</span></p>
+<p>entre <span class="math inline">\(-t_{0.025}\)</span> y <span class="math inline">\(t_{0.05}\)</span>. en consecuencia</p>
+<p><span class="math display">\[P(-t_{0.025}&lt;T&lt;t_{0.05}) = 0.925\]</span></p>
+</div>
+<div id="en-sintesis" class="section level2">
+<h2>En sintesis</h2>
+<p>El objetivo es aplicart los conocimientos del uso de la tabla <em>t</em> de Student para determinar los valores de <em>t</em> conociendo los grados de libertad y el area o percentil, para ellos vamos a describir la tabla <em>t</em> de Student, identificar el valor teorico de <em>t</em> conociendo los grados de libertad y el area o percentil, por ultimo vamos a representar graficamente el valor de <em>t</em> encontrado.</p>
+<p>Antes de presentarte la tabla de la <em>t</em> de Student, vamos a recordar concocimientos basicos de estadistica I, tambien vamos a recordar nuestros conocimientos de teroria de la desicion para muestras grandes.</p>
+<p>Recordemos que el percentil es el resultado de dividri un conjunto de datos en 100 partes iguales, cada una de esas partes un 1%, para representar el percentil en la grafica de la campana de Gauss hacemos el recorrido o sumatoria desde la parte izquierda de la grafica hacia la parte derecha, la campana de Gausses una grafica que representa la distribucion normal de un grupo de datos.</p>
+<div id="grafica-distribucion-normal" class="section level4">
+<h4>Grafica distribucion normal</h4>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>La distribucion normal la utilizamos para muestras grandes, es decir; mayores de 30, mientras que la distribucion de la <em>t</em> de Student la utilizamos para muestras pequeñas, es decir; menores de 30.</p>
+<p>La <em>t</em> de Student es una distribucion de probabilidad que surge por la necesidad de estimar la media de una poblacion normalmente distribuida cuando la muestra es pequeña, es decir; menor de 30.</p>
+<p>La grafica de la campana de Gauss a la grafica de la campana de la <em>t</em> de Student, son similares en el hecho de que ambas son simetricas, sin embargo, la diferencia esta en el hecho de que la campana de Gauss es unica, mientras que la grafica de la <em>t</em> de Student varia de acuerdo al valor de n, de hecho, si nos fijamos en la tabla de la <em>t</em> de Student va ir en numeracion consecutiva del 1 al 30, sin embargo, al llegar al numero 30, se hace similar en la picudez con la grafica de la campana de Gauss, esto quiere decir, que a partir de 30 el valor de t es similar al valor de z.</p>
+</div>
+<div id="grafica-comparativa-dist.-normal-y-dist.-t-de-student" class="section level4">
+<h4>Grafica comparativa dist. Normal y Dist. <em>t</em> de Student</h4>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Vemos en rojo la distribucion normal y en azul la distribucion de la <em>t</em> de Student con 3 grados de libertad.</p>
+<p>Si comparamos la tabla de la distribucion normal con la tabla de <em>t</em> de Student vamos a encontrar algunas diferencias, por ejemplo, en la distribucion normal se utilizan los valores de z y el area, mientras que en la distribucion de la <em>t</em> de Student vamos a utilizar los grados de libertad, los grados de libertad estan representados por la letra griega <span class="math inline">\(\nu\)</span> (nu), ademas, en la distribucion de la <em>t</em> de Student utilizamos el percentil, que en este caso esta representado en la tabla por el numero en subindice al lado de <em>t</em>.</p>
+<p>Cuando decimos grados de libertad nos referimos al numero de datos independientes que podemos tomar de la poblacion para conformar la muestra, los grados de libertad se calculan restandole 1 a n (n - 1), <span class="math inline">\(\nu = n - 1\)</span>, para calcular en la tabla <em>t</em> el valor critico o teorico de <em>t</em> debemos interceptar los grados de libertad con el percentil.</p>
+<p><img src="./imagenes/5.png" /></p>
+<p>Las principales aplicaciones de la distribucion de la <em>t</em> de Student estan en el campo de la medicina, biologia y agricultura, precisamente de donde nacio, pero tambien la podemos aplicar en el campo de la educacion, por ejemplo, si quisieramos comparar el coeficiente intelectual de un grupo pequeño de estudiantes.</p>
+<p>Si has trabajado con teoria de la desicion, ya sabes que existen 3 tiposd de ensayos:</p>
+<ol style="list-style-type: decimal">
+<li>Unilateral a la derecha</li>
+</ol>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Utilizamos el ensayo unilateral a la derecha para demostrar si existe <strong>superioridad</strong>, en este caso, la zona de rechazo es representada por la cola de la derecha de la curva.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>Unilateral a la izquierda</li>
+</ol>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Utilizamos el ensayo unilateral a la izquierda para demostrar si existe <strong>inferioridad</strong>, y en este caso, la zona de rechazo es representada por la cola izquierda de la curva.</p>
+<ol start="3" style="list-style-type: decimal">
+<li>Bilateral</li>
+</ol>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>En el caso de los ensayos bilaterales los utilizamos para demostrar si existe <strong>diferencia</strong>. Es importante destacar que en este caso tenemos 2 zonas de rechazo, la de la izquierda y la de la derecha</p>
+</div>
+</div>
+<div id="ejercicios" class="section level2">
+<h2>Ejercicios</h2>
+<p>Para una distribucion t de 15 grados de libertad, hallar el valor de t tal que el area de la derecha de t sea 0.01.</p>
+</div>
+<div id="solucion-1" class="section level2">
+<h2>Solucion</h2>
+<p>En otras palabras lo que queremos econtrar es la probabilidad de que t sea mayor a 0.01 <span class="math inline">\(P(t &gt; 0.01)\)</span></p>
+<div id="datos" class="section level4">
+<h4>Datos</h4>
+<ul>
+<li><span class="math inline">\(\nu = 15\)</span></li>
+<li>Area a la derecha de t es 0.01</li>
+</ul>
+<p>El siguiente paso es calcular cual es el percentil qeu corresponde, recordemos que el percentil es el acumulado desde la parte izquierda hasta hasta donde llega la t, aplicamos la ley del complemento y decimos <span class="math inline">\(1 - 0.01 = 0.99\)</span>, quiere decir entonces, que el area de t a la izquierda, es decir el area que no esta sombreada va a representar el percentil 0.99</p>
+<p>Luego ubicamos en nuestra tabla los grados de libertad a la izquierda y lo cruzamos con los percentiles que se encuentran en la parte superior, en nuestro caso 99%.</p>
+<p>El valor critico de t, o el valor teorico de t es 2.60, <span class="math inline">\(t = 2.60\)</span>, entonces, para encontrar el valor de t de 2.60 en el grafico</p>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>qt(p = 0.99, df = 15)</code></pre>
+<pre><code>## [1] 2.60248</code></pre>
+<p>En la solucion manual aqui finaliza el ejercicio.</p>
+<p>R cuenta con 4 funciones que se enmarcan para manipular distribuciones <em>t</em> de Student siguientes:</p>
+<ul>
+<li><code>dt()</code>: devuelve la funcion de densidad en un punto dado</li>
+<li><code>pt()</code>: devuelve la funcion de distribucion</li>
+<li><code>qt()</code>: devuelve la funcion percentiles</li>
+<li><code>rt()</code>: genera desviaciones aleatorias</li>
+</ul>
+<p>Como notamos antes de la t varia la letra <code>d</code>, <code>p</code>, <code>q</code> y <code>r</code>.</p>
+<ul>
+<li><code>d</code>: produce la densidad</li>
+<li><code>p</code>: probabilidad (produce la funcion de densidad acumulada)</li>
+<li><code>q</code>: percentiles, el valor contrario de <code>p</code>, el inverso de DFA</li>
+<li><code>r</code>: aleatorio, en ingles “random”</li>
+</ul>
+<p>Por ejemplo, <code>qt(p = 0.95, df = 30)</code> devolvera 1.69 que el valor del percentil 95 de esta distribucion, esto significa que el 95% de todos los numeros en nuestra funcion es menor que 1.69 y solo el 5% es mayor, esto es el inverso de la funcion de densidad acumulada.</p>
+<pre class="r"><code>qt(p = 0.95, df = 30)</code></pre>
+<pre><code>## [1] 1.697261</code></pre>
+<p>Lo que tenemos que hacer en nuestra tabla es buscar el nivel de significancia de 0.05 y cruzar con 30 grados de libertad, obtendremos el mismo resultado.</p>
+<p>Del mismo modo, si usamos <code>pt(q = 1.69, df = 30)</code> obtendremos un resultado cercano al 95%, esta funcion devuelve la distribucion de frecuencia acumulada, que es la probabilidad de obtener un numero menor o igual al argumento, dado que 1.69 es nuestro percentil 95, el valor de la distribucion de frecuencia acumulada es de hecho 95%</p>
+<pre class="r"><code>pt(q = 1.69, df = 30)</code></pre>
+<pre><code>## [1] 0.9493024</code></pre>
+<p><code>dt(x, df = 30)</code> producira el valor de la funcion de densidad de probabilidad en <code>x</code>, para 1.69 es 0.096, qeu es bastante bajo, mientras que para cero es casi 50%</p>
+<pre class="r"><code>dt(1.69, df = 30)</code></pre>
+<pre><code>## [1] 0.09663243</code></pre>
+<p>Por ejemplo, encuentra el valor en la distribucion <em>t</em> de Student de la funcion de densidad de probabilidad en <code>x = 0</code> con 20 grados de libertad</p>
+<pre class="r"><code>dt(x = 0, df = 20)</code></pre>
+<pre><code>## [1] 0.3939886</code></pre>
+<p>Con <code>x = 1</code></p>
+<pre class="r"><code>dt(x = 1, df = 20)</code></pre>
+<pre><code>## [1] 0.2360456</code></pre>
+<p>Por lo general, cuando intentas resolver preguntas sobre probabilidad utilizando la distribucion <em>t</em> de Student, a menudo se usa <code>pt()</code> en lugar de <code>dt()</code>, sin embargo, una aplicacion util de <code>dt()</code> es crear un diagrama de distribucion <em>t</em> de Student, el siguiente codigo muestra como hacerlo:</p>
+<pre class="r"><code># crea una secuencia de 100 numeros igualmente
+# espaciados entre -4 y 4
+x &lt;- seq(-4, 4, length=100)
 
+# crea un vector de valores que muestra la altura
+# de la distribucion de probabilidad para cada
+# valor en x, utilizando 20 grados de libertad
+y &lt;- dt(x = x, df = 20)
+
+# traza x e y como un diagram de dispersion con 
+# lineas conectadas y agrega un eje x con etiquetas
+# personalizadas
+plot(x,y, type = &quot;l&quot;, lwd = 2, axes = FALSE, 
+     xlab = &quot;&quot;, ylab = &quot;&quot;)
+axis(1, at = -3:3, labels = c(&quot;-3s&quot;, &quot;-2s&quot;, &quot;-1s&quot;, 
+                              &quot;mean&quot;, &quot;1s&quot;, &quot;2s&quot;, &quot;3s&quot;))</code></pre>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><strong>pt()</strong></p>
+<p>La funcion <code>pt()</code> devuelve el valor de la funcion de densidad acumulativa de la distribucion <em>t</em> de Student dada una determinada variable aleatoria <code>x</code> y grados de libertad <code>df</code>, la sintaxis es la siguiente: <code>pt(x, df)</code></p>
+<p>En pocas palabras, <code>pt()</code> devuelve el area a la izquierda de un valor dado x en la distribucion <em>t</em> de Student, si esta interesado en un area a la derecha dado un valor x simplemente agregue el argumento <code>lower.tail = FALSE</code></p>
+</div>
+<div id="ejemplo-1-1" class="section level4">
+<h4>Ejemplo 1</h4>
+<p>Encuentre el area a la <strong>izquierda</strong> de un estadistico t con un valor de -0.785 y 14 grados de libertad</p>
+<pre class="r"><code>pt(-0.785, 14)</code></pre>
+<pre><code>## [1] 0.2227675</code></pre>
+</div>
+<div id="ejemplo-2-1" class="section level4">
+<h4>Ejemplo 2</h4>
+<p>Encuentre el area a la <strong>derecha</strong> de un estadistico t con un valor de -0.785 y 14 grados de libertad</p>
+<pre class="r"><code># lo siguiente produce un resultado equivalente
+# 1 - area a la izquierda
+1 - pt(-0.785, 14)</code></pre>
+<pre><code>## [1] 0.7772325</code></pre>
+<pre class="r"><code># area a la derecha
+pt(-0.785, 14, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.7772325</code></pre>
+</div>
+<div id="ejemplo-3" class="section level4">
+<h4>Ejemplo 3</h4>
+<p>Encuentre el area total de una distribucion <em>t</em> de Student con 14 grados de libertad que se encuentra a la izquierda de -0.785 o a la derecha de 0.785</p>
+<pre class="r"><code>pt(-0.785, 14) + pt(0.785, 14, lower.tail = FALSE)</code></pre>
+<pre><code>## [1] 0.4455351</code></pre>
+<p><strong>qt()</strong></p>
+<p>La funcion <code>qt()</code> devuelve el valor de la funcion de densidad acumulativa inversa de la distribucion <em>t</em> de Student dada una determinada variable aleatoria <code>x</code> y grados de libertad <code>df</code>, la sintaxis es la siguiente: <code>qt(x, df)</code></p>
+<p>En pocas palabras, puede usar <code>qt()</code> para averiguar cual es el puntaje t del percentil de la distribucion <em>t</em> de Student</p>
+</div>
+<div id="ejemplos" class="section level4">
+<h4>Ejemplos</h4>
+<p>Encuentre el puntaje-t del 99avo percentil de la distribucion <em>t</em> de Student con 20 grados de libertad.</p>
+<pre class="r"><code>qt(0.99, df = 20)</code></pre>
+<pre><code>## [1] 2.527977</code></pre>
+<p>Encuentre el puntaje-t del 95avo percentil de la distribucion <em>t</em> de Student con 20 grados de libertad.</p>
+<pre class="r"><code>qt(0.95, df = 20)</code></pre>
+<pre><code>## [1] 1.724718</code></pre>
+<p>Encuentre el puntaje-t del 90avo percentil de la distribucion <em>t</em> de Student con 20 grados de libertad.</p>
+<pre class="r"><code>qt(0.90, df = 20)</code></pre>
+<pre><code>## [1] 1.325341</code></pre>
+<p>Tenga en cuenta que los <strong>valores criticos</strong> encontrados por <strong>qt</strong> coincidiran con los valores criticos encontrados en la tabla de distribucion <em>t</em></p>
+<p><img src="imagenes/8.png" /></p>
+<p><strong>rt()</strong></p>
+<p>La funcion <code>rt()</code> genera un vector de variables aleatorias que siguen una distribucion de <em>t</em> de Student dada una longitud de vector <code>n</code> y grados de libertad <code>df</code>, la sintaxis es la siguiente: <code>rt(n, df)</code></p>
+<pre class="r"><code># genera un vector de 5 variables aleatorias
+# que siguen una distribucion t de Student
+# con 20 grados de libertad
+rt(n = 5, df = 20)</code></pre>
+<pre><code>## [1]  1.0310462 -1.6370774  0.9242782  1.6036274 -0.7311559</code></pre>
+<pre class="r"><code># genera un vector de 1000 variables aleatorias
+# que siguen una distribucion t de Student
+# con 40 grados de libertad
+distribucionEstrecha &lt;- rt(1000, 40)
+
+# genera un vector de 1000 variables aleatorias
+# que siguen una distribucion t de Student
+# con 5 grados de libertad
+distribucionAmplia &lt;- rt(1000, 5)</code></pre>
+<pre class="r"><code># genera dos histogramas para ver estas dos distribuciones
+# una al lado de la otra y especifica 50 barras en
+# el histograma
+par(mfrow=c(1, 2)) #one row, two columns
+hist(distribucionEstrecha, breaks=50, xlim = c(-6, 4)) 
+hist(distribucionAmplia, breaks=50, xlim = c(-6, 4))</code></pre>
+<p><img src="/post/2019-11-02-la-distribucion-t-de-student_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Observe como la distribucion amplia esta mas extendida en comparacion con la distribucion estrecha, esto se debe a que especificamos que los grados de libertad en la distribucion amplia son 5 en comparacion con 40 de la distribucion estrecha. Cuantos menos grados de libertad mas amplia sera la distribucion <em>t</em> de Student.</p>
+<p>En proximas publicaciones nos centraremos unicamente en resolver problemas relacionados a la distribucion <em>t</em> de Student.</p>
+<p><em>Gracias!</em></p>
+</div>
+</div>
 
     </div>
   </article>
@@ -118,7 +366,22 @@
     </div>
     
 
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
     
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 
     
 <script type="application/javascript">
