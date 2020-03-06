@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>estadistica on Diseñando una experiencia ...</title>
@@ -6,10 +6,19 @@
     <description>Recent content in estadistica on Diseñando una experiencia ...</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Nov 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 06 Mar 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/estadistica/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Usabilidad percibida de un celular vs Benchmark; con R</title>
+      <link>/2020/03/06/usabilidad-percibida-de-un-celular-vs-benchmark-con-r/</link>
+      <pubDate>Fri, 06 Mar 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/03/06/usabilidad-percibida-de-un-celular-vs-benchmark-con-r/</guid>
+      <description>Un Sistema de Escalas de Usabilidad, también conocido como Escala de Usabilidad de un Sistema (EUS) o simplemente SUS por sus siglas en inglés (System Usability Scale) es una herramienta metodológica muy similar a la Escala de Likert y que se usa para medir la usabilidad de un objeto, dispositivo o aplicaciónAunque esta escala es extraordinariamente simple de usar, diferentes pruebas y tests han demostrado que los resultados obtenidos a partir de la misma suelen ser muy confiables y acertados, razón por la cual es uno de los métodos de medición de usabilidad más utilizados en Experiencia de Usuario.</description>
+    </item>
     
     <item>
       <title>La distribucion t de Student</title>

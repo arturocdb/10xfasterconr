@@ -1,17 +1,50 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/estadistica/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/estadistica/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/2020/03/06/usabilidad-percibida-de-un-celular-vs-benchmark-con-r/</loc>
+    <lastmod>2020-03-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -25,44 +58,8 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/estadistica/</loc>
-    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/estadistica/</loc>
-    <lastmod>2019-11-02T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/2019/10/30/estimacion-por-intervalo-i/</loc>
     <lastmod>2019-10-30T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r/</loc>
-    <lastmod>2019-10-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/r/</loc>
-    <lastmod>2019-10-30T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -98,7 +95,6 @@
   <url>
     <loc>/categories/fundamentos/</loc>
     <lastmod>2019-10-10T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -112,15 +108,13 @@
   </url>
   
   <url>
-    <loc>/categories/probabilidad/</loc>
+    <loc>/tags/probabilidad/</loc>
     <lastmod>2019-08-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/probabilidad/</loc>
+    <loc>/categories/probabilidad/</loc>
     <lastmod>2019-08-15T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -129,15 +123,13 @@
   </url>
   
   <url>
-    <loc>/categories/casos-de-estudio/</loc>
+    <loc>/tags/casos-de-estudio/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
-    <loc>/tags/casos-de-estudio/</loc>
+    <loc>/categories/casos-de-estudio/</loc>
     <lastmod>2019-07-25T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -146,25 +138,23 @@
   </url>
   
   <url>
+    <loc>/tags/fundamentos/</loc>
+    <lastmod>2019-07-21T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/2019/07/21/graficos-de-barras/</loc>
     <lastmod>2019-07-21T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/fundamentos/</loc>
-    <lastmod>2019-07-21T00:00:00+00:00</lastmod>
-    <priority>0</priority>
+    <loc>/tags/inicio/</loc>
+    <lastmod>2019-07-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/2019/07/20/porque-estudiar-la-dispersion/</loc>
     <lastmod>2019-07-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/inicio/</loc>
-    <lastmod>2019-07-20T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -210,7 +200,6 @@
   <url>
     <loc>/categories/comentarios/</loc>
     <lastmod>2018-02-06T00:00:00+00:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>

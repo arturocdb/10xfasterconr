@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.59.1" />
+
+
+<title>Usabilidad percibida de un celular vs Benchmark; con R - Diseñando una experiencia ...</title>
+<meta property="og:title" content="Usabilidad percibida de un celular vs Benchmark; con R - Diseñando una experiencia ...">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Nos dedicamos a formar Analistas de datos con R.">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/nosotros/">Nosotros</a></li>
+    
+    <li><a href="/servicios/">Servicios</a></li>
+    
+    <li><a href="/curso/">Curso R</a></li>
+    
+    <li><a href="/contacto/">Contacto</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">3 min read</span>
+    
+
+    <h1 class="article-title">Usabilidad percibida de un celular vs Benchmark; con R</h1>
+
+    
+    <span class="article-date">2020-03-06</span>
+    
+
+    <div class="article-content">
+      
+
+
+<p>Un Sistema de Escalas de Usabilidad, también conocido como Escala de Usabilidad de un Sistema (EUS) o simplemente SUS por sus siglas en inglés (System Usability Scale) es una herramienta metodológica muy similar a la Escala de Likert y que se usa para medir la usabilidad de un objeto, dispositivo o aplicación
+Aunque esta escala es extraordinariamente simple de usar, diferentes pruebas y tests han demostrado que los resultados obtenidos a partir de la misma suelen ser muy confiables y acertados, razón por la cual es uno de los métodos de medición de usabilidad más utilizados en Experiencia de Usuario.
+La escala en sí consiste en 10 preguntas, cada una de las cuales puede ser puntuada de 1 a 5, donde 1 significa Total desacuerdo y 5 significa Total acuerdo.
+Para una evaluación estadística práctica, los datos del cuestionario pueden tratarse como datos continuos, por lo que podemos usar una prueba t de una muestra para tamaños de muestra pequeños y grandes
+Un puntaje SUS, como la mayoría de los datos del cuestionario, es difícil de interpretar sin alguna comparación significativa.</p>
+<div id="estadisticamente-hablando" class="section level2">
+<h2>Estadisticamente hablando</h2>
+<p>Por ejemplo, un puntaje promedio del SUS para teléfonos celulares es de alrededor de 67. Podemos usar este valor para determinar si una prueba de usabilidad actual del teléfono celular excede este punto de referencia. Para probar el punto de referencia usaremos la prueba t de una muestra. La distribución t también se utiliza al construir intervalos de confianza y comparar dos medias para datos de satisfacción.</p>
+</div>
+<div id="caso-de-estudio" class="section level2">
+<h2>Caso de estudio</h2>
+<p>Se pidió a veinte usuarios que completaran algunas tareas comunes (marcar, agregar contactos y enviar mensajes de texto) en un nuevo diseño de teléfono celular. Al final de la prueba, los usuarios respondieron al cuestionario SUS de 10 ítems. La puntuación media del SUS fue de 73 y la desviación estándar fue de 19. ¿Existe evidencia suficiente para concluir que la usabilidad percibida de este teléfono celular es mejor que el promedio de la industria de 67 según lo informado por los estudios realizados?.</p>
+</div>
+<div id="calculos-con-r" class="section level2">
+<h2>Calculos con R</h2>
+<p>Bueno, lo primero que haremos será calcular el estadístico t, pero no contamos con los datos, vamos a solicitar a R que genere un conjunto de datos que tenta la media y desviación estándar del problema.</p>
+<pre class="r"><code># generacion de los datos
+rnorm2 &lt;- function(n,mean,sd){mean+sd*scale(rnorm(n))}
+data &lt;- rnorm2(20, 73, 19)
+ 
+# calculo del estadistico t
+t.test(data, mu = 67, conf.level = 0.95)</code></pre>
+<pre><code>## 
+##  One Sample t-test
+## 
+## data:  data
+## t = 1.4123, df = 19, p-value = 0.174
+## alternative hypothesis: true mean is not equal to 67
+## 95 percent confidence interval:
+##  64.10773 81.89227
+## sample estimates:
+## mean of x 
+##        73</code></pre>
+<p>La diferencia observada de seis puntos SUS es 1.41 errores estándar del punto de referencia. Para saber qué tan probable es esta diferencia con un tamaño de muestra de 20, buscamos el valor de probabilidad.</p>
+<pre class="r"><code># valor de probabilidad
+pt(1.41, 19)</code></pre>
+<pre><code>## [1] 0.9126499</code></pre>
+<p>Los parámetros son el estadístico de prueba (1.41), los grados de libertad (19) y una prueba de una cola (1). Obtenemos la probabilidad de 0.9126, lo que significa que podemos tener una confianza de alrededor del 91% de que este teléfono celular tiene un puntaje promedio mayor que el promedio de la industria de 67. Para la mayoría de los entornos de desarrollo, esto es evidencia suficiente para concluir que el teléfono celular está por encima del promedio.</p>
+<p><em>Gracias!</em></p>
+</div>
+
+    </div>
+  </article>
+
+  
+<section id="comments">
+  <div id="disqus_thread"></div>
+  <script>
+  var disqus_config = function () {
+  
+  };
+  (function() {
+    var inIFrame = function() {
+      var iframe = true;
+      try { iframe = window.self !== window.top; } catch (e) {}
+      return iframe;
+    };
+    if (inIFrame()) return;
+    var d = document, s = d.createElement('script');
+    s.src = '//www-10xfasterconr-com.disqus.com/embed.js'; s.async = true;
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</section>
+
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+
+    
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-142402614-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  </body>
+</html>
+
